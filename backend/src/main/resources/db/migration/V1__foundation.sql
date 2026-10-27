@@ -1,0 +1,25 @@
+CREATE TABLE users (
+ id UUID PRIMARY KEY,
+ username VARCHAR(24) NOT NULL UNIQUE,
+ password_hash VARCHAR(100) NOT NULL,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE characters (
+ id UUID PRIMARY KEY,
+ user_id UUID NOT NULL REFERENCES users(id),
+ name VARCHAR(24) NOT NULL UNIQUE,
+ race VARCHAR(12) NOT NULL CHECK (race IN ('HUMAN','DEMON','BEAST')),
+ character_class VARCHAR(24) NOT NULL DEFAULT 'NOVICE',
+ organization VARCHAR(60),
+ cultivation_path VARCHAR(32),
+ level INTEGER NOT NULL DEFAULT 1 CHECK (level >= 1),
+ exp BIGINT NOT NULL DEFAULT 0 CHECK (exp >= 0),
+ cultivation BIGINT NOT NULL DEFAULT 0 CHECK (cultivation >= 0),
+ realm VARCHAR(24) NOT NULL DEFAULT 'LUYEN_KHI',
+ realm_stage INTEGER NOT NULL DEFAULT 0,
+ map_id VARCHAR(32) NOT NULL,
+ x DOUBLE PRECISION NOT NULL DEFAULT 160,
+ y DOUBLE PRECISION NOT NULL DEFAULT 500,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX characters_user_idx ON characters(user_id);

@@ -1,0 +1,22 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kiếm Tu — Sprite Test</title><style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#101c31;color:#f2f7ff}body{margin:0; padding:20px;display:flex; flex-direction:column;gap:14px;align-items:center}h1{margin:0;font-size:25px}p{color:#b8cde7;margin:0}canvas{width:min(960px,100%);background:#b9e6e3;border:2px solid #5487a8;border-radius:8px;image-rendering:pixelated;image-rendering:crisp-edges}.panel{width:min(960px,100%);display:flex;gap:7px;flex-wrap:wrap}.panel button{border:1px solid #53728a;color:#dcefff;background:#21334f;border-radius:8px;padding:8px 12px;cursor:pointer}.panel button:hover,.panel button.active{background:#166782;border-color:#7fe4ff}kbd{background:#253b58;border-radius:3px;padding:2px 5px;font-weight:bold}.note{font-size:14px;line-height:1.7}</style></head><body>
+<h1>Kiếm Tu · Bộ sprite 64×64</h1><p>Demo chạy offline — mở sau khi giải nén ZIP</p><canvas id="game" width="960" height="480"></canvas><div class="panel" id="buttons"></div><p class="note">Điều khiển: <kbd>A/D</kbd> hoặc <kbd>←/→</kbd> để đi · giữ <kbd>Shift</kbd> để chạy · <kbd>Space</kbd> nhảy · <kbd>J</kbd> đánh · <kbd>K</kbd> tung chiêu · <kbd>M</kbd> ngồi thiền · <kbd>F</kbd> phi kiếm · <kbd>H</kbd> trúng đòn · <kbd>X</kbd> gục · <kbd>R</kbd> hồi về đứng yên.</p>
+<script>
+const conf={idle:[4,5,true],walk:[6,9,true],run:[6,12,true],jump:[4,8,false],land:[3,9,false],attack_1:[6,12,false],cast:[6,9,false],hurt:[3,8,false],death:[5,6,false],meditate:[4,5,true],fly_sword:[4,6,true]};
+const images={};for(let a in conf){let img=new Image();img.src=`animations/${a}.png`;images[a]=img}
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
+const buttons=document.getElementById('buttons');let mode='idle',frame=0,elapsed=0,x=480,facing=1,hold={},last=performance.now(),locked=false;
+for(let name in conf){let b=document.createElement('button');b.textContent=name.replace('_',' ');b.dataset.anim=name;b.onclick=()=>setMode(name,true);buttons.appendChild(b)}
+function setMode(name,force=false){if(!conf[name])return;if(mode===name&&!force)return;mode=name;frame=0;elapsed=0;locked=!conf[name][2];document.querySelectorAll('button[data-anim]').forEach(b=>b.classList.toggle('active',b.dataset.anim===name))}
+setMode('idle',true);
+function key(k){return !!hold[k]}
+document.addEventListener('keydown',e=>{hold[e.code]=true;if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();let keys={Space:'jump',KeyJ:'attack_1',KeyK:'cast',KeyM:'meditate',KeyF:'fly_sword',KeyH:'hurt',KeyX:'death',KeyR:'idle'};if(keys[e.code]&&!e.repeat)setMode(keys[e.code],true)});
+document.addEventListener('keyup',e=>hold[e.code]=false);
+function background(){ctx.fillStyle='#bde9f2';ctx.fillRect(0,0,960,480);ctx.fillStyle='#a4d7e6';for(let i=0;i<10;i++){ctx.fillRect(i*115-30,115+((i*29)%44),105,110)};ctx.fillStyle='#74ba99';ctx.fillRect(0,320,960,160);ctx.fillStyle='#50975e';ctx.fillRect(0,356,960,124);for(let i=0;i<45;i++){const bx=(i*79+17)%960;ctx.fillStyle=i%2?'#499462':'#b9d87c';ctx.fillRect(bx,356+((i*43)%18),7,7)}ctx.fillStyle='#6c966b';ctx.fillRect(0,418,960,4);ctx.fillStyle='#425e53';ctx.fillRect(0,422,960,58)}
+function update(dt){let direction=(key('ArrowRight')||key('KeyD')?1:0)-(key('ArrowLeft')||key('KeyA')?1:0);
+if(!locked && ['idle','walk','run'].includes(mode)){if(direction){facing=direction;setMode(key('ShiftLeft')||key('ShiftRight')?'run':'walk');x=Math.max(70,Math.min(890,x+direction*(mode==='run'?190:105)*dt))}else setMode('idle')}
+elapsed+=dt;let fps=conf[mode][1],n=conf[mode][0];while(elapsed>=1/fps){elapsed-=1/fps;frame++;if(frame>=n){if(conf[mode][2])frame=0;else{locked=false;setMode('idle');break}}}}
+function draw(t){let dt=Math.min(.05,(t-last)/1000);last=t;update(dt);background();ctx.fillStyle='#1d3554';ctx.font='18px monospace';ctx.fillText(`Animation: ${mode}   Frame: ${frame+1}/${conf[mode][0]}   FPS: ${conf[mode][1]}`,18,28);
+let img=images[mode];if(img?.complete&&img.naturalWidth){ctx.save();ctx.translate(Math.round(x),354);ctx.scale(facing*4,4);ctx.drawImage(img,frame*64,0,64,64,-32,-58,64,64);ctx.restore()}
+requestAnimationFrame(draw)}requestAnimationFrame(draw);
+</script></body></html>

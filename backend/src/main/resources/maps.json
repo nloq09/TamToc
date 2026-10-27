@@ -1,0 +1,6 @@
+[
+ {"id":"thanh-van","name":"Thanh Vân Thành","width":2400,"height":640,"ground":540,"color":"#122c3e","platforms":[{"x":500,"y":450,"width":200,"height":20},{"x":940,"y":370,"width":180,"height":20},{"x":1450,"y":450,"width":220,"height":20}],"portals":[{"x":2200,"target":"trung-chau","label":"Trung Châu"}]},
+ {"id":"u-minh","name":"U Minh Thành","width":2400,"height":640,"ground":540,"color":"#301c32","platforms":[{"x":500,"y":450,"width":200,"height":20},{"x":940,"y":370,"width":180,"height":20},{"x":1450,"y":450,"width":220,"height":20}],"portals":[{"x":2200,"target":"trung-chau","label":"Trung Châu"}]},
+ {"id":"van-yeu","name":"Vạn Yêu Lâm","width":2400,"height":640,"ground":540,"color":"#14372f","platforms":[{"x":500,"y":450,"width":200,"height":20},{"x":940,"y":370,"width":180,"height":20},{"x":1450,"y":450,"width":220,"height":20}],"portals":[{"x":2200,"target":"trung-chau","label":"Trung Châu"}]},
+ {"id":"trung-chau","name":"Trung Châu","width":3200,"height":640,"ground":540,"color":"#233333","platforms":[{"x":550,"y":440,"width":230,"height":20},{"x":1100,"y":360,"width":230,"height":20},{"x":1700,"y":440,"width":230,"height":20}],"portals":[{"x":120,"target":"thanh-van","label":"Thanh Vân"},{"x":260,"target":"u-minh","label":"U Minh"},{"x":400,"target":"van-yeu","label":"Vạn Yêu"}]}
+]
