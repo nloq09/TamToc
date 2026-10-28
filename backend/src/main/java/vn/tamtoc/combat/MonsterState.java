@@ -8,6 +8,8 @@ public class MonsterState {
     public final UUID id=UUID.randomUUID();
     public final MonsterDefinition definition;
     public final String mapId;
+    public UUID instanceId;
+    public boolean rewardProcessed;
     public final double spawnX, y;
     public double x;
     public int hp, phase=1, patrolDirection=1;

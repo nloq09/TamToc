@@ -11,7 +11,7 @@ public class MonsterAi {
     public void step(MonsterState m,List<PlayerState> players,double dt,long now,BiConsumer<String,Object> event){
         if(m.hp<=0){
             if(now<m.respawnAt)return;
-            m.state=RESPAWN;m.hp=m.definition.hp();m.x=m.spawnX;m.phase=1;m.contributions.clear();
+            m.state=RESPAWN;m.hp=m.definition.hp();m.x=m.spawnX;m.phase=1;m.contributions.clear();m.rewardProcessed=false;
             event.accept("MONSTER_SPAWN",m.view());return;
         }
         m.phase=m.definition.id().equals("BOSS")&&m.hp<m.definition.hp()/2?2:1;

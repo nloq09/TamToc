@@ -14,7 +14,7 @@ public class ProgressStore {
     public ProgressData load(UUID id) {return docs.findById(id).map(d->{try{return json.readValue(d.data,ProgressData.class);}catch(Exception e){throw new IllegalStateException("Corrupt character progress",e);}}).orElseGet(ProgressData::new);}
     public record Save(UUID id,String map,double x,double y,int level,long exp,long cultivation,String realm,int stage,String organization,String path,String data) {}
     public Save freeze(PlayerState p) {
-        try{return new Save(p.id,p.mapId,p.x,p.y,p.level,p.exp,p.cultivation,p.realm,p.realmStage,p.organization,p.path,json.writeValueAsString(p.progress));}
+        try{return new Save(p.id,p.returnMapId==null?p.mapId:p.returnMapId,p.returnMapId==null?p.x:p.returnX,p.returnMapId==null?p.y:p.returnY,p.level,p.exp,p.cultivation,p.realm,p.realmStage,p.organization,p.path,json.writeValueAsString(p.progress));}
         catch(Exception e){throw new IllegalStateException(e);}
     }
     @Transactional public void save(Save s) {

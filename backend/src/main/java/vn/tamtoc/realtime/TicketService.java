@@ -22,7 +22,7 @@ public class TicketService {
     }
     public Ticket consume(String key) {
         Ticket ticket=tickets.remove(key);
-        if (ticket == null || ticket.expires() < System.currentTimeMillis()) throw new IllegalArgumentException("Vé kết nối không hợp lệ hoặc hết hạn.");
+        if (ticket == null || ticket.expires() < System.currentTimeMillis()) throw new ProtocolException("INVALID_TICKET","Vé kết nối không hợp lệ hoặc hết hạn.");
         return ticket;
     }
     @Scheduled(fixedDelay=30000) void clean() { tickets.entrySet().removeIf(e -> e.getValue().expires() < System.currentTimeMillis()); }

@@ -20,3 +20,20 @@ game:
   tick-ms: 50
   broadcast-ms: 100
   input-timeout-ms: 250
+  reconnect-grace-ms: ${RECONNECT_GRACE_MS:20000}
+  ws-idle-timeout-ms: ${WS_IDLE_TIMEOUT_MS:15000}
+  party:
+    max-size: ${MAX_PARTY_SIZE:4}
+    invitation-ms: ${PARTY_INVITATION_MS:60000}
+    reward-radius: 800
+    activity-ms: 10000
+  instance-cleanup-ms: ${INSTANCE_CLEANUP_MS:60000}
+  dungeon:
+    min-level: ${DUNGEON_MIN_LEVEL:5}
+    duration-ms: ${DUNGEON_DURATION_MS:900000}
+  duel:
+    invitation-ms: 30000
+    countdown-ms: 5000
+    duration-ms: ${DUEL_DURATION_MS:180000}
+    disconnect-ms: 15000
+    damage-modifier: 1.0

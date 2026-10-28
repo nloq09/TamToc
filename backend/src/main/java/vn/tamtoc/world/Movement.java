@@ -5,7 +5,7 @@ public final class Movement {
     public static final double HALF_WIDTH = 16, HEIGHT = 44, SPEED = 240, GRAVITY = 1500, JUMP = 570;
     private Movement() {}
     public static void step(PlayerState p, MapCatalog.MapDefinition map, double dt) {
-        p.x = Math.clamp(p.x + p.direction * SPEED * dt, HALF_WIDTH, map.width() - HALF_WIDTH);
+        p.x = Math.clamp(p.x + p.direction * SPEED * p.movementScale * dt, HALF_WIDTH, map.width() - HALF_WIDTH);
         if (p.jumpQueued && p.grounded) { p.vy = -JUMP; p.grounded=false; }
         p.jumpQueued=false;
         double previousY = p.y;

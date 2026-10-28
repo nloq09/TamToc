@@ -3,40 +3,49 @@ package vn.tamtoc.combat;
 import java.util.*;
 import java.util.function.BiConsumer;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import vn.tamtoc.world.*;
+import vn.tamtoc.realtime.ProtocolException;
 
-/** Shared engine for every race and cultivation path. World owns synchronization. */
+/** One validation/cost/hitbox/damage pipeline for PvE and consented arena PvP. */
 @Component
 public class CombatEngine {
-    private final CombatCatalog catalog;
-    public CombatEngine(CombatCatalog c){catalog=c;}
-    public void cast(PlayerState p,String skillId,MapCatalog.MapDefinition map,Collection<MonsterState> mobs,long now,
-        BiConsumer<String,Object> event,BiConsumer<PlayerState,MonsterState> killed){
-        var skill=catalog.skills.get(skillId);
-        if(skill==null||!CombatCatalog.unlocked(p,skill))throw new IllegalArgumentException("Kỹ năng chưa mở khóa.");
-        if(p.progress.hp<=0)throw new IllegalArgumentException("Nhân vật đang chờ hồi sinh.");
-        if(p.cooldowns.getOrDefault(skillId,0L)>now)throw new IllegalArgumentException("Kỹ năng đang hồi chiêu.");
-        if(p.progress.mp<skill.mpCost())throw new IllegalArgumentException("Không đủ MP.");
-        p.progress.mp-=skill.mpCost();p.cooldowns.put(skillId,now+skill.cooldown());
+    private final CombatCatalog catalog;private final PvPDamageModifier pvp;
+    public CombatEngine(CombatCatalog c){this(c,new PvPDamageModifier(1));}
+    @Autowired public CombatEngine(CombatCatalog c,PvPDamageModifier modifier){catalog=c;pvp=modifier;}
+    public void cast(PlayerState player,String skill,MapCatalog.MapDefinition map,Collection<MonsterState> monsters,long now,BiConsumer<String,Object> event,BiConsumer<PlayerState,MonsterState> killed){cast(player,skill,map,monsters,List.of(),null,now,event,killed);}
+    public void castDuel(PlayerState player,String skill,MapCatalog.MapDefinition map,Collection<PlayerState> targets,UUID instance,long now,BiConsumer<String,Object> event){cast(player,skill,map,List.of(),targets,instance,now,event,(p,m)->{});}
+    private void cast(PlayerState p,String id,MapCatalog.MapDefinition map,Collection<MonsterState> monsters,Collection<PlayerState> players,UUID duel,long now,BiConsumer<String,Object> event,BiConsumer<PlayerState,MonsterState> killed){
+        var skill=catalog.skills.get(id);
+        if(skill==null||!CombatCatalog.unlocked(p,skill))throw new ProtocolException("SKILL_LOCKED","Kỹ năng chưa mở khóa.");
+        if(p.progress.hp<=0)throw new ProtocolException("PLAYER_DEAD","Nhân vật đang chờ hồi sinh.");
+        if(p.cooldowns.getOrDefault(id,0L)>now)throw new ProtocolException("SKILL_COOLDOWN","Kỹ năng đang hồi chiêu.");
+        if(p.progress.mp<skill.mpCost())throw new ProtocolException("INSUFFICIENT_MP","Không đủ MP.");
+        p.progress.mp-=skill.mpCost();p.cooldowns.put(id,now+skill.cooldown());p.lastActiveAt=now;
         switch(skill.effectType()){
             case "DASH" -> p.x=Math.clamp(p.x+p.facing*skill.range(),Movement.HALF_WIDTH,map.width()-Movement.HALF_WIDTH);
             case "HEAL" -> {p.progress.hp=Math.min(p.maxHp(),p.progress.hp+skill.damage());p.progress.mp=Math.min(p.maxMp(),p.progress.mp+20);}
             case "SHIELD" -> p.shieldUntil=now+5000;
             case "EMPOWER" -> p.empoweredUntil=now+5000;
             default -> {
-                for(var m:mobs){
-                    if(m.hp<=0||!m.mapId.equals(p.mapId)||Math.abs(m.y-p.y)>85||Math.abs(m.x-p.x)>skill.range())continue;
-                    if(!skill.targetType().equals("AREA")&&(m.x-p.x)*p.facing < -20)continue;
-                    boolean crit=java.util.concurrent.ThreadLocalRandom.current().nextDouble()<.12;
-                    int damage=Math.max(1,skill.damage()+p.attack()+(p.empoweredUntil>now?15:0)-m.definition.def());
-                    if(crit)damage=(int)(damage*1.5);
-                    damage=Math.min(m.hp,damage);m.hp-=damage;m.contributions.merge(p.id,damage,Integer::sum);
+                for(var m:monsters){
+                    if(m.hp<=0||!m.mapId.equals(p.mapId)||!Objects.equals(m.instanceId,p.instanceId)||!inRange(p,m.x,m.y,skill))continue;
+                    boolean critical=critical();int damage=Math.min(m.hp,damage(p,skill,m.definition.def(),critical,now));m.hp-=damage;m.contributions.merge(p.id,damage,Integer::sum);
                     if(skill.effectType().equals("SLOW"))m.slowedUntil=now+3000;
-                    event.accept("COMBAT_EVENT",Map.of("source",p.id,"target",m.id,"damage",damage,"crit",crit,"skill",skill.id(),"x",m.x,"y",m.y));
+                    event.accept("COMBAT_EVENT",Map.of("source",p.id,"target",m.id,"damage",damage,"crit",critical,"skill",id,"x",m.x,"y",m.y));
                     if(m.hp==0){m.state=MonsterState.Ai.DEAD;m.respawnAt=now+m.definition.respawnMs();killed.accept(p,m);}
+                }
+                for(var target:players){
+                    if(!CombatTargetPolicy.pvp(p,target,duel)||!inRange(p,target.x,target.y,skill))continue;
+                    boolean critical=critical();int damage=Math.min(target.progress.hp,pvp.apply(damage(p,skill,target.defense()+(target.shieldUntil>now?18:0),critical,now)));target.progress.hp-=damage;
+                    if(skill.effectType().equals("SLOW"))target.slowedUntil=now+3000;
+                    event.accept("COMBAT_EVENT",Map.of("source",p.id,"target",target.id,"damage",damage,"crit",critical,"skill",id,"x",target.x,"y",target.y));
                 }
             }
         }
-        event.accept("SKILL_CAST",Map.of("id",p.id,"skill",skill.id(),"x",p.x,"y",p.y,"facing",p.facing));
+        event.accept("SKILL_CAST",Map.of("id",p.id,"skill",id,"x",p.x,"y",p.y,"facing",p.facing));
     }
+    private static boolean inRange(PlayerState p,double x,double y,CombatCatalog.SkillDefinition s){return Math.abs(y-p.y)<=85&&Math.abs(x-p.x)<=s.range()&&(s.targetType().equals("AREA")||(x-p.x)*p.facing>=-20);}
+    private static boolean critical(){return java.util.concurrent.ThreadLocalRandom.current().nextDouble()<.12;}
+    private static int damage(PlayerState p,CombatCatalog.SkillDefinition skill,int defense,boolean critical,long now){int amount=Math.max(1,skill.damage()+p.attack()+(p.empoweredUntil>now?15:0)-defense);return critical?(int)(amount*1.5):amount;}
 }

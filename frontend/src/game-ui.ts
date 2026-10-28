@@ -1,7 +1,10 @@
+import {initializeDuels,duelBlocked} from './duel-ui';
 import {type Character,type Player,type Skill} from './types';
 import type {GameConnection} from './network';
 import {openProgression,setPanelMap} from './progression-ui';
 import {api} from './api';
+import {initializeSocial} from './social-ui';
+import {initializeActivities} from './activity-ui';
 let current:Character;
 let connection:GameConnection;
 let selfId='';
@@ -18,6 +21,9 @@ async function updateTrackedQuest(){
 }
 export function enhanceGame(c:Character,transport:GameConnection){
  current=c;connection=transport;selfId=c.id;
+ initializeSocial(c,transport,()=>void showPanel('party'));
+ initializeActivities(c,transport,()=>void showPanel('dungeon'));
+ initializeDuels(c,transport,()=>void showPanel('duel'));
  void api<{requiredLevel:number}>('/characters/'+c.id+'/available-organizations').then(data=>{organizationLevel=data.requiredLevel;}).catch(error);
  document.querySelector('.controls-panel')!.innerHTML='<span class="eyebrow">KỸ NĂNG & TU LUYỆN</span><div id="skill-bar"></div><div class="progress-track"><span id="exp-label"></span><span id="cultivation-label"></span></div><div class="game-actions"><button id="quests-button">Nhiệm vụ [Q]</button><button id="inventory-button">Túi đồ [I]</button><button id="cultivation-button">Tu luyện</button><button id="organization-button">Thế lực</button></div>';
  const objective=document.querySelector('.panel h3');if(objective)objective.textContent='Tu luyện nhập môn';
@@ -48,13 +54,15 @@ export function combatMessage(type:string,p:any){
   document.querySelector('#drawer-level')!.textContent=`Cấp ${self.level} · ${self.path||'Nhập môn'}`;
   document.querySelector('#drawer-vitals')!.textContent=`HP ${self.hp}/${self.maxHp} · MP ${self.mp}/${self.maxMp}`;
   document.querySelector('#drawer-realm')!.textContent=subtitle?.textContent||'';
-  const target=(p.monsters as {name:string;level:number;hp:number;maxHp:number;x:number;y:number}[]).filter(m=>m.hp>0&&Math.abs(m.x-self.x)<350&&Math.abs(m.y-self.y)<120).sort((a,b)=>Math.abs(a.x-self.x)-Math.abs(b.x-self.x))[0];
+  document.querySelector<HTMLButtonElement>('#interact-button')!.disabled=p.mapId==='duel-arena';
+  const target=((p.mapId==='duel-arena'?p.players.filter((v:Player)=>v.id!==selfId):p.monsters) as {name:string;level:number;hp:number;maxHp:number;x:number;y:number}[]).filter(m=>m.hp>0&&(p.mapId==='duel-arena'||Math.abs(m.x-self.x)<350&&Math.abs(m.y-self.y)<120)).sort((a,b)=>Math.abs(a.x-self.x)-Math.abs(b.x-self.x))[0];
   document.querySelector<HTMLElement>('#target-hud')!.hidden=!target;
+  document.querySelector('#target-hud>span')!.textContent=p.mapId==='duel-arena'?'ĐỐI THỦ THÁCH ĐẤU':'YÊU VẬT GẦN NHẤT';
   if(target){document.querySelector('#target-name')!.textContent=`${target.name} · Cấp ${target.level}`;document.querySelector('#target-hp')!.textContent=`${target.hp} / ${target.maxHp}`;document.querySelector<HTMLElement>('#target-fill')!.style.width=target.hp/target.maxHp*100+'%';}
   document.querySelector('#exp-label')!.textContent=`Cấp ${self.level} · EXP ${self.exp}/${self.level*100}`;
   document.querySelector('#cultivation-label')!.textContent=`Tu vi ${self.cultivation} · ${self.realm==='TRUC_CO'?'Trúc Cơ':'Luyện Khí'} ${['Sơ Kỳ','Trung Kỳ','Hậu Kỳ','Viên Mãn'][self.realmStage]}`;
   const orgButton=document.querySelector<HTMLButtonElement>('#organization-button')!;orgButton.disabled=self.level<organizationLevel;orgButton.title=orgButton.disabled?`Mở từ cấp ${organizationLevel}`:'Xem thế lực';
-  for(const b of document.querySelectorAll<HTMLButtonElement>('[data-skill]')){const remaining=(self.cooldowns[b.dataset.skill!]||0)-p.serverTime;b.disabled=remaining>0||self.hp<=0;b.querySelector('small')!.textContent=remaining>0?(remaining/1000).toFixed(1)+'s':'';}
+  for(const b of document.querySelectorAll<HTMLButtonElement>('[data-skill]')){const remaining=(self.cooldowns[b.dataset.skill!]||0)-p.serverTime;b.disabled=remaining>0||self.hp<=0||!!duelBlocked();b.querySelector('small')!.textContent=remaining>0?(remaining/1000).toFixed(1)+'s':'';}
  }
  if(type==='PLAYER_DIED'&&p.id===selfId)error(new Error('Đã tử trận. Tự hồi sinh tại khu an toàn sau 4 giây.'));
  if(type==='QUEST_UPDATED')void updateTrackedQuest();

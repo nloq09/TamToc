@@ -1,3 +1,5 @@
+> Lịch sử kiểm thử MVP ngày 27/10. Kết quả mới nhất của Phase 6 ngày 28/10 xem [PHASE6_VERIFICATION.md](PHASE6_VERIFICATION.md).
+
 # Kết quả kiểm thử — 27/10/2026 (Asia/Bangkok)
 
 Các kiểm tra dưới đây đã được thực thi trong workspace, không chỉ viết test.
@@ -22,3 +24,7 @@ Tài khoản test được giữ trong database để kiểm tra persistence. T�
 ## Cập nhật bố cục theo ảnh tham khảo
 
 Client đã build thành công sau thay đổi bố cục. Browser QA xác nhận ngăn bên trái mở/đóng, chuyển tab hành trang/kỹ năng/chức năng, tháo và trang bị lại kiếm, khóa thế lực theo cấp từ server, thu gọn/mở chat. Thanh nhiệm vụ hiển thị tiến độ thật; camera dịch để nhân vật vẫn nằm trong phần bản đồ còn nhìn thấy khi mở bảng. Backend không thay đổi trong lần cập nhật này.
+
+## Thử bộ sprite Kiếm Tu 64×64
+
+Client build thành công. Kiểm tra asset xác nhận atlas và portrait giống byte với bộ gốc, atlas 384×704, cả 11 hàng animation có frame/FPS hợp lệ. Browser QA xác nhận sprite nhân vật trong thế giới, điểm neo chân trên mặt đất, portrait trên HUD/bảng trái và không có JavaScript error ở lần đọc console cuối. Animation chạy/nhảy/tiếp đất/đánh/cast/hurt/death được nối với snapshot và sự kiện server; chưa có kiểm thử tự động ghi hình từng trạng thái animation. Meditate/fly_sword chưa gắn gameplay.

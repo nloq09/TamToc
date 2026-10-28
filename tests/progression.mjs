@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-const base='http://127.0.0.1:8080';const stamp=Date.now().toString(36);const key=process.env.DEV_ADMIN_KEY;
+const base=process.env.TEST_API||'http://127.0.0.1:8080';const stamp=Date.now().toString(36);const key=process.env.DEV_ADMIN_KEY;
 assert.ok(key,'Set DEV_ADMIN_KEY and start backend with -EnableDevTools for this test');
 async function api(path,body,token,status=200,admin=false){
  const r=await fetch(base+'/api'+path,{method:body===undefined?'GET':'POST',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{}),...(admin?{'X-Dev-Key':key}:{})},body:body===undefined?undefined:JSON.stringify(body)});

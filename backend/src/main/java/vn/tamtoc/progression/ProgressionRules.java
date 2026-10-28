@@ -14,7 +14,7 @@ public class ProgressionRules {
         var q=catalog.quests.get(id);require(q!=null,"Nhiệm vụ không tồn tại.");
         require(p.level>=(id.equals("PATH")?catalog.data.organizationLevel():q.requiredLevel()),"Chưa đủ cấp nhận nhiệm vụ.");
         require(!p.progress.quests.containsKey(id),"Đã nhận hoặc hoàn thành nhiệm vụ.");
-        require(p.progress.hp>0&&Math.abs(p.x-300)<100,"Hãy gặp Tiếp Dẫn Sứ tại vị trí 300 để nhận nhiệm vụ.");
+        require(p.progress.hp>0&&p.instanceId==null&&Math.abs(p.x-300)<100,"Hãy gặp Tiếp Dẫn Sứ tại vị trí 300 để nhận nhiệm vụ.");
         p.progress.quests.put(id,"ACTIVE");if(id.equals("WOLVES"))p.progress.questWolfStart=p.progress.wolfKills;
         if(id.equals("PATH"))p.progress.guideMet=true;
     }
@@ -34,7 +34,7 @@ public class ProgressionRules {
         require(p.level>=catalog.data.organizationLevel(),"Chưa đủ cấp gia nhập thế lực.");
         require(o.race().equals(p.race),"Thế lực không thuộc chủng tộc của ngươi.");
         require(p.progress.guideMet&&"ACTIVE".equals(p.progress.quests.get("PATH")),"Hãy nhận nhiệm vụ Con Đường Tu Luyện tại NPC.");
-        require(Math.abs(p.x-300)<100&&p.progress.hp>0,"Hãy gặp Tiếp Dẫn Sứ để bắt đầu khảo hạch.");
+        require(p.instanceId==null&&Math.abs(p.x-300)<100&&p.progress.hp>0,"Hãy gặp Tiếp Dẫn Sứ để bắt đầu khảo hạch.");
         require(p.progress.trialOrganization==null,"Đã chọn khảo hạch. Hoàn thành thử thách đang nhận.");
         p.progress.trialOrganization=id;p.progress.trialKillStart=p.progress.totalKills;
     }
@@ -45,7 +45,7 @@ public class ProgressionRules {
         require(o.race().equals(p.race),"Không thể gia nhập thế lực của tộc khác.");
         require(id.equals(p.progress.trialOrganization)&&p.progress.guideMet,"Chưa nhận khảo hạch của thế lực này.");
         require(p.progress.totalKills-p.progress.trialKillStart>=catalog.data.trialKills(),"Chưa hoàn thành khảo hạch.");
-        require(Math.abs(p.x-300)<100&&p.progress.hp>0,"Hãy trở lại Tiếp Dẫn Sứ để xác nhận gia nhập.");
+        require(p.instanceId==null&&Math.abs(p.x-300)<100&&p.progress.hp>0,"Hãy trở lại Tiếp Dẫn Sứ để xác nhận gia nhập.");
         p.organization=id;p.path=o.path();
         if(p.path.equals("KIEM_TU"))p.progress.inventory.put("QI_SWORD",1);
     }

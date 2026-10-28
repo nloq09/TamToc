@@ -12,8 +12,13 @@ body:has(.game-layout){overflow:hidden;background:#0c171b}body:has(.game-layout)
 @media(max-width:440px){.game-layout .chat-panel{bottom:126px;width:165px}.game-layout .chat-panel:not(:focus-within) #chat-form{display:none}.game-layout .player-hud{width:195px}.game-layout .world-top{max-width:105px}.game-layout .world-meta #population{font-size:7px}}
 @media(max-height:500px){.game-layout .quest-tracker{display:none}.game-layout .world-caption{display:none}.drawer-profile{min-height:85px;padding:8px 13px}.drawer-profile .portrait{height:55px}.drawer-tabs button{min-height:34px;padding:5px 2px}.game-layout #dialog-content{padding:12px}.game-layout .target-hud{top:95px}.game-layout .map-hud{top:65px}}
 /* Keep scene titles clear of the character HUD in the narrow desktop panel. */
+.game-layout .portrait{background-color:#19383e;background-image:url('/assets/kiem-tu/portrait.png');background-size:64px 64px;background-position:center;background-repeat:no-repeat;image-rendering:pixelated}
+.game-layout .portrait>span{visibility:hidden}
 @media(min-width:651px) and (max-width:1050px){.game-layout .world-top{left:calc(50% + 65px)}}
 .game-layout .controls-panel>.eyebrow{display:none}
 .game-layout .dialog-row.item-line{padding:10px;margin:6px 0}
 .game-layout .dialog-row.item-line p{margin:4px 0;font-size:9px;line-height:1.5}
 .game-layout .dialog-row.item-line button{padding:4px 9px;margin-top:3px}
+.network-banner{position:absolute;z-index:8;top:75px;left:50%;transform:translateX(-50%);width:max-content;max-width:80vw;padding:10px 16px;border:1px solid #bba474;border-radius:4px;background:#10282fec;color:#f0d9a6;font-size:12px;text-align:center;box-shadow:0 4px 18px #001b}
+.viewport:has(#connection-status[data-state="reconnecting"]) #world{filter:saturate(.55)}
+@media(max-width:650px){.network-banner{top:200px;font-size:10px}}

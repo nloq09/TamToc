@@ -1,24 +1,8 @@
 import Phaser from 'phaser';
-import { races, type MapDefinition, type Player, type Snapshot,type Monster } from './types';
+import { type MapDefinition, type Player, type Snapshot,type Monster } from './types';
 import type { GameConnection } from './network';
-
-class VisualComponent {
- container:Phaser.GameObjects.Container;
- target:Player;
- private hp:Phaser.GameObjects.Rectangle;
- private name:Phaser.GameObjects.Text;
- constructor(scene:Phaser.Scene,p:Player,self:boolean) {
-  this.target=p;
-  const halo=scene.add.rectangle(0,3,46,5,self?0xe6ca89:0x91a7af,0.25);
-  const body=scene.add.rectangle(0,-22,32,44,races[p.race].color).setStrokeStyle(self?2:1,self?0xf5e5b3:0xffffff,0.8);
-  const name=scene.add.text(0,-69,`${p.name} · Lv.${p.level}`,{fontFamily:'Segoe UI',fontSize:'13px',color:'#e9f2ef',backgroundColor:'#0c171dcc',padding:{x:6,y:3}}).setOrigin(0.5);
-  const hp=scene.add.rectangle(-18,-48,36,3,0x74d9a9).setOrigin(0,0.5);
-  this.hp=hp;this.name=name;
-  this.container=scene.add.container(p.x,p.y,[halo,body,name,hp]);
- }
- update(dt:number) { const alpha=1-Math.exp(-dt/45); this.container.x=Phaser.Math.Linear(this.container.x,this.target.x,alpha); this.container.y=Phaser.Math.Linear(this.container.y,this.target.y,alpha);this.hp.scaleX=this.target.hp/this.target.maxHp;this.name.setText(`${this.target.name} · Lv.${this.target.level}`);this.container.alpha=this.target.hp>0?1:.3; }
- destroy() { this.container.destroy(); }
-}
+import {VisualComponent} from './player-visual';
+import {preloadPlayerSprites,registerPlayerAnimations,type SpriteMetadata} from './sprite-pack';
 
 export class WorldScene extends Phaser.Scene {
  private visuals=new Map<string,VisualComponent>();
@@ -29,17 +13,23 @@ export class WorldScene extends Phaser.Scene {
  private pathSkill='';
  private drops=new Map<string,Phaser.GameObjects.Rectangle>();
  private drawerWidth=-1;
+ private spriteMetadata:SpriteMetadata|null=null;
  constructor(private connection:GameConnection) { super('world'); }
+ preload(){preloadPlayerSprites(this);}
  create() {
+  this.spriteMetadata=registerPlayerAnimations(this);
   this.keys=this.input.keyboard!.addKeys('A,D,LEFT,RIGHT,SPACE,E,J,K,L,U,SHIFT') as Record<string,Phaser.Input.Keyboard.Key>;
  }
  loadWorld(snapshot:Snapshot) {
+  this.tweens.killAll();this.cameras.main.stopFollow();
+  if(this.keys)Object.values(this.keys).forEach(key=>key.reset());
+  this.sequence=0;this.elapsed=0;
   this.visuals.forEach(v=>v.destroy()); this.visuals.clear();this.monsters.clear();this.drops.clear(); this.children.removeAll(true);
   this.selfId=snapshot.selfId; this.currentMap=snapshot.map;
   this.drawerWidth=-1;
   const map=snapshot.map;
   this.cameras.main.setBackgroundColor(map.color);
-  // All scenery consists of geometric shapes; no sprite dependencies.
+  // Terrain, NPCs and monsters stay geometric while player visuals use the test sprite pack.
   for(let i=0;i<13;i++) {
    const x=i*290;
    this.add.triangle(x, map.ground,0,0,190,-180-(i%3)*65,380,0,0x577973,0.10).setOrigin(0);
@@ -51,8 +41,10 @@ export class WorldScene extends Phaser.Scene {
   for(let y=60;y<map.ground;y+=80) grid.lineBetween(0,y,map.width,y);
   this.add.rectangle(0,map.ground,map.width,map.height-map.ground,0x162726).setOrigin(0);
   this.add.rectangle(0,map.ground,map.width,3,0x7c9b87).setOrigin(0);
+  if(!['huyen-moc-party','duel-arena'].includes(map.id)){
   this.add.rectangle(300,map.ground-24,32,48,0xe4c567).setStrokeStyle(1,0xffe5a0);
   this.add.text(300,map.ground-70,'Tiếp Dẫn Sứ · [E]',{fontFamily:'Segoe UI',fontSize:'12px',color:'#f3d896'}).setOrigin(.5);
+  }
   for(const platform of map.platforms) {
    this.add.rectangle(platform.x,platform.y,platform.width,platform.height,0x45635b).setOrigin(0).setStrokeStyle(1,0x8da58d,0.5);
   }
@@ -72,13 +64,14 @@ export class WorldScene extends Phaser.Scene {
   for(const [id,visual] of this.visuals) if(!ids.has(id)) { visual.destroy(); this.visuals.delete(id); }
   for(const p of players) {
    const old=this.visuals.get(p.id);
-   if(old) old.target=p; else this.visuals.set(p.id,new VisualComponent(this,p,p.id===this.selfId));
+   if(old) old.receive(p); else this.visuals.set(p.id,new VisualComponent(this,p,p.id===this.selfId,this.spriteMetadata));
   }
  }
  remove(id:string) { this.visuals.get(id)?.destroy(); this.visuals.delete(id); }
  setPathSkill(id:string){this.pathSkill=id;}
  syncLoot(loot:{id:string;x:number;y:number}[]){const ids=new Set(loot.map(l=>l.id));for(const[id,shape]of this.drops)if(!ids.has(id)){shape.destroy();this.drops.delete(id);}for(const l of loot)if(!this.drops.has(l.id))this.drops.set(l.id,this.add.rectangle(l.x,l.y-7,12,12,0xf2d08c).setStrokeStyle(1,0xfff2c6));}
  syncMonsters(monsters:Monster[]){
+  const ids=new Set(monsters.map(m=>m.id));for(const [id,v]of this.monsters)if(!ids.has(id)){v.container.destroy();this.monsters.delete(id);}
   for(const m of monsters){
    let visual=this.monsters.get(m.id);
    if(!visual){
@@ -94,9 +87,11 @@ export class WorldScene extends Phaser.Scene {
  effect(event:any){
   if(!this.currentMap)return;
   if(typeof event.damage==='number'){
+   this.visuals.get(event.target)?.action('hurt');
    const text=this.add.text(event.x,event.y-70,`${event.crit?'! ':''}${event.damage}`,{fontSize:event.crit?'22px':'16px',color:event.skill==='MONSTER'?'#ffa3a0':'#ffe4a4'}).setOrigin(.5);
    this.tweens.add({targets:text,y:text.y-45,alpha:0,duration:750,onComplete:()=>text.destroy()});
   }else{
+   this.visuals.get(event.id)?.action(event.skill==='ATTACK'?'attack_1':event.skill==='DASH'?'run':'cast');
    const shape=this.add.rectangle(event.x+event.facing*45,event.y-25,event.skill==='QI'?130:55,12,0xe2d49a,.7);
    this.tweens.add({targets:shape,x:shape.x+event.facing*55,alpha:0,duration:230,onComplete:()=>shape.destroy()});
   }

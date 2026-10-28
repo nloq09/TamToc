@@ -17,8 +17,9 @@ export function gameShell(c:Character){return `
   <div class="map-hud"><canvas id="minimap" width="260" height="74" aria-label="Bản đồ vị trí người chơi"></canvas><button id="map-button" title="Bản đồ [M]">Bản đồ <kbd>M</kbd></button></div>
   <aside class="quest-tracker"><div class="panel"><div class="eyebrow">NHIỆM VỤ THEO DÕI</div><h3>Tu luyện nhập môn</h3><p>Đến gặp Tiếp Dẫn Sứ để nhận nhiệm vụ.</p><div class="objective">◇ Khám phá Tam Giới</div></div></aside>
   <div class="world-caption">A / D di chuyển · SPACE nhảy · E tương tác</div>
-  <div class="chat-panel"><div class="chat-title">KHU VỰC <button id="toggle-chat" aria-label="Thu gọn chat" aria-expanded="true">−</button></div><div id="chat-log" role="log" aria-live="polite"></div><form id="chat-form"><input name="message" id="chat-input" maxlength="200" autocomplete="off" aria-label="Tin nhắn khu vực" placeholder="Enter để trò chuyện…"><button aria-label="Gửi tin nhắn">↗</button></form></div>
-  <div class="controls-panel"></div>
+  <div class="chat-panel"><div class="chat-title">KÊNH <select id="chat-channel" aria-label="Kênh chat"><option value="AREA">Khu vực</option><option value="PARTY">Tổ đội</option></select><button id="toggle-chat" aria-label="Thu gọn chat" aria-expanded="true">−</button></div><div id="chat-log" role="log" aria-live="polite"></div><form id="chat-form"><input name="message" id="chat-input" maxlength="200" autocomplete="off" aria-label="Tin nhắn khu vực" placeholder="Enter để trò chuyện…"><button aria-label="Gửi tin nhắn">↗</button></form></div>
+  <div class="controls-panel"></div><div id="duel-hud" class="activity-hud" hidden></div><button id="duel-notice" class="activity-notice" hidden></button><div id="activity-hud" class="activity-hud" hidden></div><button id="activity-notice" class="activity-notice" hidden></button><div id="party-hud" class="party-hud" hidden></div><button id="party-notice" class="party-notice" hidden></button>
+  <div id="network-banner" class="network-banner" role="status" hidden></div>
   <button class="round-button interact-button" id="interact-button" title="Tương tác [E]">E<small>Tương tác</small></button>
   <p id="error" class="error game-toast" role="alert" hidden></p>
   <dialog id="info-dialog" aria-label="Bảng nhân vật" tabindex="-1">

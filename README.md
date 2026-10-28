@@ -1,6 +1,6 @@
 # Tam Tộc: Nghịch Thiên
 
-Web MMORPG 2D tu tiên, bản MVP gồm các vertical slice Phase 1–4. Client TypeScript + Phaser 3 + Vite; backend Java 21 + Spring Boot, Spring Security, JPA, WebSocket; PostgreSQL + Flyway. Không có chế độ offline hay backend giả.
+Web MMORPG 2D tu tiên, bản MVP Phase 1–4 được mở rộng multiplayer trong Phase 6. Client TypeScript + Phaser 3 + Vite; backend Java 21 + Spring Boot, Spring Security, JPA, WebSocket; PostgreSQL + Flyway. Không có chế độ offline hay backend giả.
 
 ## Chạy bằng Docker (khuyến nghị)
 
@@ -50,11 +50,11 @@ Script nạp `.env`, chọn profile `production` mặc định. Trong workspace 
 - L: kỹ năng tộc; U: kỹ năng thế lực sau khi mở khóa.
 - E: nhặt đồ, nói chuyện NPC hoặc dùng cổng khi ở gần.
 - I: túi đồ; Q: nhiệm vụ; C: nhân vật; M: bản đồ; Enter: focus chat.
-- Có thể bấm nút kỹ năng trên HUD. Chat chỉ gửi trong cùng map.
+- Có thể bấm nút kỹ năng trên HUD. Chat Khu vực gửi trong cùng map/instance; kênh Tổ đội chỉ tới thành viên.
 
 Giao diện chơi phủ toàn bộ khung trình duyệt: HP/MP góc trên trái, khu vực và minimap ở phía trên, kỹ năng sát cạnh dưới. Nhiệm vụ, hành trang, kỹ năng, tu luyện và chức năng mở trong ngăn bên trái có tab chuyển nhanh; bản đồ vẫn hiển thị phía sau. Dùng nút × hoặc Escape để đóng bảng. Hành trang chia rõ 6 ô trang bị trên người và vật phẩm trong túi; linh thạch hiển thị ở chân bảng từ dữ liệu server.
 
-Mở hai trình duyệt hoặc hai cửa sổ riêng và đăng nhập hai tài khoản để kiểm tra multiplayer. Không cho hai kết nối điều khiển cùng một nhân vật. Khi mất mạng, rời thế giới rồi vào lại để lấy vé mới.
+Mở hai trình duyệt hoặc hai cửa sổ riêng và đăng nhập hai tài khoản để kiểm tra multiplayer. Không cho hai kết nối điều khiển cùng một nhân vật. Mất mạng ngoài ý muốn sẽ tự xin vé mới và nối lại; grace mặc định 20 giây. Trong Chức năng có nút thử ngắt mạng 7 giây (chỉ localhost). Khi refresh, tab giữ khóa phục hồi trong sessionStorage; Rời thế giới sẽ xóa khóa.
 
 ## Kiểm thử
 
@@ -103,6 +103,10 @@ backend/src/main/java/vn/tamtoc/
   world/         realtime state, tick loop, vật lý, map, loot
   combat/        Skill Engine, Monster AI, trạng thái quái
   progression/   nhiệm vụ, túi đồ, cảnh giới, thế lực, persistence
+  party/         lời mời, quyền trưởng đội, chia ngân sách thưởng
+  instance/      registry theo instanceId, lịch sử và ledger DB
+  dungeon/       ready, 3 wave, wipe, thưởng và cleanup
+  duel/          lời thách đấu, countdown, kết quả 1v1
 backend/src/main/resources/
   db/migration/  schema Flyway
   maps.json      map, địa hình, cổng
@@ -110,13 +114,16 @@ backend/src/main/resources/
   progression.json  nhiệm vụ, vật phẩm, 9 thế lực, cấp yêu cầu
 frontend/src/
   api.ts, network.ts   REST và native WebSocket
-  game.ts             Phaser scene, VisualComponent, nội suy
+  game.ts             Phaser scene, nội suy, input và hiệu ứng
+  player-visual.ts    VisualComponent và trạng thái animation nhân vật
+  sprite-pack.ts      nạp atlas, đăng ký animation theo metadata
   game-ui.ts, progression-ui.ts  HUD và các bảng tương tác
+  social-ui.ts, activity-ui.ts, duel-ui.ts  tổ đội/phó bản/đấu trường
 tests/                 integration tests Node.js 22+
 scripts/               tạo env, chạy server, kiểm thử
 ```
 
-Client gửi ý định `INPUT {direction,jump,sequence}`, không gửi tọa độ chính thức. Server chạy tick 20Hz, broadcast 10Hz theo map; sửa trong `application.yml`. Client nội suy dữ liệu server, chưa có prediction/reconciliation. Hình học nằm trong VisualComponent/scene, không dùng sprite; thay sprite không làm đổi gameplay server.
+Client gửi ý định `INPUT {direction,jump,sequence}`, không gửi tọa độ chính thức. Server chạy tick 20Hz, broadcast 10Hz theo (mapId, instanceId); sửa trong `application.yml`. Client nội suy dữ liệu server, chưa có prediction/reconciliation. Nhân vật đang thử bộ sprite Kiếm Tu 64×64 do người dùng cung cấp, nạp từ `frontend/public/assets/kiem-tu`; animation/FPS/điểm neo lấy từ metadata gốc. Ba tộc dùng chung hình mẫu, màu dưới chân phân biệt tộc. NPC, quái và địa hình vẫn là hình học. VisualComponent phản ánh snapshot và sự kiện chiến đấu thật; animation không tính sát thương hay thay đổi vị trí server. Các animation ngồi thiền/phi kiếm chưa gắn với gameplay. Nếu asset không tải được, nhân vật dùng hình khối dự phòng.
 
 PostgreSQL lưu users, characters và character_progress. Progress aggregate chứa inventory/equipment, quest status/counters và cooldown trong tài liệu JSON có kiểm soát server; không có API cập nhật tùy ý aggregate. Một cột organization duy nhất trên nhân vật bảo đảm không có hai thế lực chính. Tất cả thao tác gameplay dùng chung khóa world, và cập nhật character/progress nằm cùng transaction. Snapshot bất biến được ghi tuần tự lúc hạ quái, đổi map, disconnect, định kỳ 15 giây và shutdown; không ghi DB mỗi tick. REST thay đổi tiến trình đợi commit rồi phản hồi. Crash đột ngột có thể mất phần thay đổi từ checkpoint gần nhất.
 
@@ -124,6 +131,35 @@ Vé WebSocket: REST có JWT và ownership → vé 30 giây → message AUTH đ�
 
 ## Giới hạn hiện tại
 
-Đây là MVP một tiến trình server, chưa benchmark tải MMO. Chưa có client prediction, reconnect tự động, refresh token, chiến đấu PvP, tổ đội, bang hội, giao dịch hay phó bản. Chưa có cast-time khác 0, projectile mô phỏng riêng hoặc hệ status effect tổng quát; kỹ năng hiện tại dùng đòn cone/area, heal, dash, shield, empower và slow. Nội dung quest hiện tại là nhiệm vụ Yêu Lang và chuỗi gia nhập thế lực; item rơi hiện có nanh và đan dược. NPC và vị trí spawn quái của MVP còn cấu hình trong source world. Các giới hạn này thuộc phạm vi mở rộng sau khi nền tảng được kiểm thử ổn định, không được thay bằng chức năng giả.
+Đây là MVP một tiến trình server. Phase 6 bổ sung reconnect, tổ đội, phó bản riêng và duel 1v1; phép đo tải local và phạm vi kịch bản ghi trong docs/PHASE6_VERIFICATION.md. Chưa có client prediction, refresh token, bang hội, giao dịch hoặc Tam Tộc Chiến. Party/instance/session đang ở RAM: khởi động lại server xóa trạng thái tạm, đưa nhân vật về map chung đã lưu; lượt phó bản ACTIVE của node được đánh dấu FAILED, không tự thưởng. Duel bị gián đoạn do server restart chưa có cơ chế tiếp tục trận/lưu trận đang diễn ra. Chưa có cast-time khác 0, projectile mô phỏng riêng hoặc hệ status effect tổng quát; kỹ năng hiện tại dùng đòn cone/area, heal, dash, shield, empower và slow. Nội dung quest hiện tại là nhiệm vụ Yêu Lang và chuỗi gia nhập thế lực; item rơi hiện có nanh và đan dược. NPC và vị trí spawn quái của MVP còn cấu hình trong source world. Các giới hạn này thuộc phạm vi mở rộng sau khi nền tảng được kiểm thử ổn định, không được thay bằng chức năng giả.
 
 Dừng dịch vụ bằng `docker compose stop`. Dữ liệu nằm trong volume `pgdata`; giữ volume khi khởi động lại.
+
+
+## Chơi Phase 6
+
+- Chức năng → Tổ đội: mời đạo hữu trong cùng khu vực, nhận/từ chối lời mời. Tối đa 4 người, cho phép ba tộc cùng đội; trưởng đội được đuổi/nhường quyền. Lời mời hết hạn sau 60 giây. Cả đội thấy HP/MP, map và trạng thái nối lại.
+- EXP/tu vi từ một quái chia đều, phần dư theo UUID tăng dần. Tổng không vượt ngân sách quái. Đồng đội cần còn sống, cùng scope, trong 800 đơn vị và đã di chuyển/thi triển kỹ năng hợp lệ trong 10 giây. Vật phẩm rơi riêng cho từng nhân vật đủ điều kiện.
+- Cấp 5+, nhóm 2–4 tới Trung Châu gần Tiếp Dẫn Sứ x=350 (±150). Chức năng → Phó bản tổ đội → từng người Sẵn sàng → trưởng đội Bắt đầu. Có ba wave, boss Huyền Mộc Yêu Vương, giới hạn 15 phút. Wipe đầu làm lại wave sau 4 giây; wipe thứ hai thất bại. Giữ suất khi mất mạng trong grace; dưới hai suất còn hợp lệ thì thất bại.
+- Thắng phó bản: thành viên trực tuyến, chưa rời và có hoạt động trong 10 giây tại instance nhận 500 EXP, 150 tu vi, 100 linh thạch, 1 Hồi Linh Đan nếu stack dưới 99. Thưởng quái vẫn theo ngân sách chung. Kết quả/ledger và progress được commit cùng transaction; retry dùng cùng grant đã chuẩn bị. Rời qua bảng phó bản hoặc tự trả về sau 60 giây kết thúc.
+- Chức năng → Thách đấu 1v1: chọn đạo hữu cùng map trong 800 đơn vị. Hai bên đồng thuận, đếm ngược 5 giây, tối đa 3 phút. Hạ gục/đầu hàng/rời game/mất mạng 15 giây kết thúc trận; hết giờ hòa. HP/MP phục hồi đầy đủ khi vào/ra, buff tạm được xóa; cooldown vẫn áp dụng. Không thưởng hoặc trừ EXP/tu vi/vật phẩm. Ngoài duel không có PvP.
+- GET `/api/characters/{id}/activities` dùng JWT chủ nhân để xem 20 kết quả phó bản và duel gần nhất. GET `/api/network/metrics` yêu cầu JWT.
+
+Chi tiết giao thức: [docs/PROTOCOL.md](docs/PROTOCOL.md). Thay đổi: [CHANGELOG.md](CHANGELOG.md). Kiểm thử và giới hạn: [docs/PHASE6_VERIFICATION.md](docs/PHASE6_VERIFICATION.md).
+
+```powershell
+node --test tests/network-client.test.mjs
+# Backend Docker đã chạy:
+node tests/reconnect.mjs
+node tests/party.mjs
+node tests/duel.mjs
+node tests/load.mjs # Ít nhất 5 phút; cần Docker CLI để đo CPU/RAM.
+# Backend local riêng ở 8081, cùng PostgreSQL:
+$env:SERVER_PORT='8081'
+.\scripts\start-backend.ps1 -EnableDevTools
+# Terminal khác: đặt TEST_API=http://127.0.0.1:8081 và DEV_ADMIN_KEY từ .env:
+node tests/dungeon.mjs
+node tests/progression.mjs
+```
+
+Test tạo dữ liệu QA mới và giữ lại trong PostgreSQL. Chạy các bộ tích hợp tuần tự để tránh rate limit đăng ký 10 lần/phút; khi gặp 429, đợi cửa sổ một phút rồi chạy lại. Không tắt rate limit để chạy test. `tests/load.mjs` tạo 4 tài khoản × 5 nhân vật, năm tổ đội; xuất số liệu không chứa token vào `.runtime/phase6-load.json`. Tham số `TEST_API` chọn backend QA cho các integration script; production.mjs luôn kiểm tra Docker 8080.

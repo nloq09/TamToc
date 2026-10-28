@@ -12,12 +12,20 @@ import org.springframework.web.socket.*;
 import vn.tamtoc.character.*;
 import vn.tamtoc.combat.*;
 import vn.tamtoc.progression.*;
+import vn.tamtoc.realtime.*;
+import vn.tamtoc.party.*;
+import vn.tamtoc.instance.*;
+import vn.tamtoc.dungeon.*;
+import vn.tamtoc.duel.*;
+import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
-public class GameWorld {
+public class GameWorld implements InstanceGateway {
     private static final Logger log=LoggerFactory.getLogger(GameWorld.class);
-    private record Connection(WebSocketSession session, PlayerState player) {}
-    private final Map<String,Connection> connections=new HashMap<>();
+    private final CharacterSessions sessions;
+    private final NetworkMetrics metrics;
+    private final UUID worldEpoch=UUID.randomUUID();
+    private long eventVersion,lastSlowLog;
     private final MapCatalog maps; private final CharacterService characters; private final ObjectMapper json;
     private final ExecutorService saves=Executors.newSingleThreadExecutor();
     private final double dt; private final long inputTimeout;
@@ -29,12 +37,27 @@ public class GameWorld {
     private final ProgressionRules rules;
     private final List<LootState> loot=new ArrayList<>();
     private final List<MonsterState> monsters=new ArrayList<>();
+    private final PartyRegistry parties;
+    private final PartyEventPublisher partyEvents;
+    private final PartyRewardPolicy rewards;
+    private final CommandRequests requests;
+    private long lastPartyBroadcast;
+    private final InstanceRegistry instances;
+    private final DungeonService dungeons;
+    private final ActivityStore history;
+    private final DuelService duels;
+    private record PendingReward(Map<UUID,ProgressStore.Save> saves,Map<UUID,Map<String,Object>> rewards) {}
+    private final Map<UUID,PendingReward> pendingRewards=new HashMap<>();
+    private boolean rewardPending(UUID id){return pendingRewards.values().stream().anyMatch(r->r.saves.containsKey(id));}
     public GameWorld(MapCatalog m, CharacterService c, ObjectMapper j,
         @Value("${game.tick-ms}") long tickMs, @Value("${game.input-timeout-ms}") long timeout,
-        ProgressStore progress,CombatCatalog combat,CombatEngine engine,MonsterAi ai,ProgressionRules rules) {
+        ProgressStore progress,CombatCatalog combat,CombatEngine engine,MonsterAi ai,ProgressionRules rules,CharacterSessions sessions,NetworkMetrics metrics,PartyRegistry parties,PartyEventPublisher partyEvents,PartyRewardPolicy rewards,CommandRequests requests,InstanceRegistry instances,DungeonService dungeons,ActivityStore history,DuelService duels) {
         maps=m; characters=c; json=j; dt=tickMs/1000.0; inputTimeout=timeout;
         this.progress=progress;this.combat=combat;this.engine=engine;this.ai=ai;
-        this.rules=rules;
+        this.rules=rules;this.sessions=sessions;this.metrics=metrics;
+        this.parties=parties;this.partyEvents=partyEvents;this.rewards=rewards;this.requests=requests;
+        this.instances=instances;this.dungeons=dungeons;this.history=history;
+        this.duels=duels;
         for(String map:List.of("thanh-van","u-minh","van-yeu","trung-chau")) {
             for(int i=0;i<5;i++)monsters.add(new MonsterState(combat.monsters.get("WOLF"),map,800+i*180,maps.get(map).ground()));
             monsters.add(new MonsterState(combat.monsters.get("SOLDIER"),map,1800,maps.get(map).ground()));
@@ -42,24 +65,36 @@ public class GameWorld {
             if(map.equals("trung-chau"))monsters.add(new MonsterState(combat.monsters.get("BOSS"),map,2750,maps.get(map).ground()));
         }
     }
-    public synchronized void join(WebSocketSession session, GameCharacter c) {
-        if (connections.containsKey(session.getId())) throw new IllegalArgumentException("Đã vào thế giới.");
-        if (connections.values().stream().anyMatch(v -> v.player.id.equals(c.id))) throw new IllegalArgumentException("Nhân vật đang được điều khiển ở kết nối khác.");
-        flushSaves();
-        var fresh=characters.owned(c.userId,c.id);
-        PlayerState player=new PlayerState(fresh);
-        player.progress=progress.load(c.id);
-        player.cooldowns=player.progress.cooldowns;rules.recalculate(player);
-        connections.put(session.getId(),new Connection(session,player));
-        send(session,"AUTH_RESULT",Map.of("ok",true,"characterId",c.id));
-        snapshot(session,player);
-        send(session,"SKILLS_UPDATED",combat.unlocked(player));
-        broadcast(player.mapId,"PLAYER_JOINED",player.view());
+    public synchronized void join(WebSocketSession socket,GameCharacter character,String resumeSecret,boolean resumable) {
+        expireSessions();flushSaves();
+        var binding=sessions.bind(character.userId,character.id,socket,resumeSecret,resumable,()->{
+            var fresh=characters.owned(character.userId,character.id);
+            PlayerState p=new PlayerState(fresh);p.progress=progress.load(p.id);p.cooldowns=p.progress.cooldowns;rules.recalculate(p);
+            if(resumeSecret!=null){p.x=180;p.y=maps.get(p.mapId).ground();p.vy=0;}
+            return p;
+        },System.currentTimeMillis());
+        var lease=binding.lease();
+        if(binding.replaced()!=null)try{binding.replaced().close(new CloseStatus(4001,"Session replaced"));}catch(Exception ignored){}
+        Map<String,Object> auth=new LinkedHashMap<>();
+        auth.put("ok",true);auth.put("characterId",character.id);auth.put("connectionId",socket.getId());auth.put("protocolVersion",resumable?2:1);auth.put("resumed",binding.resumed());auth.put("worldEpoch",worldEpoch);
+        if(resumable)auth.put("resumeToken",sessions.resumeSecret(lease));
+        send(socket,"AUTH_RESULT",auth);if(binding.resumed())metrics.resumes.increment();
+        snapshot(socket,lease.player);send(socket,"SKILLS_UPDATED",combat.unlocked(lease.player));
+        broadcast(lease.player,"PLAYER_JOINED",lease.player.view());
+        partyState(lease.player.id);
+        dungeons.snapshot(lease.player.id,this,System.currentTimeMillis());
+        duels.snapshot(lease.player.id,this,System.currentTimeMillis());
     }
-    private void snapshot(WebSocketSession s, PlayerState p) {
-        send(s,"WORLD_SNAPSHOT",Map.of("selfId",p.id,"map",maps.get(p.mapId),"players",views(p.mapId),"monsters",monsterViews(p.mapId),"loot",lootViews(p.mapId),"tick",tick,"serverTime",System.currentTimeMillis()));
+    private Map<String,Object> state(PlayerState p){
+        Map<String,Object> state=new LinkedHashMap<>();
+        state.put("players",views(p));state.put("monsters",monsterViews(p));state.put("loot",lootViews(p));
+        state.put("tick",tick);state.put("worldTick",tick);state.put("mapId",p.mapId);state.put("instanceId",p.instanceId);state.put("serverTime",System.currentTimeMillis());return state;
     }
-    private List<PlayerState.View> views(String map) { return connections.values().stream().map(Connection::player).filter(p -> p.mapId.equals(map)).map(PlayerState::view).toList(); }
+    private void snapshot(WebSocketSession socket,PlayerState p){if(socket==null||!socket.isOpen())return;var state=state(p);state.put("selfId",p.id);state.put("map",maps.get(p.mapId));state.put("connectionId",socket.getId());send(socket,"WORLD_SNAPSHOT",state);}
+    public synchronized void resumeSnapshot(String sid){var lease=controller(sid);snapshot(lease.session,lease.player);}
+    private CharacterSessions.Lease controller(String sid){var lease=sessions.byConnection(sid);if(lease==null)throw new ProtocolException("SESSION_NOT_ACTIVE","Kết nối không còn điều khiển nhân vật.");return lease;}
+    private static boolean sameScope(PlayerState p,String map,UUID instance){return p.mapId.equals(map)&&Objects.equals(p.instanceId,instance);}
+    private List<PlayerState.View> views(PlayerState observer){return sessions.all().stream().map(l->l.player).filter(p->sameScope(p,observer.mapId,observer.instanceId)).map(PlayerState::view).toList();}
     public synchronized void input(String sid, int direction, boolean jump, long sequence) {
         PlayerState p=player(sid);
         if (sequence <= p.sequence) return;
@@ -70,68 +105,82 @@ public class GameWorld {
     }
     public synchronized void interact(String sid) {
         PlayerState p=player(sid);
+        if(p.instanceId!=null&&instances.get(p.instanceId)!=null&&instances.get(p.instanceId).kind.equals("DUEL"))throw new ProtocolException("INTERACTION_DISABLED","Không thể tương tác NPC trong đấu trường.");
         if(p.progress.hp<=0)throw new IllegalArgumentException("Đang chờ hồi sinh.");
-        var nearby=loot.stream().filter(l->l.mapId().equals(p.mapId)&&Math.abs(l.x()-p.x)<80&&Math.abs(l.y()-p.y)<80).findFirst();
-        if(nearby.isPresent()) {var item=nearby.get();rules.addItem(p,item.itemId());loot.remove(item);checkpoint(p);send(connections.get(sid).session,"INVENTORY_UPDATED",p.progress.inventory);return;}
+        var nearby=lootViews(p).stream().filter(l->Math.abs(l.x()-p.x)<80&&Math.abs(l.y()-p.y)<80).findFirst();
+        if(nearby.isPresent()) {var item=nearby.get();rules.addItem(p,item.itemId());loot.remove(item);checkpoint(p);send(controller(sid).session,"INVENTORY_UPDATED",p.progress.inventory);return;}
+        if(p.instanceId!=null)throw new ProtocolException("INTERACTION_DISABLED","Trong phó bản chỉ nhặt vật phẩm hoặc rời bằng bảng phó bản.");
         if(Math.abs(p.x-300)<35) {
-            p.progress.guideMet=true;checkpoint(p);send(connections.get(sid).session,"NPC_DIALOG",Map.of("name","Tiếp Dẫn Sứ","message","Mở Nhiệm vụ để nhận thử thách Yêu Lang. Từ cấp 10, nhận Con Đường Tu Luyện rồi chọn một thế lực."));return;
+            p.progress.guideMet=true;checkpoint(p);send(controller(sid).session,"NPC_DIALOG",Map.of("name","Tiếp Dẫn Sứ","message","Mở Nhiệm vụ để nhận thử thách Yêu Lang. Từ cấp 10, nhận Con Đường Tu Luyện rồi chọn một thế lực."));return;
         }
         var portal=maps.get(p.mapId).portals().stream().filter(v -> Math.abs(v.x()-p.x)<70 && p.y > maps.get(p.mapId).ground()-80).findFirst()
             .orElseThrow(() -> new IllegalArgumentException("Hãy đến gần cổng dịch chuyển rồi nhấn E."));
-        String old=p.mapId; broadcast(old,"PLAYER_LEFT",Map.of("id",p.id));
+        broadcast(p,"PLAYER_LEFT",Map.of("id",p.id));
         p.mapId=portal.target(); p.x=p.mapId.equals("trung-chau") ? 650 : 2000; p.y=maps.get(p.mapId).ground(); p.vy=0; p.direction=0;
-        checkpoint(p); snapshot(connections.get(sid).session,p); broadcast(p.mapId,"PLAYER_JOINED",p.view());
+        checkpoint(p); snapshot(controller(sid).session,p); broadcast(p,"PLAYER_JOINED",p.view());
     }
     public synchronized void chat(String sid, String message) {
         PlayerState p=player(sid); String clean=message.strip();
         if (clean.isEmpty() || clean.length()>200) throw new IllegalArgumentException("Tin nhắn phải có 1–200 ký tự.");
-        broadcast(p.mapId,"CHAT",Map.of("name",p.name,"message",clean));
+        broadcast(p,"CHAT",Map.of("name",p.name,"message",clean));
     }
     private PlayerState player(String sid) {
-        Connection c=connections.get(sid); if(c==null) throw new IllegalArgumentException("Chưa vào thế giới."); return c.player;
+        return controller(sid).player;
     }
-    private List<MonsterState.View> monsterViews(String map){return monsters.stream().filter(m->m.mapId.equals(map)).map(MonsterState::view).toList();}
-    private List<LootState> lootViews(String map){return loot.stream().filter(l->l.mapId().equals(map)).toList();}
+    private List<MonsterState> runtimeMonsters(PlayerState p){if(p.instanceId!=null){var instance=instances.get(p.instanceId);return instance==null?List.of():List.copyOf(instance.monsters);}return monsters.stream().filter(m->m.mapId.equals(p.mapId)).toList();}
+    private List<MonsterState.View> monsterViews(PlayerState p){return runtimeMonsters(p).stream().map(MonsterState::view).toList();}
+    private List<MonsterState> allMonsters(){var all=new ArrayList<>(monsters);for(var instance:instances.all())if(instance.active)all.addAll(instance.monsters);return all;}
+    private List<LootState> lootViews(PlayerState p){return loot.stream().filter(l->l.mapId().equals(p.mapId)&&Objects.equals(l.instanceId(),p.instanceId)&&l.ownerId().equals(p.id)).toList();}
     public synchronized void cast(String sid,String skill){
+        cast(sid,skill,null);
+    }
+    public synchronized void cast(String sid,String skill,UUID explicitPlayerTarget){
         PlayerState p=player(sid);
-        engine.cast(p,skill,maps.get(p.mapId),monsters,System.currentTimeMillis(),(t,v)->broadcast(p.mapId,t,v),this::reward);
+        if(explicitPlayerTarget!=null){var duel=duels.forPlayer(p.id);if(duel==null)throw new ProtocolException("PVP_NOT_ALLOWED","Chỉ được tấn công người chơi trong đấu trường tự nguyện.");if(!duel.other(p.id).equals(explicitPlayerTarget))throw new ProtocolException("INVALID_TARGET","Mục tiêu không thuộc trận thách đấu.");}
+        if(duels.forPlayer(p.id)!=null){engine.castDuel(p,skill,maps.get(p.mapId),duels.opponents(p.id,this),p.instanceId,System.currentTimeMillis(),(t,v)->broadcast(p,t,v));duels.afterCombat(p.id,this,System.currentTimeMillis());}
+        else engine.cast(p,skill,maps.get(p.mapId),runtimeMonsters(p),System.currentTimeMillis(),(t,v)->broadcast(p,t,v),this::reward);
+        p.lastActiveAt=System.currentTimeMillis();
     }
     private void reward(PlayerState killer,MonsterState monster){
-        loot.add(new LootState(UUID.randomUUID(),monster.definition.id().equals("WOLF")?"WOLF_FANG":"POTION",monster.mapId,monster.x,monster.y,System.currentTimeMillis()+60000));
-        for(var c:connections.values()){
-            PlayerState p=c.player;
-            if(!p.mapId.equals(monster.mapId)||p.progress.hp<=0||!monster.contributions.containsKey(p.id)||Math.abs(p.x-monster.x)>600)continue;
-            // Shared credit requires actual damage contribution, no client-supplied rewards.
-            int previousLevel=p.level;
-            boolean leveled=ProgressionRules.addExp(p,monster.definition.exp());p.cultivation+=monster.definition.cultivation();p.progress.totalKills++;
+        if(monster.rewardProcessed)return;monster.rewardProcessed=true;
+        for(var share:rewards.split(monster,sessions.online().stream().map(l->l.player).toList(),System.currentTimeMillis())){
+            var p=share.player();var lease=sessions.byCharacter(p.id);int previousLevel=p.level;
+            boolean leveled=ProgressionRules.addExp(p,share.exp());p.cultivation+=share.cultivation();p.progress.totalKills++;
             if(monster.definition.id().equals("WOLF"))p.progress.wolfKills++;
-            if(leveled)send(c.session,"PLAYER_LEVEL_UP",p.view());
-            if(previousLevel<rules.organizationLevel()&&p.level>=rules.organizationLevel())send(c.session,"ORGANIZATION_UNLOCKED",Map.of("level",p.level));
-            send(c.session,"QUEST_UPDATED",p.progress.quests);
-            checkpoint(p);
+            loot.add(new LootState(UUID.randomUUID(),monster.definition.id().equals("WOLF")?"WOLF_FANG":"POTION",monster.mapId,monster.x,monster.y,System.currentTimeMillis()+60000,p.id,p.instanceId));
+            if(leveled)send(lease.session,"PLAYER_LEVEL_UP",p.view());
+            if(previousLevel<rules.organizationLevel()&&p.level>=rules.organizationLevel())send(lease.session,"ORGANIZATION_UNLOCKED",Map.of("level",p.level));
+            send(lease.session,"QUEST_UPDATED",p.progress.quests);checkpoint(p);
         }
     }
     @Scheduled(fixedRateString="${game.tick-ms}") public synchronized void simulate() {
-        tick++; long now=System.currentTimeMillis();
+        long started=System.nanoTime();tick++; long now=System.currentTimeMillis();expireSessions();
         loot.removeIf(l->l.expiresAt()<now);
-        for (Connection c:connections.values()) {
+        for(var invite:parties.expire(now)){sendTo(invite.targetId(),"PARTY_INVITATION_EXPIRED",Map.of("invitationId",invite.id()));sendTo(invite.inviterId(),"PARTY_INVITATION_EXPIRED",Map.of("invitationId",invite.id()));}
+        for (var c:sessions.all()) {
             PlayerState p=c.player;
-            if(now-p.lastInput>inputTimeout) { p.direction=0; p.jumpHeld=false; p.jumpQueued=false; }
+            if(c.status!=CharacterSessions.Status.ONLINE||now-p.lastInput>inputTimeout) { p.direction=0; p.jumpHeld=false; p.jumpQueued=false; }
             if(p.progress.hp<=0){
+                if(duels.forPlayer(p.id)!=null)continue;
                 if(now>=p.progress.respawnAt){p.progress.hp=p.maxHp();p.progress.mp=p.maxMp();p.x=180;p.y=maps.get(p.mapId).ground();p.vy=0;}
                 else continue;
             }
-            Movement.step(p,maps.get(p.mapId),dt);
-            if(now>=p.regenAt){p.regenAt=now+1000;p.progress.mp=Math.min(p.maxMp(),p.progress.mp+2);if(p.x<420)p.progress.hp=Math.min(p.maxHp(),p.progress.hp+8);}
+            p.movementScale=p.slowedUntil>now?.5:1;double previousX=p.x;Movement.step(p,maps.get(p.mapId),dt);if(Math.abs(p.x-previousX)>.1)p.lastActiveAt=now;
+            if(now>=p.regenAt){p.regenAt=now+1000;p.progress.mp=Math.min(p.maxMp(),p.progress.mp+2);if(p.instanceId==null&&p.x<420)p.progress.hp=Math.min(p.maxHp(),p.progress.hp+8);}
         }
-        for(var m:monsters){var local=connections.values().stream().map(Connection::player).filter(p->p.mapId.equals(m.mapId)).toList();if(!local.isEmpty())ai.step(m,local,dt,now,(t,v)->broadcast(m.mapId,t,v));}
+        for(var m:allMonsters()){if(m.instanceId!=null&&m.hp<=0)continue;var local=sessions.all().stream().map(l->l.player).filter(p->sameScope(p,m.mapId,m.instanceId)).toList();if(!local.isEmpty())ai.step(m,local,dt,now,(t,v)->broadcast(m.mapId,m.instanceId,t,v));}
+        dungeons.step(this,now);
+        duels.step(this,now);
+        long duration=System.nanoTime()-started;metrics.tick(duration,(long)(dt*1000));
+        if(duration>dt*1e9&&now-lastSlowLog>5000){lastSlowLog=now;log.warn("World tick {} took {} ms",tick,duration/1e6);}
     }
     @Scheduled(fixedRateString="${game.broadcast-ms}") public synchronized void updates() {
-        for(String map:connections.values().stream().map(c->c.player.mapId).distinct().toList())
-            broadcast(map,"ENTITY_UPDATE",Map.of("players",views(map),"monsters",monsterViews(map),"loot",lootViews(map),"tick",tick,"serverTime",System.currentTimeMillis()));
+        for(var lease:sessions.online())send(lease.session,"ENTITY_UPDATE",state(lease.player));
+        if(System.currentTimeMillis()-lastPartyBroadcast>=500){lastPartyBroadcast=System.currentTimeMillis();for(var party:parties.all())publishParty(party.leader);for(var lease:sessions.online())if(lease.player.instanceId!=null){var instance=instances.get(lease.player.instanceId);if(instance!=null&&instance.kind.equals("DUNGEON"))dungeons.snapshot(lease.player.id,this,System.currentTimeMillis());else if(instance!=null&&instance.kind.equals("DUEL"))duels.snapshot(lease.player.id,this,System.currentTimeMillis());}}
     }
-    @Scheduled(fixedDelay=15000) public synchronized void checkpointAll() { for(var c:connections.values()) checkpoint(c.player); }
+    @Scheduled(fixedDelay=15000) public synchronized void checkpointAll() { for(var c:sessions.all()) checkpoint(c.player); }
     private void checkpoint(PlayerState p) {
+        if(rewardPending(p.id))return;
         var snapshot=progress.freeze(p);
         saves.submit(()-> { try { progress.save(snapshot); } catch(Exception e) { log.error("Progress save failed for {}",snapshot.id(),e); } });
     }
@@ -141,10 +190,12 @@ public class GameWorld {
     /** All REST gameplay mutations use the same world lock as combat and input. */
     public synchronized <T> T access(UUID owner,UUID id,java.util.function.Function<PlayerState,T> action,boolean write){
         var owned=characters.owned(owner,id);
-        var live=connections.values().stream().filter(c->c.player.id.equals(id)).findFirst().orElse(null);
+        var live=sessions.byCharacter(id);
         PlayerState p;
         if(live==null){flushSaves();owned=characters.owned(owner,id);p=new PlayerState(owned);p.progress=progress.load(id);p.cooldowns=p.progress.cooldowns;rules.recalculate(p);}else p=live.player;
         var before=write?progress.freeze(p):null;
+        if(write&&duels.forPlayer(id)!=null)throw new ProtocolException("ACTIVITY_LOCKED","Không thể thay đổi tiến trình hoặc vật phẩm trong trận thách đấu.");
+        if(write&&rewardPending(id))throw new ProtocolException("REWARD_PENDING","Đang lưu phần thưởng phó bản. Vui lòng thử lại sau.");
         try{
             T result=action.apply(p);
             if(write){
@@ -164,17 +215,102 @@ public class GameWorld {
             throw new IllegalStateException("Could not save character progress",e);
         }
     }
-    public synchronized void leave(String sid) {
-        Connection c=connections.remove(sid);
-        if(c!=null) { checkpoint(c.player); broadcast(c.player.mapId,"PLAYER_LEFT",Map.of("id",c.player.id)); }
+    public synchronized void disconnect(String sid,boolean intentional){
+        var controlling=sessions.byConnection(sid);if(intentional&&controlling!=null&&duels.forPlayer(controlling.player.id)!=null)duels.forfeit(controlling.player.id,"LOGOUT",this,System.currentTimeMillis());
+        var lease=sessions.disconnect(sid,intentional,System.currentTimeMillis());if(lease==null)return;
+        metrics.disconnects.increment();checkpoint(lease.player);if(intentional)leaveParty(lease.player.id);else publishParty(lease.player.id);
+        if(sessions.byCharacter(lease.player.id)==null)broadcast(lease.player,"PLAYER_LEFT",Map.of("id",lease.player.id));
+        else broadcast(lease.player,"PLAYER_CONNECTION_STATE",Map.of("id",lease.player.id,"status",lease.status.name(),"expiresAt",lease.expiresAt));
     }
-    private void broadcast(String map,String type,Object payload) {
-        for(Connection c:connections.values()) if(c.player.mapId.equals(map)) send(c.session,type,payload);
+    private boolean online(UUID id){var lease=sessions.byCharacter(id);return lease!=null&&lease.status==CharacterSessions.Status.ONLINE;}
+    private void sendTo(UUID id,String type,Object payload){var lease=sessions.byCharacter(id);if(lease!=null)send(lease.session,type,payload);}
+    private void publishParty(UUID member){partyEvents.publish(member,(id,view)->sendTo(id,"PARTY_UPDATED",view));}
+    private void partyState(UUID member){sendTo(member,"PARTY_UPDATED",partyEvents.view(member));for(var i:parties.pending(member,System.currentTimeMillis()))invitation(i);}
+    private void invitation(PartyRegistry.Invitation i){var inviter=sessions.byCharacter(i.inviterId());sendTo(i.targetId(),"PARTY_INVITATION_RECEIVED",Map.of("id",i.id(),"inviterId",i.inviterId(),"name",inviter==null?"Đạo hữu":inviter.player.name,"expiresAt",i.expiresAt()));}
+    private void leaveParty(UUID member){var before=parties.get(member);if(before==null)return;var remaining=parties.leave(member,this::online);sendTo(member,"PARTY_DISBANDED",Map.of("reason","LEFT_PARTY"));if(remaining!=null)publishParty(remaining.leader);}
+    private static UUID id(JsonNode p,String field){try{String raw=p.path(field).asText();if(raw.length()!=36)throw new IllegalArgumentException();return UUID.fromString(raw);}catch(Exception e){throw new ProtocolException("INVALID_ID","ID không hợp lệ: "+field);}}
+    public synchronized void partyCommand(String sid,String type,JsonNode payload,String requestId){
+        var actor=player(sid);long now=System.currentTimeMillis();
+        if(type.equals("NEARBY_PLAYERS_REQUEST")){sendTo(actor.id,"NEARBY_PLAYERS",views(actor).stream().filter(p->!p.id().equals(actor.id)&&p.connectionStatus().equals("ONLINE")).toList());return;}
+        if(type.equals("PARTY_STATE_REQUEST")){partyState(actor.id);return;}
+        if(type.equals("PARTY_CHAT")){
+            var party=parties.get(actor.id);if(party==null)throw new ProtocolException("NOT_IN_PARTY","Chưa có tổ đội.");
+            String text=payload.path("text").asText().strip();if(text.isEmpty()||text.length()>200)throw new ProtocolException("INVALID_CHAT","Tin nhắn phải có 1–200 ký tự.");
+            for(UUID member:party.members)sendTo(member,"CHAT",Map.of("name",actor.name,"message",text,"channel","PARTY"));return;
+        }
+        boolean executed=requests.execute(actor.id,requestId,type+":"+payload.toString(),()->{
+            var currentParty=parties.get(actor.id);if(currentParty!=null&&dungeons.busy(currentParty.id))throw new ProtocolException("PARTY_BUSY","Không thể đổi tổ đội trong lúc phó bản đang chạy.");
+            switch(type){
+                case "PARTY_INVITE" -> {var invite=parties.invite(actor.id,id(payload,"targetCharacterId"),this::online,now);invitation(invite);sendTo(actor.id,"PARTY_INVITATION_SENT",Map.of("invitationId",invite.id()));publishParty(actor.id);}
+                case "PARTY_ACCEPT" -> {UUID invite=id(payload,"invitationId");var pending=parties.pending(actor.id,now).stream().filter(i->i.id().equals(invite)).findFirst();if(pending.isPresent()&&dungeons.busy(pending.get().partyId()))throw new ProtocolException("PARTY_BUSY","Tổ đội đang tham gia phó bản, không thể nhận lời mời cũ.");parties.accept(actor.id,invite,this::online,now);sendTo(actor.id,"PARTY_INVITATION_RESOLVED",Map.of("invitationId",invite));publishParty(actor.id);}
+                case "PARTY_DECLINE" -> {var invite=parties.decline(actor.id,id(payload,"invitationId"),now);sendTo(actor.id,"PARTY_INVITATION_RESOLVED",Map.of("invitationId",invite.id()));sendTo(invite.inviterId(),"PARTY_INVITATION_DECLINED",Map.of("invitationId",invite.id()));}
+                case "PARTY_LEAVE" -> leaveParty(actor.id);
+                case "PARTY_KICK" -> {UUID target=id(payload,"targetCharacterId");parties.kick(actor.id,target,this::online);sendTo(target,"PARTY_DISBANDED",Map.of("reason","KICKED"));publishParty(actor.id);}
+                case "PARTY_TRANSFER_LEADER" -> {parties.transfer(actor.id,id(payload,"targetCharacterId"),this::online);publishParty(actor.id);}
+                default -> throw new ProtocolException("UNSUPPORTED_MESSAGE","Thao tác tổ đội không hợp lệ.");
+            }
+        },now);
+        sendTo(actor.id,"COMMAND_RESULT",Map.of("requestId",requestId,"status","OK","replayed",!executed));
     }
-    public void send(WebSocketSession session,String type,Object payload) {
-        if(!session.isOpen()) return;
-        try { session.sendMessage(new TextMessage(json.writeValueAsString(Map.of("type",type,"payload",payload)))); }
-        catch(Exception e) { log.debug("Socket send failed {}",session.getId()); try { session.close(); } catch(Exception ignored) {} }
+    private void expireSessions(){for(var lease:sessions.expire(System.currentTimeMillis())){leaveParty(lease.player.id);checkpoint(lease.player);broadcast(lease.player,"PLAYER_LEFT",Map.of("id",lease.player.id));}}
+    @Override public PlayerState getPlayer(UUID id){var lease=sessions.byCharacter(id);return lease==null?null:lease.player;}
+    @Override public boolean isOnline(UUID id){return online(id);}
+    @Override public long disconnectedSince(UUID id){var lease=sessions.byCharacter(id);return lease==null?0:lease.disconnectedAt;}
+    @Override public void event(UUID player,String type,Object payload){sendTo(player,type,payload);}
+    @Override public void moveTo(UUID id,String map,UUID instance,double x){
+        var p=getPlayer(id);if(p==null)return;
+        if(instance!=null&&p.instanceId==null){p.returnMapId=p.mapId;p.returnX=p.x;p.returnY=p.y;}
+        broadcast(p,"PLAYER_LEFT",Map.of("id",p.id));p.mapId=map;p.instanceId=instance;p.x=x;p.y=maps.get(map).ground();p.vy=0;p.direction=0;p.jumpHeld=false;p.jumpQueued=false;
+        var lease=sessions.byCharacter(id);snapshot(lease.session,p);broadcast(p,"PLAYER_JOINED",p.view());checkpoint(p);
+    }
+    @Override public void returnHome(UUID id){var p=getPlayer(id);if(p==null)return;String map=p.returnMapId==null?"trung-chau":p.returnMapId;double x=p.returnMapId==null?350:p.returnX;p.progress.hp=p.maxHp();p.progress.mp=p.maxMp();p.shieldUntil=0;p.empoweredUntil=0;p.slowedUntil=0;p.movementScale=1;moveTo(id,map,null,x);p.returnMapId=null;checkpoint(p);}
+    @Override public Map<UUID,Map<String,Object>> grantDungeon(UUID run,List<UUID> eligible,int exp,int cultivation,int stones){
+        var pending=pendingRewards.get(run);
+        if(pending==null){
+            Map<UUID,ProgressStore.Save> after=new LinkedHashMap<>();Map<UUID,Map<String,Object>> rewards=new LinkedHashMap<>();
+            for(UUID id:eligible){var p=getPlayer(id);ProgressionRules.addExp(p,exp);p.cultivation+=cultivation;p.progress.stones+=stones;int amount=p.progress.inventory.getOrDefault("POTION",0)<99?1:0;if(amount==1)rules.addItem(p,"POTION");after.put(id,progress.freeze(p));rewards.put(id,Map.of("exp",exp,"cultivation",cultivation,"stones",stones,"itemId","POTION","itemQuantity",amount));}
+            pending=new PendingReward(Map.copyOf(after),Map.copyOf(rewards));pendingRewards.put(run,pending);
+        }
+        // Keep the same immutable grant on retry, including an unknown commit outcome.
+        // Ordinary checkpoints/mutations are blocked until the ledger confirms completion.
+        final var prepared=pending;
+        try{String detail=json.writeValueAsString(prepared.rewards);saves.submit(()->history.completeDungeon(run,prepared.saves,detail)).get();}
+        catch(Exception e){throw new IllegalStateException("Dungeon reward could not commit",e);}
+        pendingRewards.remove(run);for(UUID id:prepared.saves.keySet()){var p=getPlayer(id);if(p!=null)checkpoint(p);}
+        return prepared.rewards;
+    }
+    private void restoreProgress(PlayerState p,ProgressStore.Save s){try{p.progress=json.readValue(s.data(),ProgressData.class);p.cooldowns=p.progress.cooldowns;p.level=s.level();p.exp=s.exp();p.cultivation=s.cultivation();p.realm=s.realm();p.realmStage=s.stage();rules.recalculate(p);}catch(Exception e){throw new IllegalStateException(e);}}
+    public synchronized void dungeonCommand(String sid,String type,JsonNode p,String requestId){
+        var actor=player(sid);long now=System.currentTimeMillis();
+        if(duels.forPlayer(actor.id)!=null)throw new ProtocolException("DUEL_BUSY","Không thể thao tác phó bản trong trận thách đấu.");
+        switch(type){
+            case "DUNGEON_LIST_REQUEST" -> dungeons.snapshot(actor.id,this,now);
+            case "DUNGEON_READY_SET" -> {if(!p.path("ready").isBoolean())throw new ProtocolException("INVALID_READY","ready phải là boolean.");dungeons.ready(actor.id,p.path("ready").asBoolean(),this);}
+            case "DUNGEON_START_REQUEST" -> {boolean executed=requests.execute(actor.id,requestId,type+":"+p,()->dungeons.start(actor.id,p.path("dungeonId").asText(),this,now),now);sendTo(actor.id,"COMMAND_RESULT",Map.of("requestId",requestId,"status","OK","replayed",!executed));}
+            case "DUNGEON_LEAVE_REQUEST" -> dungeons.leave(actor.id,this,now);
+            default -> throw new ProtocolException("UNSUPPORTED_MESSAGE","Thao tác phó bản không hợp lệ.");
+        }
+    }
+    public synchronized void duelCommand(String sid,String type,JsonNode p,String requestId){
+        var actor=player(sid);long now=System.currentTimeMillis();
+        if(type.equals("DUEL_STATE_REQUEST")){duels.snapshot(actor.id,this,now);sendTo(actor.id,"NEARBY_PLAYERS",views(actor).stream().filter(v->!v.id().equals(actor.id)&&v.connectionStatus().equals("ONLINE")).toList());return;}
+        boolean executed=requests.execute(actor.id,requestId,type+":"+p,()->{
+            switch(type){
+                case "DUEL_CHALLENGE" -> {var invite=duels.challenge(actor.id,id(p,"targetCharacterId"),this,now);sendTo(actor.id,"DUEL_CHALLENGE_SENT",Map.of("id",invite.id()));}
+                case "DUEL_ACCEPT" -> duels.accept(actor.id,id(p,"duelInvitationId"),this,now);
+                case "DUEL_DECLINE" -> duels.decline(actor.id,id(p,"duelInvitationId"),this,now);
+                case "DUEL_FORFEIT" -> duels.forfeit(actor.id,"FORFEIT",this,now);
+                default -> throw new ProtocolException("UNSUPPORTED_MESSAGE","Thao tác thách đấu không hợp lệ.");
+            }
+        },now);
+        sendTo(actor.id,"COMMAND_RESULT",Map.of("requestId",requestId,"status","OK","replayed",!executed));
+    }
+    private void broadcast(PlayerState scope,String type,Object payload){broadcast(scope.mapId,scope.instanceId,type,payload);}
+    private void broadcast(String map,UUID instance,String type,Object payload){for(var lease:sessions.online())if(sameScope(lease.player,map,instance))send(lease.session,type,payload);}
+    public synchronized void send(WebSocketSession session,String type,Object payload){
+        if(session==null||!session.isOpen())return;
+        try{var message=new TextMessage(json.writeValueAsString(Map.of("type",type,"payload",payload,"worldTick",tick,"worldEpoch",worldEpoch,"stateVersion",++eventVersion)));session.sendMessage(message);metrics.messages.increment();metrics.bytes.add(message.getPayloadLength());}
+        catch(Exception e){metrics.exceptions.increment();log.warn("Socket send failed {}",session.getId(),e);try{session.close();}catch(Exception ignored){}}
     }
     @PreDestroy public void shutdown() throws InterruptedException {
         checkpointAll(); saves.shutdown(); if(!saves.awaitTermination(10,TimeUnit.SECONDS)) log.warn("Pending position checkpoints at shutdown");

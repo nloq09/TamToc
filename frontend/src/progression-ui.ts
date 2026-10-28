@@ -1,5 +1,8 @@
+import {duelMarkup,bindDuelPanel,requestDuel} from './duel-ui';
 import { api } from './api';
 import {races,type Character,type MapDefinition,type Skill} from './types';
+import {partyMarkup,bindPartyPanel,requestParty} from './social-ui';
+import {dungeonMarkup,bindDungeonPanel,requestDungeon} from './activity-ui';
 const esc=(s:unknown)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const slots:Record<string,string>={WEAPON:'Vũ khí',ARMOR:'Áo',LEGS:'Quần',FEET:'Giày',ARTIFACT:'Pháp bảo',ACCESSORY:'Phụ kiện'};
 const status:Record<string,string>={AVAILABLE:'Chưa nhận',ACTIVE:'Đang thực hiện',CLAIMED:'Đã lĩnh thưởng'};
@@ -9,6 +12,7 @@ export function setPanelMap(map:MapDefinition){worldMap=map;}
 export async function openProgression(kind:string,c:Character){
  const version=++renderVersion;
  const dialog=document.querySelector<HTMLDialogElement>('#info-dialog');if(!dialog)return;
+ dialog.dataset.panel=kind;
  if(!dialog.open)dialog.show();
  document.querySelector('#dialog-content')!.innerHTML='<p>Đang tải…</p>';
  const path='/characters/'+c.id;
@@ -39,15 +43,26 @@ export async function openProgression(kind:string,c:Character){
   if(version===renderVersion)document.querySelector('#wallet-stones')!.textContent=String(data.stones);
  }else if(kind==='map'){
   content=`<div class="eyebrow">BẢN ĐỒ TAM GIỚI</div><h2>${esc(worldMap?.name||'Thế giới')}</h2><div class="dialog-row"><p>Thanh Vân Thành ⇄ Trung Châu</p><p>U Minh Thành ⇄ Trung Châu</p><p>Vạn Yêu Lâm ⇄ Trung Châu</p></div><h3>Cổng trong khu vực</h3>${worldMap?.portals.map(p=>`<div class="dialog-row"><strong>◇ ${esc(p.label)}</strong><p>Vị trí x = ${p.x} · Đến gần và nhấn E.</p></div>`).join('')||''}`;
+ }else if(kind==='party'){
+  content=partyMarkup();
+ }else if(kind==='dungeon'){
+  content=dungeonMarkup();
+ }else if(kind==='duel'){
+  content=duelMarkup();
  }else if(kind==='functions'){
   const availability=await api<{requiredLevel:number;level:number}>(path+'/available-organizations');
-  content=`<div class="eyebrow">ĐỒNG HÀNH CÙNG ĐẠO HỮU</div><h2>Chức năng</h2><div class="function-grid"><button data-open="character">Nhân vật [C]</button><button data-open="map">Bản đồ [M]</button><button data-open="organizations" ${availability.level<availability.requiredLevel?'disabled':''}>Thế lực${availability.level<availability.requiredLevel?' · Cấp '+availability.requiredLevel:''}</button><button data-open="quests">Nhiệm vụ [Q]</button><button data-open="inventory">Hành trang [I]</button><button id="leave">Rời thế giới ↗</button></div><div class="dialog-row"><p>A / D: di chuyển · Space: nhảy</p><p>J: đánh thường · K: Linh Khí Kích</p><p>L: kỹ năng tộc · U: kỹ năng thế lực</p><p>Shift: thân pháp · E: tương tác</p></div>`;
+  content=`<div class="eyebrow">ĐỒNG HÀNH CÙNG ĐẠO HỮU</div><h2>Chức năng</h2><div class="function-grid"><button data-open="character">Nhân vật [C]</button><button data-open="map">Bản đồ [M]</button><button data-open="party">Tổ đội</button><button data-open="dungeon">Phó bản tổ đội</button><button data-open="duel">Thách đấu 1v1</button><button data-open="organizations" ${availability.level<availability.requiredLevel?'disabled':''}>Thế lực${availability.level<availability.requiredLevel?' · Cấp '+availability.requiredLevel:''}</button><button data-open="quests">Nhiệm vụ [Q]</button><button data-open="inventory">Hành trang [I]</button><button id="leave">Rời thế giới ↗</button><button id="network-retry">Kết nối lại</button>${['localhost','127.0.0.1'].includes(location.hostname)?'<button id="network-test">Thử ngắt mạng 7 giây</button>':''}</div><div class="dialog-row"><p>A / D: di chuyển · Space: nhảy</p><p>J: đánh thường · K: Linh Khí Kích</p><p>L: kỹ năng tộc · U: kỹ năng thế lực</p><p>Shift: thân pháp · E: tương tác</p></div>`;
  }
  if(version!==renderVersion||!dialog.isConnected||!dialog.open)return;
  document.querySelectorAll<HTMLButtonElement>('[data-panel]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.panel===kind||(b.dataset.panel==='functions'&&['character','map','organizations'].includes(kind)))));
  document.querySelector('#dialog-content')!.innerHTML=content+'<p id="panel-message" role="status"></p><button class="quiet" id="refresh-panel">Làm mới ↻</button>';
+ if(kind==='party'){bindPartyPanel();requestParty();}
+ if(kind==='dungeon'){bindDungeonPanel();requestDungeon();}
+ if(kind==='duel'){bindDuelPanel();requestDuel();}
  dialog.focus({preventScroll:true});
  document.querySelectorAll<HTMLButtonElement>('[data-open]').forEach(b=>b.onclick=()=>void openProgression(b.dataset.open!,c));
+ document.querySelector('#network-test')?.addEventListener('click',()=>{dialog.close();window.dispatchEvent(new CustomEvent('game:network-test'));});
+ document.querySelector('#network-retry')?.addEventListener('click',()=>{dialog.close();window.dispatchEvent(new CustomEvent('game:network-retry'));});
  document.querySelector('#leave')?.addEventListener('click',()=>window.dispatchEvent(new CustomEvent('game:leave')));
  document.querySelector('#refresh-panel')!.addEventListener('click',()=>void openProgression(kind,c));
  document.querySelectorAll<HTMLButtonElement>('[data-action]').forEach(b=>b.onclick=async()=>{

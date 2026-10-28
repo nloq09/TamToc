@@ -1,12 +1,16 @@
+import {duelMessage} from './duel-ui';
 import './style.css';
 import './progression.css';
 import './game-layout.css';
+import './social.css';
 import {gameShell} from './game-shell';
 import { api,hasToken,setToken } from './api';
 import { races,type Race,type Character,type Player,type Snapshot } from './types';
 import { GameConnection } from './network';
 import { createGame } from './game';
 import { enhanceGame,combatMessage,showPanel } from './game-ui';
+import {socialMessage} from './social-ui';
+import {activityMessage} from './activity-ui';
 
 const root=document.querySelector<HTMLDivElement>('#app')!;
 let connection:GameConnection|null=null;
@@ -14,6 +18,7 @@ let activeGame:ReturnType<typeof createGame>|null=null;
 let lastSnapshot:Snapshot|null=null;
 let players:Player[]=[];
 let busy=false;
+let entering=false;
 const esc=(s:string)=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const brand=`<a class="brand" href="/" aria-label="Tam Tộc"><span class="seal">三</span><span>TAM TỘC<small>NGHỊCH THIÊN</small></span></a>`;
 const header=()=>`<header>${brand}<div class="header-right"><span class="phase">TAM GIỚI · KHAI THIÊN</span><span class="live-dot"></span><span id="service-status">Đang kiểm tra máy chủ</span></div></header>`;
@@ -49,32 +54,41 @@ function creation() {
  };
 }
 async function enter(c:Character) {
- if(busy&&connection)return;
+ if(entering||connection)return;
+ entering=true;
  try{
   const {ticket}=await api<{ticket:string}>(`/characters/${c.id}/connection-ticket`,{});
+  let firstTicket:string|null=ticket;
   lastSnapshot=null;players=[];
   shell(gameShell(c));
-  connection=new GameConnection(onMessage,intentional=>{if(!intentional){document.querySelector('#connection-status')!.textContent='Mất kết nối';error('Kết nối đã đóng. Nhấn Rời thế giới rồi vào lại để kết nối lại.');}});
-  activeGame=createGame(connection);enhanceGame(c,connection);connection.connect(ticket);
+  connection=new GameConnection(onMessage,status=>{
+   const label=document.querySelector<HTMLElement>('#connection-status');if(label){label.textContent=status.message;label.dataset.state=status.state;}
+   const banner=document.querySelector<HTMLElement>('#network-banner');if(banner){banner.hidden=status.state==='connected'||status.state==='closed';banner.textContent=status.message;}
+   if(status.state==='failed')error(status.message);
+  },{characterId:c.id,ticket:async(signal)=>{if(firstTicket){const value=firstTicket;firstTicket=null;return value;}return (await api<{ticket:string}>(`/characters/${c.id}/connection-ticket`,{},signal)).ticket;}});
+  activeGame=createGame(connection);enhanceGame(c,connection);connection.connect();
   document.querySelector('#map-button')!.addEventListener('click',showMap);
   document.querySelector('#character-button')!.addEventListener('click',showCharacter);
   document.querySelector('#close-dialog')!.addEventListener('click',()=>document.querySelector<HTMLDialogElement>('#info-dialog')!.close());
   document.querySelector<HTMLDialogElement>('#info-dialog')!.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();document.querySelector<HTMLDialogElement>('#info-dialog')!.close();}});
-  document.querySelector<HTMLFormElement>('#chat-form')!.onsubmit=e=>{e.preventDefault();const input=document.querySelector<HTMLInputElement>('#chat-input')!;if(input.value.trim()){connection?.send('CHAT',{message:input.value});input.value='';}};
- }catch(e){error((e as Error).message);}
+  document.querySelector<HTMLFormElement>('#chat-form')!.onsubmit=e=>{e.preventDefault();const input=document.querySelector<HTMLInputElement>('#chat-input')!;if(input.value.trim()){const party=document.querySelector<HTMLSelectElement>('#chat-channel')?.value==='PARTY';connection?.send(party?'PARTY_CHAT':'CHAT',party?{text:input.value}:{message:input.value});input.value='';}};
+ }catch(e){error((e as Error).message);}finally{entering=false;}
 }
 function onMessage(type:string,p:any) {
+ socialMessage(type,p);
+ activityMessage(type,p);
+ duelMessage(type,p);
  combatMessage(type,p);
  if(type==='SKILLS_UPDATED')activeGame?.scene.setPathSkill(p.find((s:any)=>s.requiredPath)?.id||'');
  if(type==='COMBAT_EVENT'||type==='SKILL_CAST')activeGame?.scene.effect(p);
  if(type==='WORLD_SNAPSHOT') {
   lastSnapshot=p;players=p.players;
   // AUTH can arrive before Phaser finishes booting.
-  const apply=()=>{if(!activeGame)return;if(activeGame.scene.sys.isActive()){activeGame.scene.loadWorld(p);updateHud();}else setTimeout(apply,20);};apply();
+  const game=activeGame;
+  const apply=()=>{if(!game||activeGame!==game||lastSnapshot!==p)return;if(game.scene.sys.isActive()){game.scene.loadWorld(p);updateHud();}else setTimeout(apply,20);};apply();
  }else if(type==='ENTITY_UPDATE'){players=p.players;if(activeGame?.scene.sys.isActive()){activeGame.scene.sync(players);activeGame.scene.syncMonsters(p.monsters);activeGame.scene.syncLoot(p.loot);}updateHud();}
  else if(type==='PLAYER_LEFT'){activeGame?.scene.remove(p.id);}
- else if(type==='AUTH_RESULT'){document.querySelector('#connection-status')!.textContent='Đã kết nối · WebSocket';}
- else if(type==='CHAT'){const log=document.querySelector('#chat-log')!;const line=document.createElement('p');const name=document.createElement('strong');name.textContent=p.name+': ';line.append(name,document.createTextNode(p.message));log.append(line);while(log.childElementCount>60)log.firstElementChild?.remove();log.scrollTop=log.scrollHeight;}
+ else if(type==='CHAT'){const log=document.querySelector('#chat-log')!;const line=document.createElement('p');const name=document.createElement('strong');name.textContent=(p.channel==='PARTY'?'[Đội] ':'')+p.name+': ';line.append(name,document.createTextNode(p.message));log.append(line);while(log.childElementCount>60)log.firstElementChild?.remove();log.scrollTop=log.scrollHeight;}
  else if(type==='ERROR')error(p.message);
 }
 function updateHud(){
@@ -89,7 +103,10 @@ function showCharacter(){void showPanel('character');}
 function showMap(){void showPanel('map');}
 function leave(){connection?.close();connection=null;activeGame?.game.destroy(true);activeGame=null;void characters();}
 window.addEventListener('keydown',e=>{if(!connection||e.target instanceof HTMLInputElement||document.querySelector('dialog[open]'))return;if(['Space','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(e.code==='KeyC')showCharacter();if(e.code==='KeyM')showMap();if(e.code==='Enter'){e.preventDefault();document.querySelector<HTMLInputElement>('#chat-input')?.focus();}});
-window.addEventListener('pagehide',()=>connection?.close());
+window.addEventListener('pagehide',()=>connection?.suspend());
+window.addEventListener('pageshow',e=>{if(e.persisted)connection?.retry();});
+window.addEventListener('game:network-test',()=>connection?.simulateDisconnect());
+window.addEventListener('game:network-retry',()=>connection?.retry());
 window.addEventListener('game:leave',leave);
 if(hasToken())void characters();else login();
 

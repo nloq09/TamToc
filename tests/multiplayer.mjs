@@ -33,7 +33,7 @@ try {
  const tb=await request('/characters/'+cb.id+'/connection-ticket',{},b.token);
  const pa=new Peer();peers.push(pa);const sa=await pa.open(ta.ticket);
  const pb=new Peer();peers.push(pb);await pb.open(tb.ticket);
- assert.equal(sa.players.length,1);
+ assert.equal(sa.players.filter(p=>p.id===ca.id).length,1);
  const replay=new Peer();peers.push(replay);await new Promise(r=>replay.socket.onopen=r);replay.send('AUTH',{ticket:ta.ticket});await replay.wait('ERROR');
  const duplicateTicket=await request('/characters/'+ca.id+'/connection-ticket',{},a.token);
  const duplicate=new Peer();peers.push(duplicate);await new Promise(r=>duplicate.socket.onopen=r);duplicate.send('AUTH',{ticket:duplicateTicket.ticket});await duplicate.wait('ERROR',p=>p.message.includes('kết nối khác'));
@@ -45,7 +45,8 @@ try {
  clearInterval(timer);pa.send('INPUT',{direction:0,jump:false,sequence:++sequence});pb.send('INPUT',{direction:0,jump:false,sequence});
  pa.send('INTERACT');pb.send('INTERACT');
  await pa.wait('WORLD_SNAPSHOT',p=>p.map.id==='trung-chau');await pb.wait('WORLD_SNAPSHOT',p=>p.map.id==='trung-chau');
- await pa.wait('ENTITY_UPDATE',p=>p.players.length===2);await pb.wait('ENTITY_UPDATE',p=>p.players.length===2);
+ const both=p=>[ca.id,cb.id].every(id=>p.players.filter(v=>v.id===id).length===1);
+ await pa.wait('ENTITY_UPDATE',both);await pb.wait('ENTITY_UPDATE',both);
  pa.messages=[];pb.messages=[];
  for(let i=0;i<8;i++){pa.send('INPUT',{direction:1,jump:false,sequence:++sequence});await new Promise(r=>setTimeout(r,50));}
  pa.send('INPUT',{direction:0,jump:false,sequence:++sequence});
