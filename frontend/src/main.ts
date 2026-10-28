@@ -1,3 +1,5 @@
+import {npcMessage} from './npc-ui';
+import {normalizeMap} from './types';
 import {duelMessage} from './duel-ui';
 import './style.css';
 import './progression.css';
@@ -75,27 +77,35 @@ async function enter(c:Character) {
  }catch(e){error((e as Error).message);}finally{entering=false;}
 }
 function onMessage(type:string,p:any) {
+ if(type==='WORLD_SNAPSHOT')p.map=normalizeMap(p.map);
+ npcMessage(type,p);
  socialMessage(type,p);
  activityMessage(type,p);
  duelMessage(type,p);
  combatMessage(type,p);
+ if(type==='WORLD_SNAPSHOT'||type==='ENTITY_UPDATE')activeGame?.scene.setWorldTick(p.worldTick??p.tick,p.tickDurationMs,p.serverTime);
  if(type==='SKILLS_UPDATED')activeGame?.scene.setPathSkill(p.find((s:any)=>s.requiredPath)?.id||'');
+ if(type==='BOSS_TELEGRAPH')activeGame?.scene.telegraph(p);
+ if(type==='BOSS_ABILITY_RESOLVED')activeGame?.scene.resolveTelegraph(p.castId);
  if(type==='COMBAT_EVENT'||type==='SKILL_CAST')activeGame?.scene.effect(p);
  if(type==='WORLD_SNAPSHOT') {
   lastSnapshot=p;players=p.players;
   // AUTH can arrive before Phaser finishes booting.
   const game=activeGame;
-  const apply=()=>{if(!game||activeGame!==game||lastSnapshot!==p)return;if(game.scene.sys.isActive()){game.scene.loadWorld(p);updateHud();}else setTimeout(apply,20);};apply();
- }else if(type==='ENTITY_UPDATE'){players=p.players;if(activeGame?.scene.sys.isActive()){activeGame.scene.sync(players);activeGame.scene.syncMonsters(p.monsters);activeGame.scene.syncLoot(p.loot);}updateHud();}
+  const apply=()=>{if(!game||activeGame!==game||lastSnapshot!==p)return;if(game.scene.sys.isActive()){game.scene.loadWorld(p);game.scene.syncBots(p.bots||[]);updateHud();}else setTimeout(apply,20);};apply();
+ }else if(type==='ENTITY_UPDATE'){players=p.players;if(activeGame?.scene.sys.isActive()){activeGame.scene.sync(players);activeGame.scene.syncMonsters(p.monsters);activeGame.scene.syncLoot(p.loot);activeGame.scene.syncBots(p.bots||[]);}updateHud();}
  else if(type==='PLAYER_LEFT'){activeGame?.scene.remove(p.id);}
  else if(type==='CHAT'){const log=document.querySelector('#chat-log')!;const line=document.createElement('p');const name=document.createElement('strong');name.textContent=(p.channel==='PARTY'?'[Đội] ':'')+p.name+': ';line.append(name,document.createTextNode(p.message));log.append(line);while(log.childElementCount>60)log.firstElementChild?.remove();log.scrollTop=log.scrollHeight;}
- else if(type==='ERROR')error(p.message);
+ else if(type==='ERROR'||type==='PORTAL_REJECTED')error(p.message);
+ else if(type==='CHECKPOINT_REACHED')error('Đã lưu điểm hồi sinh: '+p.spawnId);
 }
 function updateHud(){
  if(!lastSnapshot)return;
  document.querySelector('#map-name')!.textContent=lastSnapshot.map.name;
  document.querySelector('#population')!.textContent=players.length+' đạo hữu';
+ const detail=document.querySelector('#map-detail');if(detail)detail.textContent=`${lastSnapshot.map.id} · ${lastSnapshot.instanceId?.slice(0,8)||'Chung'} · Lv ${lastSnapshot.map.recommendedLevelMin}–${lastSnapshot.map.recommendedLevelMax}`;
  const canvas=document.querySelector<HTMLCanvasElement>('#minimap')!;const ctx=canvas.getContext('2d')!;ctx.clearRect(0,0,260,74);ctx.fillStyle='#273e3a';ctx.fillRect(6,49,248,3);
+ lastSnapshot.map.obstacles.forEach(r=>{ctx.fillStyle='#c0ac89';ctx.fillRect(6+r.x/lastSnapshot!.map.width*248,15+r.y/lastSnapshot!.map.ground*32,Math.max(2,r.width/lastSnapshot!.map.width*248),Math.max(2,r.height/lastSnapshot!.map.ground*32));});
  lastSnapshot.map.portals.forEach(p=>{ctx.fillStyle='#be98f0';ctx.fillRect(6+p.x/lastSnapshot!.map.width*248,35,4,15);});
  players.forEach(p=>{ctx.fillStyle=p.id===lastSnapshot!.selfId?'#e6ca89':'#89b6c3';ctx.fillRect(6+p.x/lastSnapshot!.map.width*248,15+p.y/lastSnapshot!.map.ground*32,5,5);});
 }

@@ -17,6 +17,7 @@ import vn.tamtoc.party.*;
 import vn.tamtoc.instance.*;
 import vn.tamtoc.dungeon.*;
 import vn.tamtoc.duel.*;
+import vn.tamtoc.bot.*;
 import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
@@ -46,55 +47,58 @@ public class GameWorld implements InstanceGateway {
     private final DungeonService dungeons;
     private final ActivityStore history;
     private final DuelService duels;
+    private final MonsterDefeats defeats;
+    private final LootRoller lootRoller;
+    private final BotRegistry bots;
+    private final TrainingService training;
+    private final WorldInterest interest;
+    private record Scope(String map,UUID instance) {}
     private record PendingReward(Map<UUID,ProgressStore.Save> saves,Map<UUID,Map<String,Object>> rewards) {}
     private final Map<UUID,PendingReward> pendingRewards=new HashMap<>();
     private boolean rewardPending(UUID id){return pendingRewards.values().stream().anyMatch(r->r.saves.containsKey(id));}
     public GameWorld(MapCatalog m, CharacterService c, ObjectMapper j,
         @Value("${game.tick-ms}") long tickMs, @Value("${game.input-timeout-ms}") long timeout,
-        ProgressStore progress,CombatCatalog combat,CombatEngine engine,MonsterAi ai,ProgressionRules rules,CharacterSessions sessions,NetworkMetrics metrics,PartyRegistry parties,PartyEventPublisher partyEvents,PartyRewardPolicy rewards,CommandRequests requests,InstanceRegistry instances,DungeonService dungeons,ActivityStore history,DuelService duels) {
+        ProgressStore progress,CombatCatalog combat,CombatEngine engine,MonsterAi ai,ProgressionRules rules,CharacterSessions sessions,NetworkMetrics metrics,PartyRegistry parties,PartyEventPublisher partyEvents,PartyRewardPolicy rewards,CommandRequests requests,InstanceRegistry instances,DungeonService dungeons,ActivityStore history,DuelService duels,MonsterPopulation population,MonsterDefeats defeats,LootRoller lootRoller,BotRegistry bots,TrainingService training,WorldInterest interest) {
         maps=m; characters=c; json=j; dt=tickMs/1000.0; inputTimeout=timeout;
         this.progress=progress;this.combat=combat;this.engine=engine;this.ai=ai;
         this.rules=rules;this.sessions=sessions;this.metrics=metrics;
         this.parties=parties;this.partyEvents=partyEvents;this.rewards=rewards;this.requests=requests;
         this.instances=instances;this.dungeons=dungeons;this.history=history;
         this.duels=duels;
-        for(String map:List.of("thanh-van","u-minh","van-yeu","trung-chau")) {
-            for(int i=0;i<5;i++)monsters.add(new MonsterState(combat.monsters.get("WOLF"),map,800+i*180,maps.get(map).ground()));
-            monsters.add(new MonsterState(combat.monsters.get("SOLDIER"),map,1800,maps.get(map).ground()));
-            monsters.add(new MonsterState(combat.monsters.get("SPIRIT"),map,2000,maps.get(map).ground()));
-            if(map.equals("trung-chau"))monsters.add(new MonsterState(combat.monsters.get("BOSS"),map,2750,maps.get(map).ground()));
-        }
+        rules.validateWorldData(maps,combat);this.defeats=defeats;this.lootRoller=lootRoller;this.bots=bots;this.training=training;this.interest=interest;monsters.addAll(population.all());
+        for(var definition:combat.monsters.values())for(var drop:definition.dropTable())if(!rules.hasItem(drop.itemId()))throw new IllegalArgumentException("Unknown drop item "+drop.itemId());
     }
-    public synchronized void join(WebSocketSession socket,GameCharacter character,String resumeSecret,boolean resumable) {
+    public synchronized void join(WebSocketSession socket,GameCharacter character,String resumeSecret,boolean resumable,boolean deltaUpdates) {
         expireSessions();flushSaves();
         var binding=sessions.bind(character.userId,character.id,socket,resumeSecret,resumable,()->{
             var fresh=characters.owned(character.userId,character.id);
             PlayerState p=new PlayerState(fresh);p.progress=progress.load(p.id);p.cooldowns=p.progress.cooldowns;rules.recalculate(p);
-            if(resumeSecret!=null){p.x=180;p.y=maps.get(p.mapId).ground();p.vy=0;}
+            maps.sanitize(p);if(resumeSecret!=null){var spawn=maps.respawn(p);p.x=spawn.x();p.y=spawn.y();p.vy=0;}
             return p;
         },System.currentTimeMillis());
-        var lease=binding.lease();
+        var lease=binding.lease();lease.deltaUpdates=deltaUpdates;
         if(binding.replaced()!=null)try{binding.replaced().close(new CloseStatus(4001,"Session replaced"));}catch(Exception ignored){}
         Map<String,Object> auth=new LinkedHashMap<>();
-        auth.put("ok",true);auth.put("characterId",character.id);auth.put("connectionId",socket.getId());auth.put("protocolVersion",resumable?2:1);auth.put("resumed",binding.resumed());auth.put("worldEpoch",worldEpoch);
+        auth.put("ok",true);auth.put("characterId",character.id);auth.put("connectionId",socket.getId());auth.put("protocolVersion",deltaUpdates?3:resumable?2:1);auth.put("resumed",binding.resumed());auth.put("worldEpoch",worldEpoch);
         if(resumable)auth.put("resumeToken",sessions.resumeSecret(lease));
         send(socket,"AUTH_RESULT",auth);if(binding.resumed())metrics.resumes.increment();
         snapshot(socket,lease.player);send(socket,"SKILLS_UPDATED",combat.unlocked(lease.player));
         broadcast(lease.player,"PLAYER_JOINED",lease.player.view());
         partyState(lease.player.id);
         dungeons.snapshot(lease.player.id,this,System.currentTimeMillis());
-        duels.snapshot(lease.player.id,this,System.currentTimeMillis());
+        duels.snapshot(lease.player.id,this,System.currentTimeMillis());training.snapshot(lease.player.id,this,System.currentTimeMillis());
     }
     private Map<String,Object> state(PlayerState p){
         Map<String,Object> state=new LinkedHashMap<>();
-        state.put("players",views(p));state.put("monsters",monsterViews(p));state.put("loot",lootViews(p));
-        state.put("tick",tick);state.put("worldTick",tick);state.put("mapId",p.mapId);state.put("instanceId",p.instanceId);state.put("serverTime",System.currentTimeMillis());return state;
+        state.put("bots",npcViews(p));state.put("players",views(p));state.put("monsters",monsterViews(p));state.put("loot",lootViews(p));
+        state.put("tickDurationMs",metrics.lastTickMs);state.put("tick",tick);state.put("worldTick",tick);state.put("mapId",p.mapId);state.put("instanceId",p.instanceId);state.put("serverTime",System.currentTimeMillis());return state;
     }
-    private void snapshot(WebSocketSession socket,PlayerState p){if(socket==null||!socket.isOpen())return;var state=state(p);state.put("selfId",p.id);state.put("map",maps.get(p.mapId));state.put("connectionId",socket.getId());send(socket,"WORLD_SNAPSHOT",state);}
+    private void snapshot(WebSocketSession socket,PlayerState p){if(socket==null||!socket.isOpen())return;var state=state(p);state.put("selfId",p.id);state.put("map",maps.get(p.mapId));state.put("connectionId",socket.getId());var controller=sessions.byConnection(socket.getId());if(controller!=null&&controller.deltaUpdates)state.put("interestVersion",interest.snapshot(socket.getId(),state));send(socket,"WORLD_SNAPSHOT",state);}
     public synchronized void resumeSnapshot(String sid){var lease=controller(sid);snapshot(lease.session,lease.player);}
     private CharacterSessions.Lease controller(String sid){var lease=sessions.byConnection(sid);if(lease==null)throw new ProtocolException("SESSION_NOT_ACTIVE","Kết nối không còn điều khiển nhân vật.");return lease;}
     private static boolean sameScope(PlayerState p,String map,UUID instance){return p.mapId.equals(map)&&Objects.equals(p.instanceId,instance);}
-    private List<PlayerState.View> views(PlayerState observer){return sessions.all().stream().map(l->l.player).filter(p->sameScope(p,observer.mapId,observer.instanceId)).map(PlayerState::view).toList();}
+    private List<PlayerState.View> views(PlayerState observer){return sessions.all().stream().map(l->l.player).filter(p->sameScope(p,observer.mapId,observer.instanceId)&&(p.id.equals(observer.id)||interest.visible(observer,p.x,p.y))).map(PlayerState::view).toList();}
+    private List<BotState.View> npcViews(PlayerState p){return bots.views(p).stream().filter(b->interest.visible(p,b.x(),b.y())).toList();}
     public synchronized void input(String sid, int direction, boolean jump, long sequence) {
         PlayerState p=player(sid);
         if (sequence <= p.sequence) return;
@@ -103,22 +107,32 @@ public class GameWorld implements InstanceGateway {
         if (jump && !p.jumpHeld) p.jumpQueued=true;
         p.jumpHeld=jump; p.lastInput=System.currentTimeMillis();
     }
-    public synchronized void interact(String sid) {
+    public synchronized void interact(String sid){interact(sid,null);}
+    public synchronized void interact(String sid,UUID targetEntity){
         PlayerState p=player(sid);
-        if(p.instanceId!=null&&instances.get(p.instanceId)!=null&&instances.get(p.instanceId).kind.equals("DUEL"))throw new ProtocolException("INTERACTION_DISABLED","Không thể tương tác NPC trong đấu trường.");
+        if(targetEntity!=null){sendTo(p.id,"DIALOGUE_STARTED",bots.dialogue(p,targetEntity,System.currentTimeMillis()));return;}
+        if(p.instanceId!=null&&instances.get(p.instanceId)!=null&&Set.of("DUEL","TRAINING").contains(instances.get(p.instanceId).kind))throw new ProtocolException("INTERACTION_DISABLED","Không thể tương tác NPC trong đấu trường.");
         if(p.progress.hp<=0)throw new IllegalArgumentException("Đang chờ hồi sinh.");
         var nearby=lootViews(p).stream().filter(l->Math.abs(l.x()-p.x)<80&&Math.abs(l.y()-p.y)<80).findFirst();
-        if(nearby.isPresent()) {var item=nearby.get();rules.addItem(p,item.itemId());loot.remove(item);checkpoint(p);send(controller(sid).session,"INVENTORY_UPDATED",p.progress.inventory);return;}
+        if(nearby.isPresent()) {var item=nearby.get();rules.addItems(p,item.itemId(),item.quantity());loot.remove(item);checkpoint(p);send(controller(sid).session,"INVENTORY_UPDATED",p.progress.inventory);return;}
         if(p.instanceId!=null)throw new ProtocolException("INTERACTION_DISABLED","Trong phó bản chỉ nhặt vật phẩm hoặc rời bằng bảng phó bản.");
-        if(Math.abs(p.x-300)<35) {
-            p.progress.guideMet=true;checkpoint(p);send(controller(sid).session,"NPC_DIALOG",Map.of("name","Tiếp Dẫn Sứ","message","Mở Nhiệm vụ để nhận thử thách Yêu Lang. Từ cấp 10, nhận Con Đường Tu Luyện rồi chọn một thế lực."));return;
+        var npc=maps.get(p.mapId).npcSpawns().stream().filter(n->Math.abs(p.x-n.x())<45&&Math.abs(p.y-n.y())<70).findFirst();
+        if(npc.isPresent()){
+            p.progress.guideMet=true;checkpoint(p);send(controller(sid).session,"NPC_DIALOG",Map.of("name",npc.get().name(),"message",String.join("\n",bots.script(npc.get().dialogueId()))));return;
         }
-        var portal=maps.get(p.mapId).portals().stream().filter(v -> Math.abs(v.x()-p.x)<70 && p.y > maps.get(p.mapId).ground()-80).findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Hãy đến gần cổng dịch chuyển rồi nhấn E."));
-        broadcast(p,"PLAYER_LEFT",Map.of("id",p.id));
-        p.mapId=portal.target(); p.x=p.mapId.equals("trung-chau") ? 650 : 2000; p.y=maps.get(p.mapId).ground(); p.vy=0; p.direction=0;
-        checkpoint(p); snapshot(controller(sid).session,p); broadcast(p,"PLAYER_JOINED",p.view());
+        if(maps.get(p.mapId).portals().stream().anyMatch(v->v.triggerBounds().contains(p.x,p.y))){usePortal(sid,null);return;}
+        var bot=bots.nearest(p);if(bot.isPresent()){sendTo(p.id,"DIALOGUE_STARTED",bots.dialogue(p,bot.get().actor.id,System.currentTimeMillis()));return;}
+        usePortal(sid,null);
     }
+    public synchronized void usePortal(String sid,String portalId){
+        var p=player(sid);long now=System.currentTimeMillis();
+        if(now-p.lastPortalAt<1000)throw new ProtocolException("PORTAL_COOLDOWN","Vừa chuyển bản đồ, hãy chờ một giây.");
+        var portal=maps.portal(p,portalId);var spawn=maps.validatePortal(p,portal);var target=maps.get(portal.target());
+        if(sessions.all().stream().filter(l->sameScope(l.player,target.id(),null)).count()>=target.maxPlayers())throw new ProtocolException("MAP_FULL","Bản đồ đã đủ người chơi.");
+        String previous=p.mapId;p.lastPortalAt=now;moveTo(p.id,target.id(),null,spawn.x(),spawn.y());
+        sendTo(p.id,"MAP_ENTERED",Map.of("mapId",p.mapId,"fromMapId",previous,"spawnId",spawn.id(),"version",target.version()));
+    }
+
     public synchronized void chat(String sid, String message) {
         PlayerState p=player(sid); String clean=message.strip();
         if (clean.isEmpty() || clean.length()>200) throw new IllegalArgumentException("Tin nhắn phải có 1–200 ký tự.");
@@ -128,26 +142,29 @@ public class GameWorld implements InstanceGateway {
         return controller(sid).player;
     }
     private List<MonsterState> runtimeMonsters(PlayerState p){if(p.instanceId!=null){var instance=instances.get(p.instanceId);return instance==null?List.of():List.copyOf(instance.monsters);}return monsters.stream().filter(m->m.mapId.equals(p.mapId)).toList();}
-    private List<MonsterState.View> monsterViews(PlayerState p){return runtimeMonsters(p).stream().map(MonsterState::view).toList();}
+    private List<MonsterState.View> monsterViews(PlayerState p){return runtimeMonsters(p).stream().filter(m->interest.visible(p,m.x,m.y)).map(MonsterState::view).toList();}
     private List<MonsterState> allMonsters(){var all=new ArrayList<>(monsters);for(var instance:instances.all())if(instance.active)all.addAll(instance.monsters);return all;}
-    private List<LootState> lootViews(PlayerState p){return loot.stream().filter(l->l.mapId().equals(p.mapId)&&Objects.equals(l.instanceId(),p.instanceId)&&l.ownerId().equals(p.id)).toList();}
+    private List<LootState> lootViews(PlayerState p){return loot.stream().filter(l->l.mapId().equals(p.mapId)&&Objects.equals(l.instanceId(),p.instanceId)&&l.ownerId().equals(p.id)&&interest.visible(p,l.x(),l.y())).toList();}
     public synchronized void cast(String sid,String skill){
         cast(sid,skill,null);
     }
     public synchronized void cast(String sid,String skill,UUID explicitPlayerTarget){
         PlayerState p=player(sid);
+        if(training.forPlayer(p.id)!=null){var run=training.forPlayer(p.id);if(explicitPlayerTarget!=null&&!explicitPlayerTarget.equals(run.bot.actor.id))throw new ProtocolException("INVALID_TARGET","Mục tiêu không thuộc bài đối luyện.");training.cast(p.id,skill,this,System.currentTimeMillis(),(t,v)->broadcast(p,t,v));return;}
         if(explicitPlayerTarget!=null){var duel=duels.forPlayer(p.id);if(duel==null)throw new ProtocolException("PVP_NOT_ALLOWED","Chỉ được tấn công người chơi trong đấu trường tự nguyện.");if(!duel.other(p.id).equals(explicitPlayerTarget))throw new ProtocolException("INVALID_TARGET","Mục tiêu không thuộc trận thách đấu.");}
         if(duels.forPlayer(p.id)!=null){engine.castDuel(p,skill,maps.get(p.mapId),duels.opponents(p.id,this),p.instanceId,System.currentTimeMillis(),(t,v)->broadcast(p,t,v));duels.afterCombat(p.id,this,System.currentTimeMillis());}
         else engine.cast(p,skill,maps.get(p.mapId),runtimeMonsters(p),System.currentTimeMillis(),(t,v)->broadcast(p,t,v),this::reward);
         p.lastActiveAt=System.currentTimeMillis();
     }
     private void reward(PlayerState killer,MonsterState monster){
-        if(monster.rewardProcessed)return;monster.rewardProcessed=true;
+        var defeated=defeats.once(monster,System.currentTimeMillis());if(defeated.isEmpty())return;
+        broadcast(monster.mapId,monster.instanceId,"MONSTER_DEFEATED",defeated.get());
         for(var share:rewards.split(monster,sessions.online().stream().map(l->l.player).toList(),System.currentTimeMillis())){
             var p=share.player();var lease=sessions.byCharacter(p.id);int previousLevel=p.level;
             boolean leveled=ProgressionRules.addExp(p,share.exp());p.cultivation+=share.cultivation();p.progress.totalKills++;
             if(monster.definition.id().equals("WOLF"))p.progress.wolfKills++;
-            loot.add(new LootState(UUID.randomUUID(),monster.definition.id().equals("WOLF")?"WOLF_FANG":"POTION",monster.mapId,monster.x,monster.y,System.currentTimeMillis()+60000,p.id,p.instanceId));
+            p.progress.killsByDefinition.merge(monster.definition.id(),1,Integer::sum);p.progress.killsByDefinition.merge(monster.mapId+":"+monster.definition.id(),1,Integer::sum);
+            for(var drop:lootRoller.roll(monster,p.id))loot.add(new LootState(UUID.randomUUID(),drop.itemId(),monster.mapId,monster.x,monster.y,System.currentTimeMillis()+60000,p.id,p.instanceId,drop.quantity()));
             if(leveled)send(lease.session,"PLAYER_LEVEL_UP",p.view());
             if(previousLevel<rules.organizationLevel()&&p.level>=rules.organizationLevel())send(lease.session,"ORGANIZATION_UNLOCKED",Map.of("level",p.level));
             send(lease.session,"QUEST_UPDATED",p.progress.quests);checkpoint(p);
@@ -161,22 +178,27 @@ public class GameWorld implements InstanceGateway {
             PlayerState p=c.player;
             if(c.status!=CharacterSessions.Status.ONLINE||now-p.lastInput>inputTimeout) { p.direction=0; p.jumpHeld=false; p.jumpQueued=false; }
             if(p.progress.hp<=0){
-                if(duels.forPlayer(p.id)!=null)continue;
-                if(now>=p.progress.respawnAt){p.progress.hp=p.maxHp();p.progress.mp=p.maxMp();p.x=180;p.y=maps.get(p.mapId).ground();p.vy=0;}
+                if(duels.forPlayer(p.id)!=null||training.forPlayer(p.id)!=null)continue;
+                if(now>=p.progress.respawnAt){p.progress.hp=p.maxHp();p.progress.mp=p.maxMp();var spawn=maps.respawn(p);p.x=spawn.x();p.y=spawn.y();p.vy=0;}
                 else continue;
             }
             p.movementScale=p.slowedUntil>now?.5:1;double previousX=p.x;Movement.step(p,maps.get(p.mapId),dt);if(Math.abs(p.x-previousX)>.1)p.lastActiveAt=now;
-            if(now>=p.regenAt){p.regenAt=now+1000;p.progress.mp=Math.min(p.maxMp(),p.progress.mp+2);if(p.instanceId==null&&p.x<420)p.progress.hp=Math.min(p.maxHp(),p.progress.hp+8);}
+            if(p.y>maps.get(p.mapId).height()+96){p.progress.hp=0;p.progress.respawnAt=now+4000;sendTo(p.id,"PLAYER_DIED",Map.of("id",p.id,"respawnMs",4000));continue;}
+            if(p.instanceId==null)for(var zone:maps.get(p.mapId).safeZones())if(zone.spawnId()!=null&&zone.bounds().contains(p.x,p.y)&&!zone.spawnId().equals(p.progress.checkpoints.get(p.mapId))){p.progress.checkpoints.put(p.mapId,zone.spawnId());checkpoint(p);sendTo(p.id,"CHECKPOINT_REACHED",Map.of("mapId",p.mapId,"spawnId",zone.spawnId()));}
+            if(now>=p.regenAt){p.regenAt=now+1000;p.progress.mp=Math.min(p.maxMp(),p.progress.mp+2);if(p.instanceId==null&&maps.get(p.mapId).heals(p.x,p.y))p.progress.hp=Math.min(p.maxHp(),p.progress.hp+8);}
         }
-        for(var m:allMonsters()){if(m.instanceId!=null&&m.hp<=0)continue;var local=sessions.all().stream().map(l->l.player).filter(p->sameScope(p,m.mapId,m.instanceId)).toList();if(!local.isEmpty())ai.step(m,local,dt,now,(t,v)->broadcast(m.mapId,m.instanceId,t,v));}
+        bots.step(allMonsters(),dt,now,(bot,t,payload)->broadcast(bot.actor,t,payload),this::reward);
+        Map<Scope,List<PlayerState>> occupants=new HashMap<>();for(var lease:sessions.all())occupants.computeIfAbsent(new Scope(lease.player.mapId,lease.player.instanceId),key->new ArrayList<>()).add(lease.player);
+        for(var actor:bots.guards())occupants.computeIfAbsent(new Scope(actor.mapId,actor.instanceId),key->new ArrayList<>()).add(actor);
+        for(var m:allMonsters()){if(m.instanceId!=null&&m.hp<=0)continue;var local=occupants.getOrDefault(new Scope(m.mapId,m.instanceId),List.of());ai.step(m,local,maps.get(m.mapId),dt,now,(t,v)->broadcast(m.mapId,m.instanceId,t,v));}
         dungeons.step(this,now);
-        duels.step(this,now);
+        duels.step(this,now);training.step(this,dt,now);
         long duration=System.nanoTime()-started;metrics.tick(duration,(long)(dt*1000));
         if(duration>dt*1e9&&now-lastSlowLog>5000){lastSlowLog=now;log.warn("World tick {} took {} ms",tick,duration/1e6);}
     }
     @Scheduled(fixedRateString="${game.broadcast-ms}") public synchronized void updates() {
-        for(var lease:sessions.online())send(lease.session,"ENTITY_UPDATE",state(lease.player));
-        if(System.currentTimeMillis()-lastPartyBroadcast>=500){lastPartyBroadcast=System.currentTimeMillis();for(var party:parties.all())publishParty(party.leader);for(var lease:sessions.online())if(lease.player.instanceId!=null){var instance=instances.get(lease.player.instanceId);if(instance!=null&&instance.kind.equals("DUNGEON"))dungeons.snapshot(lease.player.id,this,System.currentTimeMillis());else if(instance!=null&&instance.kind.equals("DUEL"))duels.snapshot(lease.player.id,this,System.currentTimeMillis());}}
+        for(var lease:sessions.online()){var state=state(lease.player);if(!lease.deltaUpdates)send(lease.session,"ENTITY_UPDATE",state);else{var delta=interest.delta(lease.connectionId,state);if(delta==null)snapshot(lease.session,lease.player);else send(lease.session,"ENTITY_DELTA",delta);}}
+        if(System.currentTimeMillis()-lastPartyBroadcast>=500){lastPartyBroadcast=System.currentTimeMillis();for(var party:parties.all())publishParty(party.leader);for(var lease:sessions.online())if(lease.player.instanceId!=null){var instance=instances.get(lease.player.instanceId);if(instance!=null&&instance.kind.equals("DUNGEON"))dungeons.snapshot(lease.player.id,this,System.currentTimeMillis());else if(instance!=null&&instance.kind.equals("DUEL"))duels.snapshot(lease.player.id,this,System.currentTimeMillis());else if(instance!=null&&instance.kind.equals("TRAINING"))training.snapshot(lease.player.id,this,System.currentTimeMillis());}}
     }
     @Scheduled(fixedDelay=15000) public synchronized void checkpointAll() { for(var c:sessions.all()) checkpoint(c.player); }
     private void checkpoint(PlayerState p) {
@@ -192,9 +214,9 @@ public class GameWorld implements InstanceGateway {
         var owned=characters.owned(owner,id);
         var live=sessions.byCharacter(id);
         PlayerState p;
-        if(live==null){flushSaves();owned=characters.owned(owner,id);p=new PlayerState(owned);p.progress=progress.load(id);p.cooldowns=p.progress.cooldowns;rules.recalculate(p);}else p=live.player;
+        if(live==null){flushSaves();owned=characters.owned(owner,id);p=new PlayerState(owned);p.progress=progress.load(id);p.cooldowns=p.progress.cooldowns;rules.recalculate(p);maps.sanitize(p);}else p=live.player;
         var before=write?progress.freeze(p):null;
-        if(write&&duels.forPlayer(id)!=null)throw new ProtocolException("ACTIVITY_LOCKED","Không thể thay đổi tiến trình hoặc vật phẩm trong trận thách đấu.");
+        if(write&&(duels.forPlayer(id)!=null||training.forPlayer(id)!=null))throw new ProtocolException("ACTIVITY_LOCKED","Không thể thay đổi tiến trình hoặc vật phẩm trong trận thách đấu.");
         if(write&&rewardPending(id))throw new ProtocolException("REWARD_PENDING","Đang lưu phần thưởng phó bản. Vui lòng thử lại sau.");
         try{
             T result=action.apply(p);
@@ -216,7 +238,9 @@ public class GameWorld implements InstanceGateway {
         }
     }
     public synchronized void disconnect(String sid,boolean intentional){
+        interest.forget(sid);
         var controlling=sessions.byConnection(sid);if(intentional&&controlling!=null&&duels.forPlayer(controlling.player.id)!=null)duels.forfeit(controlling.player.id,"LOGOUT",this,System.currentTimeMillis());
+        if(intentional&&controlling!=null&&training.forPlayer(controlling.player.id)!=null)training.cancel(controlling.player.id,"LOGOUT",this,System.currentTimeMillis());
         var lease=sessions.disconnect(sid,intentional,System.currentTimeMillis());if(lease==null)return;
         metrics.disconnects.increment();checkpoint(lease.player);if(intentional)leaveParty(lease.player.id);else publishParty(lease.player.id);
         if(sessions.byCharacter(lease.player.id)==null)broadcast(lease.player,"PLAYER_LEFT",Map.of("id",lease.player.id));
@@ -257,10 +281,11 @@ public class GameWorld implements InstanceGateway {
     @Override public boolean isOnline(UUID id){return online(id);}
     @Override public long disconnectedSince(UUID id){var lease=sessions.byCharacter(id);return lease==null?0:lease.disconnectedAt;}
     @Override public void event(UUID player,String type,Object payload){sendTo(player,type,payload);}
-    @Override public void moveTo(UUID id,String map,UUID instance,double x){
+    @Override public void moveTo(UUID id,String map,UUID instance,double x){moveTo(id,map,instance,x,maps.get(map).ground());}
+    private void moveTo(UUID id,String map,UUID instance,double x,double y){
         var p=getPlayer(id);if(p==null)return;
         if(instance!=null&&p.instanceId==null){p.returnMapId=p.mapId;p.returnX=p.x;p.returnY=p.y;}
-        broadcast(p,"PLAYER_LEFT",Map.of("id",p.id));p.mapId=map;p.instanceId=instance;p.x=x;p.y=maps.get(map).ground();p.vy=0;p.direction=0;p.jumpHeld=false;p.jumpQueued=false;
+        broadcast(p,"PLAYER_LEFT",Map.of("id",p.id));p.mapId=map;p.instanceId=instance;p.x=x;p.y=y;p.vy=0;p.direction=0;p.jumpHeld=false;p.jumpQueued=false;
         var lease=sessions.byCharacter(id);snapshot(lease.session,p);broadcast(p,"PLAYER_JOINED",p.view());checkpoint(p);
     }
     @Override public void returnHome(UUID id){var p=getPlayer(id);if(p==null)return;String map=p.returnMapId==null?"trung-chau":p.returnMapId;double x=p.returnMapId==null?350:p.returnX;p.progress.hp=p.maxHp();p.progress.mp=p.maxMp();p.shieldUntil=0;p.empoweredUntil=0;p.slowedUntil=0;p.movementScale=1;moveTo(id,map,null,x);p.returnMapId=null;checkpoint(p);}
@@ -291,6 +316,15 @@ public class GameWorld implements InstanceGateway {
             default -> throw new ProtocolException("UNSUPPORTED_MESSAGE","Thao tác phó bản không hợp lệ.");
         }
     }
+    public synchronized void trainingCommand(String sid,String type,JsonNode p,String requestId){
+        var actor=player(sid);long now=System.currentTimeMillis();
+        if(type.equals("TRAINING_STATE_REQUEST")){training.snapshot(actor.id,this,now);sendTo(actor.id,"NPC_LIST",npcViews(actor));return;}
+        boolean executed=requests.execute(actor.id,requestId,type+":"+p,()->{
+            if(type.equals("START_TRAINING"))training.start(actor.id,id(p,"botEntityId"),p.path("difficulty").asText(),this,now);
+            else if(type.equals("CANCEL_TRAINING"))training.cancel(actor.id,"CANCELED",this,now);
+            else throw new ProtocolException("UNSUPPORTED_MESSAGE","Thao tác đối luyện không hợp lệ.");
+        },now);sendTo(actor.id,"COMMAND_RESULT",Map.of("requestId",requestId,"status","OK","replayed",!executed));
+    }
     public synchronized void duelCommand(String sid,String type,JsonNode p,String requestId){
         var actor=player(sid);long now=System.currentTimeMillis();
         if(type.equals("DUEL_STATE_REQUEST")){duels.snapshot(actor.id,this,now);sendTo(actor.id,"NEARBY_PLAYERS",views(actor).stream().filter(v->!v.id().equals(actor.id)&&v.connectionStatus().equals("ONLINE")).toList());return;}
@@ -305,8 +339,9 @@ public class GameWorld implements InstanceGateway {
         },now);
         sendTo(actor.id,"COMMAND_RESULT",Map.of("requestId",requestId,"status","OK","replayed",!executed));
     }
-    private void broadcast(PlayerState scope,String type,Object payload){broadcast(scope.mapId,scope.instanceId,type,payload);}
-    private void broadcast(String map,UUID instance,String type,Object payload){for(var lease:sessions.online())if(sameScope(lease.player,map,instance))send(lease.session,type,payload);}
+    private void broadcast(PlayerState scope,String type,Object payload){var point=WorldInterest.point(payload);broadcastAt(scope.mapId,scope.instanceId,type,payload,point==null?new WorldInterest.Point(scope.x,scope.y):point);}
+    private void broadcast(String map,UUID instance,String type,Object payload){broadcastAt(map,instance,type,payload,WorldInterest.point(payload));}
+    private void broadcastAt(String map,UUID instance,String type,Object payload,WorldInterest.Point point){for(var lease:sessions.online())if(sameScope(lease.player,map,instance)&&(type.equals("CHAT")||point==null||interest.visible(lease.player,point.x(),point.y())))send(lease.session,type,payload);}
     public synchronized void send(WebSocketSession session,String type,Object payload){
         if(session==null||!session.isOpen())return;
         try{var message=new TextMessage(json.writeValueAsString(Map.of("type",type,"payload",payload,"worldTick",tick,"worldEpoch",worldEpoch,"stateVersion",++eventVersion)));session.sendMessage(message);metrics.messages.increment();metrics.bytes.add(message.getPayloadLength());}

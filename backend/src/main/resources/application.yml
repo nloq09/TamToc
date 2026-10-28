@@ -17,6 +17,8 @@ server:
 game:
   jwt-secret: ${JWT_SECRET}
   allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
+  interest-radius: ${INTEREST_RADIUS:900}
+  interest-vertical: ${INTEREST_VERTICAL:550}
   tick-ms: 50
   broadcast-ms: 100
   input-timeout-ms: 250

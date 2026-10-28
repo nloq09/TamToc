@@ -21,7 +21,7 @@ public class AuthController {
     public AuthController(AccountRepository a, PasswordEncoder p, JwtEncoder e, RateLimits l) { accounts=a; passwords=p; encoder=e; limits=l; }
     public record Credentials(@Pattern(regexp="[a-zA-Z0-9_]{3,24}") @NotNull String username,
         @NotNull @Size(min=10, max=64) String password) {}
-    @GetMapping("/health") public Map<String, String> health() { return Map.of("status", "up", "phase", "1-4-mvp"); }
+    @GetMapping("/health") public Map<String, String> health() { return Map.of("status", "up", "phase", "7-world-ai"); }
     @PostMapping("/auth/register") @ResponseStatus(HttpStatus.CREATED)
     public Map<String, Object> register(@Valid @RequestBody Credentials c, HttpServletRequest req) {
         limits.check("register:" + req.getRemoteAddr(), 10);

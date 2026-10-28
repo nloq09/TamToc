@@ -66,7 +66,7 @@ try{
  const login=await api('/auth/login',{username:'progress_'+stamp,password:'Progress_Test_123'});
  const restored=await api(path,undefined,login.token);assert.equal(restored.organization,'THANH_VAN');assert.equal(restored.cultivationPath,'KIEM_TU');assert.equal(restored.realmStage,1);
  const savedInventory=await api(path+'/inventory',undefined,login.token);assert.equal(savedInventory.equipment.WEAPON,'QI_SWORD');assert.equal(savedInventory.stones,140);
- const savedQuest=await api(path+'/quests',undefined,login.token);assert.ok(savedQuest.every(q=>q.status==='CLAIMED'));
+ const savedQuest=await api(path+'/quests',undefined,login.token);assert.ok(savedQuest.filter(q=>['WOLVES','PATH'].includes(q.definition.id)).every(q=>q.status==='CLAIMED'));
  const next=await api(path+'/connection-ticket',{},login.token);peer=new Peer(next.ticket);peer.id=c.id;await peer.until(()=>peer.snapshot);assert.equal(peer.self().path,'KIEM_TU');assert.ok(peer.self().cooldowns.KIEM_TU>Date.now());
  console.log('PASS relogin persistence: level, realm, cultivation, quest rewards, inventory, organization, skills and cooldown');
 }finally{clearInterval(timer);peer?.ws.close();}

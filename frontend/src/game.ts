@@ -1,5 +1,6 @@
+import {WorldDebug} from './world-debug';
 import Phaser from 'phaser';
-import { type MapDefinition, type Player, type Snapshot,type Monster } from './types';
+import { type MapDefinition, type Player, type Snapshot,type Monster,type Bot } from './types';
 import type { GameConnection } from './network';
 import {VisualComponent} from './player-visual';
 import {preloadPlayerSprites,registerPlayerAnimations,type SpriteMetadata} from './sprite-pack';
@@ -10,21 +11,33 @@ export class WorldScene extends Phaser.Scene {
  private keys!:Record<string,Phaser.Input.Keyboard.Key>;
  private sequence=0; private elapsed=0;
  private monsters=new Map<string,{container:Phaser.GameObjects.Container;hp:Phaser.GameObjects.Rectangle;label:Phaser.GameObjects.Text;target:Monster}>();
+ private bots=new Map<string,{container:Phaser.GameObjects.Container;hp:Phaser.GameObjects.Rectangle;label:Phaser.GameObjects.Text;target:Bot}>();
+ private latestBots:Bot[]=[];
  private pathSkill='';
  private drops=new Map<string,Phaser.GameObjects.Rectangle>();
  private drawerWidth=-1;
+ private debug:WorldDebug|null=null;
+ private worldTick=0;
+ private tickDurationMs=0;
+ private serverTime=0;
+ private telegraphs=new Map<string,Phaser.GameObjects.Rectangle>();
+ private latestMonsters:Monster[]=[];
+ private readonly toggleDebug=()=>{if(import.meta.env.DEV)this.debug?.toggle();};
  private spriteMetadata:SpriteMetadata|null=null;
  constructor(private connection:GameConnection) { super('world'); }
  preload(){preloadPlayerSprites(this);}
  create() {
   this.spriteMetadata=registerPlayerAnimations(this);
-  this.keys=this.input.keyboard!.addKeys('A,D,LEFT,RIGHT,SPACE,E,J,K,L,U,SHIFT') as Record<string,Phaser.Input.Keyboard.Key>;
+  if(import.meta.env.DEV){window.addEventListener('game:debug',this.toggleDebug);this.events.once(Phaser.Scenes.Events.SHUTDOWN,()=>window.removeEventListener('game:debug',this.toggleDebug));}
+  this.keys=this.input.keyboard!.addKeys('A,D,LEFT,RIGHT,SPACE,E,J,K,L,U,SHIFT,F3') as Record<string,Phaser.Input.Keyboard.Key>;
  }
  loadWorld(snapshot:Snapshot) {
+  this.debug?.destroy();this.debug=null;
   this.tweens.killAll();this.cameras.main.stopFollow();
   if(this.keys)Object.values(this.keys).forEach(key=>key.reset());
-  this.sequence=0;this.elapsed=0;
-  this.visuals.forEach(v=>v.destroy()); this.visuals.clear();this.monsters.clear();this.drops.clear(); this.children.removeAll(true);
+  // A map snapshot keeps the same controller; continue beyond its accepted input sequence.
+  this.sequence=Math.max(this.sequence,(snapshot.players.find(p=>p.id===snapshot.selfId)?.sequence??-1)+1);this.elapsed=0;
+  this.visuals.forEach(v=>v.destroy()); this.visuals.clear();this.monsters.clear();this.bots.clear();this.latestBots=[];this.drops.clear();this.telegraphs.clear(); this.children.removeAll(true);
   this.selfId=snapshot.selfId; this.currentMap=snapshot.map;
   this.drawerWidth=-1;
   const map=snapshot.map;
@@ -39,12 +52,10 @@ export class WorldScene extends Phaser.Scene {
   const grid=this.add.graphics().lineStyle(1,0xaac0b6,0.035);
   for(let x=0;x<map.width;x+=80) grid.lineBetween(x,0,x,map.ground);
   for(let y=60;y<map.ground;y+=80) grid.lineBetween(0,y,map.width,y);
-  this.add.rectangle(0,map.ground,map.width,map.height-map.ground,0x162726).setOrigin(0);
-  this.add.rectangle(0,map.ground,map.width,3,0x7c9b87).setOrigin(0);
-  if(!['huyen-moc-party','duel-arena'].includes(map.id)){
-  this.add.rectangle(300,map.ground-24,32,48,0xe4c567).setStrokeStyle(1,0xffe5a0);
-  this.add.text(300,map.ground-70,'Tiếp Dẫn Sứ · [E]',{fontFamily:'Segoe UI',fontSize:'12px',color:'#f3d896'}).setOrigin(.5);
-  }
+  for(const floor of map.groundColliders){this.add.rectangle(floor.x,floor.y,floor.width,floor.height,0x162726).setOrigin(0);this.add.rectangle(floor.x,floor.y,floor.width,3,0x7c9b87).setOrigin(0);}
+  for(const box of map.obstacles)this.add.rectangle(box.x,box.y,box.width,box.height,0x6a6550).setOrigin(0).setStrokeStyle(1,0xc4b895);
+  for(const zone of map.safeZones){this.add.rectangle(zone.bounds.x,Math.min(map.ground,zone.bounds.y+zone.bounds.height)-2,zone.bounds.width,4,0x77b894,.5).setOrigin(0);if(zone.spawnId){const spawn=map.spawnPoints.find(p=>p.id===zone.spawnId);if(spawn)this.add.text(spawn.x,spawn.y-100,'◇ '+(zone.id==='home-safe'||zone.id==='entry-safe'?'Khu an toàn':'Trại nghỉ · Điểm hồi sinh'),{fontSize:'12px',color:'#9bd4b3'}).setOrigin(.5);}}
+  for(const npc of map.npcSpawns){this.add.rectangle(npc.x,npc.y-24,32,48,0xe4c567).setStrokeStyle(1,0xffe5a0);this.add.text(npc.x,npc.y-70,npc.name+' · [E]',{fontFamily:'Segoe UI',fontSize:'12px',color:'#f3d896'}).setOrigin(.5);}
   for(const platform of map.platforms) {
    this.add.rectangle(platform.x,platform.y,platform.width,platform.height,0x45635b).setOrigin(0).setStrokeStyle(1,0x8da58d,0.5);
   }
@@ -56,7 +67,9 @@ export class WorldScene extends Phaser.Scene {
   }
   this.cameras.main.setBounds(0,0,map.width,map.height);
   this.sync(snapshot.players);
-  this.syncMonsters(snapshot.monsters);
+  this.syncMonsters(snapshot.monsters);this.syncLoot(snapshot.loot||[]);
+  this.syncBots(snapshot.bots||[]);
+  if(import.meta.env.DEV)this.debug=new WorldDebug(this,map,snapshot);
   const self=this.visuals.get(this.selfId); if(self) this.cameras.main.startFollow(self.container,true,0.12,0.12);
  }
  sync(players:Player[]) {
@@ -68,9 +81,15 @@ export class WorldScene extends Phaser.Scene {
   }
  }
  remove(id:string) { this.visuals.get(id)?.destroy(); this.visuals.delete(id); }
+ setWorldTick(tick:number,durationMs=0,serverTime=Date.now()){this.worldTick=tick;this.tickDurationMs=durationMs;this.serverTime=serverTime;}
  setPathSkill(id:string){this.pathSkill=id;}
+ syncBots(bots:Bot[]){
+  this.latestBots=bots;const ids=new Set(bots.map(b=>b.id));for(const[id,v]of this.bots)if(!ids.has(id)){v.container.destroy();this.bots.delete(id);}
+  for(const bot of bots){let v=this.bots.get(bot.id);if(!v){const color=bot.attitude==='HOSTILE'?0xbb6864:bot.botType==='GUARD'?0x74a6b8:0xc1b46f;const body=this.add.rectangle(0,-22,30,44,color).setStrokeStyle(1,0xdbe2ca,.8);const hp=this.add.rectangle(-15,-53,30,3,0x83d0af).setOrigin(0,.5);const label=this.add.text(0,-94,'',{fontSize:'10px',align:'center',color:'#d9e8ce'}).setOrigin(.5);const container=this.add.container(bot.x,bot.y,[body,hp,label]);v={container,hp,label,target:bot};this.bots.set(bot.id,v);}v.target=bot;v.hp.scaleX=bot.hp/bot.maxHp;v.label.setText(`[AI · ${bot.botType}]\n${bot.name}`);v.container.visible=bot.hp>0;}
+ }
  syncLoot(loot:{id:string;x:number;y:number}[]){const ids=new Set(loot.map(l=>l.id));for(const[id,shape]of this.drops)if(!ids.has(id)){shape.destroy();this.drops.delete(id);}for(const l of loot)if(!this.drops.has(l.id))this.drops.set(l.id,this.add.rectangle(l.x,l.y-7,12,12,0xf2d08c).setStrokeStyle(1,0xfff2c6));}
  syncMonsters(monsters:Monster[]){
+  this.latestMonsters=monsters;
   const ids=new Set(monsters.map(m=>m.id));for(const [id,v]of this.monsters)if(!ids.has(id)){v.container.destroy();this.monsters.delete(id);}
   for(const m of monsters){
    let visual=this.monsters.get(m.id);
@@ -81,9 +100,16 @@ export class WorldScene extends Phaser.Scene {
     const label=this.add.text(0,-h-27,'',{fontFamily:'Segoe UI',fontSize:'11px',color:'#eed5b2'}).setOrigin(.5);
     const container=this.add.container(m.x,m.y,[body,hp,label]);visual={container,hp,label,target:m};this.monsters.set(m.id,visual);
    }
-   visual.target=m;visual.hp.scaleX=m.hp/m.maxHp;visual.container.visible=m.hp>0;visual.label.setText(`${m.name} · ${m.level}${m.phase>1?' · Cuồng nộ':''}`);
+   visual.target=m;visual.hp.scaleX=m.hp/m.maxHp;visual.container.visible=m.hp>0;visual.label.setText(`${m.tier&&m.tier!=='NORMAL'?'['+m.tier+'] ':''}${m.name} · ${m.level}${m.phase>1?' · Giai đoạn '+m.phase:''}`);
+   if(m.telegraph)this.telegraph(m.telegraph);
   }
  }
+ telegraph(event:{castId:string;x:number;y:number;radius:number;resolvesAt:number}){
+  if(this.telegraphs.has(event.castId)||event.resolvesAt<this.serverTime)return;
+  const shape=this.add.rectangle(event.x,event.y,event.radius*2,130,0xcf6752,.24).setStrokeStyle(2,0xff9c67,.85).setDepth(10);this.telegraphs.set(event.castId,shape);
+  this.tweens.add({targets:shape,alpha:.6,duration:Math.max(50,Math.min(1500,event.resolvesAt-this.serverTime)),onComplete:()=>{shape.destroy();this.telegraphs.delete(event.castId);}});
+ }
+ resolveTelegraph(id:string){this.telegraphs.get(id)?.destroy();this.telegraphs.delete(id);}
  effect(event:any){
   if(!this.currentMap)return;
   if(typeof event.damage==='number'){
@@ -98,6 +124,9 @@ export class WorldScene extends Phaser.Scene {
  }
  update(_time:number,dt:number) {
   this.visuals.forEach(v=>v.update(dt));
+  if(import.meta.env.DEV&&this.keys&&Phaser.Input.Keyboard.JustDown(this.keys.F3))this.toggleDebug();
+  this.debug?.update(this.latestMonsters,this.worldTick,this.tickDurationMs,this.latestBots);
+  this.bots.forEach(v=>{const alpha=1-Math.exp(-dt/60);v.container.x=Phaser.Math.Linear(v.container.x,v.target.x,alpha);v.container.y=Phaser.Math.Linear(v.container.y,v.target.y,alpha);});
   this.monsters.forEach(v=>{const alpha=1-Math.exp(-dt/60);v.container.x=Phaser.Math.Linear(v.container.x,v.target.x,alpha);});
   if(!this.keys || !this.currentMap) return;
   const drawer=document.querySelector<HTMLDialogElement>('#info-dialog');

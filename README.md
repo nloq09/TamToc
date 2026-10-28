@@ -119,7 +119,7 @@ frontend/src/
   sprite-pack.ts      nạp atlas, đăng ký animation theo metadata
   game-ui.ts, progression-ui.ts  HUD và các bảng tương tác
   social-ui.ts, activity-ui.ts, duel-ui.ts  tổ đội/phó bản/đấu trường
-tests/                 integration tests Node.js 22+
+tests/                 integration tests đã kiểm tra trên Node.js 24
 scripts/               tạo env, chạy server, kiểm thử
 ```
 
@@ -131,7 +131,7 @@ Vé WebSocket: REST có JWT và ownership → vé 30 giây → message AUTH đ�
 
 ## Giới hạn hiện tại
 
-Đây là MVP một tiến trình server. Phase 6 bổ sung reconnect, tổ đội, phó bản riêng và duel 1v1; phép đo tải local và phạm vi kịch bản ghi trong docs/PHASE6_VERIFICATION.md. Chưa có client prediction, refresh token, bang hội, giao dịch hoặc Tam Tộc Chiến. Party/instance/session đang ở RAM: khởi động lại server xóa trạng thái tạm, đưa nhân vật về map chung đã lưu; lượt phó bản ACTIVE của node được đánh dấu FAILED, không tự thưởng. Duel bị gián đoạn do server restart chưa có cơ chế tiếp tục trận/lưu trận đang diễn ra. Chưa có cast-time khác 0, projectile mô phỏng riêng hoặc hệ status effect tổng quát; kỹ năng hiện tại dùng đòn cone/area, heal, dash, shield, empower và slow. Nội dung quest hiện tại là nhiệm vụ Yêu Lang và chuỗi gia nhập thế lực; item rơi hiện có nanh và đan dược. NPC và vị trí spawn quái của MVP còn cấu hình trong source world. Các giới hạn này thuộc phạm vi mở rộng sau khi nền tảng được kiểm thử ổn định, không được thay bằng chức năng giả.
+Đây là bản phát triển một tiến trình server. Phase 7 thêm map data, quái có FSM, NPC AI và AOI/delta; Phase 6 cung cấp reconnect, tổ đội, phó bản riêng và duel 1v1; phép đo tải local và phạm vi kịch bản ghi trong docs/PHASE6_VERIFICATION.md. Chưa có client prediction, refresh token, bang hội, giao dịch hoặc Tam Tộc Chiến. Party/instance/session đang ở RAM: khởi động lại server xóa trạng thái tạm, đưa nhân vật về map chung đã lưu; lượt phó bản ACTIVE của node được đánh dấu FAILED, không tự thưởng. Duel bị gián đoạn do server restart chưa có cơ chế tiếp tục trận/lưu trận đang diễn ra. Chưa có cast-time khác 0, projectile mô phỏng riêng hoặc hệ status effect tổng quát; kỹ năng hiện tại dùng đòn cone/area, heal, dash, shield, empower và slow. Quest gồm Yêu Lang, chuỗi gia nhập thế lực và bảy nhiệm vụ theo vùng cấp 1–10; item có trang bị, đan dược và nguyên liệu/quest metadata. Map, cổng, spawn, NPC/thoại, behavior và drop được cấu hình JSON, kiểm tra khi startup. Navigation dùng graph designer; không tự sinh đường đi cho mọi địa hình. TRAINER/ESCORT/SCOUT chưa có. Có thể thấy WARN khi gửi vào socket vừa đóng đồng thời; cleanup vẫn chạy, cần cải thiện transport khi mở rộng. Các giới hạn này thuộc phạm vi mở rộng sau khi nền tảng được kiểm thử ổn định, không được thay bằng chức năng giả.
 
 Dừng dịch vụ bằng `docker compose stop`. Dữ liệu nằm trong volume `pgdata`; giữ volume khi khởi động lại.
 
@@ -163,3 +163,28 @@ node tests/progression.mjs
 ```
 
 Test tạo dữ liệu QA mới và giữ lại trong PostgreSQL. Chạy các bộ tích hợp tuần tự để tránh rate limit đăng ký 10 lần/phút; khi gặp 429, đợi cửa sổ một phút rồi chạy lại. Không tắt rate limit để chạy test. `tests/load.mjs` tạo 4 tài khoản × 5 nhân vật, năm tổ đội; xuất số liệu không chứa token vào `.runtime/phase6-load.json`. Tham số `TEST_API` chọn backend QA cho các integration script; production.mjs luôn kiểm tra Docker 8080.
+
+## Chơi Phase 7
+
+- Cổng x190 ở ba thành khởi đầu đưa tới **Thanh Vân Ngoại Sơn / Huyết Vụ Cốc / Linh Thú Sơn Lộ** (đề xuất 1–6). Đến gần và nhấn E. Cổng cũ x2200 sang Trung Châu vẫn hoạt động. Map → xem kết nối và cấp/quest cần thiết từ dữ liệu server.
+- **Tam Giới Biên Cảnh** đề xuất 6–12; cổng cuối các field yêu cầu cấp 6, Trung Châu x760 cũng nối tới đây cho người muốn khám phá sớm. **Thiên Môn Di Tích** đề xuất 10–20, cổng từ Trung Châu x3080 hoặc Biên Cảnh x3450 yêu cầu cấp 10. Đây là khoảng đề xuất; điều kiện vào ghi riêng trên mỗi cổng.
+- Ground/solid/platform được server và client dùng chung. Field có vật cản phải nhảy qua; vùng viền xanh là nghỉ/hồi phục, vào trại nghỉ lưu checkpoint. Hồi sinh về checkpoint; reconnect còn grace giữ đúng map/instance/vị trí. Thành vẫn giữ bãi luyện cũ bên phải lõi an toàn.
+- Quái NORMAL/ELITE/MINIBOSS/WORLD_BOSS có aggro/threat/leash/RETURN, spawn/respawn theo nhóm và UUID ổn định. Huyền Mộc Yêu Vương có hai phase và cảnh báo AoE trước hit; damage, EXP/tu vi, personal loot/quantity đều do server quyết định. Quest vùng chỉ tính đúng definition/map sau khi nhận.
+- NPC có nhãn **[AI]**: GUARD tuần tra/đánh quái, WANDERER đi lại và thoại script, CHALLENGER mở bài đối luyện riêng. Ở gần NPC → Chức năng → NPC AI / Đối luyện → EASY/HARD. Chuẩn bị 3 giây, tối đa 3 phút, có nút hủy; thắng/thua không đổi EXP/tu vi/đồ và trả HP/MP đầy. NPC không tính là người online.
+- F3 trong Vite dev bật overlay geometry/nav/spawn/sensor/state/tick; production build tắt. Đồ họa quái/NPC/địa hình vẫn placeholder; giữ bộ sprite Kiếm Tu đã được cung cấp.
+- Protocol 3: baseline + AOI delta upsert/remove, vùng ±900 ngang/±550 dọc, luôn gồm self. HUD đếm người trong khoảng nhìn; chat khu vực vẫn map-wide. Client thiếu baseline xin snapshot mới, không replay combat. Protocol 1/2 còn được hỗ trợ với full update trong AOI.
+
+Không thêm migration Phase 7; dữ liệu bền vững bổ sung vào progress JSON có default cho save cũ, giữ V1–V3. Config nạp lúc khởi động server, chưa có hot reload. Thêm nội dung: [docs/WORLD_AUTHORING.md](docs/WORLD_AUTHORING.md). Thay đổi/kiểm chứng từng milestone: [docs/PHASE7_IMPLEMENTATION.md](docs/PHASE7_IMPLEMENTATION.md). Số đo tải thực tế: [docs/PHASE7_PERFORMANCE.md](docs/PHASE7_PERFORMANCE.md).
+
+```powershell
+node --test tests/network-client.test.mjs
+node tests/maps.mjs
+node tests/ecology.mjs
+node tests/bots.mjs
+node tests/interest.mjs
+node tests/load-world.mjs # Docker đang chạy; 20 client, ba field combat, tối thiểu 5 phút.
+# QA local 8081 và DEV_ADMIN_KEY đã thiết lập:
+node tests/world-content.mjs
+```
+
+Load Phase 7 dùng 4 tài khoản × 5 nhân vật, 6 party trên ba field, 64 monster slots và 21 NPC, xuất `.runtime/phase7-load.json`. Chạy riêng khi không có các test khác để CPU/RAM/network có ý nghĩa. Không dùng mức tải local này để khẳng định sức chứa production hoặc hàng nghìn người chơi.

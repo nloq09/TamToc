@@ -54,3 +54,32 @@ Một nhân vật có một controller. Vé mới thiếu proof đúng bị `CHA
 `COMMAND_RESULT {requestId,status:"OK",replayed:boolean}` xác nhận lệnh có requestId. Receipt thành công giữ 15 phút, tối đa 10.000 trong RAM, ràng buộc actor + request UUID + fingerprint. Lặp cùng lệnh không thực thi lại; tái sử dụng ID cho payload khác bị chặn. Receipt tạm không thay unique ledger DB.
 
 GET `/api/network/metrics` (JWT) trả online/grace, activeParties, activeInstances, allocatedInstances, disconnects/resumes/resumeFailures/exceptions, outgoingMessages/outgoingBytes, ticks/meanTickMs/maxTickMs/slowTicks (tích lũy từ lúc server chạy). GET `/api/characters/{id}/activities` kiểm tra ownership, trả tối đa 20 dungeon và 20 duel gần nhất.
+
+## Phase 7 — protocol 3 và vùng quan sát
+
+Frontend gửi `AUTH {ticket,protocolVersion:3,resumeToken?}`. Giữ nguyên vé một lần/proof/epoch/envelope stateVersion của Phase 6. AUTH_RESULT xác nhận protocolVersion. Protocol 1/2 được hỗ trợ bằng ENTITY_UPDATE đầy đủ **trong AOI**, không còn danh sách toàn map. Chat khu vực vẫn cùng map/instance, party/control/activity giữ scope riêng.
+
+`WORLD_SNAPSHOT` thêm `interestVersion`, map metadata, `bots`, `tickDurationMs`. Baseline chứa players/monsters/bots/loot trong ±900 ngang/±550 dọc (config server), luôn có self; loot còn kiểm tra ownership. `mapId` và `instanceId` nằm trong mọi state. Số đạo hữu trên HUD là số người thấy trong AOI.
+
+Sau baseline protocol 3 nhận `ENTITY_DELTA`: `baseInterestVersion`, `interestVersion` kế tiếp, `mapId`, `instanceId`, tick/worldTick/serverTime/tickDurationMs; bốn trường players/monsters/bots/loot đều có `{upsert:[],remove:[]}`. Upsert chứa nguyên view của entity mới hoặc thay đổi; remove chứa ID ra AOI/đã xóa. Entity state/FSM/telegraph thay đổi nằm trong upsert, không cần stream riêng MONSTER_STATE_CHANGED/BOT_STATE_CHANGED. Snapshot mới thay thế toàn bộ bốn tập. Client ghép thành state trước khi render, không tự đoán delta mất base. Mismatch → khóa gửi gameplay, gửi RESUME_WORLD một lần, chờ full snapshot rồi tiếp tục. Không replay skill/chat. Chuyển map/instance và reconnect luôn có baseline mới. Input sequence tiếp tục tăng qua snapshot của cùng controller; binding mới server reset sequence.
+
+Sự kiện chiến đấu có vị trí lọc cùng AOI. CHAT map-wide; party/run/connection events là control plane, không dùng để tạo entity hiện trên scene. Quái vẫn mô phỏng ngoài AOI. Cache delta theo connection được xóa khi close; callback cũ không xóa baseline/controller mới.
+
+## Map, quái và NPC
+
+- JWT GET `/api/world/maps`: summary vùng, khoảng cấp đề xuất, cổng và điều kiện; `/maps/{mapId}`: geometry/collision/spawn/nav; `/monsters`: id/name/level/tier. Không trả loot seed/drop table hoặc dữ liệu tài khoản.
+- `USE_PORTAL {portalId}` hoặc INTERACT rỗng gần cổng. Server kiểm tra scope, alive/activity, triggerBounds, level/quest, enabled/capacity/cooldown 1 giây; tự chọn targetSpawn. `MAP_ENTERED`, WORLD_SNAPSHOT, PLAYER_LEFT/JOINED theo scope; chưa thêm MAP_LEFT riêng. `PORTAL_REJECTED {code,message}` cho lỗi cổng.
+- `CHECKPOINT_REACHED {mapId,spawnId}` thông báo save checkpoint thay đổi. Reconnect trong grace giữ vị trí/runtime; fresh join sanitize save không hợp lệ hoặc fallback về checkpoint khi proof cũ hết lease.
+- `MONSTER_DEFEATED {eventId,entityId,monsterDefinitionId,mapId,instanceId,ordinal,timestamp,x,y}` chỉ một lần mỗi vòng đời. `BOSS_PHASE_CHANGED` và `BOSS_TELEGRAPH` có vị trí/scope; telegraph cũng nằm trong monster view tới khi resolve. Hit resolve kiểm tra lại vị trí thật. Personal loot view có quantity; INTERACT nhặt nguyên tử.
+- `bots[]` là AI registry riêng: id/isAI/definitionId/name/botType/race/factionId/attitude/mapId/instanceId/x/y/HP/MP/level/facing/state/interactable/interactionRadius/perception/leashRadius/homeX/homeY. Không có user/controller/ticket, không tăng onlinePlayers. Frontend ghi [AI].
+- `TRAINING_STATE_REQUEST {}` → `NPC_LIST` với payload là mảng bot trong scope/AOI, kèm trạng thái bài tập gần nhất nếu có. `INTERACT {entityId}` → `DIALOGUE_STARTED {entityId,name,isAI,botType,lines,canTrain}`; phải ở gần NPC hợp lệ. INTERACT không có entityId vẫn giữ cổng/loot/Guide cũ.
+
+## Bài đối luyện với AI
+
+`START_TRAINING {botEntityId,difficulty:"EASY"|"HARD"}` và `CANCEL_TRAINING {}` dùng requestId theo receipt chung. `TRAINING_STATE_REQUEST {}` đọc lại trạng thái/kết quả gần nhất. Server kiểm tra CHALLENGER/consent/phạm vi/không bận trước khi tạo instance, không nhận mapId/winner/damage từ client.
+
+`TRAINING_STARTED`, `TRAINING_STATE` chứa runId/instanceId/botId/name/difficulty/state/reason/secondsRemaining/rewardGranted; chuẩn bị 3 giây, tối đa 180 giây. Sau ACTIVE dùng ATTACK/CAST_SKILL chung, targetCharacterId nếu có phải là đối thủ AI. Không có TRAINING_ACTION tính damage riêng. Hai instance tách hoàn toàn.
+
+`TRAINING_RESULT` có reason VICTORY/DEFEAT/CANCELED/TIMEOUT/LOGOUT/ABANDONED và `rewardGranted:false`. Trả về anchor với HP/MP đầy, giữ cooldown, xóa NPC/instance; không thay EXP/tu vi/inventory/quest. Grace 20 giây; còn lease thì nối lại cùng opponent, hết hạn ABANDONED và dọn run. Kết quả RAM giữ 60 giây, không ghi lịch sử activity DB. TRAINING_ERROR có code/message/retryable; chưa hỗ trợ TRAINER/ESCORT/SCOUT.
+
+Metrics thêm `deltaClients`, `interestConnections`, `npcEntities`, `trainingNpcEntities`, `monsterSlots`, `aliveMonsters`. Tick duration đo thời gian thân simulate; không bao gồm chờ world lock, DB của REST, broadcast hoặc thời gian chờ scheduler. Khi phân tích tải cần lấy hiệu counters/ticks trước-sau cùng CPU/RAM và bytes thực nhận ở client.

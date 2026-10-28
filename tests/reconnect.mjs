@@ -22,16 +22,17 @@ try{
  const events=[],statuses=[];let latest;
  const makeTransport=()=>new GameConnection((type,payload)=>{events.push({type,payload});if(['WORLD_SNAPSHOT','ENTITY_UPDATE'].includes(type))latest=payload;},status=>statuses.push(status),{characterId:ca.id,url:base.replace(/^http/,'ws')+'/ws',ticket:()=>ticket(ca,a.token),storage,baseDelayMs:100,maxDelayMs:300});
  const connection=makeTransport();transports.push(connection);connection.connect();await until(()=>latest?.selfId===ca.id);
- const originalMobs=latest.monsters.map(m=>m.id).sort();
  const duplicate=new Peer();peers.push(duplicate);await duplicate.open(await ticket(ca,a.token),{protocolVersion:2});assert.equal((await duplicate.wait('ERROR')).payload.code,'CHARACTER_ALREADY_CONNECTED');duplicate.close();
  let sequence=0;movement=setInterval(()=>connection.send('INPUT',{direction:1,jump:false,sequence:++sequence}),50);
  await until(()=>latest.players.find(p=>p.id===ca.id).x>=740,6000);clearInterval(movement);connection.send('INPUT',{direction:0,jump:false,sequence:++sequence});
+ // Compare at the reconnect position: movement legitimately expands the initial AOI.
+ const originalMobs=new Map(latest.monsters.filter(m=>m.type==='WOLF').map(m=>[m.spawnGroupId+':'+m.spawnX+':'+m.spawnY,m.id]));assert.ok(originalMobs.size>=2);
  observer.messages=[];connection.simulateDisconnect(7000);
  const grace=await observer.wait('PLAYER_CONNECTION_STATE',p=>p.id===ca.id);assert.equal(grace.payload.status,'DISCONNECTED_GRACE');
  await observer.wait('ENTITY_UPDATE',p=>p.players.some(v=>v.id===ca.id&&v.connectionStatus==='DISCONNECTED_GRACE'&&v.hp<v.maxHp),7000);
  await until(()=>events.filter(e=>e.type==='WORLD_SNAPSHOT').length>=2,10000);
  assert.equal(events.filter(e=>e.type==='AUTH_RESULT').at(-1).payload.resumed,true);
- assert.deepEqual(latest.monsters.map(m=>m.id).sort(),originalMobs);assert.equal(latest.players.filter(p=>p.id===ca.id).length,1);
+ const sharedMobs=latest.monsters.filter(m=>originalMobs.has(m.spawnGroupId+':'+m.spawnX+':'+m.spawnY));assert.ok(sharedMobs.length>=2);for(const m of sharedMobs)assert.equal(m.id,originalMobs.get(m.spawnGroupId+':'+m.spawnX+':'+m.spawnY));assert.equal(new Set(latest.monsters.map(m=>m.id)).size,latest.monsters.length);assert.equal(latest.players.filter(p=>p.id===ca.id).length,1);
  assert.ok(statuses.some(s=>s.state==='reconnecting'));
  connection.send('CHAT',{message:'Đã nối lại'});await observer.wait('CHAT',p=>p.message==='Đã nối lại');
  const beforeX=latest.players.find(p=>p.id===ca.id).x;
@@ -48,7 +49,7 @@ try{
  const departed=await observer.wait('PLAYER_LEFT',p=>p.id===ca.id,23000);assert.ok(departed);
  const priorSnapshots=events.filter(e=>e.type==='WORLD_SNAPSHOT').length;const fresh=makeTransport();transports.push(fresh);fresh.connect();
  await until(()=>events.filter(e=>e.type==='WORLD_SNAPSHOT').length>priorSnapshots);
- assert.equal(events.filter(e=>e.type==='AUTH_RESULT').at(-1).payload.resumed,false);assert.equal(latest.players.find(p=>p.id===ca.id).x,180);
+ assert.equal(events.filter(e=>e.type==='AUTH_RESULT').at(-1).payload.resumed,false);assert.equal(latest.players.find(p=>p.id===ca.id).x,latest.map.spawnPoints.find(s=>s.id==='home').x);
  console.log('PASS grace expiration cleans registry exactly once; stale resume proof falls back to safe fresh world join');
  const metrics=await api('/network/metrics',undefined,a.token);assert.ok(metrics.resumes>=2);console.log('Network metrics:',JSON.stringify(metrics));
  fresh.close();await observer.wait('PLAYER_LEFT',p=>p.id===ca.id);

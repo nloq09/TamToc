@@ -4,7 +4,10 @@ import java.util.UUID;
 import vn.tamtoc.character.GameCharacter;
 
 /** Realtime state is deliberately separate from the persistence entity. */
-public class PlayerState {
+public class PlayerState extends MotionBody {
+    public record AiStats(int hp,int mp,int attack,int defense) {}
+    public AiStats aiStats;
+    public boolean isAi(){return aiStats!=null;}
     public final UUID id;
     public final String name, race;
     public int level;
@@ -21,22 +24,21 @@ public class PlayerState {
     public String connectionStatus="ONLINE";
     public String returnMapId;
     public double returnX,returnY;
-    public double x, y, vy;
-    public boolean grounded, jumpHeld, jumpQueued;
-    public int direction;
     public long lastInput = System.currentTimeMillis();
     public long sequence = -1;
     public long lastActiveAt;
+    public long lastPortalAt;
     public long slowedUntil;
-    public double movementScale=1;
     public PlayerState(GameCharacter c) {
         id=c.id; name=c.name; race=c.race.name(); level=c.level; mapId=c.mapId; x=c.x; y=c.y;
         exp=c.exp;cultivation=c.cultivation;realm=c.realm;realmStage=c.realmStage;organization=c.organization;path=c.cultivationPath;
     }
-    public int maxHp(){return 100+(level-1)*12+realmStage*15+(realm.equals("TRUC_CO")?100:0);}
-    public int maxMp(){return 60+(level-1)*5;}
-    public int attack(){return (level-1)*2+equipmentAttack;}
-    public int defense(){return (level-1)+equipmentDefense;}
+    private PlayerState(UUID id,String name,String race,int level,String map){this.id=id;this.name=name;this.race=race;this.level=level;mapId=map;realm="LUYEN_KHI";}
+    public static PlayerState ai(UUID id,String name,String race,int level,String map){return new PlayerState(id,name,race,level,map);}
+    public int maxHp(){return aiStats!=null?aiStats.hp():100+(level-1)*12+realmStage*15+(realm.equals("TRUC_CO")?100:0);}
+    public int maxMp(){return aiStats!=null?aiStats.mp():60+(level-1)*5;}
+    public int attack(){return aiStats!=null?aiStats.attack():(level-1)*2+equipmentAttack;}
+    public int defense(){return aiStats!=null?aiStats.defense():(level-1)+equipmentDefense;}
     public record View(UUID id, String name, String race, int level, double x, double y, int hp, int maxHp, int mp, int maxMp, long sequence,int facing,long exp,long cultivation,String realm,int realmStage,String organization,String path,java.util.Map<String,Long> cooldowns,String mapId,UUID instanceId,String connectionStatus) {}
     public View view() { return new View(id,name,race,level,x,y,progress.hp,maxHp(),progress.mp,maxMp(),sequence,facing,exp,cultivation,realm,realmStage,organization,path,java.util.Map.copyOf(cooldowns),mapId,instanceId,connectionStatus); }
 }

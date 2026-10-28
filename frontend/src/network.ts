@@ -1,6 +1,20 @@
 export type ConnectionState='connecting'|'syncing'|'connected'|'reconnecting'|'failed'|'closed';
 export interface ConnectionStatus {state:ConnectionState;attempt:number;message:string}
 interface Message {type:string;payload:any;worldEpoch?:string;stateVersion?:number}
+/** A full snapshot anchors AOI deltas; missing bases request a new snapshot, never guess. */
+export class InterestState {
+ private sets=new Map<string,Map<string,any>>();
+ private meta:any={};
+ private version=0;
+ private static readonly kinds=['players','monsters','bots','loot'];
+ reset(snapshot:any){this.sets.clear();for(const kind of InterestState.kinds)this.sets.set(kind,new Map((snapshot[kind]||[]).map((row:any)=>[row.id,row])));this.meta=Object.fromEntries(Object.entries(snapshot).filter(([k])=>!InterestState.kinds.includes(k)));this.version=snapshot.interestVersion??0;}
+ apply(delta:any):any|null{
+  if(!this.version||delta.baseInterestVersion!==this.version||delta.interestVersion!==this.version+1||delta.mapId!==this.meta.mapId||(delta.instanceId??null)!==(this.meta.instanceId??null))return null;
+  for(const kind of InterestState.kinds){const diff=delta[kind];if(!diff||!Array.isArray(diff.upsert)||!Array.isArray(diff.remove))return null;}
+  for(const kind of InterestState.kinds){const rows=this.sets.get(kind)!;for(const id of delta[kind].remove)rows.delete(id);for(const row of delta[kind].upsert)rows.set(row.id,row);}
+  this.version=delta.interestVersion;this.meta={...this.meta,...Object.fromEntries(Object.entries(delta).filter(([k])=>!InterestState.kinds.includes(k)))};return {...this.meta,...Object.fromEntries(InterestState.kinds.map(kind=>[kind,[...this.sets.get(kind)!.values()]]))};
+ }
+}
 interface Options {
  ticket:(signal?:AbortSignal)=>Promise<string>;
  characterId:string;
@@ -26,6 +40,7 @@ export class GameConnection {
  private heartbeat:ReturnType<typeof setInterval>|null=null;
  private offlineUntil=0;
  private ticketRequest:AbortController|null=null;
+ private interest=new InterestState();
  private readonly onMessage:(type:string,payload:any)=>void;
  private readonly onStatus:(status:ConnectionStatus)=>void;
  private readonly options:Options;
@@ -57,7 +72,7 @@ export class GameConnection {
   const url=this.options.url||`${location.protocol==='https:'?'wss:':'ws:'}//${location.host}/ws`;
   const socket=new WebSocket(url);this.socket=socket;this.lastReceived=Date.now();
   this.startHeartbeat();
-  socket.onopen=()=>{if(generation===this.generation&&!this.stopped)socket.send(JSON.stringify({type:'AUTH',payload:{ticket,protocolVersion:2,...(this.resumeToken?{resumeToken:this.resumeToken}:{})}}));};
+  socket.onopen=()=>{if(generation===this.generation&&!this.stopped)socket.send(JSON.stringify({type:'AUTH',payload:{ticket,protocolVersion:3,...(this.resumeToken?{resumeToken:this.resumeToken}:{})}}));};
   socket.onmessage=e=>{
    if(this.stopped||generation!==this.generation||this.socket!==socket)return;
    this.lastReceived=Date.now();
@@ -65,6 +80,7 @@ export class GameConnection {
    try{message=JSON.parse(String(e.data));}catch{this.fail('Máy chủ gửi dữ liệu không hợp lệ.');return;}
    const {type,payload}=message;
    if(type==='AUTH_RESULT'){
+    this.interest=new InterestState();
     if(payload.resumeToken){this.resumeToken=payload.resumeToken;try{this.storage?.setItem(this.storageKey(),this.resumeToken);}catch{}}
     this.worldEpoch=message.worldEpoch||payload.worldEpoch||'';this.lastVersion=-1;this.ready=false;
     this.status('syncing','Đang đồng bộ thế giới…');this.onMessage(type,payload);return;
@@ -78,9 +94,15 @@ export class GameConnection {
    if(message.worldEpoch&&this.worldEpoch&&message.worldEpoch!==this.worldEpoch)return;
    if(message.stateVersion!==undefined){if(message.stateVersion<=this.lastVersion)return;this.lastVersion=message.stateVersion;}
    if(type==='WORLD_SNAPSHOT'){
+    this.interest.reset(payload);
     this.ready=true;this.attempt=0;this.onMessage(type,payload);this.status('connected','Đã kết nối · WebSocket');return;
    }
    if(!this.ready||type==='PONG')return;
+   if(type==='ENTITY_DELTA'){
+    const state=this.interest.apply(payload);
+    if(!state){this.ready=false;this.status('syncing','Đang đồng bộ vùng quan sát…');socket.send(JSON.stringify({type:'RESUME_WORLD',payload:{}}));return;}
+    this.onMessage('ENTITY_UPDATE',state);return;
+   }
    this.onMessage(type,payload);
   };
   socket.onclose=e=>{

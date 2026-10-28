@@ -55,3 +55,17 @@ test('leaving during a pending ticket request aborts it and never opens a socket
  const connection=new GameConnection(()=>{},()=>{},options);connection.connect();connection.close();await pause(0);
  assert.ok(aborted);assert.equal(Socket.instances.length,0);
 });
+
+test('AOI deltas merge entities and remove despawned players, NPCs, monsters and loot',async()=>{
+ const {make,events}=setup(),connection=make();connection.connect();await pause(0);
+ try{const s=Socket.instances[0];authenticate(s);s.packet('WORLD_SNAPSHOT',{mapId:'field',instanceId:null,interestVersion:1,players:[{id:'self',x:1}],monsters:[{id:'wolf'}],bots:[{id:'guard',x:2}],loot:[{id:'fang'}]},2);
+  s.packet('ENTITY_DELTA',{mapId:'field',instanceId:null,baseInterestVersion:1,interestVersion:2,players:{upsert:[{id:'self',x:3}],remove:[]},monsters:{upsert:[{id:'spirit'}],remove:['wolf']},bots:{upsert:[{id:'guard',x:5}],remove:[]},loot:{upsert:[],remove:['fang']}},3);
+  const state=events.at(-1);assert.equal(state.type,'ENTITY_UPDATE');assert.deepEqual(state.payload.players,[{id:'self',x:3}]);assert.deepEqual(state.payload.monsters,[{id:'spirit'}]);assert.deepEqual(state.payload.bots,[{id:'guard',x:5}]);assert.deepEqual(state.payload.loot,[]);
+ }finally{connection.close();}
+});
+
+test('missing AOI base requests exactly one full snapshot and gates gameplay until it arrives',async()=>{
+ const {make,events}=setup(),connection=make();connection.connect();await pause(0);
+ try{const s=Socket.instances[0];authenticate(s);s.packet('WORLD_SNAPSHOT',{mapId:'field',interestVersion:1,players:[],monsters:[],bots:[],loot:[]},2);const invalid={mapId:'field',baseInterestVersion:9,interestVersion:10};s.packet('ENTITY_DELTA',invalid,3);s.packet('ENTITY_DELTA',invalid,4);assert.equal(s.sent.filter(p=>p.type==='RESUME_WORLD').length,1);assert.equal(connection.send('ATTACK'),false);assert.equal(events.at(-1).type,'WORLD_SNAPSHOT');s.packet('WORLD_SNAPSHOT',{mapId:'field',interestVersion:12,players:[],monsters:[],bots:[],loot:[]},5);assert.equal(connection.send('ATTACK'),true);
+ }finally{connection.close();}
+});

@@ -1,25 +1,737 @@
 {
- "skills":[
- {"id":"ATTACK","name":"Đánh Thường","description":"Đòn cận chiến nhập môn","requiredPath":null,"requiredRace":null,"requiredLevel":1,"mpCost":0,"cooldown":500,"castTime":0,"damage":22,"range":88,"targetType":"CONE","effectType":"DAMAGE"},
- {"id":"QI","name":"Linh Khí Kích","description":"Linh khí tấn công tầm ngắn","requiredPath":null,"requiredRace":null,"requiredLevel":1,"mpCost":8,"cooldown":1800,"castTime":0,"damage":36,"range":270,"targetType":"CONE","effectType":"DAMAGE"},
- {"id":"DASH","name":"Thân Pháp","description":"Lướt theo hướng nhìn","requiredPath":null,"requiredRace":null,"requiredLevel":1,"mpCost":5,"cooldown":2200,"castTime":0,"damage":0,"range":140,"targetType":"SELF","effectType":"DASH"},
- {"id":"HUMAN_POWER","name":"Ngộ Đạo","description":"Hồi phục linh lực và sinh lực","requiredPath":null,"requiredRace":"HUMAN","requiredLevel":1,"mpCost":0,"cooldown":10000,"castTime":0,"damage":25,"range":0,"targetType":"SELF","effectType":"HEAL"},
- {"id":"DEMON_POWER","name":"Ma Hóa","description":"Cường hóa sát thương trong 5 giây","requiredPath":null,"requiredRace":"DEMON","requiredLevel":1,"mpCost":10,"cooldown":10000,"castTime":0,"damage":0,"range":0,"targetType":"SELF","effectType":"EMPOWER"},
- {"id":"BEAST_POWER","name":"Yêu Ảnh","description":"Tạo giáp huyết mạch trong 5 giây","requiredPath":null,"requiredRace":"BEAST","requiredLevel":1,"mpCost":10,"cooldown":10000,"castTime":0,"damage":0,"range":0,"targetType":"SELF","effectType":"SHIELD"},
- {"id":"KIEM_TU","name":"Kiếm Khí Trảm","description":"Kiếm khí xuyên qua nhiều mục tiêu","requiredPath":"KIEM_TU","requiredRace":null,"requiredLevel":10,"mpCost":15,"cooldown":2500,"castTime":0,"damage":65,"range":230,"targetType":"CONE","effectType":"DAMAGE"},
- {"id":"PHAP_TU","name":"Ngũ Hành Chưởng","description":"Pháp lực diện rộng","requiredPath":"PHAP_TU","requiredRace":null,"requiredLevel":10,"mpCost":18,"cooldown":3000,"castTime":0,"damage":70,"range":380,"targetType":"AREA","effectType":"DAMAGE"},
- {"id":"THE_TU","name":"Kim Cang Hộ Thể","description":"Hộ giáp trong 5 giây","requiredPath":"THE_TU","requiredRace":null,"requiredLevel":10,"mpCost":12,"cooldown":6500,"castTime":0,"damage":0,"range":0,"targetType":"SELF","effectType":"SHIELD"},
- {"id":"HUYET_MA","name":"Huyết Sát Trảm","description":"Bộc phát huyết lực","requiredPath":"HUYET_MA","requiredRace":null,"requiredLevel":10,"mpCost":15,"cooldown":2500,"castTime":0,"damage":65,"range":230,"targetType":"CONE","effectType":"DAMAGE"},
- {"id":"HON_MA","name":"U Minh Chú","description":"Ma chú làm chậm mục tiêu","requiredPath":"HON_MA","requiredRace":null,"requiredLevel":10,"mpCost":18,"cooldown":3000,"castTime":0,"damage":70,"range":380,"targetType":"AREA","effectType":"SLOW"},
- {"id":"MA_THE","name":"Bất Diệt Ma Giáp","description":"Hộ giáp trong 5 giây","requiredPath":"MA_THE","requiredRace":null,"requiredLevel":10,"mpCost":12,"cooldown":6500,"castTime":0,"damage":0,"range":0,"targetType":"SELF","effectType":"SHIELD"},
- {"id":"YEU_CHIEN","name":"Lang Ảnh Trảo","description":"Trảo kích huyết mạch","requiredPath":"YEU_CHIEN","requiredRace":null,"requiredLevel":10,"mpCost":15,"cooldown":2500,"castTime":0,"damage":65,"range":230,"targetType":"CONE","effectType":"DAMAGE"},
- {"id":"YEU_PHAP","name":"Hồ Hỏa Thuật","description":"Linh hỏa diện rộng","requiredPath":"YEU_PHAP","requiredRace":null,"requiredLevel":10,"mpCost":18,"cooldown":3000,"castTime":0,"damage":70,"range":380,"targetType":"AREA","effectType":"DAMAGE"},
- {"id":"YEU_GIAP","name":"Huyền Quy Hộ Thể","description":"Hộ giáp trong 5 giây","requiredPath":"YEU_GIAP","requiredRace":null,"requiredLevel":10,"mpCost":12,"cooldown":6500,"castTime":0,"damage":0,"range":0,"targetType":"SELF","effectType":"SHIELD"}
- ],
- "monsters":[
- {"id":"WOLF","name":"Yêu Lang","level":1,"hp":80,"atk":8,"def":2,"speed":75,"detection":260,"range":48,"respawnMs":6000,"exp":45,"cultivation":15},
- {"id":"SOLDIER","name":"Ma Binh","level":3,"hp":135,"atk":12,"def":4,"speed":60,"detection":250,"range":55,"respawnMs":8000,"exp":65,"cultivation":20},
- {"id":"SPIRIT","name":"Linh Thú","level":4,"hp":160,"atk":13,"def":5,"speed":95,"detection":280,"range":60,"respawnMs":9000,"exp":75,"cultivation":25},
- {"id":"BOSS","name":"Huyền Mộc Yêu Vương","level":10,"hp":1800,"atk":25,"def":10,"speed":55,"detection":300,"range":95,"respawnMs":30000,"exp":500,"cultivation":160}
- ]
+  "skills": [
+    {
+      "id": "ATTACK",
+      "name": "Đánh Thường",
+      "description": "Đòn cận chiến nhập môn",
+      "requiredPath": null,
+      "requiredRace": null,
+      "requiredLevel": 1,
+      "mpCost": 0,
+      "cooldown": 500,
+      "castTime": 0,
+      "damage": 22,
+      "range": 88,
+      "targetType": "CONE",
+      "effectType": "DAMAGE"
+    },
+    {
+      "id": "QI",
+      "name": "Linh Khí Kích",
+      "description": "Linh khí tấn công tầm ngắn",
+      "requiredPath": null,
+      "requiredRace": null,
+      "requiredLevel": 1,
+      "mpCost": 8,
+      "cooldown": 1800,
+      "castTime": 0,
+      "damage": 36,
+      "range": 270,
+      "targetType": "CONE",
+      "effectType": "DAMAGE"
+    },
+    {
+      "id": "DASH",
+      "name": "Thân Pháp",
+      "description": "Lướt theo hướng nhìn",
+      "requiredPath": null,
+      "requiredRace": null,
+      "requiredLevel": 1,
+      "mpCost": 5,
+      "cooldown": 2200,
+      "castTime": 0,
+      "damage": 0,
+      "range": 140,
+      "targetType": "SELF",
+      "effectType": "DASH"
+    },
+    {
+      "id": "HUMAN_POWER",
+      "name": "Ngộ Đạo",
+      "description": "Hồi phục linh lực và sinh lực",
+      "requiredPath": null,
+      "requiredRace": "HUMAN",
+      "requiredLevel": 1,
+      "mpCost": 0,
+      "cooldown": 10000,
+      "castTime": 0,
+      "damage": 25,
+      "range": 0,
+      "targetType": "SELF",
+      "effectType": "HEAL"
+    },
+    {
+      "id": "DEMON_POWER",
+      "name": "Ma Hóa",
+      "description": "Cường hóa sát thương trong 5 giây",
+      "requiredPath": null,
+      "requiredRace": "DEMON",
+      "requiredLevel": 1,
+      "mpCost": 10,
+      "cooldown": 10000,
+      "castTime": 0,
+      "damage": 0,
+      "range": 0,
+      "targetType": "SELF",
+      "effectType": "EMPOWER"
+    },
+    {
+      "id": "BEAST_POWER",
+      "name": "Yêu Ảnh",
+      "description": "Tạo giáp huyết mạch trong 5 giây",
+      "requiredPath": null,
+      "requiredRace": "BEAST",
+      "requiredLevel": 1,
+      "mpCost": 10,
+      "cooldown": 10000,
+      "castTime": 0,
+      "damage": 0,
+      "range": 0,
+      "targetType": "SELF",
+      "effectType": "SHIELD"
+    },
+    {
+      "id": "KIEM_TU",
+      "name": "Kiếm Khí Trảm",
+      "description": "Kiếm khí xuyên qua nhiều mục tiêu",
+      "requiredPath": "KIEM_TU",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 15,
+      "cooldown": 2500,
+      "castTime": 0,
+      "damage": 65,
+      "range": 230,
+      "targetType": "CONE",
+      "effectType": "DAMAGE"
+    },
+    {
+      "id": "PHAP_TU",
+      "name": "Ngũ Hành Chưởng",
+      "description": "Pháp lực diện rộng",
+      "requiredPath": "PHAP_TU",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 18,
+      "cooldown": 3000,
+      "castTime": 0,
+      "damage": 70,
+      "range": 380,
+      "targetType": "AREA",
+      "effectType": "DAMAGE"
+    },
+    {
+      "id": "THE_TU",
+      "name": "Kim Cang Hộ Thể",
+      "description": "Hộ giáp trong 5 giây",
+      "requiredPath": "THE_TU",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 12,
+      "cooldown": 6500,
+      "castTime": 0,
+      "damage": 0,
+      "range": 0,
+      "targetType": "SELF",
+      "effectType": "SHIELD"
+    },
+    {
+      "id": "HUYET_MA",
+      "name": "Huyết Sát Trảm",
+      "description": "Bộc phát huyết lực",
+      "requiredPath": "HUYET_MA",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 15,
+      "cooldown": 2500,
+      "castTime": 0,
+      "damage": 65,
+      "range": 230,
+      "targetType": "CONE",
+      "effectType": "DAMAGE"
+    },
+    {
+      "id": "HON_MA",
+      "name": "U Minh Chú",
+      "description": "Ma chú làm chậm mục tiêu",
+      "requiredPath": "HON_MA",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 18,
+      "cooldown": 3000,
+      "castTime": 0,
+      "damage": 70,
+      "range": 380,
+      "targetType": "AREA",
+      "effectType": "SLOW"
+    },
+    {
+      "id": "MA_THE",
+      "name": "Bất Diệt Ma Giáp",
+      "description": "Hộ giáp trong 5 giây",
+      "requiredPath": "MA_THE",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 12,
+      "cooldown": 6500,
+      "castTime": 0,
+      "damage": 0,
+      "range": 0,
+      "targetType": "SELF",
+      "effectType": "SHIELD"
+    },
+    {
+      "id": "YEU_CHIEN",
+      "name": "Lang Ảnh Trảo",
+      "description": "Trảo kích huyết mạch",
+      "requiredPath": "YEU_CHIEN",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 15,
+      "cooldown": 2500,
+      "castTime": 0,
+      "damage": 65,
+      "range": 230,
+      "targetType": "CONE",
+      "effectType": "DAMAGE"
+    },
+    {
+      "id": "YEU_PHAP",
+      "name": "Hồ Hỏa Thuật",
+      "description": "Linh hỏa diện rộng",
+      "requiredPath": "YEU_PHAP",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 18,
+      "cooldown": 3000,
+      "castTime": 0,
+      "damage": 70,
+      "range": 380,
+      "targetType": "AREA",
+      "effectType": "DAMAGE"
+    },
+    {
+      "id": "YEU_GIAP",
+      "name": "Huyền Quy Hộ Thể",
+      "description": "Hộ giáp trong 5 giây",
+      "requiredPath": "YEU_GIAP",
+      "requiredRace": null,
+      "requiredLevel": 10,
+      "mpCost": 12,
+      "cooldown": 6500,
+      "castTime": 0,
+      "damage": 0,
+      "range": 0,
+      "targetType": "SELF",
+      "effectType": "SHIELD"
+    }
+  ],
+  "monsters": [
+    {
+      "id": "WOLF",
+      "name": "Yêu Lang",
+      "level": 1,
+      "hp": 80,
+      "atk": 8,
+      "def": 2,
+      "speed": 75,
+      "detection": 260,
+      "range": 48,
+      "respawnMs": 6000,
+      "exp": 45,
+      "cultivation": 15,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": []
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "SOLDIER",
+      "name": "Ma Binh",
+      "level": 3,
+      "hp": 135,
+      "atk": 12,
+      "def": 4,
+      "speed": 60,
+      "detection": 250,
+      "range": 55,
+      "respawnMs": 8000,
+      "exp": 65,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": []
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "POTION",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "SPIRIT",
+      "name": "Linh Thú",
+      "level": 4,
+      "hp": 160,
+      "atk": 13,
+      "def": 5,
+      "speed": 95,
+      "detection": 280,
+      "range": 60,
+      "respawnMs": 9000,
+      "exp": 75,
+      "cultivation": 25,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": true,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": []
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "POTION",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "BOSS",
+      "name": "Huyền Mộc Yêu Vương",
+      "level": 10,
+      "hp": 1800,
+      "atk": 25,
+      "def": 10,
+      "speed": 55,
+      "detection": 300,
+      "range": 95,
+      "respawnMs": 30000,
+      "exp": 500,
+      "cultivation": 160,
+      "tier": "WORLD_BOSS",
+      "behavior": {
+        "leashRadius": 480,
+        "chaseTimeoutMs": 20000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 32,
+        "height": 80
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 4500,
+              "telegraphMs": 750,
+              "radius": 155,
+              "bonusDamage": 8
+            }
+          ]
+        },
+        {
+          "phase": 2,
+          "hpBelow": 0.5,
+          "speedMultiplier": 1.5,
+          "damageMultiplier": 2,
+          "attackCooldownMs": 750,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 3000,
+              "telegraphMs": 650,
+              "radius": 180,
+              "bonusDamage": 14
+            },
+            {
+              "id": "FOREST_BURST",
+              "cooldownMs": 4500,
+              "telegraphMs": 900,
+              "radius": 210,
+              "bonusDamage": 8
+            }
+          ]
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "POTION",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        },
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.65,
+          "minQuantity": 1,
+          "maxQuantity": 2
+        }
+      ]
+    },
+    {
+      "id": "WOLF_ALPHA",
+      "name": "Yêu Lang Đầu Đàn",
+      "level": 6,
+      "hp": 420,
+      "atk": 17,
+      "def": 7,
+      "speed": 80,
+      "detection": 290,
+      "range": 60,
+      "respawnMs": 18000,
+      "exp": 130,
+      "cultivation": 45,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": [
+            {
+              "id": "HOWL_BITE",
+              "cooldownMs": 5000,
+              "telegraphMs": 500,
+              "radius": 90,
+              "bonusDamage": 5
+            }
+          ]
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 2,
+          "maxQuantity": 3
+        },
+        {
+          "itemId": "FOREST_MARK",
+          "chance": 0.5,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "RUIN_SENTINEL",
+      "name": "Thạch Vệ Di Tích",
+      "level": 12,
+      "hp": 1100,
+      "atk": 25,
+      "def": 11,
+      "speed": 65,
+      "detection": 330,
+      "range": 75,
+      "respawnMs": 25000,
+      "exp": 240,
+      "cultivation": 80,
+      "tier": "MINIBOSS",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": [
+            {
+              "id": "STONE_PULSE",
+              "cooldownMs": 4500,
+              "telegraphMs": 850,
+              "radius": 150,
+              "bonusDamage": 10
+            }
+          ]
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 2
+        },
+        {
+          "itemId": "POTION",
+          "chance": 0.6,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "SOLDIER_VETERAN",
+      "name": "Ma Binh Tinh Nhuệ",
+      "level": 7,
+      "hp": 300,
+      "atk": 18,
+      "def": 7,
+      "speed": 60,
+      "detection": 250,
+      "range": 55,
+      "respawnMs": 12000,
+      "exp": 120,
+      "cultivation": 40,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": []
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "POTION",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        },
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.4,
+          "minQuantity": 1,
+          "maxQuantity": 2
+        }
+      ]
+    },
+    {
+      "id": "SPIRIT_VETERAN",
+      "name": "Linh Thú Biên Cảnh",
+      "level": 8,
+      "hp": 360,
+      "atk": 20,
+      "def": 8,
+      "speed": 95,
+      "detection": 280,
+      "range": 60,
+      "respawnMs": 12000,
+      "exp": 145,
+      "cultivation": 48,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": true,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": []
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "POTION",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        },
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.4,
+          "minQuantity": 1,
+          "maxQuantity": 2
+        }
+      ]
+    },
+    {
+      "id": "RUIN_SPIRIT",
+      "name": "Linh Thể Di Tích",
+      "level": 14,
+      "hp": 650,
+      "atk": 28,
+      "def": 14,
+      "speed": 95,
+      "detection": 280,
+      "range": 60,
+      "respawnMs": 12000,
+      "exp": 260,
+      "cultivation": 85,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 180,
+        "attackCooldownMs": 1200,
+        "threatSwitchRatio": 0.35,
+        "canJump": true,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": []
+        }
+      ],
+      "dropTable": [
+        {
+          "itemId": "POTION",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        },
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.4,
+          "minQuantity": 1,
+          "maxQuantity": 2
+        }
+      ]
+    }
+  ]
 }

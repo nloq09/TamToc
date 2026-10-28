@@ -23,6 +23,7 @@ public class CharacterSessions {
         public Status status=Status.ONLINE;
         public long expiresAt;
         public long disconnectedAt;
+        public boolean deltaUpdates;
         private Lease(UUID owner,PlayerState player,boolean resumable,String secret){this.owner=owner;this.player=player;this.resumable=resumable;this.secret=secret;}
     }
     public record Binding(Lease lease,boolean resumed,WebSocketSession replaced) {}

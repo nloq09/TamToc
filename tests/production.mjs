@@ -18,7 +18,7 @@ if(process.env.PERSISTENCE_USERNAME){
  const headers={Authorization:'Bearer '+login.token};
  const chars=await fetch(base+'/api/characters',{headers}).then(r=>r.json());const c=chars.find(c=>c.name.startsWith('Cultivator_'));assert.ok(c);assert.equal(c.cultivationPath,'KIEM_TU');assert.equal(c.realmStage,1);
  const inventory=await fetch(base+'/api/characters/'+c.id+'/inventory',{headers}).then(r=>r.json());assert.equal(inventory.equipment.WEAPON,'QI_SWORD');assert.equal(inventory.stones,140);
- const quests=await fetch(base+'/api/characters/'+c.id+'/quests',{headers}).then(r=>r.json());assert.ok(quests.every(q=>q.status==='CLAIMED'));
+ const quests=await fetch(base+'/api/characters/'+c.id+'/quests',{headers}).then(r=>r.json());assert.ok(quests.filter(q=>['WOLVES','PATH'].includes(q.definition.id)).every(q=>q.status==='CLAIMED'));
  const skills=await fetch(base+'/api/characters/'+c.id+'/skills',{headers}).then(r=>r.json());assert.ok(skills.some(s=>s.id==='KIEM_TU'));
  console.log('PASS full progression survives backend shutdown and restart in Docker with the same PostgreSQL volume');
 }

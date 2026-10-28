@@ -4,6 +4,10 @@ import java.util.*;
 
 /** Durable per-character aggregate. Client requests never bind to this type. */
 public class ProgressData {
+    public java.util.Map<String,String> checkpoints=new java.util.HashMap<>();
+    public java.util.Map<String,Integer> mapVersions=new java.util.HashMap<>();
+    public java.util.Map<String,Integer> killsByDefinition=new java.util.HashMap<>();
+    public java.util.Map<String,Integer> questKillStarts=new java.util.HashMap<>();
     public int hp=100, mp=60, stones=0;
     public int wolfKills=0, totalKills=0;
     public Map<String,Integer> inventory=new LinkedHashMap<>(Map.of("WOOD_SWORD",1,"ROBE",1,"POTION",3));

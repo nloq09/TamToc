@@ -48,7 +48,7 @@ public class GameSocket extends TextWebSocketHandler {
                 if(p.has("characterId")&&!ticket.character().toString().equals(p.path("characterId").asText()))throw new ProtocolException("CHARACTER_MISMATCH","Nhân vật không khớp với vé kết nối.");
                 String resume=p.has("resumeToken")?p.path("resumeToken").asText():null;
                 if(resume!=null&&(resume.length()<32||resume.length()>128))throw new ProtocolException("INVALID_RESUME_TOKEN","Khóa phục hồi không hợp lệ.");
-                world.join(s.session,characters.owned(ticket.owner(),ticket.character()),resume,p.path("protocolVersion").asInt(1)==2);s.authenticated=true;return;
+                int protocol=p.path("protocolVersion").asInt(1);if(protocol<1||protocol>3)throw new ProtocolException("UNSUPPORTED_PROTOCOL","Protocol chưa được hỗ trợ.");world.join(s.session,characters.owned(ticket.owner(),ticket.character()),resume,protocol>=2,protocol>=3);s.authenticated=true;return;
             }
             switch(type) {
                 case "INPUT" -> {
@@ -56,7 +56,8 @@ public class GameSocket extends TextWebSocketHandler {
                         || !p.path("sequence").isIntegralNumber() || !p.path("sequence").canConvertToLong() || p.path("sequence").asLong()<0 || p.has("x") || p.has("y")) throw new ProtocolException("INVALID_INPUT","Input không hợp lệ.");
                     world.input(raw.getId(),p.path("direction").asInt(),p.path("jump").asBoolean(),p.path("sequence").asLong());
                 }
-                case "INTERACT" -> { limits.check("interact:"+raw.getId(),60); world.interact(raw.getId()); }
+                case "INTERACT" -> { limits.check("interact:"+raw.getId(),60); world.interact(raw.getId(),p.has("entityId")?UUID.fromString(p.path("entityId").asText()):null); }
+                case "USE_PORTAL" -> {limits.check("portal:"+raw.getId(),30);if(!p.path("portalId").isTextual()||p.path("portalId").asText().length()>80)throw new ProtocolException("INVALID_PORTAL","portalId không hợp lệ.");world.usePortal(raw.getId(),p.path("portalId").asText());}
                 case "ATTACK" -> world.cast(raw.getId(),"ATTACK",target(p));
                 case "CAST_SKILL" -> world.cast(raw.getId(),p.path("skillId").asText(),target(p));
                 case "CHAT" -> { limits.check("chat:"+raw.getId(),30); world.chat(raw.getId(),p.path("message").asText()); }
@@ -68,6 +69,7 @@ public class GameSocket extends TextWebSocketHandler {
                 case "PING" -> world.send(s.session,"PONG",Map.of("serverTime",now));
                 case "DUNGEON_LIST_REQUEST","DUNGEON_READY_SET","DUNGEON_START_REQUEST","DUNGEON_LEAVE_REQUEST" -> {limits.check("dungeon:"+raw.getId(),60);world.dungeonCommand(raw.getId(),type,p,root.has("requestId")?root.path("requestId").asText():p.path("requestId").asText());}
                 case "DUEL_STATE_REQUEST","DUEL_CHALLENGE","DUEL_ACCEPT","DUEL_DECLINE","DUEL_FORFEIT" -> {limits.check("duel:"+raw.getId(),30);world.duelCommand(raw.getId(),type,p,root.has("requestId")?root.path("requestId").asText():p.path("requestId").asText());}
+                case "START_TRAINING","CANCEL_TRAINING","TRAINING_STATE_REQUEST" -> {limits.check("training:"+raw.getId(),30);world.trainingCommand(raw.getId(),type,p,root.has("requestId")?root.path("requestId").asText():p.path("requestId").asText());}
                 case "RESUME_WORLD" -> {if(p.has("characterId")||p.has("mapId")||p.has("instanceId"))throw new ProtocolException("INVALID_RESUME_REQUEST","Phiên server quyết định nhân vật và bản đồ phục hồi.");limits.check("snapshot:"+raw.getId(),10);world.resumeSnapshot(raw.getId());}
                 case "LEAVE_WORLD" -> {world.disconnect(raw.getId(),true);raw.close(CloseStatus.NORMAL);}
                 default -> throw new ProtocolException("UNSUPPORTED_MESSAGE","Message chưa được hỗ trợ: " + type);
@@ -77,7 +79,7 @@ public class GameSocket extends TextWebSocketHandler {
             String code=e instanceof ProtocolException problem?problem.code():e instanceof org.springframework.web.server.ResponseStatusException status&&status.getStatusCode().value()==429?"RATE_LIMITED":e instanceof IllegalArgumentException?"GAMEPLAY_REJECTED":"REQUEST_FAILED";
             if(!s.authenticated)metrics.resumeFailures.increment();
             if(!(e instanceof IllegalArgumentException)&&!(e instanceof org.springframework.web.server.ResponseStatusException)){metrics.exceptions.increment();log.error("WebSocket request failed, type/session {}",raw.getId(),e);}
-            world.send(s.session,messageType.startsWith("PARTY_")?"PARTY_ERROR":messageType.startsWith("DUNGEON_")?"DUNGEON_ERROR":messageType.startsWith("DUEL_")?"DUEL_ERROR":"ERROR",Map.of("message",reason,"code",code,"retryable",code.equals("RATE_LIMITED")||code.equals("REQUEST_FAILED")));
+            world.send(s.session,(messageType.equals("USE_PORTAL")||(e instanceof ProtocolException pe&&pe.code().startsWith("PORTAL_")))?"PORTAL_REJECTED":(messageType.contains("TRAINING"))?"TRAINING_ERROR":messageType.startsWith("PARTY_")?"PARTY_ERROR":messageType.startsWith("DUNGEON_")?"DUNGEON_ERROR":messageType.startsWith("DUEL_")?"DUEL_ERROR":"ERROR",Map.of("message",reason,"code",code,"retryable",code.equals("RATE_LIMITED")||code.equals("REQUEST_FAILED")));
             if(!s.authenticated) raw.close(CloseStatus.POLICY_VIOLATION);
         }
     }

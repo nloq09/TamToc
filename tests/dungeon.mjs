@@ -39,6 +39,7 @@ try{
  await Promise.all([[a,b],[c,d]].map(async([leader,member],index)=>{
   const finished=(await leader.wait('DUNGEON_FINISHED',p=>p.run.state==='COMPLETED',150000)).payload;
   assert.equal(finished.run.wave,3);assert.equal(finished.run.reason,'VICTORY');
+  const warningIndex=leader.events.findIndex(e=>e.type==='BOSS_TELEGRAPH');assert.ok(warningIndex>=0,'boss encounter emitted a telegraph');const bossId=leader.events[warningIndex].payload.id;const hitIndex=leader.events.findIndex(e=>e.type==='COMBAT_EVENT'&&e.payload.source===bossId);assert.ok(hitIndex>warningIndex,'boss warning precedes boss damage');assert.ok(leader.events.some(e=>e.type==='BOSS_PHASE_CHANGED'&&e.payload.id===bossId&&e.payload.phase===2));
   for(const client of [leader,member]){
    const history=await api('/characters/'+client.id+'/activities',undefined,client.account.token);const entry=history.dungeons.find(r=>r.id===runs[index].runId);assert.equal(entry.status,'COMPLETED');assert.equal(Number(entry.reward_count),entry.eligible?1:0);
    const before=await api('/characters/'+client.id+'/inventory',undefined,client.account.token);client.send('DUNGEON_LIST_REQUEST');await new Promise(r=>setTimeout(r,250));const after=await api('/characters/'+client.id+'/inventory',undefined,client.account.token);assert.equal(after.stones,before.stones);
