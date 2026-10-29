@@ -97,6 +97,8 @@ function onMessage(type:string,p:any) {
  else if(type==='PLAYER_LEFT'){activeGame?.scene.remove(p.id);}
  else if(type==='CHAT'){const log=document.querySelector('#chat-log')!;const line=document.createElement('p');const name=document.createElement('strong');name.textContent=(p.channel==='PARTY'?'[Đội] ':'')+p.name+': ';line.append(name,document.createTextNode(p.message));log.append(line);while(log.childElementCount>60)log.firstElementChild?.remove();log.scrollTop=log.scrollHeight;}
  else if(type==='ERROR'||type==='PORTAL_REJECTED')error(p.message);
+ else if(type==='WORLD_BOSS_STARTED')error('Hoang Nguyên Cự Thú đã xuất hiện trong khu vực!');
+ else if(type==='WORLD_BOSS_ENDED')error('Sự kiện Hoang Nguyên Cự Thú đã kết thúc.');
  else if(type==='CHECKPOINT_REACHED')error('Đã lưu điểm hồi sinh: '+p.spawnId);
 }
 function updateHud(){

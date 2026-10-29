@@ -20,8 +20,13 @@ public class DevController {
     public DevController(GameWorld w,@Value("${DEV_ADMIN_KEY:}")String key){world=w;this.key=key;}
     @PostMapping("/api/dev/characters/{id}/level10")
     public Object grant(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id,@RequestHeader(value="X-Dev-Key",defaultValue="")String supplied,HttpServletRequest request){
+        return raise(jwt,id,supplied,request,10);
+    }
+    public record LevelRequest(@jakarta.validation.constraints.Min(1) @jakarta.validation.constraints.Max(25) int level) {}
+    @PostMapping("/api/dev/characters/{id}/level") public Object level(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id,@RequestHeader(value="X-Dev-Key",defaultValue="")String supplied,HttpServletRequest request,@jakarta.validation.Valid @RequestBody LevelRequest body){return raise(jwt,id,supplied,request,body.level());}
+    private Object raise(Jwt jwt,UUID id,String supplied,HttpServletRequest request,int level){
         boolean loopback=Set.of("127.0.0.1","0:0:0:0:0:0:0:1","::1").contains(request.getRemoteAddr());
         if(!loopback||key.length()<32||!MessageDigest.isEqual(key.getBytes(StandardCharsets.UTF_8),supplied.getBytes(StandardCharsets.UTF_8)))throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Chỉ dành cho quản trị viên local.");
-        return world.access(UUID.fromString(jwt.getSubject()),id,p->{p.level=Math.max(10,p.level);p.progress.hp=p.maxHp();p.progress.mp=p.maxMp();return Map.of("level",p.level);},true);
+        return world.access(UUID.fromString(jwt.getSubject()),id,p->{p.level=Math.max(level,p.level);p.progress.hp=p.maxHp();p.progress.mp=p.maxMp();return Map.of("level",p.level);},true);
     }
 }

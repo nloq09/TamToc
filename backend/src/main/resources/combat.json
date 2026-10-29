@@ -272,7 +272,8 @@
           "minQuantity": 1,
           "maxQuantity": 1
         }
-      ]
+      ],
+      "speciesId": "yeu_lang"
     },
     {
       "id": "SOLDIER",
@@ -319,7 +320,8 @@
           "minQuantity": 1,
           "maxQuantity": 1
         }
-      ]
+      ],
+      "speciesId": "ma_binh"
     },
     {
       "id": "SPIRIT",
@@ -366,7 +368,8 @@
           "minQuantity": 1,
           "maxQuantity": 1
         }
-      ]
+      ],
+      "speciesId": "linh_thu"
     },
     {
       "id": "BOSS",
@@ -450,7 +453,8 @@
           "minQuantity": 1,
           "maxQuantity": 2
         }
-      ]
+      ],
+      "speciesId": "huyen_moc_yeu_vuong"
     },
     {
       "id": "WOLF_ALPHA",
@@ -511,7 +515,8 @@
           "minQuantity": 1,
           "maxQuantity": 1
         }
-      ]
+      ],
+      "speciesId": "WOLF_ALPHA"
     },
     {
       "id": "RUIN_SENTINEL",
@@ -572,7 +577,8 @@
           "minQuantity": 1,
           "maxQuantity": 1
         }
-      ]
+      ],
+      "speciesId": "RUIN_SENTINEL"
     },
     {
       "id": "SOLDIER_VETERAN",
@@ -625,7 +631,8 @@
           "minQuantity": 1,
           "maxQuantity": 2
         }
-      ]
+      ],
+      "speciesId": "SOLDIER_VETERAN"
     },
     {
       "id": "SPIRIT_VETERAN",
@@ -678,7 +685,8 @@
           "minQuantity": 1,
           "maxQuantity": 2
         }
-      ]
+      ],
+      "speciesId": "SPIRIT_VETERAN"
     },
     {
       "id": "RUIN_SPIRIT",
@@ -730,6 +738,3360 @@
           "chance": 0.4,
           "minQuantity": 1,
           "maxQuantity": 2
+        }
+      ],
+      "speciesId": "RUIN_SPIRIT"
+    },
+    {
+      "id": "thanh_van_ngoai_son_mob_01_lv1",
+      "speciesId": "son_tho",
+      "name": "Sơn Thỏ",
+      "level": 1,
+      "hp": 57,
+      "atk": 5,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 42,
+      "cultivation": 11,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_van_ngoai_son_mob_01_lv2",
+      "speciesId": "son_tho",
+      "name": "Sơn Thỏ",
+      "level": 2,
+      "hp": 69,
+      "atk": 6,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 54,
+      "cultivation": 14,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_van_ngoai_son_mob_02_lv2",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 2,
+      "hp": 69,
+      "atk": 6,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 54,
+      "cultivation": 14,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_van_ngoai_son_mob_02_lv3",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 3,
+      "hp": 81,
+      "atk": 7,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 66,
+      "cultivation": 17,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_van_ngoai_son_mob_02_lv4",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_van_ngoai_son_mob_03_lv4",
+      "speciesId": "truc_yeu",
+      "name": "Trúc Yêu",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_van_ngoai_son_mob_03_lv5",
+      "speciesId": "truc_yeu",
+      "name": "Trúc Yêu",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_mob_01_lv4",
+      "speciesId": "truc_tinh",
+      "name": "Trúc Tinh",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_mob_01_lv5",
+      "speciesId": "truc_tinh",
+      "name": "Trúc Tinh",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_mob_02_lv4",
+      "speciesId": "thanh_diep_ho",
+      "name": "Thanh Diệp Hồ",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_mob_02_lv5",
+      "speciesId": "thanh_diep_ho",
+      "name": "Thanh Diệp Hồ",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_mob_02_lv6",
+      "speciesId": "thanh_diep_ho",
+      "name": "Thanh Diệp Hồ",
+      "level": 6,
+      "hp": 117,
+      "atk": 10,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 102,
+      "cultivation": 26,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_mob_03_lv6",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 6,
+      "hp": 117,
+      "atk": 10,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 102,
+      "cultivation": 26,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_mob_03_lv7",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 7,
+      "hp": 129,
+      "atk": 11,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 114,
+      "cultivation": 29,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_mob_01_lv1",
+      "speciesId": "ma_trung",
+      "name": "Ma Trùng",
+      "level": 1,
+      "hp": 57,
+      "atk": 5,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 42,
+      "cultivation": 11,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_mob_01_lv2",
+      "speciesId": "ma_trung",
+      "name": "Ma Trùng",
+      "level": 2,
+      "hp": 69,
+      "atk": 6,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 54,
+      "cultivation": 14,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_mob_02_lv2",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 2,
+      "hp": 69,
+      "atk": 6,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 54,
+      "cultivation": 14,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_mob_02_lv3",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 3,
+      "hp": 81,
+      "atk": 7,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 66,
+      "cultivation": 17,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_mob_02_lv4",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_mob_03_lv4",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_mob_03_lv5",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_mob_01_lv4",
+      "speciesId": "da_buc",
+      "name": "Dạ Bức",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_mob_01_lv5",
+      "speciesId": "da_buc",
+      "name": "Dạ Bức",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_mob_02_lv4",
+      "speciesId": "u_minh_hon",
+      "name": "U Minh Hồn",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_mob_02_lv5",
+      "speciesId": "u_minh_hon",
+      "name": "U Minh Hồn",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_mob_02_lv6",
+      "speciesId": "u_minh_hon",
+      "name": "U Minh Hồn",
+      "level": 6,
+      "hp": 117,
+      "atk": 10,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 102,
+      "cultivation": 26,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_mob_03_lv6",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 6,
+      "hp": 117,
+      "atk": 10,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 102,
+      "cultivation": 26,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_mob_03_lv7",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 7,
+      "hp": 129,
+      "atk": 11,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 114,
+      "cultivation": 29,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_mob_01_lv1",
+      "speciesId": "moc_linh",
+      "name": "Mộc Linh",
+      "level": 1,
+      "hp": 57,
+      "atk": 5,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 42,
+      "cultivation": 11,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_mob_01_lv2",
+      "speciesId": "moc_linh",
+      "name": "Mộc Linh",
+      "level": 2,
+      "hp": 69,
+      "atk": 6,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 54,
+      "cultivation": 14,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_mob_02_lv2",
+      "speciesId": "linh_thu",
+      "name": "Linh Thú",
+      "level": 2,
+      "hp": 69,
+      "atk": 6,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 54,
+      "cultivation": 14,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_mob_02_lv3",
+      "speciesId": "linh_thu",
+      "name": "Linh Thú",
+      "level": 3,
+      "hp": 81,
+      "atk": 7,
+      "def": 0,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 66,
+      "cultivation": 17,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_mob_02_lv4",
+      "speciesId": "linh_thu",
+      "name": "Linh Thú",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_mob_03_lv4",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_mob_03_lv5",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_mob_01_lv4",
+      "speciesId": "truc_ho",
+      "name": "Trúc Hồ",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_mob_01_lv5",
+      "speciesId": "truc_ho",
+      "name": "Trúc Hồ",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_mob_02_lv4",
+      "speciesId": "phong_linh_dieu",
+      "name": "Phong Linh Điểu",
+      "level": 4,
+      "hp": 93,
+      "atk": 8,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 190,
+      "respawnMs": 18000,
+      "exp": 78,
+      "cultivation": 20,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 400,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_mob_02_lv5",
+      "speciesId": "phong_linh_dieu",
+      "name": "Phong Linh Điểu",
+      "level": 5,
+      "hp": 105,
+      "atk": 9,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 190,
+      "respawnMs": 18000,
+      "exp": 90,
+      "cultivation": 23,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 400,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_mob_02_lv6",
+      "speciesId": "phong_linh_dieu",
+      "name": "Phong Linh Điểu",
+      "level": 6,
+      "hp": 117,
+      "atk": 10,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 190,
+      "respawnMs": 18000,
+      "exp": 102,
+      "cultivation": 26,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 400,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_mob_03_lv6",
+      "speciesId": "linh_thu",
+      "name": "Linh Thú",
+      "level": 6,
+      "hp": 117,
+      "atk": 10,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 102,
+      "cultivation": 26,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_mob_03_lv7",
+      "speciesId": "linh_thu",
+      "name": "Linh Thú",
+      "level": 7,
+      "hp": 129,
+      "atk": 11,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 114,
+      "cultivation": 29,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_mob_01_lv6",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 6,
+      "hp": 117,
+      "atk": 10,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 102,
+      "cultivation": 26,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_mob_01_lv7",
+      "speciesId": "yeu_lang",
+      "name": "Yêu Lang",
+      "level": 7,
+      "hp": 129,
+      "atk": 11,
+      "def": 1,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 114,
+      "cultivation": 29,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "WOLF_FANG",
+          "chance": 1,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_mob_02_lv8",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 8,
+      "hp": 141,
+      "atk": 12,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 126,
+      "cultivation": 32,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_mob_02_lv9",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 9,
+      "hp": 153,
+      "atk": 13,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 138,
+      "cultivation": 35,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_mob_02_lv10",
+      "speciesId": "ma_binh",
+      "name": "Ma Binh",
+      "level": 10,
+      "hp": 165,
+      "atk": 14,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 150,
+      "cultivation": 38,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_mob_03_lv11",
+      "speciesId": "linh_thu",
+      "name": "Linh Thú",
+      "level": 11,
+      "hp": 177,
+      "atk": 15,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 162,
+      "cultivation": 41,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_mob_03_lv12",
+      "speciesId": "linh_thu",
+      "name": "Linh Thú",
+      "level": 12,
+      "hp": 189,
+      "atk": 16,
+      "def": 3,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 174,
+      "cultivation": 44,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_mob_01_lv8",
+      "speciesId": "hoang_nguyen_lang",
+      "name": "Hoang Nguyên Lang",
+      "level": 8,
+      "hp": 141,
+      "atk": 12,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 190,
+      "respawnMs": 18000,
+      "exp": 126,
+      "cultivation": 32,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 400,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_mob_01_lv9",
+      "speciesId": "hoang_nguyen_lang",
+      "name": "Hoang Nguyên Lang",
+      "level": 9,
+      "hp": 153,
+      "atk": 13,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 190,
+      "respawnMs": 18000,
+      "exp": 138,
+      "cultivation": 35,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 400,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_mob_02_lv10",
+      "speciesId": "dia_cot_trung",
+      "name": "Địa Cốt Trùng",
+      "level": 10,
+      "hp": 165,
+      "atk": 14,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 150,
+      "cultivation": 38,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_mob_02_lv11",
+      "speciesId": "dia_cot_trung",
+      "name": "Địa Cốt Trùng",
+      "level": 11,
+      "hp": 177,
+      "atk": 15,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 162,
+      "cultivation": 41,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_mob_02_lv12",
+      "speciesId": "dia_cot_trung",
+      "name": "Địa Cốt Trùng",
+      "level": 12,
+      "hp": 189,
+      "atk": 16,
+      "def": 3,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 174,
+      "cultivation": 44,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_mob_03_lv14",
+      "speciesId": "bien_sa_ung",
+      "name": "Biên Sa Ưng",
+      "level": 14,
+      "hp": 213,
+      "atk": 18,
+      "def": 3,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 198,
+      "cultivation": 50,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_mob_03_lv15",
+      "speciesId": "bien_sa_ung",
+      "name": "Biên Sa Ưng",
+      "level": 15,
+      "hp": 225,
+      "atk": 19,
+      "def": 3,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 210,
+      "cultivation": 53,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_mob_01_lv15",
+      "speciesId": "di_tich_oan_linh",
+      "name": "Di Tích Oán Linh",
+      "level": 15,
+      "hp": 225,
+      "atk": 19,
+      "def": 3,
+      "speed": 85,
+      "detection": 190,
+      "range": 190,
+      "respawnMs": 18000,
+      "exp": 210,
+      "cultivation": 53,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 400,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_mob_01_lv16",
+      "speciesId": "di_tich_oan_linh",
+      "name": "Di Tích Oán Linh",
+      "level": 16,
+      "hp": 237,
+      "atk": 20,
+      "def": 4,
+      "speed": 85,
+      "detection": 190,
+      "range": 190,
+      "respawnMs": 18000,
+      "exp": 222,
+      "cultivation": 56,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 400,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_mob_02_lv17",
+      "speciesId": "thien_mon_ve_binh",
+      "name": "Thiên Môn Vệ Binh",
+      "level": 17,
+      "hp": 249,
+      "atk": 21,
+      "def": 4,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 234,
+      "cultivation": 59,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_mob_02_lv18",
+      "speciesId": "thien_mon_ve_binh",
+      "name": "Thiên Môn Vệ Binh",
+      "level": 18,
+      "hp": 261,
+      "atk": 22,
+      "def": 4,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 246,
+      "cultivation": 62,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_mob_02_lv19",
+      "speciesId": "thien_mon_ve_binh",
+      "name": "Thiên Môn Vệ Binh",
+      "level": 19,
+      "hp": 273,
+      "atk": 23,
+      "def": 4,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 258,
+      "cultivation": 65,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_mob_03_lv21",
+      "speciesId": "co_an_hon",
+      "name": "Cổ Ấn Hồn",
+      "level": 21,
+      "hp": 297,
+      "atk": 25,
+      "def": 5,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 282,
+      "cultivation": 71,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_mob_03_lv22",
+      "speciesId": "co_an_hon",
+      "name": "Cổ Ấn Hồn",
+      "level": 22,
+      "hp": 309,
+      "atk": 26,
+      "def": 5,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 294,
+      "cultivation": 74,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyen_moc_bi_canh_mob_01_lv10",
+      "speciesId": "moc_linh",
+      "name": "Mộc Linh",
+      "level": 10,
+      "hp": 165,
+      "atk": 14,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 150,
+      "cultivation": 38,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyen_moc_bi_canh_mob_01_lv11",
+      "speciesId": "moc_linh",
+      "name": "Mộc Linh",
+      "level": 11,
+      "hp": 177,
+      "atk": 15,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 162,
+      "cultivation": 41,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyen_moc_bi_canh_mob_02_lv11",
+      "speciesId": "huyen_moc_thu_tinh",
+      "name": "Huyền Mộc Thụ Tinh",
+      "level": 11,
+      "hp": 177,
+      "atk": 15,
+      "def": 2,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 162,
+      "cultivation": 41,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyen_moc_bi_canh_mob_02_lv12",
+      "speciesId": "huyen_moc_thu_tinh",
+      "name": "Huyền Mộc Thụ Tinh",
+      "level": 12,
+      "hp": 189,
+      "atk": 16,
+      "def": 3,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 174,
+      "cultivation": 44,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyen_moc_bi_canh_mob_02_lv13",
+      "speciesId": "huyen_moc_thu_tinh",
+      "name": "Huyền Mộc Thụ Tinh",
+      "level": 13,
+      "hp": 201,
+      "atk": 17,
+      "def": 3,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 186,
+      "cultivation": 47,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "cuu_u_thach_phu_mob_01_lv18",
+      "speciesId": "u_hon_thach_ve",
+      "name": "U Hồn Thạch Vệ",
+      "level": 18,
+      "hp": 261,
+      "atk": 22,
+      "def": 4,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 246,
+      "cultivation": 62,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "cuu_u_thach_phu_mob_01_lv19",
+      "speciesId": "u_hon_thach_ve",
+      "name": "U Hồn Thạch Vệ",
+      "level": 19,
+      "hp": 273,
+      "atk": 23,
+      "def": 4,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 258,
+      "cultivation": 65,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "cuu_u_thach_phu_mob_02_lv20",
+      "speciesId": "thach_phu_ma_linh",
+      "name": "Thạch Phủ Ma Linh",
+      "level": 20,
+      "hp": 285,
+      "atk": 24,
+      "def": 5,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 270,
+      "cultivation": 68,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "cuu_u_thach_phu_mob_02_lv21",
+      "speciesId": "thach_phu_ma_linh",
+      "name": "Thạch Phủ Ma Linh",
+      "level": 21,
+      "hp": 297,
+      "atk": 25,
+      "def": 5,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 282,
+      "cultivation": 71,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "cuu_u_thach_phu_mob_02_lv22",
+      "speciesId": "thach_phu_ma_linh",
+      "name": "Thạch Phủ Ma Linh",
+      "level": 22,
+      "hp": 309,
+      "atk": 26,
+      "def": 5,
+      "speed": 85,
+      "detection": 190,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 294,
+      "cultivation": 74,
+      "tier": "NORMAL",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_van_ngoai_son_boss_elite_variant",
+      "speciesId": "son_lang_tinh",
+      "name": "Sơn Lang Tinh",
+      "level": 5,
+      "hp": 275,
+      "atk": 14,
+      "def": 5,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 270,
+      "cultivation": 69,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "truc_anh_lam_boss_elite_variant",
+      "speciesId": "truc_linh_ho_ve",
+      "name": "Trúc Linh Hộ Vệ",
+      "level": 7,
+      "hp": 325,
+      "atk": 16,
+      "def": 5,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 342,
+      "cultivation": 87,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyet_vu_coc_boss_elite_variant",
+      "speciesId": "huyet_anh",
+      "name": "Huyết Ảnh",
+      "level": 5,
+      "hp": 275,
+      "atk": 14,
+      "def": 5,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 270,
+      "cultivation": 69,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "u_minh_ngoai_dao_boss_elite_variant",
+      "speciesId": "hac_anh_trinh_sat",
+      "name": "Hắc Ảnh Trinh Sát",
+      "level": 7,
+      "hp": 325,
+      "atk": 16,
+      "def": 5,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 342,
+      "cultivation": 87,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "linh_thu_son_lo_boss_elite_variant",
+      "speciesId": "co_moc_tinh",
+      "name": "Cổ Mộc Tinh",
+      "level": 5,
+      "hp": 275,
+      "atk": 14,
+      "def": 5,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 270,
+      "cultivation": 69,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "thanh_khau_truc_lam_boss_elite_variant",
+      "speciesId": "thanh_khau_ho_linh",
+      "name": "Thanh Khâu Hộ Linh",
+      "level": 7,
+      "hp": 325,
+      "atk": 16,
+      "def": 5,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 342,
+      "cultivation": 87,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "tam_gioi_bien_canh_boss_elite_variant",
+      "speciesId": "bien_canh_loan_thu",
+      "name": "Biên Cảnh Loạn Thú",
+      "level": 12,
+      "hp": 450,
+      "atk": 21,
+      "def": 7,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 522,
+      "cultivation": 132,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_boss_elite_variant",
+      "speciesId": "hoang_nguyen_thu_linh",
+      "name": "Hoang Nguyên Thủ Lĩnh",
+      "level": 15,
+      "hp": 525,
+      "atk": 24,
+      "def": 7,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 630,
+      "cultivation": 159,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "vo_chu_hoang_nguyen_boss_world_boss_variant",
+      "speciesId": "hoang_nguyen_cu_thu",
+      "name": "Hoang Nguyên Cự Thú",
+      "level": 15,
+      "hp": 1200,
+      "atk": 34,
+      "def": 7,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 1680,
+      "cultivation": 424,
+      "tier": "WORLD_BOSS",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ],
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 4500,
+              "telegraphMs": 750,
+              "radius": 155,
+              "bonusDamage": 8
+            }
+          ]
+        },
+        {
+          "phase": 2,
+          "hpBelow": 0.5,
+          "speedMultiplier": 1.5,
+          "damageMultiplier": 2,
+          "attackCooldownMs": 750,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 3000,
+              "telegraphMs": 650,
+              "radius": 180,
+              "bonusDamage": 14
+            },
+            {
+              "id": "FOREST_BURST",
+              "cooldownMs": 4500,
+              "telegraphMs": 900,
+              "radius": 210,
+              "bonusDamage": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thien_mon_di_tich_boss_elite_variant",
+      "speciesId": "thien_mon_tran_linh",
+      "name": "Thiên Môn Trấn Linh",
+      "level": 22,
+      "hp": 700,
+      "atk": 31,
+      "def": 9,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 882,
+      "cultivation": 222,
+      "tier": "ELITE",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ]
+    },
+    {
+      "id": "huyen_moc_bi_canh_boss_dungeon_boss_variant",
+      "speciesId": "huyen_moc_yeu_vuong",
+      "name": "Huyền Mộc Yêu Vương",
+      "level": 15,
+      "hp": 1200,
+      "atk": 34,
+      "def": 7,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 1260,
+      "cultivation": 318,
+      "tier": "DUNGEON_BOSS",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ],
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 4500,
+              "telegraphMs": 750,
+              "radius": 155,
+              "bonusDamage": 8
+            }
+          ]
+        },
+        {
+          "phase": 2,
+          "hpBelow": 0.5,
+          "speedMultiplier": 1.5,
+          "damageMultiplier": 2,
+          "attackCooldownMs": 750,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 3000,
+              "telegraphMs": 650,
+              "radius": 180,
+              "bonusDamage": 14
+            },
+            {
+              "id": "FOREST_BURST",
+              "cooldownMs": 4500,
+              "telegraphMs": 900,
+              "radius": 210,
+              "bonusDamage": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cuu_u_thach_phu_boss_dungeon_boss_variant",
+      "speciesId": "cuu_u_thach_quan",
+      "name": "Cửu U Thạch Quân",
+      "level": 25,
+      "hp": 1600,
+      "atk": 44,
+      "def": 10,
+      "speed": 100,
+      "detection": 280,
+      "range": 48,
+      "respawnMs": 18000,
+      "exp": 1980,
+      "cultivation": 498,
+      "tier": "DUNGEON_BOSS",
+      "behavior": {
+        "leashRadius": 430,
+        "chaseTimeoutMs": 15000,
+        "thinkIntervalMs": 200,
+        "targetStickMs": 1500,
+        "attackWindupMs": 220,
+        "attackCooldownMs": 1400,
+        "threatSwitchRatio": 0.35,
+        "canJump": false,
+        "jumpVelocity": 570,
+        "maxDrop": 240,
+        "halfWidth": 16,
+        "height": 35
+      },
+      "dropTable": [
+        {
+          "itemId": "ANCIENT_FRAGMENT",
+          "chance": 0.3,
+          "minQuantity": 1,
+          "maxQuantity": 1
+        }
+      ],
+      "phases": [
+        {
+          "phase": 1,
+          "hpBelow": 1,
+          "speedMultiplier": 1,
+          "damageMultiplier": 1,
+          "attackCooldownMs": 1200,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 4500,
+              "telegraphMs": 750,
+              "radius": 155,
+              "bonusDamage": 8
+            }
+          ]
+        },
+        {
+          "phase": 2,
+          "hpBelow": 0.5,
+          "speedMultiplier": 1.5,
+          "damageMultiplier": 2,
+          "attackCooldownMs": 750,
+          "abilities": [
+            {
+              "id": "ROOT_SLAM",
+              "cooldownMs": 3000,
+              "telegraphMs": 650,
+              "radius": 180,
+              "bonusDamage": 14
+            },
+            {
+              "id": "FOREST_BURST",
+              "cooldownMs": 4500,
+              "telegraphMs": 900,
+              "radius": 210,
+              "bonusDamage": 8
+            }
+          ]
         }
       ]
     }

@@ -318,6 +318,126 @@
       "lines": [
         "Mở Nhiệm vụ để nhận thử thách Yêu Lang. Từ cấp 10, nhận Con Đường Tu Luyện rồi chọn một thế lực."
       ]
+    },
+    {
+      "id": "world15-guide-thanh_van_thanh",
+      "lines": [
+        "Đạo hữu đã đến Thanh Vân Thành.",
+        "Nói chuyện Tiếp Dẫn Sứ; giới thiệu tộc và kỹ năng nhập môn",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-u_minh_thanh",
+      "lines": [
+        "Đạo hữu đã đến U Minh Thành.",
+        "Tiếp nhận hướng dẫn từ NPC Ma Tộc",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-van_yeu_lam",
+      "lines": [
+        "Đạo hữu đã đến Vạn Yêu Lâm.",
+        "Tiếp dẫn NPC Yêu Tộc",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-thanh_van_ngoai_son",
+      "lines": [
+        "Đạo hữu đã đến Thanh Vân Ngoại Sơn.",
+        "Liên kết nhiệm vụ diệt 5 Yêu Lang hiện hữu; không tạo bản sao",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-huyet_vu_coc",
+      "lines": [
+        "Đạo hữu đã đến Huyết Vụ Cốc.",
+        "Ma Trùng/Ma Binh, liên kết nhiệm vụ Yêu Lang cũ khi hợp lệ",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-linh_thu_son_lo",
+      "lines": [
+        "Đạo hữu đã đến Linh Thú Sơn Lộ.",
+        "Theo dấu Linh Thú, đồng bộ nhiệm vụ Yêu Lang cũ khi hợp lệ",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-truc_anh_lam",
+      "lines": [
+        "Đạo hữu đã đến Trúc Ảnh Lâm.",
+        "Kiểm tra Trúc Tinh và tìm dấu tích linh mạch",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-u_minh_ngoai_dao",
+      "lines": [
+        "Đạo hữu đã đến U Minh Ngoại Đạo.",
+        "Truy tìm Dạ Bức và U Minh Hồn",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-thanh_khau_truc_lam",
+      "lines": [
+        "Đạo hữu đã đến Thanh Khâu Trúc Lâm.",
+        "Bảo vệ trúc lâm và đối đầu Thanh Khâu Hộ Linh",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-trung_chau",
+      "lines": [
+        "Đạo hữu đã đến Trung Châu.",
+        "Mở chuỗi lựa chọn thế lực tại Level 10 theo hệ thống đã có",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-tam_gioi_bien_canh",
+      "lines": [
+        "Đạo hữu đã đến Tam Giới Biên Cảnh.",
+        "Ba nhánh truyện gặp nhau ở Tam Giới Biên Cảnh",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-vo_chu_hoang_nguyen",
+      "lines": [
+        "Đạo hữu đã đến Vô Chủ Hoang Nguyên.",
+        "Nhiệm vụ đi săn, nhiệm vụ tổ đội và hoạt động định kỳ",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-thien_mon_di_tich",
+      "lines": [
+        "Đạo hữu đã đến Thiên Môn Di Tích.",
+        "Khám phá phong ấn và chiến đấu với Thiên Môn Trấn Linh",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-huyen_moc_bi_canh",
+      "lines": [
+        "Đạo hữu đã đến Huyền Mộc Bí Cảnh.",
+        "Boss Huyền Mộc Yêu Vương, clear waves trước boss",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
+    },
+    {
+      "id": "world15-guide-cuu_u_thach_phu",
+      "lines": [
+        "Đạo hữu đã đến Cửu U Thạch Phủ.",
+        "Đối đầu boss Cửu U Thạch Quân, giới hạn farm phần thưởng",
+        "Mở Nhiệm vụ để nhận hoặc lĩnh thưởng; Sổ tay chỉ đường cho tuyến tu luyện của ngươi."
+      ]
     }
   ],
   "difficulties": [

@@ -16,8 +16,9 @@ public class JdbcActivityStore implements ActivityStore {
     private final String node;
     public JdbcActivityStore(JdbcTemplate j,ProgressStore p,@Value("${NODE_ID:local}")String node,@Value("${server.port:8080}")int port){jdbc=j;progress=p;this.node=node+":"+port;}
     @PostConstruct void recover(){jdbc.update("UPDATE dungeon_runs SET status='FAILED',ended_at=now(),result='SERVER_RESTART' WHERE status='ACTIVE' AND server_node=?",node);}
-    @Override @Transactional public void startDungeon(UUID run,UUID instance,UUID party,Collection<UUID> participants,long started){
-        jdbc.update("INSERT INTO dungeon_runs(id,instance_id,dungeon_id,party_id,server_node,status,started_at) VALUES (?,?, 'HUYEN_MOC',?,?,'ACTIVE',?)",run,instance,party,node,new Timestamp(started));
+    @Override @Transactional public void startDungeon(UUID run,UUID instance,UUID party,Collection<UUID> participants,long started){startDungeon(run,instance,party,participants,started,"HUYEN_MOC");}
+    @Override @Transactional public void startDungeon(UUID run,UUID instance,UUID party,Collection<UUID> participants,long started,String dungeon){
+        jdbc.update("INSERT INTO dungeon_runs(id,instance_id,dungeon_id,party_id,server_node,status,started_at) VALUES (?,?,?,?,?,'ACTIVE',?)",run,instance,dungeon,party,node,new Timestamp(started));
         for(UUID id:participants)jdbc.update("INSERT INTO dungeon_run_participants(run_id,character_id) VALUES (?,?)",run,id);
     }
     @Override @Transactional public boolean completeDungeon(UUID run,Map<UUID,ProgressStore.Save> snapshots,String rewards){

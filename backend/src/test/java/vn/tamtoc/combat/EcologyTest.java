@@ -12,15 +12,15 @@ class EcologyTest {
     @BeforeEach void setup()throws Exception{maps=new MapCatalog(json);catalog=new CombatCatalog(json);}
     PlayerState player(String map,double x){var p=new PlayerState(new GameCharacter(UUID.randomUUID(),"EcologyTester",Race.HUMAN));p.mapId=map;p.x=x;p.y=540;return p;}
     @Test void dataGroupsHaveBoundedUniqueSlotsAndStableRespawnIdentity(){
-        var population=new MonsterPopulation(maps,catalog);int expected=maps.all().stream().flatMap(m->m.monsterSpawnGroups().stream()).mapToInt(MapCatalog.SpawnGroup::maxAlive).sum();assertEquals(expected,population.all().size());assertEquals(expected,population.all().stream().map(m->m.id).distinct().count());
+        var population=new MonsterPopulation(maps,catalog);int expected=maps.all().stream().filter(m->!Set.of("DUNGEON","ARENA").contains(m.mapType())).flatMap(m->m.monsterSpawnGroups().stream()).filter(MapCatalog.SpawnGroup::enabled).mapToInt(MapCatalog.SpawnGroup::maxAlive).sum();assertEquals(expected,population.all().size());assertEquals(expected,population.all().stream().map(m->m.id).distinct().count());
         var m=population.all().get(0);UUID id=m.id;var defeats=new MonsterDefeats();m.hp=0;m.state=MonsterState.Ai.DEAD;m.respawnAt=2000;assertTrue(defeats.once(m,1000).isPresent());assertTrue(defeats.once(m,1001).isEmpty());ai.step(m,List.of(),maps.get(m.mapId),.05,1999,(t,p)->{});assertEquals(0,m.hp);ai.step(m,List.of(),maps.get(m.mapId),.05,2000,(t,p)->{});assertEquals(id,m.id);assertEquals(m.definition.hp(),m.hp);assertFalse(m.rewardProcessed);m.hp=0;assertEquals(2,defeats.once(m,3000).orElseThrow().ordinal());
     }
     @Test void threatKeepsTargetUntilHoldExpiresAndHigherThreatWins(){
-        var m=new MonsterState(catalog.monsters.get("WOLF"),"thanh-van",800,540);var a=player(m.mapId,835);var b=player(m.mapId,830);m.threat.put(a.id,50d);m.threat.put(b.id,1d);
+        var m=new MonsterState(catalog.monsters.get("WOLF"),"thanh-van-ngoai-son",800,540);var a=player(m.mapId,835);var b=player(m.mapId,830);m.threat.put(a.id,50d);m.threat.put(b.id,1d);
         ai.step(m,List.of(a,b),maps.get(m.mapId),.05,1000,(t,p)->{});assertEquals(a.id,m.targetId);m.threat.put(b.id,300d);m.nextThinkAt=0;ai.step(m,List.of(a,b),maps.get(m.mapId),.05,1100,(t,p)->{});assertEquals(a.id,m.targetId);ai.step(m,List.of(a,b),maps.get(m.mapId),.05,2700,(t,p)->{});assertEquals(b.id,m.targetId);
     }
     @Test void leashTimeoutReturnsAndFullyResetsInsteadOfChasingForever(){
-        var map=maps.get("thanh-van");var m=new MonsterState(catalog.monsters.get("WOLF"),map.id(),800,540);var p=player(map.id(),900);m.hp=20;m.contributions.put(p.id,60);m.threat.put(p.id,60d);
+        var map=maps.get("thanh-van-ngoai-son");var m=new MonsterState(catalog.monsters.get("WOLF"),map.id(),800,540);var p=player(map.id(),900);m.hp=20;m.contributions.put(p.id,60);m.threat.put(p.id,60d);
         ai.step(m,List.of(p),map,.05,1000,(t,v)->{});m.x=880;p.x=1000;ai.step(m,List.of(p),map,.05,1200,(t,v)->{});ai.step(m,List.of(p),map,.05,17000,(t,v)->{});assertEquals(MonsterState.Ai.RETURN,m.state);for(int i=1;i<=100;i++)ai.step(m,List.of(),map,.05,17000+i*50,(t,v)->{});assertEquals(m.definition.hp(),m.hp);assertTrue(m.contributions.isEmpty());assertTrue(m.threat.isEmpty());assertNull(m.targetId);assertTrue(Math.abs(m.x-m.spawnX)<=85);
     }
     @Test void perceptionAndMovementCannotCrossSolidWallOrAttackSafeZone(){

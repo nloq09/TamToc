@@ -21,7 +21,8 @@ try{
  const jump=setInterval(()=>b.input(1,true),50);try{await until(()=>b.self().x>1525,4000);}finally{clearInterval(jump);b.input(0,false);}
  await b.move(1970);await b.wait('CHECKPOINT_REACHED',p=>p.spawnId==='camp');
  await b.move(3030);b.send('USE_PORTAL',{portalId:'ngoai-son-to-center'});assert.equal((await b.wait('PORTAL_REJECTED')).payload.code,'PORTAL_LEVEL_REQUIRED');
+ const lastCheckpoint=field.safeZones.filter(z=>z.spawnId&&b.self().x>=z.bounds.x&&b.self().x<=z.bounds.x+z.bounds.width).at(-1)?.spawnId||'camp';
  const ids=b.snapshot.monsters.map(m=>m.id).sort();b.close(false);await sleep(5000);await b.open();assert.equal(b.auth.resumed,true);assert.equal(b.snapshot.mapId,'thanh-van-ngoai-son');assert.deepEqual(b.snapshot.monsters.map(m=>m.id).sort(),ids);assert.equal(b.snapshot.players.filter(p=>p.id===b.id).length,1);
- b.close();await sleep(350);await b.open();assert.equal(b.auth.resumed,false);assert.equal(b.snapshot.mapId,'thanh-van-ngoai-son');assert.ok(Math.abs(b.self().x-1970)<20);
+ b.close();await sleep(350);await b.open();assert.equal(b.auth.resumed,false);assert.equal(b.snapshot.mapId,'thanh-van-ngoai-son');assert.ok(Math.abs(b.self().x-field.spawnPoints.find(s=>s.id===lastCheckpoint).x)<20);
  console.log('PASS walking/dash stop at solid wall, server jump clears it, persisted checkpoint, level gate, five-second field resume and safe fallback at checkpoint');
 }catch(e){console.error(clients.map(c=>({name:c.character.name,map:c.snapshot?.mapId,self:c.self(),errors:c.events.filter(e=>e.type.endsWith('ERROR')).slice(-3)})));throw e;}finally{timers.forEach(clearInterval);clients.forEach(c=>c.close());}

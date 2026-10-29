@@ -11,7 +11,7 @@ class CombatTest {
     CombatCatalog catalog; CombatEngine engine; PlayerState p; MapCatalog.MapDefinition map;
     @BeforeEach void setup() throws Exception {
         catalog=new CombatCatalog(new ObjectMapper());engine=new CombatEngine(catalog);
-        p=new PlayerState(new GameCharacter(UUID.randomUUID(),"Tester",Race.HUMAN));p.x=800;p.y=540;
+        p=new PlayerState(new GameCharacter(UUID.randomUUID(),"Tester",Race.HUMAN));p.mapId="thanh-van-ngoai-son";p.x=800;p.y=540;
         map=new MapCatalog(new ObjectMapper()).get(p.mapId);
     }
     @Test void rejectsLockedSkillAndWrongRaceWithoutSpendingMana(){
@@ -42,4 +42,5 @@ class CombatTest {
         m.hp=0;m.respawnAt=2000;new MonsterAi().step(m,List.of(p),.05,2001,(t,e)->{});
         assertEquals(1800,m.hp);assertEquals(1,m.phase);
     }
+    @Test void playerCannotFarmFromProtectedCampWithoutTakingDamage()throws Exception{p.x=350;int mp=p.progress.mp;assertThrows(vn.tamtoc.realtime.ProtocolException.class,()->engine.cast(p,"QI",map,List.of(),1000,(t,e)->{},(a,b)->{}));assertEquals(mp,p.progress.mp);engine.cast(p,"HUMAN_POWER",map,List.of(),1000,(t,e)->{},(a,b)->{});}
 }

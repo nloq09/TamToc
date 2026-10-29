@@ -21,6 +21,7 @@ public class CombatEngine {
         var skill=catalog.skills.get(id);
         if(skill==null||!CombatCatalog.unlocked(p,skill))throw new ProtocolException("SKILL_LOCKED","Kỹ năng chưa mở khóa.");
         if(p.progress.hp<=0)throw new ProtocolException("PLAYER_DEAD","Nhân vật đang chờ hồi sinh.");
+        if(p.aiStats==null&&map.safe(p.x,p.y)&&Set.of("DAMAGE","SLOW").contains(skill.effectType()))throw new ProtocolException("SAFE_ZONE_COMBAT","Hãy rời vùng an toàn trước khi tấn công.");
         if(p.cooldowns.getOrDefault(id,0L)>now)throw new ProtocolException("SKILL_COOLDOWN","Kỹ năng đang hồi chiêu.");
         if(p.progress.mp<skill.mpCost())throw new ProtocolException("INSUFFICIENT_MP","Không đủ MP.");
         p.progress.mp-=skill.mpCost();p.cooldowns.put(id,now+skill.cooldown());p.lastActiveAt=now;

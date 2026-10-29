@@ -4,6 +4,9 @@ import java.util.*;
 
 /** Durable per-character aggregate. Client requests never bind to this type. */
 public class ProgressData {
+    public Set<String> discoveredMaps=new HashSet<>(),discoveredMonsters=new HashSet<>();
+    public Map<String,Integer> questObjectives=new HashMap<>();
+    public Map<String,Long> nextDungeonAt=new HashMap<>();
     public java.util.Map<String,String> checkpoints=new java.util.HashMap<>();
     public java.util.Map<String,Integer> mapVersions=new java.util.HashMap<>();
     public java.util.Map<String,Integer> killsByDefinition=new java.util.HashMap<>();

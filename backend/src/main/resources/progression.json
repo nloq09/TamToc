@@ -190,7 +190,7 @@
     {
       "id": "RUINS_KING",
       "name": "Huyền Mộc xâm lấn",
-      "description": "Hạ Huyền Mộc Yêu Vương tại Thiên Môn Di Tích.",
+      "description": "Hạ Huyền Mộc Yêu Vương trong Huyền Mộc Bí Cảnh. Giữ thưởng/tiến trình cũ.",
       "requiredLevel": 10,
       "type": "KILL",
       "target": "BOSS",
@@ -198,7 +198,1116 @@
       "exp": 900,
       "cultivation": 300,
       "stones": 200,
-      "mapId": "thien-mon-di-tich"
+      "mapId": "huyen-moc-party"
+    },
+    {
+      "id": "guide_thanh_van_thanh",
+      "name": "Khám phá Thanh Vân Thành",
+      "description": "Hoàn thành mục tiêu tại Thanh Vân Thành.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "thanh-van",
+      "requiredRace": "HUMAN",
+      "prerequisiteQuestIds": [],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "thanh-van",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "guide_u_minh_thanh",
+      "name": "Khám phá U Minh Thành",
+      "description": "Hoàn thành mục tiêu tại U Minh Thành.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "u-minh",
+      "requiredRace": "DEMON",
+      "prerequisiteQuestIds": [],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "u-minh",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "guide_van_yeu_lam",
+      "name": "Khám phá Vạn Yêu Lâm",
+      "description": "Hoàn thành mục tiêu tại Vạn Yêu Lâm.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "van-yeu",
+      "requiredRace": "BEAST",
+      "prerequisiteQuestIds": [],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "van-yeu",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "explore_thanh_van_ngoai_son",
+      "name": "Dấu tích tại Thanh Vân Ngoại Sơn",
+      "description": "Hoàn thành mục tiêu tại Thanh Vân Ngoại Sơn.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "thanh-van-ngoai-son",
+      "requiredRace": "HUMAN",
+      "prerequisiteQuestIds": [
+        "guide_thanh_van_thanh"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "thanh-van-ngoai-son",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_thanh_van_ngoai_son",
+      "name": "Trấn áp Sơn Thỏ tại Thanh Vân Ngoại Sơn",
+      "description": "Hoàn thành mục tiêu tại Thanh Vân Ngoại Sơn.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "thanh-van-ngoai-son",
+      "requiredRace": "HUMAN",
+      "prerequisiteQuestIds": [
+        "explore_thanh_van_ngoai_son"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "thanh-van-ngoai-son",
+          "monsterId": "son_tho",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "explore_truc_anh_lam",
+      "name": "Dấu tích tại Trúc Ảnh Lâm",
+      "description": "Hoàn thành mục tiêu tại Trúc Ảnh Lâm.",
+      "requiredLevel": 4,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 480,
+      "cultivation": 140,
+      "stones": 60,
+      "mapId": "truc_anh_lam",
+      "requiredRace": "HUMAN",
+      "prerequisiteQuestIds": [
+        "hunt_thanh_van_ngoai_son",
+        "WOLVES"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "truc_anh_lam",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_truc_anh_lam",
+      "name": "Trấn áp Trúc Tinh tại Trúc Ảnh Lâm",
+      "description": "Hoàn thành mục tiêu tại Trúc Ảnh Lâm.",
+      "requiredLevel": 4,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 480,
+      "cultivation": 140,
+      "stones": 60,
+      "mapId": "truc_anh_lam",
+      "requiredRace": "HUMAN",
+      "prerequisiteQuestIds": [
+        "explore_truc_anh_lam"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "truc_anh_lam",
+          "monsterId": "truc_tinh",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "explore_huyet_vu_coc",
+      "name": "Dấu tích tại Huyết Vụ Cốc",
+      "description": "Hoàn thành mục tiêu tại Huyết Vụ Cốc.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "huyet-vu-coc",
+      "requiredRace": "DEMON",
+      "prerequisiteQuestIds": [
+        "guide_u_minh_thanh"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "huyet-vu-coc",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_huyet_vu_coc",
+      "name": "Trấn áp Ma Trùng tại Huyết Vụ Cốc",
+      "description": "Hoàn thành mục tiêu tại Huyết Vụ Cốc.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "huyet-vu-coc",
+      "requiredRace": "DEMON",
+      "prerequisiteQuestIds": [
+        "explore_huyet_vu_coc"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "huyet-vu-coc",
+          "monsterId": "ma_trung",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "explore_u_minh_ngoai_dao",
+      "name": "Dấu tích tại U Minh Ngoại Đạo",
+      "description": "Hoàn thành mục tiêu tại U Minh Ngoại Đạo.",
+      "requiredLevel": 4,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 480,
+      "cultivation": 140,
+      "stones": 60,
+      "mapId": "u_minh_ngoai_dao",
+      "requiredRace": "DEMON",
+      "prerequisiteQuestIds": [
+        "hunt_huyet_vu_coc",
+        "WOLVES"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "u_minh_ngoai_dao",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_u_minh_ngoai_dao",
+      "name": "Trấn áp Dạ Bức tại U Minh Ngoại Đạo",
+      "description": "Hoàn thành mục tiêu tại U Minh Ngoại Đạo.",
+      "requiredLevel": 4,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 480,
+      "cultivation": 140,
+      "stones": 60,
+      "mapId": "u_minh_ngoai_dao",
+      "requiredRace": "DEMON",
+      "prerequisiteQuestIds": [
+        "explore_u_minh_ngoai_dao"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "u_minh_ngoai_dao",
+          "monsterId": "da_buc",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "explore_linh_thu_son_lo",
+      "name": "Dấu tích tại Linh Thú Sơn Lộ",
+      "description": "Hoàn thành mục tiêu tại Linh Thú Sơn Lộ.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "linh-thu-son-lo",
+      "requiredRace": "BEAST",
+      "prerequisiteQuestIds": [
+        "guide_van_yeu_lam"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "linh-thu-son-lo",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_linh_thu_son_lo",
+      "name": "Trấn áp Mộc Linh tại Linh Thú Sơn Lộ",
+      "description": "Hoàn thành mục tiêu tại Linh Thú Sơn Lộ.",
+      "requiredLevel": 1,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 120,
+      "cultivation": 35,
+      "stones": 15,
+      "mapId": "linh-thu-son-lo",
+      "requiredRace": "BEAST",
+      "prerequisiteQuestIds": [
+        "explore_linh_thu_son_lo"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "linh-thu-son-lo",
+          "monsterId": "moc_linh",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "explore_thanh_khau_truc_lam",
+      "name": "Dấu tích tại Thanh Khâu Trúc Lâm",
+      "description": "Hoàn thành mục tiêu tại Thanh Khâu Trúc Lâm.",
+      "requiredLevel": 4,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 480,
+      "cultivation": 140,
+      "stones": 60,
+      "mapId": "thanh_khau_truc_lam",
+      "requiredRace": "BEAST",
+      "prerequisiteQuestIds": [
+        "hunt_linh_thu_son_lo",
+        "WOLVES"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "thanh_khau_truc_lam",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_thanh_khau_truc_lam",
+      "name": "Trấn áp Trúc Hồ tại Thanh Khâu Trúc Lâm",
+      "description": "Hoàn thành mục tiêu tại Thanh Khâu Trúc Lâm.",
+      "requiredLevel": 4,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 480,
+      "cultivation": 140,
+      "stones": 60,
+      "mapId": "thanh_khau_truc_lam",
+      "requiredRace": "BEAST",
+      "prerequisiteQuestIds": [
+        "explore_thanh_khau_truc_lam"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "thanh_khau_truc_lam",
+          "monsterId": "truc_ho",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "guide_trung_chau",
+      "name": "Khám phá Trung Châu",
+      "description": "Hoàn thành mục tiêu tại Trung Châu.",
+      "requiredLevel": 10,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1200,
+      "cultivation": 350,
+      "stones": 150,
+      "mapId": "trung-chau",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_tam_gioi_bien_canh"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": "PATH",
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "trung-chau",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "explore_tam_gioi_bien_canh",
+      "name": "Dấu tích tại Tam Giới Biên Cảnh",
+      "description": "Hoàn thành mục tiêu tại Tam Giới Biên Cảnh.",
+      "requiredLevel": 6,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 720,
+      "cultivation": 210,
+      "stones": 90,
+      "mapId": "tam-gioi-bien-canh",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [],
+      "anyPrerequisiteQuestIds": [
+        "bounty_truc_anh_lam_boss_elite",
+        "bounty_u_minh_ngoai_dao_boss_elite",
+        "bounty_thanh_khau_truc_lam_boss_elite"
+      ],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "tam-gioi-bien-canh",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "explore_vo_chu_hoang_nguyen",
+      "name": "Dấu tích tại Vô Chủ Hoang Nguyên",
+      "description": "Hoàn thành mục tiêu tại Vô Chủ Hoang Nguyên.",
+      "requiredLevel": 8,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 960,
+      "cultivation": 280,
+      "stones": 120,
+      "mapId": "vo_chu_hoang_nguyen",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "guide_trung_chau"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "vo_chu_hoang_nguyen",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_vo_chu_hoang_nguyen",
+      "name": "Trấn áp Hoang Nguyên Lang tại Vô Chủ Hoang Nguyên",
+      "description": "Hoàn thành mục tiêu tại Vô Chủ Hoang Nguyên.",
+      "requiredLevel": 8,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 960,
+      "cultivation": 280,
+      "stones": 120,
+      "mapId": "vo_chu_hoang_nguyen",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_vo_chu_hoang_nguyen"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "vo_chu_hoang_nguyen",
+          "monsterId": "hoang_nguyen_lang",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "explore_thien_mon_di_tich",
+      "name": "Dấu tích tại Thiên Môn Di Tích",
+      "description": "Hoàn thành mục tiêu tại Thiên Môn Di Tích.",
+      "requiredLevel": 15,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1800,
+      "cultivation": 525,
+      "stones": 225,
+      "mapId": "thien-mon-di-tich",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "hunt_vo_chu_hoang_nguyen"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "thien-mon-di-tich",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "hunt_thien_mon_di_tich",
+      "name": "Trấn áp Di Tích Oán Linh tại Thiên Môn Di Tích",
+      "description": "Hoàn thành mục tiêu tại Thiên Môn Di Tích.",
+      "requiredLevel": 15,
+      "type": "STORY",
+      "target": "",
+      "count": 5,
+      "exp": 1800,
+      "cultivation": 525,
+      "stones": 225,
+      "mapId": "thien-mon-di-tich",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_thien_mon_di_tich"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "MAIN_STORY",
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "mapId": "thien-mon-di-tich",
+          "monsterId": "di_tich_oan_linh",
+          "placementId": null,
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "explore_huyen_moc_bi_canh",
+      "name": "Dấu tích tại Huyền Mộc Bí Cảnh",
+      "description": "Hoàn thành mục tiêu tại Huyền Mộc Bí Cảnh.",
+      "requiredLevel": 10,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1200,
+      "cultivation": 350,
+      "stones": 150,
+      "mapId": "huyen-moc-party",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_vo_chu_hoang_nguyen"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "DUNGEON",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "huyen-moc-party",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "clear_wave_huyen_moc_bi_canh",
+      "name": "Vượt vòng quái tại Huyền Mộc Bí Cảnh",
+      "description": "Hoàn thành mục tiêu tại Huyền Mộc Bí Cảnh.",
+      "requiredLevel": 10,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1200,
+      "cultivation": 350,
+      "stones": 150,
+      "mapId": "huyen-moc-party",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_huyen_moc_bi_canh"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "DUNGEON",
+      "objectives": [
+        {
+          "type": "CLEAR_DUNGEON_WAVE",
+          "mapId": "huyen-moc-party",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "explore_cuu_u_thach_phu",
+      "name": "Dấu tích tại Cửu U Thạch Phủ",
+      "description": "Hoàn thành mục tiêu tại Cửu U Thạch Phủ.",
+      "requiredLevel": 18,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 2160,
+      "cultivation": 630,
+      "stones": 270,
+      "mapId": "cuu_u_thach_phu",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_thien_mon_di_tich"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "DUNGEON",
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "mapId": "cuu_u_thach_phu",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "clear_wave_cuu_u_thach_phu",
+      "name": "Vượt vòng quái tại Cửu U Thạch Phủ",
+      "description": "Hoàn thành mục tiêu tại Cửu U Thạch Phủ.",
+      "requiredLevel": 18,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 2160,
+      "cultivation": 630,
+      "stones": 270,
+      "mapId": "cuu_u_thach_phu",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_cuu_u_thach_phu"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "DUNGEON",
+      "objectives": [
+        {
+          "type": "CLEAR_DUNGEON_WAVE",
+          "mapId": "cuu_u_thach_phu",
+          "monsterId": null,
+          "placementId": null,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_thanh_van_ngoai_son_boss_elite",
+      "name": "Thảo phạt Sơn Lang Tinh",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 3,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 360,
+      "cultivation": 105,
+      "stones": 45,
+      "mapId": "thanh-van-ngoai-son",
+      "requiredRace": "HUMAN",
+      "prerequisiteQuestIds": [
+        "hunt_thanh_van_ngoai_son"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "thanh-van-ngoai-son",
+          "monsterId": "son_lang_tinh",
+          "placementId": "thanh_van_ngoai_son_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_truc_anh_lam_boss_elite",
+      "name": "Thảo phạt Trúc Linh Hộ Vệ",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 5,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 600,
+      "cultivation": 175,
+      "stones": 75,
+      "mapId": "truc_anh_lam",
+      "requiredRace": "HUMAN",
+      "prerequisiteQuestIds": [
+        "hunt_truc_anh_lam"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "truc_anh_lam",
+          "monsterId": "truc_linh_ho_ve",
+          "placementId": "truc_anh_lam_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_huyet_vu_coc_boss_elite",
+      "name": "Thảo phạt Huyết Ảnh",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 3,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 360,
+      "cultivation": 105,
+      "stones": 45,
+      "mapId": "huyet-vu-coc",
+      "requiredRace": "DEMON",
+      "prerequisiteQuestIds": [
+        "hunt_huyet_vu_coc"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "huyet-vu-coc",
+          "monsterId": "huyet_anh",
+          "placementId": "huyet_vu_coc_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_u_minh_ngoai_dao_boss_elite",
+      "name": "Thảo phạt Hắc Ảnh Trinh Sát",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 5,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 600,
+      "cultivation": 175,
+      "stones": 75,
+      "mapId": "u_minh_ngoai_dao",
+      "requiredRace": "DEMON",
+      "prerequisiteQuestIds": [
+        "hunt_u_minh_ngoai_dao"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "u_minh_ngoai_dao",
+          "monsterId": "hac_anh_trinh_sat",
+          "placementId": "u_minh_ngoai_dao_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_linh_thu_son_lo_boss_elite",
+      "name": "Thảo phạt Cổ Mộc Tinh",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 3,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 360,
+      "cultivation": 105,
+      "stones": 45,
+      "mapId": "linh-thu-son-lo",
+      "requiredRace": "BEAST",
+      "prerequisiteQuestIds": [
+        "hunt_linh_thu_son_lo"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "linh-thu-son-lo",
+          "monsterId": "co_moc_tinh",
+          "placementId": "linh_thu_son_lo_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_thanh_khau_truc_lam_boss_elite",
+      "name": "Thảo phạt Thanh Khâu Hộ Linh",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 5,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 600,
+      "cultivation": 175,
+      "stones": 75,
+      "mapId": "thanh_khau_truc_lam",
+      "requiredRace": "BEAST",
+      "prerequisiteQuestIds": [
+        "hunt_thanh_khau_truc_lam"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "thanh_khau_truc_lam",
+          "monsterId": "thanh_khau_ho_linh",
+          "placementId": "thanh_khau_truc_lam_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_tam_gioi_bien_canh_boss_elite",
+      "name": "Thảo phạt Biên Cảnh Loạn Thú",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 10,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1200,
+      "cultivation": 350,
+      "stones": 150,
+      "mapId": "tam-gioi-bien-canh",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_tam_gioi_bien_canh"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "tam-gioi-bien-canh",
+          "monsterId": "bien_canh_loan_thu",
+          "placementId": "tam_gioi_bien_canh_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_vo_chu_hoang_nguyen_boss_elite",
+      "name": "Thảo phạt Hoang Nguyên Thủ Lĩnh",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 13,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1560,
+      "cultivation": 455,
+      "stones": 195,
+      "mapId": "vo_chu_hoang_nguyen",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "hunt_vo_chu_hoang_nguyen"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "vo_chu_hoang_nguyen",
+          "monsterId": "hoang_nguyen_thu_linh",
+          "placementId": "vo_chu_hoang_nguyen_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_vo_chu_hoang_nguyen_boss_world_boss",
+      "name": "Thảo phạt Hoang Nguyên Cự Thú",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 13,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1560,
+      "cultivation": 455,
+      "stones": 195,
+      "mapId": "vo_chu_hoang_nguyen",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "hunt_vo_chu_hoang_nguyen"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "vo_chu_hoang_nguyen",
+          "monsterId": "hoang_nguyen_cu_thu",
+          "placementId": "vo_chu_hoang_nguyen_boss_world_boss",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_thien_mon_di_tich_boss_elite",
+      "name": "Thảo phạt Thiên Môn Trấn Linh",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 20,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 2400,
+      "cultivation": 700,
+      "stones": 300,
+      "mapId": "thien-mon-di-tich",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "hunt_thien_mon_di_tich"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "thien-mon-di-tich",
+          "monsterId": "thien_mon_tran_linh",
+          "placementId": "thien_mon_di_tich_boss_elite",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_huyen_moc_bi_canh_boss_dungeon_boss",
+      "name": "Thảo phạt Huyền Mộc Yêu Vương",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 13,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 1560,
+      "cultivation": 455,
+      "stones": 195,
+      "mapId": "huyen-moc-party",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_huyen_moc_bi_canh"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "huyen-moc-party",
+          "monsterId": "huyen_moc_yeu_vuong",
+          "placementId": "huyen_moc_bi_canh_boss_dungeon_boss",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "bounty_cuu_u_thach_phu_boss_dungeon_boss",
+      "name": "Thảo phạt Cửu U Thạch Quân",
+      "description": "Thảo phạt đúng vị trí boss; thưởng một lần.",
+      "requiredLevel": 23,
+      "type": "STORY",
+      "target": "",
+      "count": 1,
+      "exp": 2760,
+      "cultivation": 805,
+      "stones": 345,
+      "mapId": "cuu_u_thach_phu",
+      "requiredRace": null,
+      "prerequisiteQuestIds": [
+        "explore_cuu_u_thach_phu"
+      ],
+      "anyPrerequisiteQuestIds": [],
+      "followUpQuestId": null,
+      "enabled": true,
+      "category": "BOSS",
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "mapId": "cuu_u_thach_phu",
+          "monsterId": "cuu_u_thach_quan",
+          "placementId": "cuu_u_thach_phu_boss_dungeon_boss",
+          "count": 1
+        }
+      ]
     }
   ],
   "items": [

@@ -1,5 +1,14 @@
 # Changelog
 
+## World Progression 15 maps — 29/10/2026
+
+- Catalog `world_catalog_15_v1` có 15 canonical map IDs và alias tương thích save cũ; 57 planned map giữ PLANNED_DISABLED. Bốn thành hoàn toàn an toàn; thêm ba mid field, Hoang Nguyên và Cửu U bằng geometry Phase 7 đã được cho phép.
+- 34 species, 31 normal groups, 12 boss placements; slot có biến thể level, zone/maxAlive/respawn và enabled được validate. Chỉ map có người/lease grace mô phỏng AI; AOI/delta và server-authoritative combat giữ nguyên.
+- 46 quest definitions với race/level/prerequisite/follow-up, objective theo map/species/group/placement/wave; khám phá lưu qua relogin. Giữ WOLVES/PATH/khảo hạch chín thế lực, chống claim trùng, khóa tăng cấp mới trên 25.
+- Hai dungeon data-driven: Huyền Mộc 10+, Cửu U 18+, wave/boss phase và unique reward ledger; Cửu U cooldown 15 phút lưu bền vững. World Boss dùng clock/scheduler và V4 unique cycle ledger, không sinh lại cùng cycle sau restart.
+- Sổ tay Map/Quái/Boss, gợi ý quest, trạng thái đã gặp/đã đến, selector dungeon và inspector local/admin chỉ đọc. API metadata loại route debug; metrics có p50/p95/p99 theo khoảng tick.
+- Java 21 Docker 75 unit tests, transport 7 tests, build frontend và các kịch bản thật routes/dungeon/discovery/save archived đạt. Báo cáo tải và phạm vi kiểm chứng: `docs/WORLD15_PERFORMANCE.md`; giới hạn/live World Boss và hướng dẫn rollback: `docs/WORLD15_IMPLEMENTATION.md`.
+
 ## Phase 7 — 28/10/2026
 
 - Map data có geometry/collision, cổng có điều kiện/spawn, safe zone/checkpoint, nav graph và startup validation; sửa save không hợp lệ khi vào lại. Thêm ba field theo tộc, Biên Cảnh và Di Tích; giữ map/cổng/bãi luyện cũ.

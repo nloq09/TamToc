@@ -14,13 +14,15 @@ public class CombatCatalog {
     public record Ability(String id,long cooldownMs,long telegraphMs,double radius,int bonusDamage) {}
     public record BossPhase(int phase,double hpBelow,double speedMultiplier,double damageMultiplier,long attackCooldownMs,List<Ability> abilities) {public BossPhase{abilities=abilities==null?List.of():List.copyOf(abilities);}}
     public record Drop(String itemId,double chance,int minQuantity,int maxQuantity) {}
-    public record MonsterDefinition(String id,String name,int level,int hp,int atk,int def,int speed,int detection,int range,long respawnMs,int exp,int cultivation,String tier,Behavior behavior,List<BossPhase> phases,List<Drop> dropTable) {
+    public record MonsterDefinition(String id,String name,int level,int hp,int atk,int def,int speed,int detection,int range,long respawnMs,int exp,int cultivation,String tier,Behavior behavior,List<BossPhase> phases,List<Drop> dropTable,String speciesId) {
         public MonsterDefinition {
             tier=tier==null?"NORMAL":tier;
+            speciesId=speciesId==null?id:speciesId;
             behavior=behavior==null?new Behavior(430,15000,200,1500,150,1200,.35,false,570,240,16,35):behavior;
             phases=phases==null?List.of(new BossPhase(1,1,1,1,behavior.attackCooldownMs,List.of())):List.copyOf(phases);dropTable=dropTable==null?List.of():List.copyOf(dropTable);
         }
-        public MonsterDefinition(String id,String name,int level,int hp,int atk,int def,int speed,int detection,int range,long respawnMs,int exp,int cultivation){this(id,name,level,hp,atk,def,speed,detection,range,respawnMs,exp,cultivation,"NORMAL",null,null,null);}
+        public MonsterDefinition(String id,String name,int level,int hp,int atk,int def,int speed,int detection,int range,long respawnMs,int exp,int cultivation){this(id,name,level,hp,atk,def,speed,detection,range,respawnMs,exp,cultivation,"NORMAL",null,null,null,null);}
+        public MonsterDefinition(String id,String name,int level,int hp,int atk,int def,int speed,int detection,int range,long respawnMs,int exp,int cultivation,String tier,Behavior behavior,List<BossPhase> phases,List<Drop> dropTable){this(id,name,level,hp,atk,def,speed,detection,range,respawnMs,exp,cultivation,tier,behavior,phases,dropTable,null);}
     }
     public record Data(List<SkillDefinition> skills,List<MonsterDefinition> monsters) {}
     public final Map<String,SkillDefinition> skills=new LinkedHashMap<>();

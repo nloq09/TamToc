@@ -26,7 +26,7 @@ try{
   leader.send('DUNGEON_READY_SET',{ready:true});member.send('DUNGEON_READY_SET',{ready:true});await leader.wait('DUNGEON_LIST',p=>p.ready.includes(leader.id)&&p.ready.includes(member.id));
   const request=leader.command('DUNGEON_START_REQUEST',{dungeonId:'HUYEN_MOC'});await leader.ack(request);const run=(await leader.wait('DUNGEON_INSTANCE_CREATED')).payload;runs.push(run);
   leader.command('DUNGEON_START_REQUEST',{dungeonId:'HUYEN_MOC'},request);assert.equal((await leader.ack(request)).replayed,true);
-  await until(()=>leader.snapshot.instanceId===run.instanceId&&member.snapshot.instanceId===run.instanceId&&leader.snapshot.monsters.length===3);
+  await until(()=>leader.snapshot.instanceId===run.instanceId&&member.snapshot.instanceId===run.instanceId&&leader.snapshot.monsters.length===4);
  }
  assert.notEqual(runs[0].instanceId,runs[1].instanceId);assert.ok(a.snapshot.monsters.every(m=>!c.snapshot.monsters.some(n=>n.id===m.id)));
  outsider.command('PARTY_ACCEPT',{invitationId:lateInvite.id});assert.equal((await outsider.wait('PARTY_ERROR')).payload.code,'PARTY_BUSY');assert.equal(outsider.snapshot.instanceId,null);

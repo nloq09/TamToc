@@ -1,4 +1,5 @@
 import {npcMarkup,bindNpcPanel,requestNpcs} from './npc-ui';
+import {loadWorldJournal,bindWorldJournal} from './world-journal-ui';
 import {duelMarkup,bindDuelPanel,requestDuel} from './duel-ui';
 import { api } from './api';
 import {races,type Character,type MapDefinition,type Skill} from './types';
@@ -6,7 +7,7 @@ import {partyMarkup,bindPartyPanel,requestParty} from './social-ui';
 import {dungeonMarkup,bindDungeonPanel,requestDungeon} from './activity-ui';
 const esc=(s:unknown)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
 const slots:Record<string,string>={WEAPON:'Vũ khí',ARMOR:'Áo',LEGS:'Quần',FEET:'Giày',ARTIFACT:'Pháp bảo',ACCESSORY:'Phụ kiện'};
-const status:Record<string,string>={AVAILABLE:'Chưa nhận',ACTIVE:'Đang thực hiện',CLAIMED:'Đã lĩnh thưởng'};
+const status:Record<string,string>={AVAILABLE:'Chưa nhận',ACTIVE:'Đang thực hiện',CLAIMED:'Đã lĩnh thưởng',LOCKED:'Chưa mở khóa'};
 let worldMap:MapDefinition|null=null;
 let renderVersion=0;
 export function setPanelMap(map:MapDefinition){worldMap=map;}
@@ -22,7 +23,7 @@ export async function openProgression(kind:string,c:Character){
  const button=(key:string,label:string,url:string,body:unknown={},disabled=false)=>{actions[key]={url,body};return `<button data-action="${key}" ${disabled?'disabled':''}>${label}</button>`;};
  if(kind==='quests'){
   const quests=await api<any[]>(path+'/quests');
-  content=`<div class="eyebrow">NHẬN TẠI TIẾP DẪN SỨ${worldMap?.npcSpawns.find(n=>n.type==='GUIDE')?' · X = '+worldMap.npcSpawns.find(n=>n.type==='GUIDE')!.x:''}</div><h2>Nhiệm vụ</h2><div class="dialog-list">${quests.map(q=>`<section class="dialog-row"><h3>${esc(q.definition.name)}</h3><p>${esc(q.definition.description)}</p><p>Cấp ${q.requiredLevel} · ${status[q.status]} · ${q.progress}/${q.definition.count}</p><p>Thưởng: ${q.definition.exp} EXP · ${q.definition.cultivation} tu vi · ${q.definition.stones} linh thạch</p>${q.status==='AVAILABLE'?button(q.definition.id,'Nhận nhiệm vụ',path+'/quests/'+q.definition.id+'/accept',{},c.level<q.requiredLevel):q.status==='ACTIVE'?button(q.definition.id,'Lĩnh thưởng',path+'/quests/'+q.definition.id+'/claim',{},q.progress<q.definition.count):'<strong>Đã hoàn thành</strong>'}</section>`).join('')}</div>`;
+  content=`<div class="eyebrow">NHẬN TẠI TIẾP DẪN SỨ${worldMap?.npcSpawns.find(n=>n.type==='GUIDE')?' · X = '+worldMap.npcSpawns.find(n=>n.type==='GUIDE')!.x:''}</div><h2>Nhiệm vụ</h2><div class="dialog-list">${quests.map(q=>`<section class="dialog-row"><h3>${esc(q.definition.name)}</h3><p>${esc(q.definition.description)}</p><p>Cấp ${q.requiredLevel} · ${status[q.status]} · ${q.progress}/${q.definition.count}</p><p>${esc(q.lockedReason||'')}</p><p>Thưởng: ${q.definition.exp} EXP · ${q.definition.cultivation} tu vi · ${q.definition.stones} linh thạch</p>${q.status==='AVAILABLE'?button(q.definition.id,'Nhận nhiệm vụ',path+'/quests/'+q.definition.id+'/accept',{},false):q.status==='ACTIVE'?button(q.definition.id,'Lĩnh thưởng',path+'/quests/'+q.definition.id+'/claim',{},q.progress<q.definition.count):q.status==='CLAIMED'?'<strong>Đã hoàn thành</strong>':'<small>Chưa mở khóa</small>'}</section>`).join('')}</div>`;
  }else if(kind==='inventory'){
   const data=await api<any>(path+'/inventory');
   const symbols:Record<string,string>={WEAPON:'⚔',ARMOR:'▣',LEGS:'Π',FEET:'⌁',ARTIFACT:'✧',ACCESSORY:'◉'};
@@ -46,7 +47,9 @@ export async function openProgression(kind:string,c:Character){
   const maps=await api<MapDefinition[]>('/world/maps');
   const names=new Map(maps.map(m=>[m.id,m.name]));
   const condition=(p:MapDefinition['portals'][number])=>`Cấp ${p.requiredLevel}${p.requiredQuest?' · nhiệm vụ '+esc(p.requiredQuest):''}${p.enabled?'':' · Đang khóa'}`;
-  content=`<div class="eyebrow">BẢN ĐỒ TAM GIỚI</div><h2>${esc(worldMap?.name||'Thế giới')}</h2><p>Cổng kiểm tra cấp và nhiệm vụ khi đi qua. Đến gần cổng và nhấn E.</p><h3>Cổng trong khu vực</h3>${worldMap?.portals.map(p=>`<div class="dialog-row"><strong>◇ ${esc(p.label)}</strong><p>Đến ${esc(names.get(p.target)||p.target)} · x = ${p.x}</p><p>${condition(p)}</p></div>`).join('')||'<p>Khu vực riêng; trở về bằng nút kết thúc hoạt động.</p>'}<h3>Các vùng trong thế giới</h3><div class="dialog-list">${maps.filter(m=>!['DUNGEON','ARENA'].includes(m.mapType)).map(m=>`<section class="dialog-row"><strong>${esc(m.name)}${m.id===worldMap?.id?' · Đang ở đây':''}</strong><p>Cấp đề xuất ${m.recommendedLevelMin}–${m.recommendedLevelMax}</p>${m.portals.map(p=>`<p>↔ ${esc(names.get(p.target)||p.target)} · ${condition(p)}</p>`).join('')}</section>`).join('')}</div>`;
+  content=`<button data-open="journal">Sổ tay Map / Quái / Boss</button><div class="eyebrow">BẢN ĐỒ TAM GIỚI</div><h2>${esc(worldMap?.name||'Thế giới')}</h2><p>Cổng kiểm tra cấp và nhiệm vụ khi đi qua. Đến gần cổng và nhấn E.</p><h3>Cổng trong khu vực</h3>${worldMap?.portals.map(p=>`<div class="dialog-row"><strong>◇ ${esc(p.label)}</strong><p>Đến ${esc(names.get(p.target)||p.target)} · x = ${p.x}</p><p>${condition(p)}</p></div>`).join('')||'<p>Khu vực riêng; trở về bằng nút kết thúc hoạt động.</p>'}<h3>Các vùng trong thế giới</h3><div class="dialog-list">${maps.filter(m=>!['DUNGEON','ARENA'].includes(m.mapType)).map(m=>`<section class="dialog-row"><strong>${esc(m.name)}${m.id===worldMap?.id?' · Đang ở đây':''}</strong><p>Cấp đề xuất ${m.recommendedLevelMin}–${m.recommendedLevelMax}</p>${m.portals.map(p=>`<p>↔ ${esc(names.get(p.target)||p.target)} · ${condition(p)}</p>`).join('')}</section>`).join('')}</div>`;
+ }else if(kind==='journal'){
+  content=await loadWorldJournal(c);
  }else if(kind==='party'){
   content=partyMarkup();
  }else if(kind==='dungeon'){
@@ -57,7 +60,7 @@ export async function openProgression(kind:string,c:Character){
   content=npcMarkup();
  }else if(kind==='functions'){
   const availability=await api<{requiredLevel:number;level:number}>(path+'/available-organizations');
-  content=`<div class="eyebrow">ĐỒNG HÀNH CÙNG ĐẠO HỮU</div><h2>Chức năng</h2><div class="function-grid"><button data-open="character">Nhân vật [C]</button><button data-open="map">Bản đồ [M]</button><button data-open="party">Tổ đội</button><button data-open="dungeon">Phó bản tổ đội</button><button data-open="duel">Thách đấu 1v1</button><button data-open="npc">NPC AI / Đối luyện</button><button data-open="organizations" ${availability.level<availability.requiredLevel?'disabled':''}>Thế lực${availability.level<availability.requiredLevel?' · Cấp '+availability.requiredLevel:''}</button><button data-open="quests">Nhiệm vụ [Q]</button><button data-open="inventory">Hành trang [I]</button><button id="leave">Rời thế giới ↗</button><button id="network-retry">Kết nối lại</button>${['localhost','127.0.0.1'].includes(location.hostname)?'<button id="network-test">Thử ngắt mạng 7 giây</button>':''}</div><div class="dialog-row"><p>A / D: di chuyển · Space: nhảy</p><p>J: đánh thường · K: Linh Khí Kích</p><p>L: kỹ năng tộc · U: kỹ năng thế lực</p><p>Shift: thân pháp · E: tương tác</p></div>`;
+  content=`<div class="eyebrow">ĐỒNG HÀNH CÙNG ĐẠO HỮU</div><h2>Chức năng</h2><div class="function-grid"><button data-open="character">Nhân vật [C]</button><button data-open="map">Bản đồ [M]</button><button data-open="journal">Sổ tay Map / Quái / Boss</button><button data-open="party">Tổ đội</button><button data-open="dungeon">Phó bản tổ đội</button><button data-open="duel">Thách đấu 1v1</button><button data-open="npc">NPC AI / Đối luyện</button><button data-open="organizations" ${availability.level<availability.requiredLevel?'disabled':''}>Thế lực${availability.level<availability.requiredLevel?' · Cấp '+availability.requiredLevel:''}</button><button data-open="quests">Nhiệm vụ [Q]</button><button data-open="inventory">Hành trang [I]</button><button id="leave">Rời thế giới ↗</button><button id="network-retry">Kết nối lại</button>${['localhost','127.0.0.1'].includes(location.hostname)?'<button id="network-test">Thử ngắt mạng 7 giây</button>':''}</div><div class="dialog-row"><p>A / D: di chuyển · Space: nhảy</p><p>J: đánh thường · K: Linh Khí Kích</p><p>L: kỹ năng tộc · U: kỹ năng thế lực</p><p>Shift: thân pháp · E: tương tác</p></div>`;
  }
  if(version!==renderVersion||!dialog.isConnected||!dialog.open)return;
  document.querySelectorAll<HTMLButtonElement>('[data-panel]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.panel===kind||(b.dataset.panel==='functions'&&['character','map','organizations'].includes(kind)))));
@@ -66,6 +69,7 @@ export async function openProgression(kind:string,c:Character){
  if(kind==='dungeon'){bindDungeonPanel();requestDungeon();}
  if(kind==='duel'){bindDuelPanel();requestDuel();}
  if(kind==='npc'){bindNpcPanel();requestNpcs();}
+ if(kind==='journal')bindWorldJournal();
  dialog.focus({preventScroll:true});
  document.querySelectorAll<HTMLButtonElement>('[data-open]').forEach(b=>b.onclick=()=>void openProgression(b.dataset.open!,c));
  document.querySelector('#network-test')?.addEventListener('click',()=>{dialog.close();window.dispatchEvent(new CustomEvent('game:network-test'));});

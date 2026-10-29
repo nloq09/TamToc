@@ -1,0 +1,2964 @@
+[
+  {
+    "id": "thanh-van",
+    "name": "Thanh Vân Thành",
+    "width": 2400,
+    "height": 640,
+    "ground": 540,
+    "color": "#122c3e",
+    "platforms": [
+      {
+        "x": 500,
+        "y": 450,
+        "width": 200,
+        "height": 20
+      },
+      {
+        "x": 940,
+        "y": 370,
+        "width": 180,
+        "height": 20
+      },
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 220,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 2200,
+        "target": "trung-chau",
+        "label": "Trung Châu",
+        "portalId": "thanh-van-portal-0",
+        "sourceMapId": "thanh-van",
+        "triggerBounds": {
+          "x": 2130,
+          "y": 440,
+          "width": 140,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 190,
+        "target": "thanh-van-ngoai-son",
+        "label": "Thanh Vân Ngoại Sơn",
+        "portalId": "city-to-ngoai-son",
+        "sourceMapId": "thanh-van",
+        "triggerBounds": {
+          "x": 125,
+          "y": 440,
+          "width": 130,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "thanh-van",
+    "raceTheme": "HUMAN",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 6,
+    "mapType": "TOWN",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 2400,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 2400,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [
+      {
+        "id": "home-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 160,
+        "y": 540,
+        "race": "HUMAN"
+      },
+      {
+        "id": "entry",
+        "x": 2000,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 385,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "guard-west",
+        "x": 350,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 405,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "thanh-van-wolves",
+        "definitionId": "WOLF",
+        "maxAlive": 5,
+        "startX": 800,
+        "endX": 1520,
+        "y": 540,
+        "respawnMs": 6000
+      },
+      {
+        "id": "thanh-van-soldier",
+        "definitionId": "SOLDIER",
+        "maxAlive": 1,
+        "startX": 1800,
+        "endX": 1800,
+        "y": 540,
+        "respawnMs": 8000
+      },
+      {
+        "id": "thanh-van-spirit",
+        "definitionId": "SPIRIT",
+        "maxAlive": 1,
+        "startX": 2000,
+        "endX": 2000,
+        "y": 540,
+        "respawnMs": 9000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "thanh-van-guard",
+        "definitionId": "human-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "thanh-van-wanderer",
+        "definitionId": "human-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "thanh-van-challenger",
+        "definitionId": "human-challenger",
+        "spawnPoint": "npc-challenger",
+        "patrolRoute": [],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "u-minh",
+    "name": "U Minh Thành",
+    "width": 2400,
+    "height": 640,
+    "ground": 540,
+    "color": "#301c32",
+    "platforms": [
+      {
+        "x": 500,
+        "y": 450,
+        "width": 200,
+        "height": 20
+      },
+      {
+        "x": 940,
+        "y": 370,
+        "width": 180,
+        "height": 20
+      },
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 220,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 2200,
+        "target": "trung-chau",
+        "label": "Trung Châu",
+        "portalId": "u-minh-portal-0",
+        "sourceMapId": "u-minh",
+        "triggerBounds": {
+          "x": 2130,
+          "y": 440,
+          "width": 140,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 190,
+        "target": "huyet-vu-coc",
+        "label": "Huyết Vụ Cốc",
+        "portalId": "city-to-huyet-vu",
+        "sourceMapId": "u-minh",
+        "triggerBounds": {
+          "x": 130,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "u-minh",
+    "raceTheme": "DEMON",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 6,
+    "mapType": "TOWN",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 2400,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 2400,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [
+      {
+        "id": "home-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 160,
+        "y": 540,
+        "race": "DEMON"
+      },
+      {
+        "id": "entry",
+        "x": 2000,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 385,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "guard-west",
+        "x": 350,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 405,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "u-minh-wolves",
+        "definitionId": "WOLF",
+        "maxAlive": 5,
+        "startX": 800,
+        "endX": 1520,
+        "y": 540,
+        "respawnMs": 6000
+      },
+      {
+        "id": "u-minh-soldier",
+        "definitionId": "SOLDIER",
+        "maxAlive": 1,
+        "startX": 1800,
+        "endX": 1800,
+        "y": 540,
+        "respawnMs": 8000
+      },
+      {
+        "id": "u-minh-spirit",
+        "definitionId": "SPIRIT",
+        "maxAlive": 1,
+        "startX": 2000,
+        "endX": 2000,
+        "y": 540,
+        "respawnMs": 9000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "u-minh-guard",
+        "definitionId": "demon-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "u-minh-wanderer",
+        "definitionId": "demon-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "u-minh-challenger",
+        "definitionId": "demon-challenger",
+        "spawnPoint": "npc-challenger",
+        "patrolRoute": [],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "van-yeu",
+    "name": "Vạn Yêu Lâm",
+    "width": 2400,
+    "height": 640,
+    "ground": 540,
+    "color": "#14372f",
+    "platforms": [
+      {
+        "x": 500,
+        "y": 450,
+        "width": 200,
+        "height": 20
+      },
+      {
+        "x": 940,
+        "y": 370,
+        "width": 180,
+        "height": 20
+      },
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 220,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 2200,
+        "target": "trung-chau",
+        "label": "Trung Châu",
+        "portalId": "van-yeu-portal-0",
+        "sourceMapId": "van-yeu",
+        "triggerBounds": {
+          "x": 2130,
+          "y": 440,
+          "width": 140,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 190,
+        "target": "linh-thu-son-lo",
+        "label": "Linh Thú Sơn Lộ",
+        "portalId": "city-to-linh-thu",
+        "sourceMapId": "van-yeu",
+        "triggerBounds": {
+          "x": 130,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "van-yeu",
+    "raceTheme": "BEAST",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 6,
+    "mapType": "TOWN",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 2400,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 2400,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [
+      {
+        "id": "home-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 160,
+        "y": 540,
+        "race": "BEAST"
+      },
+      {
+        "id": "entry",
+        "x": 2000,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 385,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "guard-west",
+        "x": 350,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 405,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "van-yeu-wolves",
+        "definitionId": "WOLF",
+        "maxAlive": 5,
+        "startX": 800,
+        "endX": 1520,
+        "y": 540,
+        "respawnMs": 6000
+      },
+      {
+        "id": "van-yeu-soldier",
+        "definitionId": "SOLDIER",
+        "maxAlive": 1,
+        "startX": 1800,
+        "endX": 1800,
+        "y": 540,
+        "respawnMs": 8000
+      },
+      {
+        "id": "van-yeu-spirit",
+        "definitionId": "SPIRIT",
+        "maxAlive": 1,
+        "startX": 2000,
+        "endX": 2000,
+        "y": 540,
+        "respawnMs": 9000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "van-yeu-guard",
+        "definitionId": "beast-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "van-yeu-wanderer",
+        "definitionId": "beast-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "van-yeu-challenger",
+        "definitionId": "beast-challenger",
+        "spawnPoint": "npc-challenger",
+        "patrolRoute": [],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "trung-chau",
+    "name": "Trung Châu",
+    "width": 3200,
+    "height": 640,
+    "ground": 540,
+    "color": "#233333",
+    "platforms": [
+      {
+        "x": 550,
+        "y": 440,
+        "width": 230,
+        "height": 20
+      },
+      {
+        "x": 1100,
+        "y": 360,
+        "width": 230,
+        "height": 20
+      },
+      {
+        "x": 1700,
+        "y": 440,
+        "width": 230,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 120,
+        "target": "thanh-van",
+        "label": "Thanh Vân",
+        "portalId": "trung-chau-portal-0",
+        "sourceMapId": "trung-chau",
+        "triggerBounds": {
+          "x": 50,
+          "y": 440,
+          "width": 140,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 260,
+        "target": "u-minh",
+        "label": "U Minh",
+        "portalId": "trung-chau-portal-1",
+        "sourceMapId": "trung-chau",
+        "triggerBounds": {
+          "x": 190,
+          "y": 440,
+          "width": 140,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 400,
+        "target": "van-yeu",
+        "label": "Vạn Yêu",
+        "portalId": "trung-chau-portal-2",
+        "sourceMapId": "trung-chau",
+        "triggerBounds": {
+          "x": 330,
+          "y": 440,
+          "width": 140,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 760,
+        "target": "tam-gioi-bien-canh",
+        "label": "Tam Giới Biên Cảnh · Khuyến nghị 6+",
+        "portalId": "center-to-border",
+        "sourceMapId": "trung-chau",
+        "triggerBounds": {
+          "x": 700,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3080,
+        "target": "thien-mon-di-tich",
+        "label": "Thiên Môn Di Tích · Cấp 10",
+        "portalId": "center-to-ruins",
+        "sourceMapId": "trung-chau",
+        "triggerBounds": {
+          "x": 3020,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 10,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "tam-gioi",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 6,
+    "mapType": "TOWN",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3200,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3200,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [
+      {
+        "id": "home-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 160,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 650,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 385,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "guard-west",
+        "x": 350,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 405,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "trung-chau-wolves",
+        "definitionId": "WOLF",
+        "maxAlive": 5,
+        "startX": 800,
+        "endX": 1520,
+        "y": 540,
+        "respawnMs": 6000
+      },
+      {
+        "id": "trung-chau-soldier",
+        "definitionId": "SOLDIER",
+        "maxAlive": 1,
+        "startX": 1800,
+        "endX": 1800,
+        "y": 540,
+        "respawnMs": 8000
+      },
+      {
+        "id": "trung-chau-spirit",
+        "definitionId": "SPIRIT",
+        "maxAlive": 1,
+        "startX": 2000,
+        "endX": 2000,
+        "y": 540,
+        "respawnMs": 9000
+      },
+      {
+        "id": "trung-chau-boss",
+        "definitionId": "BOSS",
+        "maxAlive": 1,
+        "startX": 2750,
+        "endX": 2750,
+        "y": 540,
+        "respawnMs": 30000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "trung-chau-guard",
+        "definitionId": "human-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "trung-chau-wanderer",
+        "definitionId": "human-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "huyen-moc-party",
+    "name": "Huyền Mộc Bí Cảnh – Tổ Đội",
+    "width": 1800,
+    "height": 640,
+    "ground": 540,
+    "color": "#243332",
+    "platforms": [
+      {
+        "x": 950,
+        "y": 450,
+        "width": 190,
+        "height": 20
+      }
+    ],
+    "portals": [],
+    "version": 2,
+    "regionId": "huyen-moc-party",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 10,
+    "recommendedLevelMax": 20,
+    "mapType": "DUNGEON",
+    "gravity": 1500,
+    "maxPlayers": 4,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1800,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 1800,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [],
+    "navigation": [],
+    "monsterSpawnGroups": [],
+    "npcSpawns": [],
+    "botSpawnGroups": []
+  },
+  {
+    "id": "duel-arena",
+    "name": "Đấu Trường Tam Tộc",
+    "width": 1400,
+    "height": 640,
+    "ground": 540,
+    "color": "#332a39",
+    "platforms": [],
+    "portals": [],
+    "version": 2,
+    "regionId": "duel-arena",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 10,
+    "mapType": "ARENA",
+    "gravity": 1500,
+    "maxPlayers": 2,
+    "pvpPolicy": "CONSENT_ONLY",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1400,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 1400,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [],
+    "navigation": [],
+    "monsterSpawnGroups": [],
+    "npcSpawns": [],
+    "botSpawnGroups": []
+  },
+  {
+    "id": "thanh-van-ngoai-son",
+    "name": "Thanh Vân Ngoại Sơn",
+    "width": 3200,
+    "height": 640,
+    "ground": 540,
+    "color": "#253d34",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "thanh-van",
+        "label": "Thanh Vân Thành",
+        "portalId": "ngoai-son-to-city",
+        "sourceMapId": "thanh-van-ngoai-son",
+        "triggerBounds": {
+          "x": 35,
+          "y": 440,
+          "width": 130,
+          "height": 120
+        },
+        "targetSpawnId": "home",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3030,
+        "target": "trung-chau",
+        "label": "Trung Châu · Cấp 6",
+        "portalId": "ngoai-son-to-center",
+        "sourceMapId": "thanh-van-ngoai-son",
+        "triggerBounds": {
+          "x": 2965,
+          "y": 440,
+          "width": 130,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 6,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 2850,
+        "target": "tam-gioi-bien-canh",
+        "label": "Tam Giới Biên Cảnh",
+        "portalId": "ngoai-son-to-border",
+        "sourceMapId": "thanh-van-ngoai-son",
+        "triggerBounds": {
+          "x": 2790,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 6,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 1,
+    "regionId": "thanh-van",
+    "raceTheme": "HUMAN",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 6,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3200,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3200,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "ngoai-son-wolves",
+        "definitionId": "WOLF",
+        "maxAlive": 4,
+        "startX": 760,
+        "endX": 1150,
+        "y": 540,
+        "respawnMs": 6000
+      },
+      {
+        "id": "ngoai-son-spirit",
+        "definitionId": "SPIRIT",
+        "maxAlive": 2,
+        "startX": 2460,
+        "endX": 2700,
+        "y": 540,
+        "respawnMs": 9000
+      },
+      {
+        "id": "ngoai-son-alpha",
+        "definitionId": "WOLF_ALPHA",
+        "maxAlive": 1,
+        "startX": 2830,
+        "endX": 2830,
+        "y": 540,
+        "respawnMs": 18000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "thanh-van-ngoai-son-guard",
+        "definitionId": "human-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "thanh-van-ngoai-son-wanderer",
+        "definitionId": "human-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "training-arena",
+    "name": "Luyện Võ Đài · NPC AI",
+    "width": 1400,
+    "height": 640,
+    "ground": 540,
+    "color": "#332a39",
+    "platforms": [],
+    "portals": [],
+    "version": 2,
+    "regionId": "training",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 10,
+    "mapType": "ARENA",
+    "gravity": 1500,
+    "maxPlayers": 1,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1400,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 1400,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 300,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 300,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "opponent",
+        "x": 720,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [],
+    "navigation": [],
+    "monsterSpawnGroups": [],
+    "npcSpawns": [],
+    "botSpawnGroups": []
+  },
+  {
+    "id": "huyet-vu-coc",
+    "name": "Huyết Vụ Cốc",
+    "width": 3200,
+    "height": 640,
+    "ground": 540,
+    "color": "#3c2733",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "u-minh",
+        "label": "U Minh Thành",
+        "portalId": "huyet-vu-to-city",
+        "sourceMapId": "huyet-vu-coc",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "home",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3030,
+        "target": "tam-gioi-bien-canh",
+        "label": "Tam Giới Biên Cảnh",
+        "portalId": "huyet-vu-to-border",
+        "sourceMapId": "huyet-vu-coc",
+        "triggerBounds": {
+          "x": 2970,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 6,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 1,
+    "regionId": "huyet-vu-coc",
+    "raceTheme": "DEMON",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 6,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3200,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3200,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "huyet-vu-wolves",
+        "definitionId": "WOLF",
+        "maxAlive": 3,
+        "startX": 760,
+        "endX": 1100,
+        "y": 540,
+        "respawnMs": 6000
+      },
+      {
+        "id": "huyet-vu-soldiers",
+        "definitionId": "SOLDIER",
+        "maxAlive": 3,
+        "startX": 2350,
+        "endX": 2680,
+        "y": 540,
+        "respawnMs": 8000
+      },
+      {
+        "id": "huyet-vu-alpha",
+        "definitionId": "WOLF_ALPHA",
+        "maxAlive": 1,
+        "startX": 2830,
+        "endX": 2830,
+        "y": 540,
+        "respawnMs": 18000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "huyet-vu-coc-guard",
+        "definitionId": "demon-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "huyet-vu-coc-wanderer",
+        "definitionId": "demon-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "linh-thu-son-lo",
+    "name": "Linh Thú Sơn Lộ",
+    "width": 3200,
+    "height": 640,
+    "ground": 540,
+    "color": "#244039",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "van-yeu",
+        "label": "Vạn Yêu Lâm",
+        "portalId": "linh-thu-to-city",
+        "sourceMapId": "linh-thu-son-lo",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "home",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3030,
+        "target": "tam-gioi-bien-canh",
+        "label": "Tam Giới Biên Cảnh",
+        "portalId": "linh-thu-to-border",
+        "sourceMapId": "linh-thu-son-lo",
+        "triggerBounds": {
+          "x": 2970,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 6,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 1,
+    "regionId": "linh-thu-son-lo",
+    "raceTheme": "BEAST",
+    "recommendedLevelMin": 1,
+    "recommendedLevelMax": 6,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3200,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3200,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "linh-thu-wolves",
+        "definitionId": "WOLF",
+        "maxAlive": 3,
+        "startX": 760,
+        "endX": 1100,
+        "y": 540,
+        "respawnMs": 6000
+      },
+      {
+        "id": "linh-thu-spirits",
+        "definitionId": "SPIRIT",
+        "maxAlive": 3,
+        "startX": 2350,
+        "endX": 2680,
+        "y": 540,
+        "respawnMs": 9000
+      },
+      {
+        "id": "linh-thu-alpha",
+        "definitionId": "WOLF_ALPHA",
+        "maxAlive": 1,
+        "startX": 2830,
+        "endX": 2830,
+        "y": 540,
+        "respawnMs": 18000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "linh-thu-son-lo-guard",
+        "definitionId": "beast-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "linh-thu-son-lo-wanderer",
+        "definitionId": "beast-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "tam-gioi-bien-canh",
+    "name": "Tam Giới Biên Cảnh",
+    "width": 3600,
+    "height": 640,
+    "ground": 540,
+    "color": "#344336",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "thanh-van-ngoai-son",
+        "label": "Thanh Vân Ngoại Sơn",
+        "portalId": "border-to-human",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 240,
+        "target": "huyet-vu-coc",
+        "label": "Huyết Vụ Cốc",
+        "portalId": "border-to-demon",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 180,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 380,
+        "target": "linh-thu-son-lo",
+        "label": "Linh Thú Sơn Lộ",
+        "portalId": "border-to-beast",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 320,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3100,
+        "target": "trung-chau",
+        "label": "Trung Châu",
+        "portalId": "border-to-center",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 3040,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3450,
+        "target": "thien-mon-di-tich",
+        "label": "Thiên Môn Di Tích · Cấp 10",
+        "portalId": "border-to-ruins",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 3390,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 10,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 1,
+    "regionId": "tam-gioi-bien-canh",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 6,
+    "recommendedLevelMax": 12,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3600,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3600,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1670,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 750,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "ruins-camp",
+        "bounds": {
+          "x": 3150,
+          "y": 400,
+          "width": 400,
+          "height": 200
+        },
+        "spawnId": "ruins-return",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 650,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 650,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "ruins-return",
+        "x": 3300,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "border-soldiers",
+        "definitionId": "SOLDIER_VETERAN",
+        "maxAlive": 3,
+        "startX": 1000,
+        "endX": 1430,
+        "y": 540,
+        "respawnMs": 10000
+      },
+      {
+        "id": "border-spirits",
+        "definitionId": "SPIRIT_VETERAN",
+        "maxAlive": 3,
+        "startX": 2320,
+        "endX": 2700,
+        "y": 540,
+        "respawnMs": 10000
+      },
+      {
+        "id": "border-alphas",
+        "definitionId": "WOLF_ALPHA",
+        "maxAlive": 2,
+        "startX": 2860,
+        "endX": 3040,
+        "y": 540,
+        "respawnMs": 18000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "tam-gioi-bien-canh-guard",
+        "definitionId": "neutral-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "tam-gioi-bien-canh-wanderer",
+        "definitionId": "neutral-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "thien-mon-di-tich",
+    "name": "Thiên Môn Di Tích",
+    "width": 3800,
+    "height": 640,
+    "ground": 540,
+    "color": "#3e3940",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "tam-gioi-bien-canh",
+        "label": "Biên Cảnh",
+        "portalId": "ruins-to-border",
+        "sourceMapId": "thien-mon-di-tich",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "ruins-return",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 1,
+    "regionId": "thien-mon-di-tich",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 10,
+    "recommendedLevelMax": 20,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3800,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3800,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1500,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      },
+      {
+        "x": 2600,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "ruins-spirits",
+        "definitionId": "RUIN_SPIRIT",
+        "maxAlive": 3,
+        "startX": 850,
+        "endX": 1250,
+        "y": 540,
+        "respawnMs": 14000
+      },
+      {
+        "id": "ruins-sentinels",
+        "definitionId": "RUIN_SENTINEL",
+        "maxAlive": 2,
+        "startX": 2220,
+        "endX": 2430,
+        "y": 540,
+        "respawnMs": 25000
+      },
+      {
+        "id": "ruins-world-boss",
+        "definitionId": "BOSS",
+        "maxAlive": 1,
+        "startX": 3260,
+        "endX": 3260,
+        "y": 540,
+        "respawnMs": 30000
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "guide"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "thien-mon-di-tich-guard",
+        "definitionId": "neutral-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "thien-mon-di-tich-wanderer",
+        "definitionId": "neutral-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  }
+]

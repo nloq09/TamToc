@@ -1,5 +1,7 @@
 # Thêm nội dung thế giới bằng dữ liệu
 
+World15 cập nhật hướng dẫn Phase 7 dưới đây: dùng source proposal `world-content-15-v1.json`, bindings đã review, `dungeons.json` và generator `scripts/build-world15-content.py`. Bốn thành hiện tại không có bãi quái; geometry năm map mới được phép lấy mẫu Phase 7. Giữ ID runtime qua alias, không tự bật proposal còn enabled=false. Quy trình/validation và rollback hiện tại: [WORLD15_IMPLEMENTATION](WORLD15_IMPLEMENTATION.md), [WORLD15_VALIDATION](WORLD15_VALIDATION.json). Các ví dụ bãi luyện town bên dưới là lịch sử; không áp lại vào catalog mới.
+
 Nguồn chuẩn là bốn file trong `backend/src/main/resources/`: `maps.json`, `combat.json`, `bots.json`, `progression.json`. Client đọc hình học/metadata từ server. Không thêm tọa độ song song trong Phaser. Các thay đổi cấu hình được nạp khi **khởi động lại backend**, chưa có hot reload.
 
 ## Quy ước và vòng đời

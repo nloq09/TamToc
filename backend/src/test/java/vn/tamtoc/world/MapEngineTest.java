@@ -21,7 +21,7 @@ class MapEngineTest {
         assertThrows(IllegalArgumentException.class,()->mutated(a->((ObjectNode)a.get(6).get("spawnPoints").get(0)).put("x",1460)));
         assertThrows(IllegalArgumentException.class,()->mutated(a->((ObjectNode)a.get(6).get("obstacles").get(0)).put("width",-1)));
         assertThrows(IllegalArgumentException.class,()->mutated(a->((ObjectNode)a.get(6).get("navigation").get(0)).put("to","missing")));
-        assertThrows(IllegalArgumentException.class,()->mutated(a->((ObjectNode)a.get(0).get("monsterSpawnGroups").get(0)).putNull("id")));
+        assertThrows(IllegalArgumentException.class,()->mutated(a->((ObjectNode)a.get(6).get("monsterSpawnGroups").get(0)).putNull("id")));
         assertThrows(IllegalArgumentException.class,()->mutated(a->{var g=(ObjectNode)a.get(6).get("monsterSpawnGroups").get(0);g.put("startX",1400);g.put("endX",1544);g.put("maxAlive",3);})); // middle slot intersects the wall
     }
     @Test void validatesPortalPositionLevelQuestAndActivity(){
@@ -40,7 +40,7 @@ class MapEngineTest {
         assertFalse(MapCollision.lineOfSight(map,1400,520,1550,520));assertTrue(MapCollision.lineOfSight(map,1400,400,1550,400));
     }
     @Test void checkpointsAndMapVersionRepairInvalidSavedLocations()throws Exception{
-        p.mapId="thanh-van-ngoai-son";p.progress.checkpoints.put(p.mapId,"camp");p.x=1460;p.y=530;maps.sanitize(p);assertEquals(1970,p.x);assertEquals(540,p.y);assertEquals(1,p.progress.mapVersions.get(p.mapId));
+        p.mapId="thanh-van-ngoai-son";p.progress.checkpoints.put(p.mapId,"camp");p.x=1460;p.y=530;maps.sanitize(p);assertEquals(1970,p.x);assertEquals(540,p.y);assertEquals(maps.get(p.mapId).version(),p.progress.mapVersions.get(p.mapId));
         var data=json.readValue(json.writeValueAsString(p.progress),vn.tamtoc.progression.ProgressData.class);assertEquals("camp",data.checkpoints.get(p.mapId));
         p.mapId="removed-map";maps.sanitize(p);assertEquals("thanh-van",p.mapId);assertEquals(160,p.x);
         p.mapId="duel-arena";maps.sanitize(p);assertEquals("thanh-van",p.mapId);

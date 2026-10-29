@@ -1,0 +1,63 @@
+[
+  {
+    "id": "HUYEN_MOC",
+    "name": "Huyền Mộc Bí Cảnh",
+    "mapId": "huyen-moc-party",
+    "minLevel": 10,
+    "cooldownMs": 0,
+    "entries": [
+      {
+        "mapId": "vo_chu_hoang_nguyen",
+        "x": 3300,
+        "radius": 120
+      },
+      {
+        "mapId": "trung-chau",
+        "x": 350,
+        "radius": 150
+      }
+    ],
+    "waves": [
+      [
+        "huyen_moc_bi_canh_mob_01"
+      ],
+      [
+        "huyen_moc_bi_canh_mob_02"
+      ],
+      [
+        "huyen_moc_bi_canh_boss_dungeon_boss"
+      ]
+    ],
+    "rewardExp": 500,
+    "rewardCultivation": 150,
+    "rewardStones": 100
+  },
+  {
+    "id": "CUU_U",
+    "name": "Cửu U Thạch Phủ",
+    "mapId": "cuu_u_thach_phu",
+    "minLevel": 18,
+    "cooldownMs": 900000,
+    "entries": [
+      {
+        "mapId": "thien-mon-di-tich",
+        "x": 3450,
+        "radius": 120
+      }
+    ],
+    "waves": [
+      [
+        "cuu_u_thach_phu_mob_01"
+      ],
+      [
+        "cuu_u_thach_phu_mob_02"
+      ],
+      [
+        "cuu_u_thach_phu_boss_dungeon_boss"
+      ]
+    ],
+    "rewardExp": 1800,
+    "rewardCultivation": 600,
+    "rewardStones": 250
+  }
+]

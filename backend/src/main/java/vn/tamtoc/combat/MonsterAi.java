@@ -17,7 +17,7 @@ public class MonsterAi {
         final var b=m.definition.behavior();
         if(m.hp<=0){
             m.castingAbility=null;m.strikeAt=0;m.navigation=null;m.direction=0;m.targetId=null;
-            if(m.instanceId!=null||now<m.respawnAt)return;
+            if(m.scheduled||m.instanceId!=null||now<m.respawnAt)return;
             m.state=RESPAWN;m.hp=m.definition.hp();m.x=m.spawnX;m.y=m.spawnY;m.vy=0;m.grounded=true;m.phase=1;m.contributions.clear();m.threat.clear();m.rewardProcessed=false;m.nextThinkAt=now;m.aggroSince=0;m.attackAt=now;m.abilityAt=now;
             event.accept("MONSTER_SPAWN",m.view());return;
         }

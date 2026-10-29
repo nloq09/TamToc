@@ -18,7 +18,11 @@ public class MapCatalog {
     public record SafeZone(String id,Rect bounds,String spawnId,boolean heal,boolean protectedArea) {}
     public record Waypoint(String id,double x,double y) {}
     public record NavEdge(String from,String to,String type) {}
-    public record SpawnGroup(String id,String definitionId,int maxAlive,double startX,double endX,double y,long respawnMs) {}
+    public record SpawnGroup(String id,String definitionId,int maxAlive,double startX,double endX,double y,long respawnMs,Boolean enabled,String placementId,String spawnPolicy,long scheduleIntervalMs,long activeDurationMs,int requiredLevel,List<String> definitionIds) {
+        public SpawnGroup {enabled=enabled==null?true:enabled;spawnPolicy=spawnPolicy==null?"AFTER_DEATH":spawnPolicy;requiredLevel=requiredLevel==0?1:requiredLevel;definitionIds=definitionIds==null||definitionIds.isEmpty()?List.of(definitionId):List.copyOf(definitionIds);if(spawnPolicy.equals("SCHEDULED_EVENT")&&(maxAlive!=1||scheduleIntervalMs<14400000||activeDurationMs<=0||activeDurationMs>scheduleIntervalMs))throw new IllegalArgumentException("Invalid scheduled event "+id);}
+        public SpawnGroup(String id,String definitionId,int maxAlive,double startX,double endX,double y,long respawnMs){this(id,definitionId,maxAlive,startX,endX,y,respawnMs,true,null,"AFTER_DEATH",0,0,1,null);}
+        public String definitionFor(int index){return definitionIds.get(index%definitionIds.size());}
+    }
     public record NpcSpawn(String id,String type,String name,double x,double y,String dialogueId) {}
     public record BotSpawn(String id,String definitionId,String spawnPoint,List<String> patrolRoute,double interactionRadius) {}
     public record Portal(double x,String target,String label,String portalId,String sourceMapId,Rect triggerBounds,String targetSpawnId,int requiredLevel,String requiredQuest,boolean enabled) {
@@ -44,10 +48,12 @@ public class MapCatalog {
     }
     private static <T> List<T> copy(List<T> value){return value==null?List.of():List.copyOf(value);}
     private final Map<String, MapDefinition> maps = new LinkedHashMap<>();
+    private final Map<String,String> aliases=new HashMap<>();
     @Autowired public MapCatalog(ObjectMapper mapper) throws IOException {
         try (var in = new ClassPathResource("maps.json").getInputStream()) {
             initialize(Arrays.asList(mapper.readValue(in,MapDefinition[].class)));
         }
+        try(var in=new ClassPathResource("world15-bindings.json").getInputStream()){mapper.readTree(in).path("mapIds").fields().forEachRemaining(e->aliases.put(e.getKey(),e.getValue().asText()));}
     }
     public MapCatalog(List<MapDefinition> definitions){initialize(definitions);}
     private static void require(boolean ok,String reason){if(!ok)throw new IllegalArgumentException("Invalid world data: "+reason);}
@@ -78,12 +84,13 @@ public class MapCatalog {
     }
     public static boolean validPosition(MapDefinition m,double x,double y){return Double.isFinite(x)&&Double.isFinite(y)&&x>=Movement.HALF_WIDTH&&x<=m.width-Movement.HALF_WIDTH&&y>=Movement.HEIGHT&&y<=m.height&&java.util.stream.Stream.of(m.obstacles,m.groundColliders).flatMap(Collection::stream).noneMatch(b->x+16>b.x&&x-16<b.x+b.width&&y>b.y+.01&&y-44<b.y+b.height);}
     public List<MapDefinition> all(){return List.copyOf(maps.values());}
-    public boolean contains(String id){return maps.containsKey(id);}
-    public MapDefinition get(String id){var map=maps.get(id);if(map==null)throw new ProtocolException("MAP_NOT_FOUND","Bản đồ không tồn tại.");return map;}
+    public boolean contains(String id){return maps.containsKey(aliases.getOrDefault(id,id));}
+    public MapDefinition get(String id){var map=maps.get(aliases.getOrDefault(id,id));if(map==null)throw new ProtocolException("MAP_NOT_FOUND","Bản đồ không tồn tại.");return map;}
     public SpawnPoint respawn(PlayerState p){var m=get(p.mapId);String checkpoint=p.progress.checkpoints.get(p.mapId);return m.spawnPoints.stream().filter(s->s.id.equals(checkpoint)).findFirst().orElse(m.spawnPoints.get(0));}
     public void sanitize(PlayerState p){
+        p.mapId=aliases.getOrDefault(p.mapId,p.mapId);
         if(!contains(p.mapId)||Set.of("DUNGEON","ARENA").contains(get(p.mapId).mapType)){p.mapId=vn.tamtoc.character.Race.valueOf(p.race).startMap;p.x=Double.NaN;}
-        var m=get(p.mapId);if(!validPosition(m,p.x,p.y)){var s=respawn(p);p.x=s.x;p.y=s.y;p.vy=0;}p.progress.mapVersions.put(m.id,m.version);
+        var m=get(p.mapId);boolean upgradedDanger=m.mapType.equals("FIELD")&&p.progress.mapVersions.getOrDefault(m.id,0)<m.version&&p.level<m.recommendedLevelMin;if(!validPosition(m,p.x,p.y)||upgradedDanger){var s=respawn(p);p.x=s.x;p.y=s.y;p.vy=0;}p.progress.mapVersions.put(m.id,m.version);
     }
     public Portal portal(PlayerState p,String id){return get(p.mapId).portals.stream().filter(v->id==null?v.triggerBounds.contains(p.x,p.y):v.portalId.equals(id)).findFirst().orElseThrow(()->new ProtocolException("PORTAL_NOT_FOUND","Hãy đến đúng cổng dịch chuyển."));}
     public SpawnPoint validatePortal(PlayerState p,Portal portal){

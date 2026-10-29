@@ -1,6 +1,8 @@
 # Tam Tộc: Nghịch Thiên
 
-Web MMORPG 2D tu tiên, bản MVP Phase 1–4 được mở rộng multiplayer trong Phase 6. Client TypeScript + Phaser 3 + Vite; backend Java 21 + Spring Boot, Spring Security, JPA, WebSocket; PostgreSQL + Flyway. Không có chế độ offline hay backend giả.
+Web MMORPG 2D tu tiên, phát triển tiếp từ Phase 1–7 với catalog **15 bản đồ, nội dung cấp 1–25**. Client TypeScript + Phaser 3 + Vite; backend Java 21 + Spring Boot, Spring Security, JPA, WebSocket; PostgreSQL + Flyway. Không có chế độ offline hay backend giả.
+
+Bản hiện tại `world_catalog_15_v1`: bốn thành an toàn, sáu field theo tộc, ba field chung, hai bí cảnh tổ đội; 34 loài quái/boss, 46 quest definitions và Sổ tay Map/Quái/Boss. Năm map mới dùng địa hình mẫu Phase 7 theo cho phép của người dùng. Trạng thái A–E, nội dung được bật, sơ đồ cổng, API và giới hạn: [WORLD15_IMPLEMENTATION](docs/WORLD15_IMPLEMENTATION.md). Số đo thật: [WORLD15_PERFORMANCE](docs/WORLD15_PERFORMANCE.md); danh mục/validation: [WORLD15_VALIDATION](docs/WORLD15_VALIDATION.json).
 
 ## Chạy bằng Docker (khuyến nghị)
 
@@ -38,8 +40,8 @@ Script nạp `.env`, chọn profile `production` mặc định. Trong workspace 
 1. Đăng ký tài khoản: 3–24 chữ ASCII/số/gạch dưới; mật khẩu 10–64 ký tự.
 2. Tạo nhân vật bằng **tên và tộc**. Không có lựa chọn nghề, thế lực hay hệ tu luyện ở bước này. Nhân vật bắt đầu cấp 1, EXP 0, Luyện Khí Sơ Kỳ, NOVICE, tổ chức/path null; có Mộc Kiếm, Áo Vải và 3 Hồi Linh Đan.
 3. Nhân Tộc ở Thanh Vân Thành, Ma Tộc ở U Minh Thành, Yêu Tộc ở Vạn Yêu Lâm. Các khu có cổng tím tới Trung Châu; ba tộc gặp nhau tại bản đồ chung này.
-4. Di chuyển tới **Tiếp Dẫn Sứ ở x=300**. Mở Nhiệm vụ để nhận “Mối họa Yêu Lang”; chỉ những quái hạ sau khi nhận mới được tính. Hoàn thành 5 Yêu Lang rồi lĩnh thưởng.
-5. Khu bên trái x=420 là khu an toàn, hồi HP. Quái từ x≈800. Cùng gây sát thương lên quái sẽ nhận credit khi ở cùng map, còn sống và gần mục tiêu lúc quái chết.
+4. Gặp **Tiếp Dẫn Sứ**, nhận chuỗi nhập môn của tộc; dùng cổng đầu thành để tới field. Nhiệm vụ “Mối họa Yêu Lang” dùng chung definition cũ, chỉ tính quái đúng mục tiêu sau khi nhận; hoàn thành 5 con rồi lĩnh thưởng một lần.
+5. Bốn thành không có quái. Field có trại an toàn hồi HP và checkpoint; phải ra khỏi vùng protected để đánh. Cùng gây sát thương lên quái sẽ nhận credit khi ở cùng map, còn sống và gần mục tiêu lúc quái chết.
 6. Nhặt khối vuông vật phẩm bằng E; mở túi để sử dụng/trang bị/tháo. Tu vi dùng trong bảng Tu luyện; cấp độ và cảnh giới là hai tiến trình riêng. MVP hỗ trợ tới Trúc Cơ Viên Mãn.
 7. Cấp 10 mở bảng Thế lực. Nhận “Con Đường Tu Luyện” tại NPC, chọn khảo hạch thuộc tộc, hạ 3 quái mới, trở lại NPC rồi **xác nhận gia nhập**. Có 9 thế lực dùng chung 3 archetype và một Combat Engine. Không có chuyển thế lực trong MVP.
 
@@ -75,22 +77,33 @@ npm run build
 Integration tests dùng **REST, WebSocket và PostgreSQL thật**, không mock. Khởi động backend trước; đóng các client game đang chơi để kiểm thử đếm số người trong map ổn định. Mỗi lần chạy tạo tài khoản/nhân vật test mới và giữ dữ liệu để điều tra.
 
 ```powershell
-.\scripts\test-integration.ps1
+node tests/multiplayer.mjs
+node tests/maps.mjs
+node tests/bots.mjs
+node tests/duel.mjs
+node tests/production.mjs
+node --test tests/network-client.test.mjs
+# Docker backend và Docker CLI; tối thiểu 5 phút:
+node tests/load-world15.mjs
 ```
 
-Bao phủ đăng ký/đăng nhập sai mật khẩu, ownership, không nhận level từ client, vé dùng một lần, kết nối trùng, hai chiều di chuyển qua map chung, chat, ngắt kết nối, lưu vị trí, HP quái chung, EXP đóng góp, khóa skill, cooldown và quái hồi sinh.
+Các lệnh trên là hồi quy production hiện tại. Có thể chạy auth/maps/bots/duel bằng `scripts/test-integration.ps1`; switch `-IncludeProgression` chạy thêm các kịch bản World15 ở QA local có bảo vệ. Các script cũ như combat/ecology/party/reconnect/progression và ví dụ Phase 6/7 phía dưới còn fixture bãi quái trong thành, chưa chuyển đổi hết; không dùng chúng để kết luận World15 đã đạt. Kiểm thử combat/quest/party/dungeon hiện tại theo phần sau.
 
 Với backend Docker mặc định, chạy thêm `node tests/production.mjs` để kiểm tra endpoint dev vắng mặt, chữ ký JWT và Origin. Kết quả thực thi và các giới hạn kiểm thử ghi trong `docs/VERIFICATION.md`.
 
-Để kiểm thử Phase 3–4 nhanh, dừng backend Compose rồi chạy backend host bằng:
+Để kiểm thử World15 với công cụ QA, dừng backend Compose rồi chạy backend host bằng:
 
 ```powershell
 .\scripts\start-backend.ps1 -EnableDevTools
-# Cửa sổ khác:
-.\scripts\test-integration.ps1 -IncludeProgression
+# Cửa sổ khác: đặt TEST_API trỏ backend local và DEV_ADMIN_KEY từ .env
+node tests/world15-routes.mjs
+node tests/world15-catalog.mjs
+node tests/dungeon.mjs
+node tests/world15-dungeon.mjs
+node tests/world15-archived-save.mjs
 ```
 
-Endpoint `POST /api/dev/characters/{id}/level10` chỉ tồn tại với profile `local`, yêu cầu JWT của chủ nhân, request loopback và header `X-Dev-Key` khớp `DEV_ADMIN_KEY` riêng trong `.env`. Không có nút cấp level trên client; người chơi thông thường không sử dụng được. Profile mặc định/Compose không bật endpoint này. Công cụ chỉ cấp level 10; khảo hạch và nhiệm vụ trong test vẫn dùng quái thật.
+Endpoint `POST /api/dev/characters/{id}/level10` và công cụ cấp QA 1–25 chỉ tồn tại với profile `local`, yêu cầu JWT của chủ nhân, request loopback và header `X-Dev-Key` khớp `DEV_ADMIN_KEY` riêng trong `.env`. Profile mặc định/Compose không bật endpoint này. Cấp QA rút ngắn chuẩn bị test; combat, khảo hạch và phần thưởng vẫn thật. Không phát key cho người chơi. Bài archived-save chỉ sửa map của QA character đã xác nhận ownership và cần Docker/PostgreSQL cục bộ; không dùng trên production.
 
 ## Cấu trúc
 
@@ -102,6 +115,7 @@ backend/src/main/java/vn/tamtoc/
   realtime/      vé ngắn hạn, xác thực socket, protocol
   world/         realtime state, tick loop, vật lý, map, loot
   combat/        Skill Engine, Monster AI, trạng thái quái
+  content/       catalog 15 map, validation, journal, world-event ledger
   progression/   nhiệm vụ, túi đồ, cảnh giới, thế lực, persistence
   party/         lời mời, quyền trưởng đội, chia ngân sách thưởng
   instance/      registry theo instanceId, lịch sử và ledger DB
@@ -112,6 +126,9 @@ backend/src/main/resources/
   maps.json      map, địa hình, cổng
   combat.json    skill, quái, boss
   progression.json  nhiệm vụ, vật phẩm, 9 thế lực, cấp yêu cầu
+  world-content-15-v1.json  proposal gốc, không tự kích hoạt
+  world15-bindings.json  alias, geometry/quest/event đã kiểm chứng
+  dungeons.json  điều kiện, waves và thưởng hai bí cảnh
 frontend/src/
   api.ts, network.ts   REST và native WebSocket
   game.ts             Phaser scene, nội suy, input và hiệu ứng
@@ -119,6 +136,7 @@ frontend/src/
   sprite-pack.ts      nạp atlas, đăng ký animation theo metadata
   game-ui.ts, progression-ui.ts  HUD và các bảng tương tác
   social-ui.ts, activity-ui.ts, duel-ui.ts  tổ đội/phó bản/đấu trường
+  world-journal-ui.ts  discovery, Sổ tay, gợi ý và inspector local
 tests/                 integration tests đã kiểm tra trên Node.js 24
 scripts/               tạo env, chạy server, kiểm thử
 ```
@@ -131,12 +149,16 @@ Vé WebSocket: REST có JWT và ownership → vé 30 giây → message AUTH đ�
 
 ## Giới hạn hiện tại
 
-Đây là bản phát triển một tiến trình server. Phase 7 thêm map data, quái có FSM, NPC AI và AOI/delta; Phase 6 cung cấp reconnect, tổ đội, phó bản riêng và duel 1v1; phép đo tải local và phạm vi kịch bản ghi trong docs/PHASE6_VERIFICATION.md. Chưa có client prediction, refresh token, bang hội, giao dịch hoặc Tam Tộc Chiến. Party/instance/session đang ở RAM: khởi động lại server xóa trạng thái tạm, đưa nhân vật về map chung đã lưu; lượt phó bản ACTIVE của node được đánh dấu FAILED, không tự thưởng. Duel bị gián đoạn do server restart chưa có cơ chế tiếp tục trận/lưu trận đang diễn ra. Chưa có cast-time khác 0, projectile mô phỏng riêng hoặc hệ status effect tổng quát; kỹ năng hiện tại dùng đòn cone/area, heal, dash, shield, empower và slow. Quest gồm Yêu Lang, chuỗi gia nhập thế lực và bảy nhiệm vụ theo vùng cấp 1–10; item có trang bị, đan dược và nguyên liệu/quest metadata. Map, cổng, spawn, NPC/thoại, behavior và drop được cấu hình JSON, kiểm tra khi startup. Navigation dùng graph designer; không tự sinh đường đi cho mọi địa hình. TRAINER/ESCORT/SCOUT chưa có. Có thể thấy WARN khi gửi vào socket vừa đóng đồng thời; cleanup vẫn chạy, cần cải thiện transport khi mở rộng. Các giới hạn này thuộc phạm vi mở rộng sau khi nền tảng được kiểm thử ổn định, không được thay bằng chức năng giả.
+Đây là bản phát triển một tiến trình server/world lock. Party/instance/session ở RAM; restart hủy lượt đang hoạt động và đưa nhân vật về anchor đã lưu. Chưa có client prediction, refresh token, bang hội, giao dịch, Tam Tộc Chiến hoặc AI TRAINER/ESCORT/SCOUT. NPC/quái/địa hình còn placeholder, navigation dùng graph thiết kế. Cấp mới dừng ở 25; 57 map planned và nội dung 26–100 chưa bật. World Boss có clock/scheduler và ledger chống trùng cycle, nhưng không tiếp tục trận đang sống sau restart; lượt QA chưa quan sát trận trong cửa sổ lịch thật. Chưa chứng nhận balance mọi tổ hợp hoặc chơi tự nhiên toàn tuyến 1→25. Giới hạn và kết quả tải local xem báo cáo World15 ở đầu README.
+
+Content version `world_catalog_15_v1` có migration **V4__world_event_cycles.sql**, giữ nguyên V1–V3. Discovery/quest-objective/cooldown dùng JSON aggregate với default cho save cũ; alias giữ ID runtime đã triển khai và fallback map archived không xóa nhân vật. Trước release đã tạo backup private trong `.tools`; không commit backup/secret. Rollback cần dừng server, code/config và backup DB cùng phiên bản, kiểm tra khôi phục trên DB riêng trước; không sửa migration đã apply hoặc chỉ thay một file maps.json. Cách dựng lại cấu hình đã review: `python scripts/build-world15-content.py --enable-world-boss`, sau đó chạy validator/tests và restart; không tự chạy generator khi boot. Chi tiết: [WORLD15_IMPLEMENTATION](docs/WORLD15_IMPLEMENTATION.md).
 
 Dừng dịch vụ bằng `docker compose stop`. Dữ liệu nằm trong volume `pgdata`; giữ volume khi khởi động lại.
 
 
-## Chơi Phase 6
+## Tham chiếu Phase 6 (lịch sử)
+
+Điều kiện bí cảnh, quái trong thành và load fixture dưới đây phản ánh bản cũ. World15 thay Huyền Mộc thành cấp 10, thêm Cửu U cấp 18/cooldown 15 phút và bốn thành hoàn toàn an toàn. Dùng hướng dẫn World15 ở đầu README cho bản hiện tại.
 
 - Chức năng → Tổ đội: mời đạo hữu trong cùng khu vực, nhận/từ chối lời mời. Tối đa 4 người, cho phép ba tộc cùng đội; trưởng đội được đuổi/nhường quyền. Lời mời hết hạn sau 60 giây. Cả đội thấy HP/MP, map và trạng thái nối lại.
 - EXP/tu vi từ một quái chia đều, phần dư theo UUID tăng dần. Tổng không vượt ngân sách quái. Đồng đội cần còn sống, cùng scope, trong 800 đơn vị và đã di chuyển/thi triển kỹ năng hợp lệ trong 10 giây. Vật phẩm rơi riêng cho từng nhân vật đủ điều kiện.
@@ -164,7 +186,9 @@ node tests/progression.mjs
 
 Test tạo dữ liệu QA mới và giữ lại trong PostgreSQL. Chạy các bộ tích hợp tuần tự để tránh rate limit đăng ký 10 lần/phút; khi gặp 429, đợi cửa sổ một phút rồi chạy lại. Không tắt rate limit để chạy test. `tests/load.mjs` tạo 4 tài khoản × 5 nhân vật, năm tổ đội; xuất số liệu không chứa token vào `.runtime/phase6-load.json`. Tham số `TEST_API` chọn backend QA cho các integration script; production.mjs luôn kiểm tra Docker 8080.
 
-## Chơi Phase 7
+## Tham chiếu Phase 7 (lịch sử)
+
+World15 thay phân bố quái/level/catalog bên dưới, bỏ bãi luyện trong thành và thêm ba mid field, Hoang Nguyên, Cửu U. Các số đo Phase 7 chỉ dùng so sánh lịch sử, không thay cho benchmark World15.
 
 - Cổng x190 ở ba thành khởi đầu đưa tới **Thanh Vân Ngoại Sơn / Huyết Vụ Cốc / Linh Thú Sơn Lộ** (đề xuất 1–6). Đến gần và nhấn E. Cổng cũ x2200 sang Trung Châu vẫn hoạt động. Map → xem kết nối và cấp/quest cần thiết từ dữ liệu server.
 - **Tam Giới Biên Cảnh** đề xuất 6–12; cổng cuối các field yêu cầu cấp 6, Trung Châu x760 cũng nối tới đây cho người muốn khám phá sớm. **Thiên Môn Di Tích** đề xuất 10–20, cổng từ Trung Châu x3080 hoặc Biên Cảnh x3450 yêu cầu cấp 10. Đây là khoảng đề xuất; điều kiện vào ghi riêng trên mỗi cổng.

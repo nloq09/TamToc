@@ -1,0 +1,71 @@
+World15 verification receipt — collected 2026-10-29; runs span 28–29 October.
+Only result lines copied; JWT, credentials, database backups and account details excluded.
+Full load script exit=1 (cleanup transport timeout); saved measurement validator exit=0; focused 20-client server-led close probe exit=0.
+Original logs are local .tools files; failed cleanup attempts are described in WORLD15_PERFORMANCE.md.
+
+world15-final-docker.log
+#12 13.57 [INFO] Tests run: 75, Failures: 0, Errors: 0, Skipped: 0
+#12 14.42 [INFO] BUILD SUCCESS
+
+world15-client-test.log
+ℹ tests 7
+ℹ pass 7
+ℹ fail 0
+
+world15-final-frontend-visual.log
+✓ built in 6.33s
+
+world15-BC-routes2.log
+PASS HUMAN ×2: safe town, real beginner hunts, one WOLVES reward, mid-field and elite, branch merge at border, shared HP/quest credit
+PASS HUMAN ×2: Trung Châu → Hoang Nguyên, existing level-10 trial/path/skills, wrong-race/change denied, rewards and organization survive relogin
+PASS DEMON ×2: safe town, real beginner hunts, one WOLVES reward, mid-field and elite, branch merge at border, shared HP/quest credit
+PASS DEMON ×2: Trung Châu → Hoang Nguyên, existing level-10 trial/path/skills, wrong-race/change denied, rewards and organization survive relogin
+PASS BEAST ×2: safe town, real beginner hunts, one WOLVES reward, mid-field and elite, branch merge at border, shared HP/quest credit
+PASS BEAST ×2: Trung Châu → Hoang Nguyên, existing level-10 trial/path/skills, wrong-race/change denied, rewards and organization survive relogin
+
+world15-D-dungeon.log
+PASS two isolated instances, READY gate, idempotent start, private entity registries, forged scope blocked, 5-second reconnect into the same instance
+PASS party 1: three real waves, shared boss combat, persisted result, unique reward grants, read/retry cannot grant again, safe return
+PASS party 2: three real waves, shared boss combat, persisted result, unique reward grants, read/retry cannot grant again, safe return
+
+world15-E-world15-dungeon.log
+PASS Cửu U: level 18/real portal entry, two wave groups + level 25 phased boss, v3 instance resume, unique ledger/reward and persistent 15-minute reset cooldown after relogin, equipment/cultivation persistence
+
+world15-E-world15-catalog.log
+PASS catalog exactly 15, canonical/runtime aliases, four safe towns, species/boss locations, private persisted journal/discovery, quest dedup/locks and keyed local inspector
+
+world15-archived-save.log
+PASS actual PostgreSQL archived-map save falls back safely, preserving earned level/EXP, organization/path, cultivation, inventory and claimed quest rewards
+
+world15-regression-auth.log
+PASS auth, ownership, creation defaults, unknown fields, ticket replay, duplicate session
+PASS portals, two-player visibility, movement both ways, coordinate tampering, shared chat, disconnect
+PASS PostgreSQL persistence after disconnect and login
+
+world15-regression-maps-final.log
+PASS three race spawn maps, metadata/collision from one source, out-of-range portal rejected, two-player field visibility and map-scoped chat
+PASS walking/dash stop at solid wall, server jump clears it, persisted checkpoint, level gate, five-second field resume and safe fallback at checkpoint
+
+world15-regression-bots.log
+PASS three races have explicit AI NPCs, NPCs excluded from player list/tickets, friendly NPC damage blocked, scripted moving citizen interaction and remote interaction denied
+PASS consent/countdown, EASY/HARD stats, two isolated practice instances, duplicate start/cancel, two-second resume, shared real combat victory, zero rewards/items lost, logout cleanup and result on reconnect
+
+world15-regression-duel.log
+PASS consent/decline, countdown, duplicate accept, scope and explicit-target guards, shared PvP damage/cooldown, knockout, unchanged progression/items and one persisted result
+PASS five-second arena resume, fifteen-second disconnect loss, safe return and result on reconnect
+PASS explicit forfeit during countdown and no orphan arena
+
+world15-regression-production-final.log
+PASS default Docker context: dev endpoint absent, invalid JWT rejected, HTTP CORS and WebSocket Origin rejected
+
+world15-load.log
+CLEANUP {"closed":1,"online":14,"parties":0,"interest":10}
+CLEANUP {"closed":11,"online":1,"parties":0,"interest":1}
+
+world15-load-follow-up.log
+PASS retained 300016 ms interval: 20 clients, 6002 tick samples, p95 1.623355 ms; every client gained real EXP; zero client errors/disconnects or new server exceptions
+PASS captured and follow-up server cleanup: 1 existing player, 0 parties, 1 AOI cache
+PASS focused 20-client server-led LEAVE_WORLD: 20/20 transports CLOSED; online 21 -> 1, AOI 1; other player retained
+
+world15-load-cleanup-probe.log
+PASS focused 20-client server-led LEAVE_WORLD: 20/20 transports CLOSED; online 21 -> 1, AOI 1; other player retained

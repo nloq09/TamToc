@@ -1,0 +1,345 @@
+{
+  "definitions": [
+    {
+      "id": "human-guard",
+      "botType": "GUARD",
+      "race": "HUMAN",
+      "factionId": "HUMAN",
+      "name": "Thủ Vệ Nhân Tộc",
+      "stats": {
+        "level": 6,
+        "hp": 240,
+        "mp": 100,
+        "attack": 18,
+        "defense": 8,
+        "speed": 115
+      },
+      "skills": [
+        "ATTACK",
+        "QI",
+        "HUMAN_POWER"
+      ],
+      "behaviorProfileId": "guard",
+      "dialogueId": "guard",
+      "interactable": true,
+      "combatPolicy": "HOSTILE_MONSTERS_ONLY",
+      "respawnMs": 5000
+    },
+    {
+      "id": "human-wanderer",
+      "botType": "WANDERER",
+      "race": "HUMAN",
+      "factionId": "HUMAN",
+      "name": "Hành Nhân Nhân Tộc",
+      "stats": {
+        "level": 1,
+        "hp": 80,
+        "mp": 0,
+        "attack": 0,
+        "defense": 0,
+        "speed": 55
+      },
+      "skills": [],
+      "behaviorProfileId": "citizen",
+      "dialogueId": "citizen",
+      "interactable": true,
+      "combatPolicy": "NEVER",
+      "respawnMs": 5000
+    },
+    {
+      "id": "human-challenger",
+      "botType": "CHALLENGER",
+      "race": "HUMAN",
+      "factionId": "HUMAN",
+      "name": "Đối Luyện Sư Nhân Tộc",
+      "stats": {
+        "level": 1,
+        "hp": 100,
+        "mp": 60,
+        "attack": 0,
+        "defense": 0,
+        "speed": 170
+      },
+      "skills": [
+        "ATTACK",
+        "QI",
+        "HUMAN_POWER"
+      ],
+      "behaviorProfileId": "sparring",
+      "dialogueId": "sparring",
+      "interactable": true,
+      "combatPolicy": "CONSENT_TRAINING",
+      "respawnMs": 5000
+    },
+    {
+      "id": "demon-guard",
+      "botType": "GUARD",
+      "race": "DEMON",
+      "factionId": "DEMON",
+      "name": "Thủ Vệ Ma Tộc",
+      "stats": {
+        "level": 6,
+        "hp": 240,
+        "mp": 100,
+        "attack": 18,
+        "defense": 8,
+        "speed": 115
+      },
+      "skills": [
+        "ATTACK",
+        "QI",
+        "DEMON_POWER"
+      ],
+      "behaviorProfileId": "guard",
+      "dialogueId": "guard",
+      "interactable": true,
+      "combatPolicy": "HOSTILE_MONSTERS_ONLY",
+      "respawnMs": 5000
+    },
+    {
+      "id": "demon-wanderer",
+      "botType": "WANDERER",
+      "race": "DEMON",
+      "factionId": "DEMON",
+      "name": "Hành Nhân Ma Tộc",
+      "stats": {
+        "level": 1,
+        "hp": 80,
+        "mp": 0,
+        "attack": 0,
+        "defense": 0,
+        "speed": 55
+      },
+      "skills": [],
+      "behaviorProfileId": "citizen",
+      "dialogueId": "citizen",
+      "interactable": true,
+      "combatPolicy": "NEVER",
+      "respawnMs": 5000
+    },
+    {
+      "id": "demon-challenger",
+      "botType": "CHALLENGER",
+      "race": "DEMON",
+      "factionId": "DEMON",
+      "name": "Đối Luyện Sư Ma Tộc",
+      "stats": {
+        "level": 1,
+        "hp": 100,
+        "mp": 60,
+        "attack": 0,
+        "defense": 0,
+        "speed": 170
+      },
+      "skills": [
+        "ATTACK",
+        "QI",
+        "DEMON_POWER"
+      ],
+      "behaviorProfileId": "sparring",
+      "dialogueId": "sparring",
+      "interactable": true,
+      "combatPolicy": "CONSENT_TRAINING",
+      "respawnMs": 5000
+    },
+    {
+      "id": "beast-guard",
+      "botType": "GUARD",
+      "race": "BEAST",
+      "factionId": "BEAST",
+      "name": "Thủ Vệ Yêu Tộc",
+      "stats": {
+        "level": 6,
+        "hp": 240,
+        "mp": 100,
+        "attack": 18,
+        "defense": 8,
+        "speed": 115
+      },
+      "skills": [
+        "ATTACK",
+        "QI",
+        "BEAST_POWER"
+      ],
+      "behaviorProfileId": "guard",
+      "dialogueId": "guard",
+      "interactable": true,
+      "combatPolicy": "HOSTILE_MONSTERS_ONLY",
+      "respawnMs": 5000
+    },
+    {
+      "id": "beast-wanderer",
+      "botType": "WANDERER",
+      "race": "BEAST",
+      "factionId": "BEAST",
+      "name": "Hành Nhân Yêu Tộc",
+      "stats": {
+        "level": 1,
+        "hp": 80,
+        "mp": 0,
+        "attack": 0,
+        "defense": 0,
+        "speed": 55
+      },
+      "skills": [],
+      "behaviorProfileId": "citizen",
+      "dialogueId": "citizen",
+      "interactable": true,
+      "combatPolicy": "NEVER",
+      "respawnMs": 5000
+    },
+    {
+      "id": "beast-challenger",
+      "botType": "CHALLENGER",
+      "race": "BEAST",
+      "factionId": "BEAST",
+      "name": "Đối Luyện Sư Yêu Tộc",
+      "stats": {
+        "level": 1,
+        "hp": 100,
+        "mp": 60,
+        "attack": 0,
+        "defense": 0,
+        "speed": 170
+      },
+      "skills": [
+        "ATTACK",
+        "QI",
+        "BEAST_POWER"
+      ],
+      "behaviorProfileId": "sparring",
+      "dialogueId": "sparring",
+      "interactable": true,
+      "combatPolicy": "CONSENT_TRAINING",
+      "respawnMs": 5000
+    },
+    {
+      "id": "neutral-guard",
+      "botType": "GUARD",
+      "race": "HUMAN",
+      "factionId": "NEUTRAL",
+      "name": "Tuần Vệ Trung Lập",
+      "stats": {
+        "level": 6,
+        "hp": 240,
+        "mp": 100,
+        "attack": 18,
+        "defense": 8,
+        "speed": 115
+      },
+      "skills": [
+        "ATTACK",
+        "QI",
+        "HUMAN_POWER"
+      ],
+      "behaviorProfileId": "guard",
+      "dialogueId": "guard",
+      "interactable": true,
+      "combatPolicy": "HOSTILE_MONSTERS_ONLY",
+      "respawnMs": 5000
+    },
+    {
+      "id": "neutral-wanderer",
+      "botType": "WANDERER",
+      "race": "HUMAN",
+      "factionId": "NEUTRAL",
+      "name": "Hành Khách Tam Giới",
+      "stats": {
+        "level": 1,
+        "hp": 80,
+        "mp": 0,
+        "attack": 0,
+        "defense": 0,
+        "speed": 55
+      },
+      "skills": [],
+      "behaviorProfileId": "citizen",
+      "dialogueId": "citizen",
+      "interactable": true,
+      "combatPolicy": "NEVER",
+      "respawnMs": 5000
+    }
+  ],
+  "profiles": [
+    {
+      "id": "guard",
+      "thinkIntervalMs": 250,
+      "perception": 220,
+      "leashRadius": 230,
+      "retreatHpRatio": 0.15,
+      "canJump": false,
+      "jumpVelocity": 570,
+      "maxDrop": 150
+    },
+    {
+      "id": "citizen",
+      "thinkIntervalMs": 650,
+      "perception": 160,
+      "leashRadius": 250,
+      "retreatHpRatio": 0.25,
+      "canJump": false,
+      "jumpVelocity": 570,
+      "maxDrop": 100
+    },
+    {
+      "id": "sparring",
+      "thinkIntervalMs": 500,
+      "perception": 650,
+      "leashRadius": 1200,
+      "retreatHpRatio": 0.18,
+      "canJump": false,
+      "jumpVelocity": 570,
+      "maxDrop": 100
+    }
+  ],
+  "dialogues": [
+    {
+      "id": "guard",
+      "lines": [
+        "[AI] Ta tuần tra bảo vệ khu an toàn. Chỉ quái thù địch mới là mục tiêu của ta.",
+        "[AI] Điểm hồi sinh nằm trong vùng có viền xanh. Hãy nghỉ trước khi ra ngoài."
+      ]
+    },
+    {
+      "id": "citizen",
+      "lines": [
+        "[AI] Ta đi theo lộ trình của vùng này. Ngoại Sơn có trại nghỉ và các nền đá để nhảy.",
+        "[AI] Cổng Trung Châu kết nối cả ba tộc. Ngươi có thể lập tổ đội cùng đạo hữu khác tộc."
+      ]
+    },
+    {
+      "id": "sparring",
+      "lines": [
+        "[AI] Chọn EASY hoặc HARD để chủ động bắt đầu bài đối luyện riêng. Không có EXP hay vật phẩm thưởng; thua cũng không mất đồ."
+      ]
+    },
+    {
+      "id": "guide",
+      "lines": [
+        "Mở Nhiệm vụ để nhận thử thách Yêu Lang. Từ cấp 10, nhận Con Đường Tu Luyện rồi chọn một thế lực."
+      ]
+    }
+  ],
+  "difficulties": [
+    {
+      "id": "EASY",
+      "thinkIntervalMs": 800,
+      "levelBonus": 0,
+      "hpMultiplier": 1,
+      "mpMultiplier": 1,
+      "attackBonus": 0,
+      "defenseBonus": 0,
+      "speedMultiplier": 0.85
+    },
+    {
+      "id": "HARD",
+      "thinkIntervalMs": 350,
+      "levelBonus": 2,
+      "hpMultiplier": 1.5,
+      "mpMultiplier": 1.2,
+      "attackBonus": 6,
+      "defenseBonus": 4,
+      "speedMultiplier": 1.15
+    }
+  ]
+}

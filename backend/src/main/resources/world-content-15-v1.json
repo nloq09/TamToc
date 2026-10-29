@@ -1,0 +1,2835 @@
+{
+  "metadata": {
+    "name": "Tam Toc: Nghich Thien — World Content 15 Map V1",
+    "contentVersion": "world_catalog_15_v1",
+    "derivedFrom": "TAM_TOC_WORLD_CONTENT_V2_DU_LIEU.json",
+    "sourceOfTruth": "EXISTING_REPOSITORY",
+    "intendedMapCount": 15,
+    "suggestedPlayableLevelRange": [
+      1,
+      25
+    ],
+    "note": "Curated proposal from 72-map content. Existing repo IDs, mechanics, quests take priority. Do not hard-delete 57 previous maps if deployed; archive/disable unused planned content. Planned spawns and connections remain disabled pending validation.",
+    "activationPolicy": "REVIEW_AND_ACTIVATE_STAGED",
+    "questsPolicy": "Respect existing kill 5 Yeu Lang and Level 10 organization entrance; do not duplicate."
+  },
+  "maps": [
+    {
+      "mapId": "thanh_van_thanh",
+      "name": "Thanh Vân Thành",
+      "region": "NHAN",
+      "type": "SAFE_TOWN",
+      "recommendedLevelMin": 1,
+      "recommendedLevelMax": 100,
+      "requiredLevel": 1,
+      "contentStatus": "EXISTING_REFERENCE",
+      "safe": true,
+      "geometryStatus": "REUSE_REPO",
+      "spawnGroupIds": [],
+      "bossIds": [],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "TOWN",
+      "needsImplementationReview": false
+    },
+    {
+      "mapId": "u_minh_thanh",
+      "name": "U Minh Thành",
+      "region": "MA",
+      "type": "SAFE_TOWN",
+      "recommendedLevelMin": 1,
+      "recommendedLevelMax": 100,
+      "requiredLevel": 1,
+      "contentStatus": "EXISTING_REFERENCE",
+      "safe": true,
+      "geometryStatus": "REUSE_REPO",
+      "spawnGroupIds": [],
+      "bossIds": [],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "TOWN",
+      "needsImplementationReview": false
+    },
+    {
+      "mapId": "van_yeu_lam",
+      "name": "Vạn Yêu Lâm",
+      "region": "YEU",
+      "type": "SAFE_TOWN",
+      "recommendedLevelMin": 1,
+      "recommendedLevelMax": 100,
+      "requiredLevel": 1,
+      "contentStatus": "EXISTING_REFERENCE",
+      "safe": true,
+      "geometryStatus": "REUSE_REPO",
+      "spawnGroupIds": [],
+      "bossIds": [],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "TOWN",
+      "needsImplementationReview": false
+    },
+    {
+      "mapId": "thanh_van_ngoai_son",
+      "name": "Thanh Vân Ngoại Sơn",
+      "region": "NHAN",
+      "type": "FIELD",
+      "recommendedLevelMin": 1,
+      "recommendedLevelMax": 5,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "thanh_van_ngoai_son_mob_01",
+        "thanh_van_ngoai_son_mob_02",
+        "thanh_van_ngoai_son_mob_03"
+      ],
+      "bossIds": [
+        "son_lang_tinh"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "thanh_van_ngoai_son_mob_zone_01",
+        "thanh_van_ngoai_son_mob_zone_02",
+        "thanh_van_ngoai_son_mob_zone_03",
+        "thanh_van_ngoai_son_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "RACE_START_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "huyet_vu_coc",
+      "name": "Huyết Vụ Cốc",
+      "region": "MA",
+      "type": "FIELD",
+      "recommendedLevelMin": 1,
+      "recommendedLevelMax": 5,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "huyet_vu_coc_mob_01",
+        "huyet_vu_coc_mob_02",
+        "huyet_vu_coc_mob_03"
+      ],
+      "bossIds": [
+        "huyet_anh"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "huyet_vu_coc_mob_zone_01",
+        "huyet_vu_coc_mob_zone_02",
+        "huyet_vu_coc_mob_zone_03",
+        "huyet_vu_coc_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "RACE_START_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "linh_thu_son_lo",
+      "name": "Linh Thú Sơn Lộ",
+      "region": "YEU",
+      "type": "FIELD",
+      "recommendedLevelMin": 1,
+      "recommendedLevelMax": 5,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "linh_thu_son_lo_mob_01",
+        "linh_thu_son_lo_mob_02",
+        "linh_thu_son_lo_mob_03"
+      ],
+      "bossIds": [
+        "co_moc_tinh"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "linh_thu_son_lo_mob_zone_01",
+        "linh_thu_son_lo_mob_zone_02",
+        "linh_thu_son_lo_mob_zone_03",
+        "linh_thu_son_lo_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "RACE_START_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "truc_anh_lam",
+      "name": "Trúc Ảnh Lâm",
+      "region": "NHAN",
+      "type": "FIELD",
+      "recommendedLevelMin": 4,
+      "recommendedLevelMax": 7,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "truc_anh_lam_mob_01",
+        "truc_anh_lam_mob_02",
+        "truc_anh_lam_mob_03"
+      ],
+      "bossIds": [
+        "truc_linh_ho_ve"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "truc_anh_lam_mob_zone_01",
+        "truc_anh_lam_mob_zone_02",
+        "truc_anh_lam_mob_zone_03",
+        "truc_anh_lam_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "RACE_MID_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "u_minh_ngoai_dao",
+      "name": "U Minh Ngoại Đạo",
+      "region": "MA",
+      "type": "FIELD",
+      "recommendedLevelMin": 4,
+      "recommendedLevelMax": 7,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "u_minh_ngoai_dao_mob_01",
+        "u_minh_ngoai_dao_mob_02",
+        "u_minh_ngoai_dao_mob_03"
+      ],
+      "bossIds": [
+        "hac_anh_trinh_sat"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "u_minh_ngoai_dao_mob_zone_01",
+        "u_minh_ngoai_dao_mob_zone_02",
+        "u_minh_ngoai_dao_mob_zone_03",
+        "u_minh_ngoai_dao_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "RACE_MID_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "thanh_khau_truc_lam",
+      "name": "Thanh Khâu Trúc Lâm",
+      "region": "YEU",
+      "type": "FIELD",
+      "recommendedLevelMin": 4,
+      "recommendedLevelMax": 7,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "thanh_khau_truc_lam_mob_01",
+        "thanh_khau_truc_lam_mob_02",
+        "thanh_khau_truc_lam_mob_03"
+      ],
+      "bossIds": [
+        "thanh_khau_ho_linh"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "thanh_khau_truc_lam_mob_zone_01",
+        "thanh_khau_truc_lam_mob_zone_02",
+        "thanh_khau_truc_lam_mob_zone_03",
+        "thanh_khau_truc_lam_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "RACE_MID_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "trung_chau",
+      "name": "Trung Châu",
+      "region": "CHUNG",
+      "type": "SAFE_TOWN",
+      "recommendedLevelMin": 1,
+      "recommendedLevelMax": 100,
+      "requiredLevel": 1,
+      "contentStatus": "EXISTING_REFERENCE",
+      "safe": true,
+      "geometryStatus": "REUSE_REPO",
+      "spawnGroupIds": [],
+      "bossIds": [],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "TOWN",
+      "needsImplementationReview": false
+    },
+    {
+      "mapId": "tam_gioi_bien_canh",
+      "name": "Tam Giới Biên Cảnh",
+      "region": "CHUNG",
+      "type": "FIELD",
+      "recommendedLevelMin": 6,
+      "recommendedLevelMax": 12,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "tam_gioi_bien_canh_mob_01",
+        "tam_gioi_bien_canh_mob_02",
+        "tam_gioi_bien_canh_mob_03"
+      ],
+      "bossIds": [
+        "bien_canh_loan_thu"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "tam_gioi_bien_canh_mob_zone_01",
+        "tam_gioi_bien_canh_mob_zone_02",
+        "tam_gioi_bien_canh_mob_zone_03",
+        "tam_gioi_bien_canh_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "SHARED_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "vo_chu_hoang_nguyen",
+      "name": "Vô Chủ Hoang Nguyên",
+      "region": "CHUNG",
+      "type": "FIELD",
+      "recommendedLevelMin": 8,
+      "recommendedLevelMax": 15,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "vo_chu_hoang_nguyen_mob_01",
+        "vo_chu_hoang_nguyen_mob_02",
+        "vo_chu_hoang_nguyen_mob_03"
+      ],
+      "bossIds": [
+        "hoang_nguyen_thu_linh",
+        "hoang_nguyen_cu_thu"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "vo_chu_hoang_nguyen_mob_zone_01",
+        "vo_chu_hoang_nguyen_mob_zone_02",
+        "vo_chu_hoang_nguyen_mob_zone_03",
+        "vo_chu_hoang_nguyen_boss_zone_elite",
+        "vo_chu_hoang_nguyen_boss_zone_world_boss"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "SHARED_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "thien_mon_di_tich",
+      "name": "Thiên Môn Di Tích",
+      "region": "CHUNG",
+      "type": "FIELD",
+      "recommendedLevelMin": 15,
+      "recommendedLevelMax": 22,
+      "requiredLevel": 1,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "thien_mon_di_tich_mob_01",
+        "thien_mon_di_tich_mob_02",
+        "thien_mon_di_tich_mob_03"
+      ],
+      "bossIds": [
+        "thien_mon_tran_linh"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "thien_mon_di_tich_mob_zone_01",
+        "thien_mon_di_tich_mob_zone_02",
+        "thien_mon_di_tich_mob_zone_03",
+        "thien_mon_di_tich_boss_zone_elite"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "SHARED_FIELD",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "huyen_moc_bi_canh",
+      "name": "Huyền Mộc Bí Cảnh",
+      "region": "BI_CANH",
+      "type": "DUNGEON",
+      "recommendedLevelMin": 10,
+      "recommendedLevelMax": 15,
+      "requiredLevel": 10,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "huyen_moc_bi_canh_mob_01",
+        "huyen_moc_bi_canh_mob_02"
+      ],
+      "bossIds": [
+        "huyen_moc_yeu_vuong"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "huyen_moc_bi_canh_mob_zone_01",
+        "huyen_moc_bi_canh_mob_zone_02",
+        "huyen_moc_bi_canh_boss_zone_dungeon_boss"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "DUNGEON",
+      "needsImplementationReview": true
+    },
+    {
+      "mapId": "cuu_u_thach_phu",
+      "name": "Cửu U Thạch Phủ",
+      "region": "BI_CANH",
+      "type": "DUNGEON",
+      "recommendedLevelMin": 18,
+      "recommendedLevelMax": 25,
+      "requiredLevel": 18,
+      "contentStatus": "PLANNED",
+      "safe": false,
+      "geometryStatus": "TO_BE_IMPLEMENTED",
+      "spawnGroupIds": [
+        "cuu_u_thach_phu_mob_01",
+        "cuu_u_thach_phu_mob_02"
+      ],
+      "bossIds": [
+        "cuu_u_thach_quan"
+      ],
+      "portalRefs": [],
+      "collisionRefs": [],
+      "spawnZoneRefs": [
+        "cuu_u_thach_phu_mob_zone_01",
+        "cuu_u_thach_phu_mob_zone_02",
+        "cuu_u_thach_phu_boss_zone_dungeon_boss"
+      ],
+      "contentPack": "WORLD15_V1",
+      "progressionRole": "DUNGEON",
+      "needsImplementationReview": true
+    }
+  ],
+  "monsterDefinitions": [
+    {
+      "monsterId": "son_tho",
+      "name": "Sơn Thỏ",
+      "tier": "NORMAL",
+      "behaviorArchetype": "MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "yeu_lang",
+      "name": "Yêu Lang",
+      "tier": "NORMAL",
+      "behaviorArchetype": "RANGED",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "EXISTING_REFERENCE"
+    },
+    {
+      "monsterId": "truc_yeu",
+      "name": "Trúc Yêu",
+      "tier": "NORMAL",
+      "behaviorArchetype": "CASTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "son_lang_tinh",
+      "name": "Sơn Lang Tinh",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "truc_tinh",
+      "name": "Trúc Tinh",
+      "tier": "NORMAL",
+      "behaviorArchetype": "SKIRMISHER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "thanh_diep_ho",
+      "name": "Thanh Diệp Hồ",
+      "tier": "NORMAL",
+      "behaviorArchetype": "MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "truc_linh_ho_ve",
+      "name": "Trúc Linh Hộ Vệ",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "ma_trung",
+      "name": "Ma Trùng",
+      "tier": "NORMAL",
+      "behaviorArchetype": "SKIRMISHER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "ma_binh",
+      "name": "Ma Binh",
+      "tier": "NORMAL",
+      "behaviorArchetype": "MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "EXISTING_REFERENCE"
+    },
+    {
+      "monsterId": "huyet_anh",
+      "name": "Huyết Ảnh",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "da_buc",
+      "name": "Dạ Bức",
+      "tier": "NORMAL",
+      "behaviorArchetype": "CASTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "u_minh_hon",
+      "name": "U Minh Hồn",
+      "tier": "NORMAL",
+      "behaviorArchetype": "TANK",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "hac_anh_trinh_sat",
+      "name": "Hắc Ảnh Trinh Sát",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "moc_linh",
+      "name": "Mộc Linh",
+      "tier": "NORMAL",
+      "behaviorArchetype": "CASTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "linh_thu",
+      "name": "Linh Thú",
+      "tier": "NORMAL",
+      "behaviorArchetype": "TANK",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "EXISTING_REFERENCE"
+    },
+    {
+      "monsterId": "co_moc_tinh",
+      "name": "Cổ Mộc Tinh",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "truc_ho",
+      "name": "Trúc Hồ",
+      "tier": "NORMAL",
+      "behaviorArchetype": "MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "phong_linh_dieu",
+      "name": "Phong Linh Điểu",
+      "tier": "NORMAL",
+      "behaviorArchetype": "RANGED",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "thanh_khau_ho_linh",
+      "name": "Thanh Khâu Hộ Linh",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "bien_canh_loan_thu",
+      "name": "Biên Cảnh Loạn Thú",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "hoang_nguyen_lang",
+      "name": "Hoang Nguyên Lang",
+      "tier": "NORMAL",
+      "behaviorArchetype": "RANGED",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "dia_cot_trung",
+      "name": "Địa Cốt Trùng",
+      "tier": "NORMAL",
+      "behaviorArchetype": "CASTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "bien_sa_ung",
+      "name": "Biên Sa Ưng",
+      "tier": "NORMAL",
+      "behaviorArchetype": "TANK",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "hoang_nguyen_thu_linh",
+      "name": "Hoang Nguyên Thủ Lĩnh",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "hoang_nguyen_cu_thu",
+      "name": "Hoang Nguyên Cự Thú",
+      "tier": "WORLD_BOSS",
+      "behaviorArchetype": "WORLD_ENCOUNTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_world_boss",
+      "rewardProfile": "reward_world_boss",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "di_tich_oan_linh",
+      "name": "Di Tích Oán Linh",
+      "tier": "NORMAL",
+      "behaviorArchetype": "RANGED",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "thien_mon_ve_binh",
+      "name": "Thiên Môn Vệ Binh",
+      "tier": "NORMAL",
+      "behaviorArchetype": "CASTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "co_an_hon",
+      "name": "Cổ Ấn Hồn",
+      "tier": "NORMAL",
+      "behaviorArchetype": "TANK",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "thien_mon_tran_linh",
+      "name": "Thiên Môn Trấn Linh",
+      "tier": "ELITE",
+      "behaviorArchetype": "ELITE_MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_elite",
+      "rewardProfile": "reward_elite",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "huyen_moc_thu_tinh",
+      "name": "Huyền Mộc Thụ Tinh",
+      "tier": "NORMAL",
+      "behaviorArchetype": "CASTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "huyen_moc_yeu_vuong",
+      "name": "Huyền Mộc Yêu Vương",
+      "tier": "DUNGEON_BOSS",
+      "behaviorArchetype": "PHASED_ENCOUNTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_dungeon_boss",
+      "rewardProfile": "reward_dungeon_boss",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "EXISTING_REFERENCE"
+    },
+    {
+      "monsterId": "u_hon_thach_ve",
+      "name": "U Hồn Thạch Vệ",
+      "tier": "NORMAL",
+      "behaviorArchetype": "SKIRMISHER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "thach_phu_ma_linh",
+      "name": "Thạch Phủ Ma Linh",
+      "tier": "NORMAL",
+      "behaviorArchetype": "MELEE",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_normal",
+      "rewardProfile": "reward_normal",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    },
+    {
+      "monsterId": "cuu_u_thach_quan",
+      "name": "Cửu U Thạch Quân",
+      "tier": "DUNGEON_BOSS",
+      "behaviorArchetype": "PHASED_ENCOUNTER",
+      "defaultMovement": "GROUND",
+      "levelScalingProfile": "default_dungeon_boss",
+      "rewardProfile": "reward_dungeon_boss",
+      "assetStatus": "PLACEHOLDER",
+      "contentOrigin": "PROPOSED"
+    }
+  ],
+  "monsterSpawnGroups": [
+    {
+      "spawnGroupId": "thanh_van_ngoai_son_mob_01",
+      "mapId": "thanh_van_ngoai_son",
+      "monsterId": "son_tho",
+      "tier": "NORMAL",
+      "levelMin": 1,
+      "levelMax": 2,
+      "maxAlive": 6,
+      "spawnZoneId": "thanh_van_ngoai_son_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thanh_van_ngoai_son_mob_02",
+      "mapId": "thanh_van_ngoai_son",
+      "monsterId": "yeu_lang",
+      "tier": "NORMAL",
+      "levelMin": 2,
+      "levelMax": 4,
+      "maxAlive": 5,
+      "spawnZoneId": "thanh_van_ngoai_son_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thanh_van_ngoai_son_mob_03",
+      "mapId": "thanh_van_ngoai_son",
+      "monsterId": "truc_yeu",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 5,
+      "maxAlive": 4,
+      "spawnZoneId": "thanh_van_ngoai_son_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "truc_anh_lam_mob_01",
+      "mapId": "truc_anh_lam",
+      "monsterId": "truc_tinh",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 5,
+      "maxAlive": 6,
+      "spawnZoneId": "truc_anh_lam_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "truc_anh_lam_mob_02",
+      "mapId": "truc_anh_lam",
+      "monsterId": "thanh_diep_ho",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 6,
+      "maxAlive": 5,
+      "spawnZoneId": "truc_anh_lam_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "truc_anh_lam_mob_03",
+      "mapId": "truc_anh_lam",
+      "monsterId": "yeu_lang",
+      "tier": "NORMAL",
+      "levelMin": 6,
+      "levelMax": 7,
+      "maxAlive": 4,
+      "spawnZoneId": "truc_anh_lam_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "huyet_vu_coc_mob_01",
+      "mapId": "huyet_vu_coc",
+      "monsterId": "ma_trung",
+      "tier": "NORMAL",
+      "levelMin": 1,
+      "levelMax": 2,
+      "maxAlive": 6,
+      "spawnZoneId": "huyet_vu_coc_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "huyet_vu_coc_mob_02",
+      "mapId": "huyet_vu_coc",
+      "monsterId": "ma_binh",
+      "tier": "NORMAL",
+      "levelMin": 2,
+      "levelMax": 4,
+      "maxAlive": 5,
+      "spawnZoneId": "huyet_vu_coc_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "huyet_vu_coc_mob_03",
+      "mapId": "huyet_vu_coc",
+      "monsterId": "yeu_lang",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 5,
+      "maxAlive": 4,
+      "spawnZoneId": "huyet_vu_coc_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "u_minh_ngoai_dao_mob_01",
+      "mapId": "u_minh_ngoai_dao",
+      "monsterId": "da_buc",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 5,
+      "maxAlive": 6,
+      "spawnZoneId": "u_minh_ngoai_dao_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "u_minh_ngoai_dao_mob_02",
+      "mapId": "u_minh_ngoai_dao",
+      "monsterId": "u_minh_hon",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 6,
+      "maxAlive": 5,
+      "spawnZoneId": "u_minh_ngoai_dao_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "u_minh_ngoai_dao_mob_03",
+      "mapId": "u_minh_ngoai_dao",
+      "monsterId": "ma_binh",
+      "tier": "NORMAL",
+      "levelMin": 6,
+      "levelMax": 7,
+      "maxAlive": 4,
+      "spawnZoneId": "u_minh_ngoai_dao_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "linh_thu_son_lo_mob_01",
+      "mapId": "linh_thu_son_lo",
+      "monsterId": "moc_linh",
+      "tier": "NORMAL",
+      "levelMin": 1,
+      "levelMax": 2,
+      "maxAlive": 6,
+      "spawnZoneId": "linh_thu_son_lo_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "linh_thu_son_lo_mob_02",
+      "mapId": "linh_thu_son_lo",
+      "monsterId": "linh_thu",
+      "tier": "NORMAL",
+      "levelMin": 2,
+      "levelMax": 4,
+      "maxAlive": 5,
+      "spawnZoneId": "linh_thu_son_lo_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "linh_thu_son_lo_mob_03",
+      "mapId": "linh_thu_son_lo",
+      "monsterId": "yeu_lang",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 5,
+      "maxAlive": 4,
+      "spawnZoneId": "linh_thu_son_lo_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thanh_khau_truc_lam_mob_01",
+      "mapId": "thanh_khau_truc_lam",
+      "monsterId": "truc_ho",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 5,
+      "maxAlive": 6,
+      "spawnZoneId": "thanh_khau_truc_lam_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thanh_khau_truc_lam_mob_02",
+      "mapId": "thanh_khau_truc_lam",
+      "monsterId": "phong_linh_dieu",
+      "tier": "NORMAL",
+      "levelMin": 4,
+      "levelMax": 6,
+      "maxAlive": 5,
+      "spawnZoneId": "thanh_khau_truc_lam_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thanh_khau_truc_lam_mob_03",
+      "mapId": "thanh_khau_truc_lam",
+      "monsterId": "linh_thu",
+      "tier": "NORMAL",
+      "levelMin": 6,
+      "levelMax": 7,
+      "maxAlive": 4,
+      "spawnZoneId": "thanh_khau_truc_lam_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "tam_gioi_bien_canh_mob_01",
+      "mapId": "tam_gioi_bien_canh",
+      "monsterId": "yeu_lang",
+      "tier": "NORMAL",
+      "levelMin": 6,
+      "levelMax": 7,
+      "maxAlive": 6,
+      "spawnZoneId": "tam_gioi_bien_canh_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "tam_gioi_bien_canh_mob_02",
+      "mapId": "tam_gioi_bien_canh",
+      "monsterId": "ma_binh",
+      "tier": "NORMAL",
+      "levelMin": 8,
+      "levelMax": 10,
+      "maxAlive": 5,
+      "spawnZoneId": "tam_gioi_bien_canh_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "tam_gioi_bien_canh_mob_03",
+      "mapId": "tam_gioi_bien_canh",
+      "monsterId": "linh_thu",
+      "tier": "NORMAL",
+      "levelMin": 11,
+      "levelMax": 12,
+      "maxAlive": 4,
+      "spawnZoneId": "tam_gioi_bien_canh_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 18
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "vo_chu_hoang_nguyen_mob_01",
+      "mapId": "vo_chu_hoang_nguyen",
+      "monsterId": "hoang_nguyen_lang",
+      "tier": "NORMAL",
+      "levelMin": 8,
+      "levelMax": 9,
+      "maxAlive": 6,
+      "spawnZoneId": "vo_chu_hoang_nguyen_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 23
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "vo_chu_hoang_nguyen_mob_02",
+      "mapId": "vo_chu_hoang_nguyen",
+      "monsterId": "dia_cot_trung",
+      "tier": "NORMAL",
+      "levelMin": 10,
+      "levelMax": 12,
+      "maxAlive": 5,
+      "spawnZoneId": "vo_chu_hoang_nguyen_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 23
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "vo_chu_hoang_nguyen_mob_03",
+      "mapId": "vo_chu_hoang_nguyen",
+      "monsterId": "bien_sa_ung",
+      "tier": "NORMAL",
+      "levelMin": 14,
+      "levelMax": 15,
+      "maxAlive": 4,
+      "spawnZoneId": "vo_chu_hoang_nguyen_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 23
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thien_mon_di_tich_mob_01",
+      "mapId": "thien_mon_di_tich",
+      "monsterId": "di_tich_oan_linh",
+      "tier": "NORMAL",
+      "levelMin": 15,
+      "levelMax": 16,
+      "maxAlive": 6,
+      "spawnZoneId": "thien_mon_di_tich_mob_zone_01",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 23
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thien_mon_di_tich_mob_02",
+      "mapId": "thien_mon_di_tich",
+      "monsterId": "thien_mon_ve_binh",
+      "tier": "NORMAL",
+      "levelMin": 17,
+      "levelMax": 19,
+      "maxAlive": 5,
+      "spawnZoneId": "thien_mon_di_tich_mob_zone_02",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 23
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "thien_mon_di_tich_mob_03",
+      "mapId": "thien_mon_di_tich",
+      "monsterId": "co_an_hon",
+      "tier": "NORMAL",
+      "levelMin": 21,
+      "levelMax": 22,
+      "maxAlive": 4,
+      "spawnZoneId": "thien_mon_di_tich_mob_zone_03",
+      "respawn": {
+        "policy": "AFTER_DEATH",
+        "seconds": 23
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "huyen_moc_bi_canh_mob_01",
+      "mapId": "huyen_moc_bi_canh",
+      "monsterId": "moc_linh",
+      "tier": "NORMAL",
+      "levelMin": 10,
+      "levelMax": 11,
+      "maxAlive": 4,
+      "spawnZoneId": "huyen_moc_bi_canh_mob_zone_01",
+      "respawn": {
+        "policy": "ENCOUNTER_WAVE",
+        "seconds": null
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "huyen_moc_bi_canh_mob_02",
+      "mapId": "huyen_moc_bi_canh",
+      "monsterId": "huyen_moc_thu_tinh",
+      "tier": "NORMAL",
+      "levelMin": 11,
+      "levelMax": 13,
+      "maxAlive": 4,
+      "spawnZoneId": "huyen_moc_bi_canh_mob_zone_02",
+      "respawn": {
+        "policy": "ENCOUNTER_WAVE",
+        "seconds": null
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "cuu_u_thach_phu_mob_01",
+      "mapId": "cuu_u_thach_phu",
+      "monsterId": "u_hon_thach_ve",
+      "tier": "NORMAL",
+      "levelMin": 18,
+      "levelMax": 19,
+      "maxAlive": 4,
+      "spawnZoneId": "cuu_u_thach_phu_mob_zone_01",
+      "respawn": {
+        "policy": "ENCOUNTER_WAVE",
+        "seconds": null
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    },
+    {
+      "spawnGroupId": "cuu_u_thach_phu_mob_02",
+      "mapId": "cuu_u_thach_phu",
+      "monsterId": "thach_phu_ma_linh",
+      "tier": "NORMAL",
+      "levelMin": 20,
+      "levelMax": 22,
+      "maxAlive": 4,
+      "spawnZoneId": "cuu_u_thach_phu_mob_zone_02",
+      "respawn": {
+        "policy": "ENCOUNTER_WAVE",
+        "seconds": null
+      },
+      "enabled": false,
+      "status": "PROPOSED_NEEDS_GEOMETRY"
+    }
+  ],
+  "bossPlacements": [
+    {
+      "placementId": "thanh_van_ngoai_son_boss_elite",
+      "mapId": "thanh_van_ngoai_son",
+      "monsterId": "son_lang_tinh",
+      "tier": "ELITE",
+      "level": 5,
+      "spawnZoneId": "thanh_van_ngoai_son_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 183
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "truc_anh_lam_boss_elite",
+      "mapId": "truc_anh_lam",
+      "monsterId": "truc_linh_ho_ve",
+      "tier": "ELITE",
+      "level": 7,
+      "spawnZoneId": "truc_anh_lam_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 192
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "huyet_vu_coc_boss_elite",
+      "mapId": "huyet_vu_coc",
+      "monsterId": "huyet_anh",
+      "tier": "ELITE",
+      "level": 5,
+      "spawnZoneId": "huyet_vu_coc_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 183
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "u_minh_ngoai_dao_boss_elite",
+      "mapId": "u_minh_ngoai_dao",
+      "monsterId": "hac_anh_trinh_sat",
+      "tier": "ELITE",
+      "level": 7,
+      "spawnZoneId": "u_minh_ngoai_dao_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 192
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "linh_thu_son_lo_boss_elite",
+      "mapId": "linh_thu_son_lo",
+      "monsterId": "co_moc_tinh",
+      "tier": "ELITE",
+      "level": 5,
+      "spawnZoneId": "linh_thu_son_lo_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 183
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "thanh_khau_truc_lam_boss_elite",
+      "mapId": "thanh_khau_truc_lam",
+      "monsterId": "thanh_khau_ho_linh",
+      "tier": "ELITE",
+      "level": 7,
+      "spawnZoneId": "thanh_khau_truc_lam_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 192
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "tam_gioi_bien_canh_boss_elite",
+      "mapId": "tam_gioi_bien_canh",
+      "monsterId": "bien_canh_loan_thu",
+      "tier": "ELITE",
+      "level": 12,
+      "spawnZoneId": "tam_gioi_bien_canh_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 198
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "vo_chu_hoang_nguyen_boss_elite",
+      "mapId": "vo_chu_hoang_nguyen",
+      "monsterId": "hoang_nguyen_thu_linh",
+      "tier": "ELITE",
+      "level": 15,
+      "spawnZoneId": "vo_chu_hoang_nguyen_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 204
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "vo_chu_hoang_nguyen_boss_world_boss",
+      "mapId": "vo_chu_hoang_nguyen",
+      "monsterId": "hoang_nguyen_cu_thu",
+      "tier": "WORLD_BOSS",
+      "level": 15,
+      "spawnZoneId": "vo_chu_hoang_nguyen_boss_zone_world_boss",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "SCHEDULED_EVENT",
+        "eventKey": "event_hoang_nguyen_cu_thu",
+        "schedule": "CONFIGURE_SERVER_TIME",
+        "minimumIntervalSeconds": 14400
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "PHASED"
+    },
+    {
+      "placementId": "thien_mon_di_tich_boss_elite",
+      "mapId": "thien_mon_di_tich",
+      "monsterId": "thien_mon_tran_linh",
+      "tier": "ELITE",
+      "level": 22,
+      "spawnZoneId": "thien_mon_di_tich_boss_zone_elite",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "AFTER_DEATH",
+        "seconds": 225
+      },
+      "requiredLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "TELEGRAPHED_ATTACK"
+    },
+    {
+      "placementId": "huyen_moc_bi_canh_boss_dungeon_boss",
+      "mapId": "huyen_moc_bi_canh",
+      "monsterId": "huyen_moc_yeu_vuong",
+      "tier": "DUNGEON_BOSS",
+      "level": 15,
+      "spawnZoneId": "huyen_moc_bi_canh_boss_zone_dungeon_boss",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "DUNGEON_ENCOUNTER",
+        "trigger": "WAVES_CLEARED",
+        "attemptLimitPolicy": "CONFIGURE"
+      },
+      "requiredLevel": 10,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "PHASED"
+    },
+    {
+      "placementId": "cuu_u_thach_phu_boss_dungeon_boss",
+      "mapId": "cuu_u_thach_phu",
+      "monsterId": "cuu_u_thach_quan",
+      "tier": "DUNGEON_BOSS",
+      "level": 25,
+      "spawnZoneId": "cuu_u_thach_phu_boss_zone_dungeon_boss",
+      "maxAlive": 1,
+      "spawnPolicy": {
+        "policy": "DUNGEON_ENCOUNTER",
+        "trigger": "WAVES_CLEARED",
+        "attemptLimitPolicy": "CONFIGURE"
+      },
+      "requiredLevel": 18,
+      "status": "PLANNED",
+      "enabled": false,
+      "mechanicTemplate": "PHASED"
+    }
+  ],
+  "plannedConnections": [
+    {
+      "connectionId": "thanh_van_thanh__thanh_van_ngoai_son",
+      "fromMapId": "thanh_van_thanh",
+      "toMapId": "thanh_van_ngoai_son",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 1,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "thanh_van_ngoai_son__truc_anh_lam",
+      "fromMapId": "thanh_van_ngoai_son",
+      "toMapId": "truc_anh_lam",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 4,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "u_minh_thanh__huyet_vu_coc",
+      "fromMapId": "u_minh_thanh",
+      "toMapId": "huyet_vu_coc",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 1,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "huyet_vu_coc__u_minh_ngoai_dao",
+      "fromMapId": "huyet_vu_coc",
+      "toMapId": "u_minh_ngoai_dao",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 4,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "van_yeu_lam__linh_thu_son_lo",
+      "fromMapId": "van_yeu_lam",
+      "toMapId": "linh_thu_son_lo",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 1,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "linh_thu_son_lo__thanh_khau_truc_lam",
+      "fromMapId": "linh_thu_son_lo",
+      "toMapId": "thanh_khau_truc_lam",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 4,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "truc_anh_lam__tam_gioi_bien_canh",
+      "fromMapId": "truc_anh_lam",
+      "toMapId": "tam_gioi_bien_canh",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 6,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "u_minh_ngoai_dao__tam_gioi_bien_canh",
+      "fromMapId": "u_minh_ngoai_dao",
+      "toMapId": "tam_gioi_bien_canh",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 6,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "thanh_khau_truc_lam__tam_gioi_bien_canh",
+      "fromMapId": "thanh_khau_truc_lam",
+      "toMapId": "tam_gioi_bien_canh",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 6,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "tam_gioi_bien_canh__trung_chau",
+      "fromMapId": "tam_gioi_bien_canh",
+      "toMapId": "trung_chau",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 6,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "trung_chau__vo_chu_hoang_nguyen",
+      "fromMapId": "trung_chau",
+      "toMapId": "vo_chu_hoang_nguyen",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 8,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "vo_chu_hoang_nguyen__thien_mon_di_tich",
+      "fromMapId": "vo_chu_hoang_nguyen",
+      "toMapId": "thien_mon_di_tich",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 15,
+      "specialCondition": "NONE",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "vo_chu_hoang_nguyen__huyen_moc_bi_canh",
+      "fromMapId": "vo_chu_hoang_nguyen",
+      "toMapId": "huyen_moc_bi_canh",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 10,
+      "specialCondition": "DUNGEON_ACCESS",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    },
+    {
+      "connectionId": "thien_mon_di_tich__cuu_u_thach_phu",
+      "fromMapId": "thien_mon_di_tich",
+      "toMapId": "cuu_u_thach_phu",
+      "bidirectional": true,
+      "suggestedRequiredLevel": 18,
+      "specialCondition": "DUNGEON_ACCESS",
+      "sourcePortalId": null,
+      "targetPortalId": null,
+      "targetSpawnId": null,
+      "status": "PLANNED_REQUIRES_PORTAL_AND_GEOMETRY",
+      "enabled": false
+    }
+  ],
+  "storyBeats": [
+    {
+      "storyBeatId": "nhan_01",
+      "name": "Khởi nguyên Thanh Vân",
+      "mapId": "thanh_van_thanh",
+      "suggestedLevel": 1,
+      "arc": "NHAN",
+      "trigger": "CHARACTER_CREATED",
+      "notes": "Nói chuyện Tiếp Dẫn Sứ; giới thiệu tộc và kỹ năng nhập môn",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "nhan_02",
+      "name": "Dấu chân Yêu Lang",
+      "mapId": "thanh_van_ngoai_son",
+      "suggestedLevel": 2,
+      "arc": "NHAN",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Liên kết nhiệm vụ diệt 5 Yêu Lang hiện hữu; không tạo bản sao",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "nhan_03",
+      "name": "Trúc Ảnh Dị Biến",
+      "mapId": "truc_anh_lam",
+      "suggestedLevel": 5,
+      "arc": "NHAN",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Kiểm tra Trúc Tinh và tìm dấu tích linh mạch",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "ma_01",
+      "name": "Tiếng gọi Ma Vực",
+      "mapId": "u_minh_thanh",
+      "suggestedLevel": 1,
+      "arc": "MA",
+      "trigger": "CHARACTER_CREATED",
+      "notes": "Tiếp nhận hướng dẫn từ NPC Ma Tộc",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "ma_02",
+      "name": "Huyết Vụ Cuồng Động",
+      "mapId": "huyet_vu_coc",
+      "suggestedLevel": 2,
+      "arc": "MA",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Ma Trùng/Ma Binh, liên kết nhiệm vụ Yêu Lang cũ khi hợp lệ",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "ma_03",
+      "name": "Ngoại Đạo Ẩn Tàng",
+      "mapId": "u_minh_ngoai_dao",
+      "suggestedLevel": 5,
+      "arc": "MA",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Truy tìm Dạ Bức và U Minh Hồn",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "yeu_01",
+      "name": "Khế ước Vạn Linh",
+      "mapId": "van_yeu_lam",
+      "suggestedLevel": 1,
+      "arc": "YEU",
+      "trigger": "CHARACTER_CREATED",
+      "notes": "Tiếp dẫn NPC Yêu Tộc",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "yeu_02",
+      "name": "Linh Thú Thất Lạc",
+      "mapId": "linh_thu_son_lo",
+      "suggestedLevel": 2,
+      "arc": "YEU",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Theo dấu Linh Thú, đồng bộ nhiệm vụ Yêu Lang cũ khi hợp lệ",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "yeu_03",
+      "name": "Hộ Linh Thanh Khâu",
+      "mapId": "thanh_khau_truc_lam",
+      "suggestedLevel": 5,
+      "arc": "YEU",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Bảo vệ trúc lâm và đối đầu Thanh Khâu Hộ Linh",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "shared_01",
+      "name": "Tam Tộc Hội Ngộ",
+      "mapId": "tam_gioi_bien_canh",
+      "suggestedLevel": 7,
+      "arc": "SHARED",
+      "trigger": "RACE_QUEST_COMPLETE",
+      "notes": "Ba nhánh truyện gặp nhau ở Tam Giới Biên Cảnh",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "shared_02",
+      "name": "Trung Châu Vấn Đạo",
+      "mapId": "trung_chau",
+      "suggestedLevel": 9,
+      "arc": "SHARED",
+      "trigger": "VISIT_MAP",
+      "notes": "Mở chuỗi lựa chọn thế lực tại Level 10 theo hệ thống đã có",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "shared_03",
+      "name": "Hoang Nguyên Thử Thách",
+      "mapId": "vo_chu_hoang_nguyen",
+      "suggestedLevel": 10,
+      "arc": "SHARED",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Nhiệm vụ đi săn, nhiệm vụ tổ đội và hoạt động định kỳ",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "dungeon_01",
+      "name": "Bí Mật Huyền Mộc",
+      "mapId": "huyen_moc_bi_canh",
+      "suggestedLevel": 12,
+      "arc": "DUNGEON",
+      "trigger": "DUNGEON_ACCESS",
+      "notes": "Boss Huyền Mộc Yêu Vương, clear waves trước boss",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "shared_04",
+      "name": "Thiên Môn Khai Phong",
+      "mapId": "thien_mon_di_tich",
+      "suggestedLevel": 17,
+      "arc": "SHARED",
+      "trigger": "QUEST_CHAIN",
+      "notes": "Khám phá phong ấn và chiến đấu với Thiên Môn Trấn Linh",
+      "status": "DRAFT",
+      "enabled": false
+    },
+    {
+      "storyBeatId": "dungeon_02",
+      "name": "Cửu U Thạch Quân",
+      "mapId": "cuu_u_thach_phu",
+      "suggestedLevel": 20,
+      "arc": "DUNGEON",
+      "trigger": "DUNGEON_ACCESS",
+      "notes": "Đối đầu boss Cửu U Thạch Quân, giới hạn farm phần thưởng",
+      "status": "DRAFT",
+      "enabled": false
+    }
+  ],
+  "questSeeds": [
+    {
+      "questId": "guide_thanh_van_thanh",
+      "name": "Khám phá Thanh Vân Thành",
+      "mapId": "thanh_van_thanh",
+      "region": "NHAN",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "guide_u_minh_thanh",
+      "name": "Khám phá U Minh Thành",
+      "mapId": "u_minh_thanh",
+      "region": "MA",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "guide_van_yeu_lam",
+      "name": "Khám phá Vạn Yêu Lâm",
+      "mapId": "van_yeu_lam",
+      "region": "YEU",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "explore_thanh_van_ngoai_son",
+      "name": "Dấu tích tại Thanh Vân Ngoại Sơn",
+      "mapId": "thanh_van_ngoai_son",
+      "region": "NHAN",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_thanh_van_ngoai_son",
+      "name": "Trấn áp Sơn Thỏ tại Thanh Vân Ngoại Sơn",
+      "mapId": "thanh_van_ngoai_son",
+      "region": "NHAN",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "son_tho"
+        }
+      ]
+    },
+    {
+      "questId": "explore_truc_anh_lam",
+      "name": "Dấu tích tại Trúc Ảnh Lâm",
+      "mapId": "truc_anh_lam",
+      "region": "NHAN",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_truc_anh_lam",
+      "name": "Trấn áp Trúc Tinh tại Trúc Ảnh Lâm",
+      "mapId": "truc_anh_lam",
+      "region": "NHAN",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "truc_tinh"
+        }
+      ]
+    },
+    {
+      "questId": "explore_huyet_vu_coc",
+      "name": "Dấu tích tại Huyết Vụ Cốc",
+      "mapId": "huyet_vu_coc",
+      "region": "MA",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_huyet_vu_coc",
+      "name": "Trấn áp Ma Trùng tại Huyết Vụ Cốc",
+      "mapId": "huyet_vu_coc",
+      "region": "MA",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "ma_trung"
+        }
+      ]
+    },
+    {
+      "questId": "explore_u_minh_ngoai_dao",
+      "name": "Dấu tích tại U Minh Ngoại Đạo",
+      "mapId": "u_minh_ngoai_dao",
+      "region": "MA",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_u_minh_ngoai_dao",
+      "name": "Trấn áp Dạ Bức tại U Minh Ngoại Đạo",
+      "mapId": "u_minh_ngoai_dao",
+      "region": "MA",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "da_buc"
+        }
+      ]
+    },
+    {
+      "questId": "explore_linh_thu_son_lo",
+      "name": "Dấu tích tại Linh Thú Sơn Lộ",
+      "mapId": "linh_thu_son_lo",
+      "region": "YEU",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_linh_thu_son_lo",
+      "name": "Trấn áp Mộc Linh tại Linh Thú Sơn Lộ",
+      "mapId": "linh_thu_son_lo",
+      "region": "YEU",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "moc_linh"
+        }
+      ]
+    },
+    {
+      "questId": "explore_thanh_khau_truc_lam",
+      "name": "Dấu tích tại Thanh Khâu Trúc Lâm",
+      "mapId": "thanh_khau_truc_lam",
+      "region": "YEU",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_thanh_khau_truc_lam",
+      "name": "Trấn áp Trúc Hồ tại Thanh Khâu Trúc Lâm",
+      "mapId": "thanh_khau_truc_lam",
+      "region": "YEU",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "truc_ho"
+        }
+      ]
+    },
+    {
+      "questId": "guide_trung_chau",
+      "name": "Khám phá Trung Châu",
+      "mapId": "trung_chau",
+      "region": "CHUNG",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "explore_tam_gioi_bien_canh",
+      "name": "Dấu tích tại Tam Giới Biên Cảnh",
+      "mapId": "tam_gioi_bien_canh",
+      "region": "CHUNG",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 6,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_tam_gioi_bien_canh",
+      "name": "Trấn áp Yêu Lang tại Tam Giới Biên Cảnh",
+      "mapId": "tam_gioi_bien_canh",
+      "region": "CHUNG",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 6,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "yeu_lang"
+        }
+      ],
+      "integrationNote": "Link to existing kill 5 Yeu Lang quest when equivalent; never duplicate quest rewards."
+    },
+    {
+      "questId": "explore_vo_chu_hoang_nguyen",
+      "name": "Dấu tích tại Vô Chủ Hoang Nguyên",
+      "mapId": "vo_chu_hoang_nguyen",
+      "region": "CHUNG",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 8,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_vo_chu_hoang_nguyen",
+      "name": "Trấn áp Hoang Nguyên Lang tại Vô Chủ Hoang Nguyên",
+      "mapId": "vo_chu_hoang_nguyen",
+      "region": "CHUNG",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 8,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "hoang_nguyen_lang"
+        }
+      ]
+    },
+    {
+      "questId": "explore_thien_mon_di_tich",
+      "name": "Dấu tích tại Thiên Môn Di Tích",
+      "mapId": "thien_mon_di_tich",
+      "region": "CHUNG",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 15,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "hunt_thien_mon_di_tich",
+      "name": "Trấn áp Di Tích Oán Linh tại Thiên Môn Di Tích",
+      "mapId": "thien_mon_di_tich",
+      "region": "CHUNG",
+      "category": "KILL_MONSTER",
+      "recommendedLevel": 15,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "KILL_MONSTER",
+          "count": 5,
+          "targetId": "di_tich_oan_linh"
+        }
+      ]
+    },
+    {
+      "questId": "explore_huyen_moc_bi_canh",
+      "name": "Dấu tích tại Huyền Mộc Bí Cảnh",
+      "mapId": "huyen_moc_bi_canh",
+      "region": "BI_CANH",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 10,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "clear_wave_huyen_moc_bi_canh",
+      "name": "Vượt vòng quái tại Huyền Mộc Bí Cảnh",
+      "mapId": "huyen_moc_bi_canh",
+      "region": "BI_CANH",
+      "category": "CLEAR_DUNGEON_WAVE",
+      "recommendedLevel": 10,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "CLEAR_DUNGEON_WAVE",
+          "count": 1,
+          "targetId": "huyen_moc_bi_canh"
+        }
+      ]
+    },
+    {
+      "questId": "explore_cuu_u_thach_phu",
+      "name": "Dấu tích tại Cửu U Thạch Phủ",
+      "mapId": "cuu_u_thach_phu",
+      "region": "BI_CANH",
+      "category": "DISCOVER_MAP",
+      "recommendedLevel": 18,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "DISCOVER_MAP",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "questId": "clear_wave_cuu_u_thach_phu",
+      "name": "Vượt vòng quái tại Cửu U Thạch Phủ",
+      "mapId": "cuu_u_thach_phu",
+      "region": "BI_CANH",
+      "category": "CLEAR_DUNGEON_WAVE",
+      "recommendedLevel": 18,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true
+      },
+      "objectives": [
+        {
+          "type": "CLEAR_DUNGEON_WAVE",
+          "count": 1,
+          "targetId": "cuu_u_thach_phu"
+        }
+      ]
+    },
+    {
+      "questId": "bounty_thanh_van_ngoai_son_boss_elite",
+      "name": "Thảo phạt Sơn Lang Tinh",
+      "mapId": "thanh_van_ngoai_son",
+      "region": "NHAN",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "thanh_van_ngoai_son_boss_elite",
+          "monsterId": "son_lang_tinh"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_truc_anh_lam_boss_elite",
+      "name": "Thảo phạt Trúc Linh Hộ Vệ",
+      "mapId": "truc_anh_lam",
+      "region": "NHAN",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "truc_anh_lam_boss_elite",
+          "monsterId": "truc_linh_ho_ve"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_huyet_vu_coc_boss_elite",
+      "name": "Thảo phạt Huyết Ảnh",
+      "mapId": "huyet_vu_coc",
+      "region": "MA",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "huyet_vu_coc_boss_elite",
+          "monsterId": "huyet_anh"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_u_minh_ngoai_dao_boss_elite",
+      "name": "Thảo phạt Hắc Ảnh Trinh Sát",
+      "mapId": "u_minh_ngoai_dao",
+      "region": "MA",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "u_minh_ngoai_dao_boss_elite",
+          "monsterId": "hac_anh_trinh_sat"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_linh_thu_son_lo_boss_elite",
+      "name": "Thảo phạt Cổ Mộc Tinh",
+      "mapId": "linh_thu_son_lo",
+      "region": "YEU",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 1,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "linh_thu_son_lo_boss_elite",
+          "monsterId": "co_moc_tinh"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_thanh_khau_truc_lam_boss_elite",
+      "name": "Thảo phạt Thanh Khâu Hộ Linh",
+      "mapId": "thanh_khau_truc_lam",
+      "region": "YEU",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 4,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "thanh_khau_truc_lam_boss_elite",
+          "monsterId": "thanh_khau_ho_linh"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_tam_gioi_bien_canh_boss_elite",
+      "name": "Thảo phạt Biên Cảnh Loạn Thú",
+      "mapId": "tam_gioi_bien_canh",
+      "region": "CHUNG",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 6,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "tam_gioi_bien_canh_boss_elite",
+          "monsterId": "bien_canh_loan_thu"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_vo_chu_hoang_nguyen_boss_elite",
+      "name": "Thảo phạt Hoang Nguyên Thủ Lĩnh",
+      "mapId": "vo_chu_hoang_nguyen",
+      "region": "CHUNG",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 8,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "vo_chu_hoang_nguyen_boss_elite",
+          "monsterId": "hoang_nguyen_thu_linh"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_vo_chu_hoang_nguyen_boss_world_boss",
+      "name": "Thảo phạt Hoang Nguyên Cự Thú",
+      "mapId": "vo_chu_hoang_nguyen",
+      "region": "CHUNG",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 8,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true,
+        "schedulerReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "vo_chu_hoang_nguyen_boss_world_boss",
+          "monsterId": "hoang_nguyen_cu_thu"
+        }
+      ],
+      "bossTier": "WORLD_BOSS"
+    },
+    {
+      "questId": "bounty_thien_mon_di_tich_boss_elite",
+      "name": "Thảo phạt Thiên Môn Trấn Linh",
+      "mapId": "thien_mon_di_tich",
+      "region": "CHUNG",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 15,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "thien_mon_di_tich_boss_elite",
+          "monsterId": "thien_mon_tran_linh"
+        }
+      ],
+      "bossTier": "ELITE"
+    },
+    {
+      "questId": "bounty_huyen_moc_bi_canh_boss_dungeon_boss",
+      "name": "Thảo phạt Huyền Mộc Yêu Vương",
+      "mapId": "huyen_moc_bi_canh",
+      "region": "BI_CANH",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 10,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true,
+        "encounterControllerReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "huyen_moc_bi_canh_boss_dungeon_boss",
+          "monsterId": "huyen_moc_yeu_vuong"
+        }
+      ],
+      "bossTier": "DUNGEON_BOSS"
+    },
+    {
+      "questId": "bounty_cuu_u_thach_phu_boss_dungeon_boss",
+      "name": "Thảo phạt Cửu U Thạch Quân",
+      "mapId": "cuu_u_thach_phu",
+      "region": "BI_CANH",
+      "category": "DEFEAT_BOSS_PLACEMENT",
+      "recommendedLevel": 18,
+      "status": "PLANNED",
+      "enabled": false,
+      "rewardProfileId": "TBD_REVIEW",
+      "unlockRequirements": {
+        "mapReady": true,
+        "questNpcReady": true,
+        "spawnPlacementReady": true,
+        "encounterControllerReady": true
+      },
+      "objectives": [
+        {
+          "type": "DEFEAT_BOSS_PLACEMENT",
+          "count": 1,
+          "targetId": "cuu_u_thach_phu_boss_dungeon_boss",
+          "monsterId": "cuu_u_thach_quan"
+        }
+      ],
+      "bossTier": "DUNGEON_BOSS"
+    }
+  ],
+  "progressionBands": [
+    {
+      "min": 1,
+      "max": 5,
+      "label": "Hương thổ nhập môn"
+    },
+    {
+      "min": 4,
+      "max": 7,
+      "label": "Vùng rèn luyện ba tộc"
+    },
+    {
+      "min": 6,
+      "max": 12,
+      "label": "Biên cảnh tam tộc"
+    },
+    {
+      "min": 8,
+      "max": 15,
+      "label": "Trung Châu và Hoang Nguyên"
+    },
+    {
+      "min": 15,
+      "max": 22,
+      "label": "Thiên Môn"
+    },
+    {
+      "min": 18,
+      "max": 25,
+      "label": "Cửu U"
+    }
+  ],
+  "archivedPlannedMapIds": [
+    "linh_tuyen_khe",
+    "huyen_kiem_phong",
+    "tang_kinh_coc",
+    "bach_van_thien_lo",
+    "huyen_thiet_khoang_mach",
+    "that_tinh_kiem_tran",
+    "thai_hu_thach_lo",
+    "loi_minh_son_mach",
+    "cuu_thien_phong_dai",
+    "vo_cuc_dao_trang",
+    "han_nguyet_tuyet_nguyen",
+    "tinh_ha_thien_kieu",
+    "thai_thuong_tien_dai",
+    "ma_trung_huyet",
+    "huyet_sat_hoang_dia",
+    "vong_hon_uyen",
+    "hac_lien_ma_tri",
+    "xich_viem_ma_son",
+    "u_hon_co_mo",
+    "thien_ma_liet_coc",
+    "cuu_u_huyen_uyen",
+    "van_huyet_luyen_trang",
+    "doa_thien_ma_dien",
+    "tich_diet_hoang_mac",
+    "hon_don_ma_hai",
+    "vo_tuong_ma_cung",
+    "huyen_moc_lam_bien",
+    "ngan_ho_co_dao",
+    "bach_thu_linh_coc",
+    "thien_lang_nguyet_linh",
+    "moc_linh_than_vuc",
+    "cuu_vi_mong_lam",
+    "van_thu_co_sao",
+    "thanh_long_lan_gian",
+    "huyen_quy_linh_dao",
+    "phuong_vu_thien_lam",
+    "thai_co_long_coc",
+    "van_linh_thien_thu",
+    "hong_hoang_than_linh",
+    "van_bao_thanh",
+    "thien_mon_tien_tram",
+    "tam_linh_do",
+    "huyen_sa_mac",
+    "long_cot_co_dao",
+    "thien_ha_co_kieu",
+    "ngu_hanh_loan_vuc",
+    "phong_ma_dai",
+    "thien_loi_tuyet_dia",
+    "van_kiep_co_chien_truong",
+    "hu_khong_liet_phung",
+    "thien_ngoai_tinh_vuc",
+    "co_than_phe_do",
+    "tam_gioi_thien_khuyet",
+    "van_kiem_mo",
+    "thai_co_yeu_quat",
+    "ma_thien_huyet_tri",
+    "tam_gioi_phong_an"
+  ],
+  "constraints": {
+    "noCombatSpawnsInSafeTowns": true,
+    "startQuestMonster": "yeu_lang",
+    "neverActivateUnverifiedGeometry": true,
+    "noNewDuplicatedLevel10OrganizationQuest": true,
+    "worldBossRequiresScheduler": true,
+    "dungeonBossRequiresEncounterController": true,
+    "serverAuthoritative": true
+  }
+}

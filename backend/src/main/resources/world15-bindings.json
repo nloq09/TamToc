@@ -1,0 +1,691 @@
+{
+  "contentVersion": "world_catalog_15_v1",
+  "mapIds": {
+    "thanh_van_thanh": "thanh-van",
+    "u_minh_thanh": "u-minh",
+    "van_yeu_lam": "van-yeu",
+    "thanh_van_ngoai_son": "thanh-van-ngoai-son",
+    "huyet_vu_coc": "huyet-vu-coc",
+    "linh_thu_son_lo": "linh-thu-son-lo",
+    "truc_anh_lam": "truc_anh_lam",
+    "u_minh_ngoai_dao": "u_minh_ngoai_dao",
+    "thanh_khau_truc_lam": "thanh_khau_truc_lam",
+    "trung_chau": "trung-chau",
+    "tam_gioi_bien_canh": "tam-gioi-bien-canh",
+    "vo_chu_hoang_nguyen": "vo_chu_hoang_nguyen",
+    "thien_mon_di_tich": "thien-mon-di-tich",
+    "huyen_moc_bi_canh": "huyen-moc-party",
+    "cuu_u_thach_phu": "cuu_u_thach_phu"
+  },
+  "monsterAliases": {
+    "yeu_lang": "WOLF",
+    "ma_binh": "SOLDIER",
+    "linh_thu": "SPIRIT",
+    "huyen_moc_yeu_vuong": "BOSS"
+  },
+  "questAliases": {
+    "hunt_tam_gioi_bien_canh": "WOLVES"
+  },
+  "verifiedMaps": [
+    "thanh_van_thanh",
+    "u_minh_thanh",
+    "van_yeu_lam",
+    "thanh_van_ngoai_son",
+    "huyet_vu_coc",
+    "linh_thu_son_lo",
+    "truc_anh_lam",
+    "u_minh_ngoai_dao",
+    "thanh_khau_truc_lam",
+    "trung_chau",
+    "tam_gioi_bien_canh",
+    "vo_chu_hoang_nguyen",
+    "thien_mon_di_tich",
+    "huyen_moc_bi_canh",
+    "cuu_u_thach_phu"
+  ],
+  "spawnBindings": {
+    "thanh_van_ngoai_son_mob_01": {
+      "runtimeMapId": "thanh-van-ngoai-son",
+      "definitionId": "thanh_van_ngoai_son_mob_01_lv1",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thanh_van_ngoai_son_mob_02": {
+      "runtimeMapId": "thanh-van-ngoai-son",
+      "definitionId": "thanh_van_ngoai_son_mob_02_lv2",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thanh_van_ngoai_son_mob_03": {
+      "runtimeMapId": "thanh-van-ngoai-son",
+      "definitionId": "thanh_van_ngoai_son_mob_03_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "truc_anh_lam_mob_01": {
+      "runtimeMapId": "truc_anh_lam",
+      "definitionId": "truc_anh_lam_mob_01_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "truc_anh_lam_mob_02": {
+      "runtimeMapId": "truc_anh_lam",
+      "definitionId": "truc_anh_lam_mob_02_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "truc_anh_lam_mob_03": {
+      "runtimeMapId": "truc_anh_lam",
+      "definitionId": "truc_anh_lam_mob_03_lv6",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "huyet_vu_coc_mob_01": {
+      "runtimeMapId": "huyet-vu-coc",
+      "definitionId": "huyet_vu_coc_mob_01_lv1",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "huyet_vu_coc_mob_02": {
+      "runtimeMapId": "huyet-vu-coc",
+      "definitionId": "huyet_vu_coc_mob_02_lv2",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "huyet_vu_coc_mob_03": {
+      "runtimeMapId": "huyet-vu-coc",
+      "definitionId": "huyet_vu_coc_mob_03_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "u_minh_ngoai_dao_mob_01": {
+      "runtimeMapId": "u_minh_ngoai_dao",
+      "definitionId": "u_minh_ngoai_dao_mob_01_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "u_minh_ngoai_dao_mob_02": {
+      "runtimeMapId": "u_minh_ngoai_dao",
+      "definitionId": "u_minh_ngoai_dao_mob_02_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "u_minh_ngoai_dao_mob_03": {
+      "runtimeMapId": "u_minh_ngoai_dao",
+      "definitionId": "u_minh_ngoai_dao_mob_03_lv6",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "linh_thu_son_lo_mob_01": {
+      "runtimeMapId": "linh-thu-son-lo",
+      "definitionId": "linh_thu_son_lo_mob_01_lv1",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "linh_thu_son_lo_mob_02": {
+      "runtimeMapId": "linh-thu-son-lo",
+      "definitionId": "linh_thu_son_lo_mob_02_lv2",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "linh_thu_son_lo_mob_03": {
+      "runtimeMapId": "linh-thu-son-lo",
+      "definitionId": "linh_thu_son_lo_mob_03_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thanh_khau_truc_lam_mob_01": {
+      "runtimeMapId": "thanh_khau_truc_lam",
+      "definitionId": "thanh_khau_truc_lam_mob_01_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thanh_khau_truc_lam_mob_02": {
+      "runtimeMapId": "thanh_khau_truc_lam",
+      "definitionId": "thanh_khau_truc_lam_mob_02_lv4",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thanh_khau_truc_lam_mob_03": {
+      "runtimeMapId": "thanh_khau_truc_lam",
+      "definitionId": "thanh_khau_truc_lam_mob_03_lv6",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "tam_gioi_bien_canh_mob_01": {
+      "runtimeMapId": "tam-gioi-bien-canh",
+      "definitionId": "tam_gioi_bien_canh_mob_01_lv6",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "tam_gioi_bien_canh_mob_02": {
+      "runtimeMapId": "tam-gioi-bien-canh",
+      "definitionId": "tam_gioi_bien_canh_mob_02_lv8",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "tam_gioi_bien_canh_mob_03": {
+      "runtimeMapId": "tam-gioi-bien-canh",
+      "definitionId": "tam_gioi_bien_canh_mob_03_lv11",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "vo_chu_hoang_nguyen_mob_01": {
+      "runtimeMapId": "vo_chu_hoang_nguyen",
+      "definitionId": "vo_chu_hoang_nguyen_mob_01_lv8",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "vo_chu_hoang_nguyen_mob_02": {
+      "runtimeMapId": "vo_chu_hoang_nguyen",
+      "definitionId": "vo_chu_hoang_nguyen_mob_02_lv10",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "vo_chu_hoang_nguyen_mob_03": {
+      "runtimeMapId": "vo_chu_hoang_nguyen",
+      "definitionId": "vo_chu_hoang_nguyen_mob_03_lv14",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thien_mon_di_tich_mob_01": {
+      "runtimeMapId": "thien-mon-di-tich",
+      "definitionId": "thien_mon_di_tich_mob_01_lv15",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thien_mon_di_tich_mob_02": {
+      "runtimeMapId": "thien-mon-di-tich",
+      "definitionId": "thien_mon_di_tich_mob_02_lv17",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "thien_mon_di_tich_mob_03": {
+      "runtimeMapId": "thien-mon-di-tich",
+      "definitionId": "thien_mon_di_tich_mob_03_lv21",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "huyen_moc_bi_canh_mob_01": {
+      "runtimeMapId": "huyen-moc-party",
+      "definitionId": "huyen_moc_bi_canh_mob_01_lv10",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "huyen_moc_bi_canh_mob_02": {
+      "runtimeMapId": "huyen-moc-party",
+      "definitionId": "huyen_moc_bi_canh_mob_02_lv11",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "cuu_u_thach_phu_mob_01": {
+      "runtimeMapId": "cuu_u_thach_phu",
+      "definitionId": "cuu_u_thach_phu_mob_01_lv18",
+      "geometryVerified": true,
+      "enabled": true
+    },
+    "cuu_u_thach_phu_mob_02": {
+      "runtimeMapId": "cuu_u_thach_phu",
+      "definitionId": "cuu_u_thach_phu_mob_02_lv20",
+      "geometryVerified": true,
+      "enabled": true
+    }
+  },
+  "bossBindings": {
+    "thanh_van_ngoai_son_boss_elite": {
+      "runtimeMapId": "thanh-van-ngoai-son",
+      "definitionId": "thanh_van_ngoai_son_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "truc_anh_lam_boss_elite": {
+      "runtimeMapId": "truc_anh_lam",
+      "definitionId": "truc_anh_lam_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "huyet_vu_coc_boss_elite": {
+      "runtimeMapId": "huyet-vu-coc",
+      "definitionId": "huyet_vu_coc_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "u_minh_ngoai_dao_boss_elite": {
+      "runtimeMapId": "u_minh_ngoai_dao",
+      "definitionId": "u_minh_ngoai_dao_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "linh_thu_son_lo_boss_elite": {
+      "runtimeMapId": "linh-thu-son-lo",
+      "definitionId": "linh_thu_son_lo_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "thanh_khau_truc_lam_boss_elite": {
+      "runtimeMapId": "thanh_khau_truc_lam",
+      "definitionId": "thanh_khau_truc_lam_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "tam_gioi_bien_canh_boss_elite": {
+      "runtimeMapId": "tam-gioi-bien-canh",
+      "definitionId": "tam_gioi_bien_canh_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "vo_chu_hoang_nguyen_boss_elite": {
+      "runtimeMapId": "vo_chu_hoang_nguyen",
+      "definitionId": "vo_chu_hoang_nguyen_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "vo_chu_hoang_nguyen_boss_world_boss": {
+      "runtimeMapId": "vo_chu_hoang_nguyen",
+      "definitionId": "vo_chu_hoang_nguyen_boss_world_boss_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "thien_mon_di_tich_boss_elite": {
+      "runtimeMapId": "thien-mon-di-tich",
+      "definitionId": "thien_mon_di_tich_boss_elite_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": null
+    },
+    "huyen_moc_bi_canh_boss_dungeon_boss": {
+      "runtimeMapId": "huyen-moc-party",
+      "definitionId": "huyen_moc_bi_canh_boss_dungeon_boss_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": "HUYEN_MOC"
+    },
+    "cuu_u_thach_phu_boss_dungeon_boss": {
+      "runtimeMapId": "cuu_u_thach_phu",
+      "definitionId": "cuu_u_thach_phu_boss_dungeon_boss_variant",
+      "geometryVerified": true,
+      "enabled": true,
+      "schedulerVerified": true,
+      "encounterId": "CUU_U"
+    }
+  },
+  "connectionBindings": {
+    "thanh_van_thanh__thanh_van_ngoai_son": {
+      "sourcePortalId": "city-to-ngoai-son",
+      "targetPortalId": "ngoai-son-to-city",
+      "geometryVerified": true
+    },
+    "u_minh_thanh__huyet_vu_coc": {
+      "sourcePortalId": "city-to-huyet-vu",
+      "targetPortalId": "huyet-vu-to-city",
+      "geometryVerified": true
+    },
+    "van_yeu_lam__linh_thu_son_lo": {
+      "sourcePortalId": "city-to-linh-thu",
+      "targetPortalId": "linh-thu-to-city",
+      "geometryVerified": true
+    },
+    "thanh_van_ngoai_son__truc_anh_lam": {
+      "sourcePortalId": "world15-thanh_van_ngoai_son__truc_anh_lam",
+      "targetPortalId": "world15-truc_anh_lam__thanh_van_ngoai_son",
+      "geometryVerified": true
+    },
+    "huyet_vu_coc__u_minh_ngoai_dao": {
+      "sourcePortalId": "world15-huyet_vu_coc__u_minh_ngoai_dao",
+      "targetPortalId": "world15-u_minh_ngoai_dao__huyet_vu_coc",
+      "geometryVerified": true
+    },
+    "linh_thu_son_lo__thanh_khau_truc_lam": {
+      "sourcePortalId": "world15-linh_thu_son_lo__thanh_khau_truc_lam",
+      "targetPortalId": "world15-thanh_khau_truc_lam__linh_thu_son_lo",
+      "geometryVerified": true
+    },
+    "truc_anh_lam__tam_gioi_bien_canh": {
+      "sourcePortalId": "world15-truc_anh_lam__tam_gioi_bien_canh",
+      "targetPortalId": "world15-tam_gioi_bien_canh__truc_anh_lam",
+      "geometryVerified": true
+    },
+    "u_minh_ngoai_dao__tam_gioi_bien_canh": {
+      "sourcePortalId": "world15-u_minh_ngoai_dao__tam_gioi_bien_canh",
+      "targetPortalId": "world15-tam_gioi_bien_canh__u_minh_ngoai_dao",
+      "geometryVerified": true
+    },
+    "thanh_khau_truc_lam__tam_gioi_bien_canh": {
+      "sourcePortalId": "world15-thanh_khau_truc_lam__tam_gioi_bien_canh",
+      "targetPortalId": "world15-tam_gioi_bien_canh__thanh_khau_truc_lam",
+      "geometryVerified": true
+    },
+    "tam_gioi_bien_canh__trung_chau": {
+      "sourcePortalId": "border-to-center",
+      "targetPortalId": "center-to-border",
+      "geometryVerified": true
+    },
+    "trung_chau__vo_chu_hoang_nguyen": {
+      "sourcePortalId": "world15-trung_chau__vo_chu_hoang_nguyen",
+      "targetPortalId": "world15-vo_chu_hoang_nguyen__trung_chau",
+      "geometryVerified": true
+    },
+    "vo_chu_hoang_nguyen__thien_mon_di_tich": {
+      "sourcePortalId": "world15-vo_chu_hoang_nguyen__thien_mon_di_tich",
+      "targetPortalId": "world15-thien_mon_di_tich__vo_chu_hoang_nguyen",
+      "geometryVerified": true
+    },
+    "vo_chu_hoang_nguyen__huyen_moc_bi_canh": {
+      "sourcePortalId": "world15-vo_chu_hoang_nguyen__huyen_moc_bi_canh",
+      "encounterId": "HUYEN_MOC",
+      "geometryVerified": true
+    },
+    "thien_mon_di_tich__cuu_u_thach_phu": {
+      "sourcePortalId": "world15-thien_mon_di_tich__cuu_u_thach_phu",
+      "encounterId": "CUU_U",
+      "geometryVerified": true
+    }
+  },
+  "questBindings": {
+    "guide_thanh_van_thanh": {
+      "questId": "guide_thanh_van_thanh",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "guide_u_minh_thanh": {
+      "questId": "guide_u_minh_thanh",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "guide_van_yeu_lam": {
+      "questId": "guide_van_yeu_lam",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_thanh_van_ngoai_son": {
+      "questId": "explore_thanh_van_ngoai_son",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_thanh_van_ngoai_son": {
+      "questId": "hunt_thanh_van_ngoai_son",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_truc_anh_lam": {
+      "questId": "explore_truc_anh_lam",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_truc_anh_lam": {
+      "questId": "hunt_truc_anh_lam",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_huyet_vu_coc": {
+      "questId": "explore_huyet_vu_coc",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_huyet_vu_coc": {
+      "questId": "hunt_huyet_vu_coc",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_u_minh_ngoai_dao": {
+      "questId": "explore_u_minh_ngoai_dao",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_u_minh_ngoai_dao": {
+      "questId": "hunt_u_minh_ngoai_dao",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_linh_thu_son_lo": {
+      "questId": "explore_linh_thu_son_lo",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_linh_thu_son_lo": {
+      "questId": "hunt_linh_thu_son_lo",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_thanh_khau_truc_lam": {
+      "questId": "explore_thanh_khau_truc_lam",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_thanh_khau_truc_lam": {
+      "questId": "hunt_thanh_khau_truc_lam",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "guide_trung_chau": {
+      "questId": "guide_trung_chau",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_tam_gioi_bien_canh": {
+      "questId": "explore_tam_gioi_bien_canh",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_tam_gioi_bien_canh": {
+      "questId": "WOLVES",
+      "linkedExisting": true
+    },
+    "explore_vo_chu_hoang_nguyen": {
+      "questId": "explore_vo_chu_hoang_nguyen",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_vo_chu_hoang_nguyen": {
+      "questId": "hunt_vo_chu_hoang_nguyen",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_thien_mon_di_tich": {
+      "questId": "explore_thien_mon_di_tich",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "hunt_thien_mon_di_tich": {
+      "questId": "hunt_thien_mon_di_tich",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_huyen_moc_bi_canh": {
+      "questId": "explore_huyen_moc_bi_canh",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "clear_wave_huyen_moc_bi_canh": {
+      "questId": "clear_wave_huyen_moc_bi_canh",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "explore_cuu_u_thach_phu": {
+      "questId": "explore_cuu_u_thach_phu",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "clear_wave_cuu_u_thach_phu": {
+      "questId": "clear_wave_cuu_u_thach_phu",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_thanh_van_ngoai_son_boss_elite": {
+      "questId": "bounty_thanh_van_ngoai_son_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_truc_anh_lam_boss_elite": {
+      "questId": "bounty_truc_anh_lam_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_huyet_vu_coc_boss_elite": {
+      "questId": "bounty_huyet_vu_coc_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_u_minh_ngoai_dao_boss_elite": {
+      "questId": "bounty_u_minh_ngoai_dao_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_linh_thu_son_lo_boss_elite": {
+      "questId": "bounty_linh_thu_son_lo_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_thanh_khau_truc_lam_boss_elite": {
+      "questId": "bounty_thanh_khau_truc_lam_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_tam_gioi_bien_canh_boss_elite": {
+      "questId": "bounty_tam_gioi_bien_canh_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_vo_chu_hoang_nguyen_boss_elite": {
+      "questId": "bounty_vo_chu_hoang_nguyen_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_vo_chu_hoang_nguyen_boss_world_boss": {
+      "questId": "bounty_vo_chu_hoang_nguyen_boss_world_boss",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_thien_mon_di_tich_boss_elite": {
+      "questId": "bounty_thien_mon_di_tich_boss_elite",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_huyen_moc_bi_canh_boss_dungeon_boss": {
+      "questId": "bounty_huyen_moc_bi_canh_boss_dungeon_boss",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    },
+    "bounty_cuu_u_thach_phu_boss_dungeon_boss": {
+      "questId": "bounty_cuu_u_thach_phu_boss_dungeon_boss",
+      "enabled": true,
+      "npc": "guide",
+      "reviewed": true
+    }
+  },
+  "archivedMapStatuses": {
+    "linh_tuyen_khe": "PLANNED_DISABLED",
+    "huyen_kiem_phong": "PLANNED_DISABLED",
+    "tang_kinh_coc": "PLANNED_DISABLED",
+    "bach_van_thien_lo": "PLANNED_DISABLED",
+    "huyen_thiet_khoang_mach": "PLANNED_DISABLED",
+    "that_tinh_kiem_tran": "PLANNED_DISABLED",
+    "thai_hu_thach_lo": "PLANNED_DISABLED",
+    "loi_minh_son_mach": "PLANNED_DISABLED",
+    "cuu_thien_phong_dai": "PLANNED_DISABLED",
+    "vo_cuc_dao_trang": "PLANNED_DISABLED",
+    "han_nguyet_tuyet_nguyen": "PLANNED_DISABLED",
+    "tinh_ha_thien_kieu": "PLANNED_DISABLED",
+    "thai_thuong_tien_dai": "PLANNED_DISABLED",
+    "ma_trung_huyet": "PLANNED_DISABLED",
+    "huyet_sat_hoang_dia": "PLANNED_DISABLED",
+    "vong_hon_uyen": "PLANNED_DISABLED",
+    "hac_lien_ma_tri": "PLANNED_DISABLED",
+    "xich_viem_ma_son": "PLANNED_DISABLED",
+    "u_hon_co_mo": "PLANNED_DISABLED",
+    "thien_ma_liet_coc": "PLANNED_DISABLED",
+    "cuu_u_huyen_uyen": "PLANNED_DISABLED",
+    "van_huyet_luyen_trang": "PLANNED_DISABLED",
+    "doa_thien_ma_dien": "PLANNED_DISABLED",
+    "tich_diet_hoang_mac": "PLANNED_DISABLED",
+    "hon_don_ma_hai": "PLANNED_DISABLED",
+    "vo_tuong_ma_cung": "PLANNED_DISABLED",
+    "huyen_moc_lam_bien": "PLANNED_DISABLED",
+    "ngan_ho_co_dao": "PLANNED_DISABLED",
+    "bach_thu_linh_coc": "PLANNED_DISABLED",
+    "thien_lang_nguyet_linh": "PLANNED_DISABLED",
+    "moc_linh_than_vuc": "PLANNED_DISABLED",
+    "cuu_vi_mong_lam": "PLANNED_DISABLED",
+    "van_thu_co_sao": "PLANNED_DISABLED",
+    "thanh_long_lan_gian": "PLANNED_DISABLED",
+    "huyen_quy_linh_dao": "PLANNED_DISABLED",
+    "phuong_vu_thien_lam": "PLANNED_DISABLED",
+    "thai_co_long_coc": "PLANNED_DISABLED",
+    "van_linh_thien_thu": "PLANNED_DISABLED",
+    "hong_hoang_than_linh": "PLANNED_DISABLED",
+    "van_bao_thanh": "PLANNED_DISABLED",
+    "thien_mon_tien_tram": "PLANNED_DISABLED",
+    "tam_linh_do": "PLANNED_DISABLED",
+    "huyen_sa_mac": "PLANNED_DISABLED",
+    "long_cot_co_dao": "PLANNED_DISABLED",
+    "thien_ha_co_kieu": "PLANNED_DISABLED",
+    "ngu_hanh_loan_vuc": "PLANNED_DISABLED",
+    "phong_ma_dai": "PLANNED_DISABLED",
+    "thien_loi_tuyet_dia": "PLANNED_DISABLED",
+    "van_kiep_co_chien_truong": "PLANNED_DISABLED",
+    "hu_khong_liet_phung": "PLANNED_DISABLED",
+    "thien_ngoai_tinh_vuc": "PLANNED_DISABLED",
+    "co_than_phe_do": "PLANNED_DISABLED",
+    "tam_gioi_thien_khuyet": "PLANNED_DISABLED",
+    "van_kiem_mo": "PLANNED_DISABLED",
+    "thai_co_yeu_quat": "PLANNED_DISABLED",
+    "ma_thien_huyet_tri": "PLANNED_DISABLED",
+    "tam_gioi_phong_an": "PLANNED_DISABLED"
+  }
+}

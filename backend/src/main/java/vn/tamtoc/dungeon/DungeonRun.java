@@ -15,6 +15,7 @@ public class DungeonRun {
     public boolean rewardsProcessed,completionPending;
     public List<UUID> eligible=List.of();
     public String reason="";
+    public String dungeonId="HUYEN_MOC";
     public Set<UUID> rewarded=Set.of();
     public Map<UUID,Map<String,Object>> grants=Map.of();
     public DungeonRun(UUID party,WorldMapInstance instance,long now){partyId=party;this.instance=instance;startedAt=now;}

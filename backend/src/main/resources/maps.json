@@ -62,11 +62,11 @@
         "enabled": true
       }
     ],
-    "version": 2,
+    "version": 3,
     "regionId": "thanh-van",
     "raceTheme": "HUMAN",
     "recommendedLevelMin": 1,
-    "recommendedLevelMax": 6,
+    "recommendedLevelMax": 100,
     "mapType": "TOWN",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -97,6 +97,18 @@
         },
         "spawnId": "home",
         "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-town-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 2400,
+          "height": 640
+        },
+        "spawnId": null,
+        "heal": false,
         "protectedArea": true
       }
     ],
@@ -176,35 +188,7 @@
         "type": "WALK"
       }
     ],
-    "monsterSpawnGroups": [
-      {
-        "id": "thanh-van-wolves",
-        "definitionId": "WOLF",
-        "maxAlive": 5,
-        "startX": 800,
-        "endX": 1520,
-        "y": 540,
-        "respawnMs": 6000
-      },
-      {
-        "id": "thanh-van-soldier",
-        "definitionId": "SOLDIER",
-        "maxAlive": 1,
-        "startX": 1800,
-        "endX": 1800,
-        "y": 540,
-        "respawnMs": 8000
-      },
-      {
-        "id": "thanh-van-spirit",
-        "definitionId": "SPIRIT",
-        "maxAlive": 1,
-        "startX": 2000,
-        "endX": 2000,
-        "y": 540,
-        "respawnMs": 9000
-      }
-    ],
+    "monsterSpawnGroups": [],
     "npcSpawns": [
       {
         "id": "guide",
@@ -212,7 +196,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-thanh_van_thanh"
       }
     ],
     "botSpawnGroups": [
@@ -308,11 +292,11 @@
         "enabled": true
       }
     ],
-    "version": 2,
+    "version": 3,
     "regionId": "u-minh",
     "raceTheme": "DEMON",
     "recommendedLevelMin": 1,
-    "recommendedLevelMax": 6,
+    "recommendedLevelMax": 100,
     "mapType": "TOWN",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -343,6 +327,18 @@
         },
         "spawnId": "home",
         "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-town-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 2400,
+          "height": 640
+        },
+        "spawnId": null,
+        "heal": false,
         "protectedArea": true
       }
     ],
@@ -422,35 +418,7 @@
         "type": "WALK"
       }
     ],
-    "monsterSpawnGroups": [
-      {
-        "id": "u-minh-wolves",
-        "definitionId": "WOLF",
-        "maxAlive": 5,
-        "startX": 800,
-        "endX": 1520,
-        "y": 540,
-        "respawnMs": 6000
-      },
-      {
-        "id": "u-minh-soldier",
-        "definitionId": "SOLDIER",
-        "maxAlive": 1,
-        "startX": 1800,
-        "endX": 1800,
-        "y": 540,
-        "respawnMs": 8000
-      },
-      {
-        "id": "u-minh-spirit",
-        "definitionId": "SPIRIT",
-        "maxAlive": 1,
-        "startX": 2000,
-        "endX": 2000,
-        "y": 540,
-        "respawnMs": 9000
-      }
-    ],
+    "monsterSpawnGroups": [],
     "npcSpawns": [
       {
         "id": "guide",
@@ -458,7 +426,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-u_minh_thanh"
       }
     ],
     "botSpawnGroups": [
@@ -554,11 +522,11 @@
         "enabled": true
       }
     ],
-    "version": 2,
+    "version": 3,
     "regionId": "van-yeu",
     "raceTheme": "BEAST",
     "recommendedLevelMin": 1,
-    "recommendedLevelMax": 6,
+    "recommendedLevelMax": 100,
     "mapType": "TOWN",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -589,6 +557,18 @@
         },
         "spawnId": "home",
         "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-town-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 2400,
+          "height": 640
+        },
+        "spawnId": null,
+        "heal": false,
         "protectedArea": true
       }
     ],
@@ -668,35 +648,7 @@
         "type": "WALK"
       }
     ],
-    "monsterSpawnGroups": [
-      {
-        "id": "van-yeu-wolves",
-        "definitionId": "WOLF",
-        "maxAlive": 5,
-        "startX": 800,
-        "endX": 1520,
-        "y": 540,
-        "respawnMs": 6000
-      },
-      {
-        "id": "van-yeu-soldier",
-        "definitionId": "SOLDIER",
-        "maxAlive": 1,
-        "startX": 1800,
-        "endX": 1800,
-        "y": 540,
-        "respawnMs": 8000
-      },
-      {
-        "id": "van-yeu-spirit",
-        "definitionId": "SPIRIT",
-        "maxAlive": 1,
-        "startX": 2000,
-        "endX": 2000,
-        "y": 540,
-        "respawnMs": 9000
-      }
-    ],
+    "monsterSpawnGroups": [],
     "npcSpawns": [
       {
         "id": "guide",
@@ -704,7 +656,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-van_yeu_lam"
       }
     ],
     "botSpawnGroups": [
@@ -849,13 +801,30 @@
         "requiredLevel": 10,
         "requiredQuest": null,
         "enabled": true
+      },
+      {
+        "x": 1080,
+        "target": "vo_chu_hoang_nguyen",
+        "label": "Vô Chủ Hoang Nguyên",
+        "portalId": "world15-trung_chau__vo_chu_hoang_nguyen",
+        "sourceMapId": "trung-chau",
+        "triggerBounds": {
+          "x": 1020,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 8,
+        "requiredQuest": null,
+        "enabled": true
       }
     ],
-    "version": 2,
+    "version": 3,
     "regionId": "tam-gioi",
     "raceTheme": "NEUTRAL",
     "recommendedLevelMin": 1,
-    "recommendedLevelMax": 6,
+    "recommendedLevelMax": 100,
     "mapType": "TOWN",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -886,6 +855,18 @@
         },
         "spawnId": "home",
         "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-town-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 3200,
+          "height": 640
+        },
+        "spawnId": null,
+        "heal": false,
         "protectedArea": true
       }
     ],
@@ -965,44 +946,7 @@
         "type": "WALK"
       }
     ],
-    "monsterSpawnGroups": [
-      {
-        "id": "trung-chau-wolves",
-        "definitionId": "WOLF",
-        "maxAlive": 5,
-        "startX": 800,
-        "endX": 1520,
-        "y": 540,
-        "respawnMs": 6000
-      },
-      {
-        "id": "trung-chau-soldier",
-        "definitionId": "SOLDIER",
-        "maxAlive": 1,
-        "startX": 1800,
-        "endX": 1800,
-        "y": 540,
-        "respawnMs": 8000
-      },
-      {
-        "id": "trung-chau-spirit",
-        "definitionId": "SPIRIT",
-        "maxAlive": 1,
-        "startX": 2000,
-        "endX": 2000,
-        "y": 540,
-        "respawnMs": 9000
-      },
-      {
-        "id": "trung-chau-boss",
-        "definitionId": "BOSS",
-        "maxAlive": 1,
-        "startX": 2750,
-        "endX": 2750,
-        "y": 540,
-        "respawnMs": 30000
-      }
-    ],
+    "monsterSpawnGroups": [],
     "npcSpawns": [
       {
         "id": "guide",
@@ -1010,7 +954,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-trung_chau"
       }
     ],
     "botSpawnGroups": [
@@ -1052,11 +996,11 @@
       }
     ],
     "portals": [],
-    "version": 2,
+    "version": 3,
     "regionId": "huyen-moc-party",
     "raceTheme": "NEUTRAL",
     "recommendedLevelMin": 10,
-    "recommendedLevelMax": 20,
+    "recommendedLevelMax": 15,
     "mapType": "DUNGEON",
     "gravity": 1500,
     "maxPlayers": 4,
@@ -1093,7 +1037,54 @@
     ],
     "waypoints": [],
     "navigation": [],
-    "monsterSpawnGroups": [],
+    "monsterSpawnGroups": [
+      {
+        "id": "huyen_moc_bi_canh_mob_01",
+        "definitionId": "huyen_moc_bi_canh_mob_01_lv10",
+        "definitionIds": [
+          "huyen_moc_bi_canh_mob_01_lv10",
+          "huyen_moc_bi_canh_mob_01_lv11"
+        ],
+        "maxAlive": 4,
+        "startX": 650,
+        "endX": 950,
+        "y": 540,
+        "respawnMs": 0,
+        "enabled": true,
+        "spawnPolicy": "ENCOUNTER_WAVE"
+      },
+      {
+        "id": "huyen_moc_bi_canh_mob_02",
+        "definitionId": "huyen_moc_bi_canh_mob_02_lv11",
+        "definitionIds": [
+          "huyen_moc_bi_canh_mob_02_lv11",
+          "huyen_moc_bi_canh_mob_02_lv12",
+          "huyen_moc_bi_canh_mob_02_lv13"
+        ],
+        "maxAlive": 4,
+        "startX": 650,
+        "endX": 950,
+        "y": 540,
+        "respawnMs": 0,
+        "enabled": true,
+        "spawnPolicy": "ENCOUNTER_WAVE"
+      },
+      {
+        "id": "huyen_moc_bi_canh_boss_dungeon_boss",
+        "placementId": "huyen_moc_bi_canh_boss_dungeon_boss",
+        "definitionId": "huyen_moc_bi_canh_boss_dungeon_boss_variant",
+        "maxAlive": 1,
+        "startX": 900,
+        "endX": 900,
+        "y": 540,
+        "respawnMs": 0,
+        "enabled": true,
+        "spawnPolicy": "DUNGEON_ENCOUNTER",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 10
+      }
+    ],
     "npcSpawns": [],
     "botSpawnGroups": []
   },
@@ -1235,13 +1226,30 @@
         "requiredLevel": 6,
         "requiredQuest": null,
         "enabled": true
+      },
+      {
+        "x": 2730,
+        "target": "truc_anh_lam",
+        "label": "Trúc Ảnh Lâm",
+        "portalId": "world15-thanh_van_ngoai_son__truc_anh_lam",
+        "sourceMapId": "thanh-van-ngoai-son",
+        "triggerBounds": {
+          "x": 2670,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 4,
+        "requiredQuest": null,
+        "enabled": true
       }
     ],
-    "version": 1,
+    "version": 2,
     "regionId": "thanh-van",
     "raceTheme": "HUMAN",
     "recommendedLevelMin": 1,
-    "recommendedLevelMax": 6,
+    "recommendedLevelMax": 5,
     "mapType": "FIELD",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -1292,6 +1300,18 @@
         "spawnId": "camp",
         "heal": true,
         "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 2940,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
       }
     ],
     "spawnPoints": [
@@ -1330,6 +1350,11 @@
         "x": 230,
         "y": 540,
         "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3030,
+        "y": 540
       }
     ],
     "waypoints": [
@@ -1443,31 +1468,65 @@
     ],
     "monsterSpawnGroups": [
       {
-        "id": "ngoai-son-wolves",
-        "definitionId": "WOLF",
+        "id": "thanh_van_ngoai_son_mob_01",
+        "definitionId": "thanh_van_ngoai_son_mob_01_lv1",
+        "definitionIds": [
+          "thanh_van_ngoai_son_mob_01_lv1",
+          "thanh_van_ngoai_son_mob_01_lv2"
+        ],
+        "maxAlive": 6,
+        "startX": 650,
+        "endX": 1220,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "thanh_van_ngoai_son_mob_02",
+        "definitionId": "thanh_van_ngoai_son_mob_02_lv2",
+        "definitionIds": [
+          "thanh_van_ngoai_son_mob_02_lv2",
+          "thanh_van_ngoai_son_mob_02_lv3",
+          "thanh_van_ngoai_son_mob_02_lv4"
+        ],
+        "maxAlive": 5,
+        "startX": 1580,
+        "endX": 1810,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "thanh_van_ngoai_son_mob_03",
+        "definitionId": "thanh_van_ngoai_son_mob_03_lv4",
+        "definitionIds": [
+          "thanh_van_ngoai_son_mob_03_lv4",
+          "thanh_van_ngoai_son_mob_03_lv5"
+        ],
         "maxAlive": 4,
-        "startX": 760,
-        "endX": 1150,
+        "startX": 2230,
+        "endX": 2600,
         "y": 540,
-        "respawnMs": 6000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "ngoai-son-spirit",
-        "definitionId": "SPIRIT",
-        "maxAlive": 2,
-        "startX": 2460,
-        "endX": 2700,
-        "y": 540,
-        "respawnMs": 9000
-      },
-      {
-        "id": "ngoai-son-alpha",
-        "definitionId": "WOLF_ALPHA",
+        "id": "thanh_van_ngoai_son_boss_elite",
+        "placementId": "thanh_van_ngoai_son_boss_elite",
+        "definitionId": "thanh_van_ngoai_son_boss_elite_variant",
         "maxAlive": 1,
-        "startX": 2830,
-        "endX": 2830,
+        "startX": 2790,
+        "endX": 2790,
         "y": 540,
-        "respawnMs": 18000
+        "respawnMs": 183000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
       }
     ],
     "npcSpawns": [
@@ -1477,7 +1536,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-thanh_van_ngoai_son"
       }
     ],
     "botSpawnGroups": [
@@ -1630,13 +1689,30 @@
         "requiredLevel": 6,
         "requiredQuest": null,
         "enabled": true
+      },
+      {
+        "x": 2730,
+        "target": "u_minh_ngoai_dao",
+        "label": "U Minh Ngoại Đạo",
+        "portalId": "world15-huyet_vu_coc__u_minh_ngoai_dao",
+        "sourceMapId": "huyet-vu-coc",
+        "triggerBounds": {
+          "x": 2670,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 4,
+        "requiredQuest": null,
+        "enabled": true
       }
     ],
-    "version": 1,
+    "version": 2,
     "regionId": "huyet-vu-coc",
     "raceTheme": "DEMON",
     "recommendedLevelMin": 1,
-    "recommendedLevelMax": 6,
+    "recommendedLevelMax": 5,
     "mapType": "FIELD",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -1687,6 +1763,18 @@
         "spawnId": "camp",
         "heal": true,
         "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 2940,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
       }
     ],
     "spawnPoints": [
@@ -1725,6 +1813,11 @@
         "x": 230,
         "y": 540,
         "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3030,
+        "y": 540
       }
     ],
     "waypoints": [
@@ -1838,31 +1931,65 @@
     ],
     "monsterSpawnGroups": [
       {
-        "id": "huyet-vu-wolves",
-        "definitionId": "WOLF",
-        "maxAlive": 3,
-        "startX": 760,
-        "endX": 1100,
+        "id": "huyet_vu_coc_mob_01",
+        "definitionId": "huyet_vu_coc_mob_01_lv1",
+        "definitionIds": [
+          "huyet_vu_coc_mob_01_lv1",
+          "huyet_vu_coc_mob_01_lv2"
+        ],
+        "maxAlive": 6,
+        "startX": 650,
+        "endX": 1220,
         "y": 540,
-        "respawnMs": 6000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "huyet-vu-soldiers",
-        "definitionId": "SOLDIER",
-        "maxAlive": 3,
-        "startX": 2350,
-        "endX": 2680,
+        "id": "huyet_vu_coc_mob_02",
+        "definitionId": "huyet_vu_coc_mob_02_lv2",
+        "definitionIds": [
+          "huyet_vu_coc_mob_02_lv2",
+          "huyet_vu_coc_mob_02_lv3",
+          "huyet_vu_coc_mob_02_lv4"
+        ],
+        "maxAlive": 5,
+        "startX": 1580,
+        "endX": 1810,
         "y": 540,
-        "respawnMs": 8000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "huyet-vu-alpha",
-        "definitionId": "WOLF_ALPHA",
+        "id": "huyet_vu_coc_mob_03",
+        "definitionId": "huyet_vu_coc_mob_03_lv4",
+        "definitionIds": [
+          "huyet_vu_coc_mob_03_lv4",
+          "huyet_vu_coc_mob_03_lv5"
+        ],
+        "maxAlive": 4,
+        "startX": 2230,
+        "endX": 2600,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "huyet_vu_coc_boss_elite",
+        "placementId": "huyet_vu_coc_boss_elite",
+        "definitionId": "huyet_vu_coc_boss_elite_variant",
         "maxAlive": 1,
-        "startX": 2830,
-        "endX": 2830,
+        "startX": 2790,
+        "endX": 2790,
         "y": 540,
-        "respawnMs": 18000
+        "respawnMs": 183000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
       }
     ],
     "npcSpawns": [
@@ -1872,7 +1999,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-huyet_vu_coc"
       }
     ],
     "botSpawnGroups": [
@@ -1965,13 +2092,30 @@
         "requiredLevel": 6,
         "requiredQuest": null,
         "enabled": true
+      },
+      {
+        "x": 2730,
+        "target": "thanh_khau_truc_lam",
+        "label": "Thanh Khâu Trúc Lâm",
+        "portalId": "world15-linh_thu_son_lo__thanh_khau_truc_lam",
+        "sourceMapId": "linh-thu-son-lo",
+        "triggerBounds": {
+          "x": 2670,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 4,
+        "requiredQuest": null,
+        "enabled": true
       }
     ],
-    "version": 1,
+    "version": 2,
     "regionId": "linh-thu-son-lo",
     "raceTheme": "BEAST",
     "recommendedLevelMin": 1,
-    "recommendedLevelMax": 6,
+    "recommendedLevelMax": 5,
     "mapType": "FIELD",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -2022,6 +2166,18 @@
         "spawnId": "camp",
         "heal": true,
         "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 2940,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
       }
     ],
     "spawnPoints": [
@@ -2060,6 +2216,11 @@
         "x": 230,
         "y": 540,
         "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3030,
+        "y": 540
       }
     ],
     "waypoints": [
@@ -2173,31 +2334,65 @@
     ],
     "monsterSpawnGroups": [
       {
-        "id": "linh-thu-wolves",
-        "definitionId": "WOLF",
-        "maxAlive": 3,
-        "startX": 760,
-        "endX": 1100,
+        "id": "linh_thu_son_lo_mob_01",
+        "definitionId": "linh_thu_son_lo_mob_01_lv1",
+        "definitionIds": [
+          "linh_thu_son_lo_mob_01_lv1",
+          "linh_thu_son_lo_mob_01_lv2"
+        ],
+        "maxAlive": 6,
+        "startX": 650,
+        "endX": 1220,
         "y": 540,
-        "respawnMs": 6000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "linh-thu-spirits",
-        "definitionId": "SPIRIT",
-        "maxAlive": 3,
-        "startX": 2350,
-        "endX": 2680,
+        "id": "linh_thu_son_lo_mob_02",
+        "definitionId": "linh_thu_son_lo_mob_02_lv2",
+        "definitionIds": [
+          "linh_thu_son_lo_mob_02_lv2",
+          "linh_thu_son_lo_mob_02_lv3",
+          "linh_thu_son_lo_mob_02_lv4"
+        ],
+        "maxAlive": 5,
+        "startX": 1580,
+        "endX": 1810,
         "y": 540,
-        "respawnMs": 9000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "linh-thu-alpha",
-        "definitionId": "WOLF_ALPHA",
+        "id": "linh_thu_son_lo_mob_03",
+        "definitionId": "linh_thu_son_lo_mob_03_lv4",
+        "definitionIds": [
+          "linh_thu_son_lo_mob_03_lv4",
+          "linh_thu_son_lo_mob_03_lv5"
+        ],
+        "maxAlive": 4,
+        "startX": 2230,
+        "endX": 2600,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "linh_thu_son_lo_boss_elite",
+        "placementId": "linh_thu_son_lo_boss_elite",
+        "definitionId": "linh_thu_son_lo_boss_elite_variant",
         "maxAlive": 1,
-        "startX": 2830,
-        "endX": 2830,
+        "startX": 2790,
+        "endX": 2790,
         "y": 540,
-        "respawnMs": 18000
+        "respawnMs": 183000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
       }
     ],
     "npcSpawns": [
@@ -2207,7 +2402,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-linh_thu_son_lo"
       }
     ],
     "botSpawnGroups": [
@@ -2331,7 +2526,7 @@
           "height": 120
         },
         "targetSpawnId": "entry",
-        "requiredLevel": 1,
+        "requiredLevel": 6,
         "requiredQuest": null,
         "enabled": true
       },
@@ -2351,9 +2546,60 @@
         "requiredLevel": 10,
         "requiredQuest": null,
         "enabled": true
+      },
+      {
+        "x": 520,
+        "target": "truc_anh_lam",
+        "label": "Trúc Ảnh Lâm",
+        "portalId": "world15-tam_gioi_bien_canh__truc_anh_lam",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 460,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "east-entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 640,
+        "target": "u_minh_ngoai_dao",
+        "label": "U Minh Ngoại Đạo",
+        "portalId": "world15-tam_gioi_bien_canh__u_minh_ngoai_dao",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 580,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "east-entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 760,
+        "target": "thanh_khau_truc_lam",
+        "label": "Thanh Khâu Trúc Lâm",
+        "portalId": "world15-tam_gioi_bien_canh__thanh_khau_truc_lam",
+        "sourceMapId": "tam-gioi-bien-canh",
+        "triggerBounds": {
+          "x": 700,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "east-entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
       }
     ],
-    "version": 1,
+    "version": 2,
     "regionId": "tam-gioi-bien-canh",
     "raceTheme": "NEUTRAL",
     "recommendedLevelMin": 6,
@@ -2420,6 +2666,18 @@
         "spawnId": "ruins-return",
         "heal": true,
         "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 3340,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
       }
     ],
     "spawnPoints": [
@@ -2464,6 +2722,11 @@
         "x": 3300,
         "y": 540,
         "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3430,
+        "y": 540
       }
     ],
     "waypoints": [
@@ -2577,31 +2840,65 @@
     ],
     "monsterSpawnGroups": [
       {
-        "id": "border-soldiers",
-        "definitionId": "SOLDIER_VETERAN",
-        "maxAlive": 3,
-        "startX": 1000,
-        "endX": 1430,
+        "id": "tam_gioi_bien_canh_mob_01",
+        "definitionId": "tam_gioi_bien_canh_mob_01_lv6",
+        "definitionIds": [
+          "tam_gioi_bien_canh_mob_01_lv6",
+          "tam_gioi_bien_canh_mob_01_lv7"
+        ],
+        "maxAlive": 6,
+        "startX": 850,
+        "endX": 1320,
         "y": 540,
-        "respawnMs": 10000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "border-spirits",
-        "definitionId": "SPIRIT_VETERAN",
-        "maxAlive": 3,
-        "startX": 2320,
-        "endX": 2700,
+        "id": "tam_gioi_bien_canh_mob_02",
+        "definitionId": "tam_gioi_bien_canh_mob_02_lv8",
+        "definitionIds": [
+          "tam_gioi_bien_canh_mob_02_lv8",
+          "tam_gioi_bien_canh_mob_02_lv9",
+          "tam_gioi_bien_canh_mob_02_lv10"
+        ],
+        "maxAlive": 5,
+        "startX": 2150,
+        "endX": 2410,
         "y": 540,
-        "respawnMs": 10000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "border-alphas",
-        "definitionId": "WOLF_ALPHA",
-        "maxAlive": 2,
-        "startX": 2860,
-        "endX": 3040,
+        "id": "tam_gioi_bien_canh_mob_03",
+        "definitionId": "tam_gioi_bien_canh_mob_03_lv11",
+        "definitionIds": [
+          "tam_gioi_bien_canh_mob_03_lv11",
+          "tam_gioi_bien_canh_mob_03_lv12"
+        ],
+        "maxAlive": 4,
+        "startX": 2670,
+        "endX": 2930,
         "y": 540,
-        "respawnMs": 18000
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "tam_gioi_bien_canh_boss_elite",
+        "placementId": "tam_gioi_bien_canh_boss_elite",
+        "definitionId": "tam_gioi_bien_canh_boss_elite_variant",
+        "maxAlive": 1,
+        "startX": 3090,
+        "endX": 3090,
+        "y": 540,
+        "respawnMs": 198000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
       }
     ],
     "npcSpawns": [
@@ -2611,7 +2908,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-tam_gioi_bien_canh"
       }
     ],
     "botSpawnGroups": [
@@ -2687,13 +2984,47 @@
         "requiredLevel": 1,
         "requiredQuest": null,
         "enabled": true
+      },
+      {
+        "x": 240,
+        "target": "vo_chu_hoang_nguyen",
+        "label": "Vô Chủ Hoang Nguyên",
+        "portalId": "world15-thien_mon_di_tich__vo_chu_hoang_nguyen",
+        "sourceMapId": "thien-mon-di-tich",
+        "triggerBounds": {
+          "x": 180,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "east-entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3450,
+        "target": "cuu_u_thach_phu",
+        "label": "Cửu U Thạch Phủ",
+        "portalId": "world15-thien_mon_di_tich__cuu_u_thach_phu",
+        "sourceMapId": "thien-mon-di-tich",
+        "triggerBounds": {
+          "x": 3390,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 18,
+        "requiredQuest": null,
+        "enabled": true
       }
     ],
-    "version": 1,
+    "version": 2,
     "regionId": "thien-mon-di-tich",
     "raceTheme": "NEUTRAL",
-    "recommendedLevelMin": 10,
-    "recommendedLevelMax": 20,
+    "recommendedLevelMin": 15,
+    "recommendedLevelMax": 22,
     "mapType": "FIELD",
     "gravity": 1500,
     "maxPlayers": 100,
@@ -2750,6 +3081,18 @@
         "spawnId": "camp",
         "heal": true,
         "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 3540,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
       }
     ],
     "spawnPoints": [
@@ -2788,6 +3131,11 @@
         "x": 230,
         "y": 540,
         "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3630,
+        "y": 540
       }
     ],
     "waypoints": [
@@ -2901,31 +3249,65 @@
     ],
     "monsterSpawnGroups": [
       {
-        "id": "ruins-spirits",
-        "definitionId": "RUIN_SPIRIT",
-        "maxAlive": 3,
-        "startX": 850,
-        "endX": 1250,
+        "id": "thien_mon_di_tich_mob_01",
+        "definitionId": "thien_mon_di_tich_mob_01_lv15",
+        "definitionIds": [
+          "thien_mon_di_tich_mob_01_lv15",
+          "thien_mon_di_tich_mob_01_lv16"
+        ],
+        "maxAlive": 6,
+        "startX": 740,
+        "endX": 1270,
         "y": 540,
-        "respawnMs": 14000
+        "respawnMs": 23000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "ruins-sentinels",
-        "definitionId": "RUIN_SENTINEL",
-        "maxAlive": 2,
-        "startX": 2220,
-        "endX": 2430,
+        "id": "thien_mon_di_tich_mob_02",
+        "definitionId": "thien_mon_di_tich_mob_02_lv17",
+        "definitionIds": [
+          "thien_mon_di_tich_mob_02_lv17",
+          "thien_mon_di_tich_mob_02_lv18",
+          "thien_mon_di_tich_mob_02_lv19"
+        ],
+        "maxAlive": 5,
+        "startX": 1700,
+        "endX": 1840,
         "y": 540,
-        "respawnMs": 25000
+        "respawnMs": 23000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
       },
       {
-        "id": "ruins-world-boss",
-        "definitionId": "BOSS",
+        "id": "thien_mon_di_tich_mob_03",
+        "definitionId": "thien_mon_di_tich_mob_03_lv21",
+        "definitionIds": [
+          "thien_mon_di_tich_mob_03_lv21",
+          "thien_mon_di_tich_mob_03_lv22"
+        ],
+        "maxAlive": 4,
+        "startX": 2210,
+        "endX": 2450,
+        "y": 540,
+        "respawnMs": 23000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "thien_mon_di_tich_boss_elite",
+        "placementId": "thien_mon_di_tich_boss_elite",
+        "definitionId": "thien_mon_di_tich_boss_elite_variant",
         "maxAlive": 1,
-        "startX": 3260,
-        "endX": 3260,
+        "startX": 2850,
+        "endX": 2850,
         "y": 540,
-        "respawnMs": 30000
+        "respawnMs": 225000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
       }
     ],
     "npcSpawns": [
@@ -2935,7 +3317,7 @@
         "name": "Tiếp Dẫn Sứ",
         "x": 300,
         "y": 540,
-        "dialogueId": "guide"
+        "dialogueId": "world15-guide-thien_mon_di_tich"
       }
     ],
     "botSpawnGroups": [
@@ -2960,5 +3342,1707 @@
         "interactionRadius": 110
       }
     ]
+  },
+  {
+    "id": "truc_anh_lam",
+    "name": "Trúc Ảnh Lâm",
+    "width": 3200,
+    "height": 640,
+    "ground": 540,
+    "color": "#253d34",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "thanh-van-ngoai-son",
+        "label": "Thanh Vân Ngoại Sơn",
+        "portalId": "world15-truc_anh_lam__thanh_van_ngoai_son",
+        "sourceMapId": "truc_anh_lam",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "east-entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3030,
+        "target": "tam-gioi-bien-canh",
+        "label": "Tam Giới Biên Cảnh",
+        "portalId": "world15-truc_anh_lam__tam_gioi_bien_canh",
+        "sourceMapId": "truc_anh_lam",
+        "triggerBounds": {
+          "x": 2970,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 6,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "thanh-van",
+    "raceTheme": "HUMAN",
+    "recommendedLevelMin": 4,
+    "recommendedLevelMax": 7,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3200,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3200,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 2940,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3030,
+        "y": 540
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "truc_anh_lam_mob_01",
+        "definitionId": "truc_anh_lam_mob_01_lv4",
+        "definitionIds": [
+          "truc_anh_lam_mob_01_lv4",
+          "truc_anh_lam_mob_01_lv5"
+        ],
+        "maxAlive": 6,
+        "startX": 650,
+        "endX": 1220,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "truc_anh_lam_mob_02",
+        "definitionId": "truc_anh_lam_mob_02_lv4",
+        "definitionIds": [
+          "truc_anh_lam_mob_02_lv4",
+          "truc_anh_lam_mob_02_lv5",
+          "truc_anh_lam_mob_02_lv6"
+        ],
+        "maxAlive": 5,
+        "startX": 1580,
+        "endX": 1810,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "truc_anh_lam_mob_03",
+        "definitionId": "truc_anh_lam_mob_03_lv6",
+        "definitionIds": [
+          "truc_anh_lam_mob_03_lv6",
+          "truc_anh_lam_mob_03_lv7"
+        ],
+        "maxAlive": 4,
+        "startX": 2230,
+        "endX": 2600,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "truc_anh_lam_boss_elite",
+        "placementId": "truc_anh_lam_boss_elite",
+        "definitionId": "truc_anh_lam_boss_elite_variant",
+        "maxAlive": 1,
+        "startX": 2790,
+        "endX": 2790,
+        "y": 540,
+        "respawnMs": 192000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "world15-guide-truc_anh_lam"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "truc_anh_lam-guard",
+        "definitionId": "human-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "truc_anh_lam-wanderer",
+        "definitionId": "human-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "u_minh_ngoai_dao",
+    "name": "U Minh Ngoại Đạo",
+    "width": 3200,
+    "height": 640,
+    "ground": 540,
+    "color": "#253d34",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "huyet-vu-coc",
+        "label": "Huyết Vụ Cốc",
+        "portalId": "world15-u_minh_ngoai_dao__huyet_vu_coc",
+        "sourceMapId": "u_minh_ngoai_dao",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "east-entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3030,
+        "target": "tam-gioi-bien-canh",
+        "label": "Tam Giới Biên Cảnh",
+        "portalId": "world15-u_minh_ngoai_dao__tam_gioi_bien_canh",
+        "sourceMapId": "u_minh_ngoai_dao",
+        "triggerBounds": {
+          "x": 2970,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 6,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "thanh-van",
+    "raceTheme": "DEMON",
+    "recommendedLevelMin": 4,
+    "recommendedLevelMax": 7,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3200,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3200,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 2940,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3030,
+        "y": 540
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "u_minh_ngoai_dao_mob_01",
+        "definitionId": "u_minh_ngoai_dao_mob_01_lv4",
+        "definitionIds": [
+          "u_minh_ngoai_dao_mob_01_lv4",
+          "u_minh_ngoai_dao_mob_01_lv5"
+        ],
+        "maxAlive": 6,
+        "startX": 650,
+        "endX": 1220,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "u_minh_ngoai_dao_mob_02",
+        "definitionId": "u_minh_ngoai_dao_mob_02_lv4",
+        "definitionIds": [
+          "u_minh_ngoai_dao_mob_02_lv4",
+          "u_minh_ngoai_dao_mob_02_lv5",
+          "u_minh_ngoai_dao_mob_02_lv6"
+        ],
+        "maxAlive": 5,
+        "startX": 1580,
+        "endX": 1810,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "u_minh_ngoai_dao_mob_03",
+        "definitionId": "u_minh_ngoai_dao_mob_03_lv6",
+        "definitionIds": [
+          "u_minh_ngoai_dao_mob_03_lv6",
+          "u_minh_ngoai_dao_mob_03_lv7"
+        ],
+        "maxAlive": 4,
+        "startX": 2230,
+        "endX": 2600,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "u_minh_ngoai_dao_boss_elite",
+        "placementId": "u_minh_ngoai_dao_boss_elite",
+        "definitionId": "u_minh_ngoai_dao_boss_elite_variant",
+        "maxAlive": 1,
+        "startX": 2790,
+        "endX": 2790,
+        "y": 540,
+        "respawnMs": 192000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "world15-guide-u_minh_ngoai_dao"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "u_minh_ngoai_dao-guard",
+        "definitionId": "demon-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "u_minh_ngoai_dao-wanderer",
+        "definitionId": "demon-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "thanh_khau_truc_lam",
+    "name": "Thanh Khâu Trúc Lâm",
+    "width": 3200,
+    "height": 640,
+    "ground": 540,
+    "color": "#253d34",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "linh-thu-son-lo",
+        "label": "Linh Thú Sơn Lộ",
+        "portalId": "world15-thanh_khau_truc_lam__linh_thu_son_lo",
+        "sourceMapId": "thanh_khau_truc_lam",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "east-entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3030,
+        "target": "tam-gioi-bien-canh",
+        "label": "Tam Giới Biên Cảnh",
+        "portalId": "world15-thanh_khau_truc_lam__tam_gioi_bien_canh",
+        "sourceMapId": "thanh_khau_truc_lam",
+        "triggerBounds": {
+          "x": 2970,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 6,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "thanh-van",
+    "raceTheme": "BEAST",
+    "recommendedLevelMin": 4,
+    "recommendedLevelMax": 7,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3200,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3200,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1450,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 420,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 2940,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3030,
+        "y": 540
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "thanh_khau_truc_lam_mob_01",
+        "definitionId": "thanh_khau_truc_lam_mob_01_lv4",
+        "definitionIds": [
+          "thanh_khau_truc_lam_mob_01_lv4",
+          "thanh_khau_truc_lam_mob_01_lv5"
+        ],
+        "maxAlive": 6,
+        "startX": 650,
+        "endX": 1220,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "thanh_khau_truc_lam_mob_02",
+        "definitionId": "thanh_khau_truc_lam_mob_02_lv4",
+        "definitionIds": [
+          "thanh_khau_truc_lam_mob_02_lv4",
+          "thanh_khau_truc_lam_mob_02_lv5",
+          "thanh_khau_truc_lam_mob_02_lv6"
+        ],
+        "maxAlive": 5,
+        "startX": 1580,
+        "endX": 1810,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "thanh_khau_truc_lam_mob_03",
+        "definitionId": "thanh_khau_truc_lam_mob_03_lv6",
+        "definitionIds": [
+          "thanh_khau_truc_lam_mob_03_lv6",
+          "thanh_khau_truc_lam_mob_03_lv7"
+        ],
+        "maxAlive": 4,
+        "startX": 2230,
+        "endX": 2600,
+        "y": 540,
+        "respawnMs": 18000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "thanh_khau_truc_lam_boss_elite",
+        "placementId": "thanh_khau_truc_lam_boss_elite",
+        "definitionId": "thanh_khau_truc_lam_boss_elite_variant",
+        "maxAlive": 1,
+        "startX": 2790,
+        "endX": 2790,
+        "y": 540,
+        "respawnMs": 192000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "world15-guide-thanh_khau_truc_lam"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "thanh_khau_truc_lam-guard",
+        "definitionId": "beast-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "thanh_khau_truc_lam-wanderer",
+        "definitionId": "beast-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "vo_chu_hoang_nguyen",
+    "name": "Vô Chủ Hoang Nguyên",
+    "width": 3600,
+    "height": 640,
+    "ground": 540,
+    "color": "#344336",
+    "platforms": [
+      {
+        "x": 580,
+        "y": 450,
+        "width": 240,
+        "height": 20
+      },
+      {
+        "x": 960,
+        "y": 370,
+        "width": 220,
+        "height": 20
+      },
+      {
+        "x": 1270,
+        "y": 450,
+        "width": 120,
+        "height": 20
+      },
+      {
+        "x": 2350,
+        "y": 450,
+        "width": 210,
+        "height": 20
+      }
+    ],
+    "portals": [
+      {
+        "x": 100,
+        "target": "trung-chau",
+        "label": "Trung Châu",
+        "portalId": "world15-vo_chu_hoang_nguyen__trung_chau",
+        "sourceMapId": "vo_chu_hoang_nguyen",
+        "triggerBounds": {
+          "x": 40,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 1,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3450,
+        "target": "thien-mon-di-tich",
+        "label": "Thiên Môn Di Tích",
+        "portalId": "world15-vo_chu_hoang_nguyen__thien_mon_di_tich",
+        "sourceMapId": "vo_chu_hoang_nguyen",
+        "triggerBounds": {
+          "x": 3390,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 15,
+        "requiredQuest": null,
+        "enabled": true
+      },
+      {
+        "x": 3300,
+        "target": "huyen-moc-party",
+        "label": "Huyền Mộc Bí Cảnh",
+        "portalId": "world15-vo_chu_hoang_nguyen__huyen_moc_bi_canh",
+        "sourceMapId": "vo_chu_hoang_nguyen",
+        "triggerBounds": {
+          "x": 3240,
+          "y": 440,
+          "width": 120,
+          "height": 120
+        },
+        "targetSpawnId": "entry",
+        "requiredLevel": 10,
+        "requiredQuest": null,
+        "enabled": true
+      }
+    ],
+    "version": 2,
+    "regionId": "tam-gioi-bien-canh",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 8,
+    "recommendedLevelMax": 15,
+    "mapType": "FIELD",
+    "gravity": 1500,
+    "maxPlayers": 100,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 3600,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 3600,
+        "height": 100
+      }
+    ],
+    "obstacles": [
+      {
+        "x": 1670,
+        "y": 450,
+        "width": 44,
+        "height": 90
+      }
+    ],
+    "safeZones": [
+      {
+        "id": "entry-safe",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 750,
+          "height": 640
+        },
+        "spawnId": "home",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "mountain-camp",
+        "bounds": {
+          "x": 1850,
+          "y": 400,
+          "width": 250,
+          "height": 200
+        },
+        "spawnId": "camp",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "ruins-camp",
+        "bounds": {
+          "x": 3150,
+          "y": 400,
+          "width": 400,
+          "height": 200
+        },
+        "spawnId": "ruins-return",
+        "heal": true,
+        "protectedArea": true
+      },
+      {
+        "id": "world15-east-camp",
+        "bounds": {
+          "x": 3340,
+          "y": 400,
+          "width": 260,
+          "height": 150
+        },
+        "spawnId": "east-entry",
+        "heal": true,
+        "protectedArea": true
+      }
+    ],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 650,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 650,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-guard",
+        "x": 430,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-citizen",
+        "x": 475,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "npc-challenger",
+        "x": 230,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "ruins-return",
+        "x": 3300,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "east-entry",
+        "x": 3430,
+        "y": 540
+      }
+    ],
+    "waypoints": [
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540
+      },
+      {
+        "id": "patrol-west",
+        "x": 780,
+        "y": 540
+      },
+      {
+        "id": "patrol-east",
+        "x": 1100,
+        "y": 540
+      },
+      {
+        "id": "camp",
+        "x": 1970,
+        "y": 540
+      },
+      {
+        "id": "high-west",
+        "x": 620,
+        "y": 450
+      },
+      {
+        "id": "jump-foot",
+        "x": 850,
+        "y": 540
+      },
+      {
+        "id": "jump-top",
+        "x": 805,
+        "y": 450
+      },
+      {
+        "id": "guard-west",
+        "x": 400,
+        "y": 540
+      },
+      {
+        "id": "guard-east",
+        "x": 460,
+        "y": 540
+      },
+      {
+        "id": "citizen-west",
+        "x": 450,
+        "y": 540
+      },
+      {
+        "id": "citizen-east",
+        "x": 560,
+        "y": 540
+      }
+    ],
+    "navigation": [
+      {
+        "from": "patrol-west",
+        "to": "patrol-east",
+        "type": "WALK"
+      },
+      {
+        "from": "high-west",
+        "to": "patrol-west",
+        "type": "DROP"
+      },
+      {
+        "from": "patrol-west",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "patrol-east",
+        "to": "jump-foot",
+        "type": "WALK"
+      },
+      {
+        "from": "jump-foot",
+        "to": "jump-top",
+        "type": "JUMP"
+      },
+      {
+        "from": "jump-top",
+        "to": "jump-foot",
+        "type": "DROP"
+      },
+      {
+        "from": "guard-west",
+        "to": "guard-east",
+        "type": "WALK"
+      },
+      {
+        "from": "guard-east",
+        "to": "guard-west",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-west",
+        "to": "citizen-east",
+        "type": "WALK"
+      },
+      {
+        "from": "citizen-east",
+        "to": "citizen-west",
+        "type": "WALK"
+      }
+    ],
+    "monsterSpawnGroups": [
+      {
+        "id": "vo_chu_hoang_nguyen_mob_01",
+        "definitionId": "vo_chu_hoang_nguyen_mob_01_lv8",
+        "definitionIds": [
+          "vo_chu_hoang_nguyen_mob_01_lv8",
+          "vo_chu_hoang_nguyen_mob_01_lv9"
+        ],
+        "maxAlive": 6,
+        "startX": 850,
+        "endX": 1320,
+        "y": 540,
+        "respawnMs": 23000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "vo_chu_hoang_nguyen_mob_02",
+        "definitionId": "vo_chu_hoang_nguyen_mob_02_lv10",
+        "definitionIds": [
+          "vo_chu_hoang_nguyen_mob_02_lv10",
+          "vo_chu_hoang_nguyen_mob_02_lv11",
+          "vo_chu_hoang_nguyen_mob_02_lv12"
+        ],
+        "maxAlive": 5,
+        "startX": 2150,
+        "endX": 2410,
+        "y": 540,
+        "respawnMs": 23000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "vo_chu_hoang_nguyen_mob_03",
+        "definitionId": "vo_chu_hoang_nguyen_mob_03_lv14",
+        "definitionIds": [
+          "vo_chu_hoang_nguyen_mob_03_lv14",
+          "vo_chu_hoang_nguyen_mob_03_lv15"
+        ],
+        "maxAlive": 4,
+        "startX": 2670,
+        "endX": 2930,
+        "y": 540,
+        "respawnMs": 23000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH"
+      },
+      {
+        "id": "vo_chu_hoang_nguyen_boss_elite",
+        "placementId": "vo_chu_hoang_nguyen_boss_elite",
+        "definitionId": "vo_chu_hoang_nguyen_boss_elite_variant",
+        "maxAlive": 1,
+        "startX": 3090,
+        "endX": 3090,
+        "y": 540,
+        "respawnMs": 204000,
+        "enabled": true,
+        "spawnPolicy": "AFTER_DEATH",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 1
+      },
+      {
+        "id": "vo_chu_hoang_nguyen_boss_world_boss",
+        "placementId": "vo_chu_hoang_nguyen_boss_world_boss",
+        "definitionId": "vo_chu_hoang_nguyen_boss_world_boss_variant",
+        "maxAlive": 1,
+        "startX": 3180,
+        "endX": 3180,
+        "y": 540,
+        "respawnMs": 0,
+        "enabled": true,
+        "spawnPolicy": "SCHEDULED_EVENT",
+        "scheduleIntervalMs": 14400000,
+        "activeDurationMs": 1200000,
+        "requiredLevel": 8
+      }
+    ],
+    "npcSpawns": [
+      {
+        "id": "guide",
+        "type": "GUIDE",
+        "name": "Tiếp Dẫn Sứ",
+        "x": 300,
+        "y": 540,
+        "dialogueId": "world15-guide-vo_chu_hoang_nguyen"
+      }
+    ],
+    "botSpawnGroups": [
+      {
+        "id": "vo_chu_hoang_nguyen-guard",
+        "definitionId": "neutral-guard",
+        "spawnPoint": "npc-guard",
+        "patrolRoute": [
+          "guard-west",
+          "guard-east"
+        ],
+        "interactionRadius": 110
+      },
+      {
+        "id": "vo_chu_hoang_nguyen-wanderer",
+        "definitionId": "neutral-wanderer",
+        "spawnPoint": "npc-citizen",
+        "patrolRoute": [
+          "citizen-west",
+          "citizen-east"
+        ],
+        "interactionRadius": 110
+      }
+    ]
+  },
+  {
+    "id": "cuu_u_thach_phu",
+    "name": "Cửu U Thạch Phủ",
+    "width": 1800,
+    "height": 640,
+    "ground": 540,
+    "color": "#243332",
+    "platforms": [
+      {
+        "x": 950,
+        "y": 450,
+        "width": 190,
+        "height": 20
+      }
+    ],
+    "portals": [],
+    "version": 3,
+    "regionId": "huyen-moc-party",
+    "raceTheme": "NEUTRAL",
+    "recommendedLevelMin": 18,
+    "recommendedLevelMax": 25,
+    "mapType": "DUNGEON",
+    "gravity": 1500,
+    "maxPlayers": 4,
+    "pvpPolicy": "DISABLED",
+    "bounds": {
+      "x": 0,
+      "y": 0,
+      "width": 1800,
+      "height": 640
+    },
+    "groundColliders": [
+      {
+        "x": 0,
+        "y": 540,
+        "width": 1800,
+        "height": 100
+      }
+    ],
+    "obstacles": [],
+    "safeZones": [],
+    "spawnPoints": [
+      {
+        "id": "home",
+        "x": 180,
+        "y": 540,
+        "race": null
+      },
+      {
+        "id": "entry",
+        "x": 180,
+        "y": 540,
+        "race": null
+      }
+    ],
+    "waypoints": [],
+    "navigation": [],
+    "monsterSpawnGroups": [
+      {
+        "id": "cuu_u_thach_phu_mob_01",
+        "definitionId": "cuu_u_thach_phu_mob_01_lv18",
+        "definitionIds": [
+          "cuu_u_thach_phu_mob_01_lv18",
+          "cuu_u_thach_phu_mob_01_lv19"
+        ],
+        "maxAlive": 4,
+        "startX": 650,
+        "endX": 950,
+        "y": 540,
+        "respawnMs": 0,
+        "enabled": true,
+        "spawnPolicy": "ENCOUNTER_WAVE"
+      },
+      {
+        "id": "cuu_u_thach_phu_mob_02",
+        "definitionId": "cuu_u_thach_phu_mob_02_lv20",
+        "definitionIds": [
+          "cuu_u_thach_phu_mob_02_lv20",
+          "cuu_u_thach_phu_mob_02_lv21",
+          "cuu_u_thach_phu_mob_02_lv22"
+        ],
+        "maxAlive": 4,
+        "startX": 650,
+        "endX": 950,
+        "y": 540,
+        "respawnMs": 0,
+        "enabled": true,
+        "spawnPolicy": "ENCOUNTER_WAVE"
+      },
+      {
+        "id": "cuu_u_thach_phu_boss_dungeon_boss",
+        "placementId": "cuu_u_thach_phu_boss_dungeon_boss",
+        "definitionId": "cuu_u_thach_phu_boss_dungeon_boss_variant",
+        "maxAlive": 1,
+        "startX": 900,
+        "endX": 900,
+        "y": 540,
+        "respawnMs": 0,
+        "enabled": true,
+        "spawnPolicy": "DUNGEON_ENCOUNTER",
+        "scheduleIntervalMs": 0,
+        "activeDurationMs": 0,
+        "requiredLevel": 18
+      }
+    ],
+    "npcSpawns": [],
+    "botSpawnGroups": []
   }
 ]
